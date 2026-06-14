@@ -82,15 +82,24 @@ class _FullBookInfoScreenState extends State<FullBookInfoScreen> {
       return;
     }
 
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      _populateFromFallback(widget.bookData);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+      return;
+    }
+
     try {
-      final uid = FirebaseAuth.instance.currentUser!.uid;
       final doc = await FirebaseFirestore.instance
           .collection('users')
-          .doc(uid)
+          .doc(user.uid)
           .collection('library')
           .doc(bookId)
           .get();
 
+      if (!mounted) return;
       if (doc.exists) {
         _isInLibrary = true;
         _firestoreDoc = doc;
@@ -99,10 +108,13 @@ class _FullBookInfoScreenState extends State<FullBookInfoScreen> {
         _populateFromFallback(widget.bookData);
       }
     } catch (e) {
+      if (!mounted) return;
       _populateFromFallback(widget.bookData);
     }
 
-    setState(() => _isLoading = false);
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
   }
 
   void _populateFromFirestore(Map<String, dynamic> data) {

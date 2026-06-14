@@ -403,7 +403,8 @@ class LibraryService {
         }
       }
     } catch (e) {
-      print('CRITICAL ERROR in updateBookDetailsWithXp: $e');
+      debugPrint('CRITICAL ERROR in updateBookDetailsWithXp: $e');
+      rethrow;
     }
 
     return {

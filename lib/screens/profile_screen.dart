@@ -64,10 +64,11 @@ class _ProfileScreenState extends State<ProfileScreen>
     _loadStats();
     _loadReminderPreference();
 
-    if (_user != null) {
+    final user = _user;
+    if (user != null) {
       _librarySub = FirebaseFirestore.instance
           .collection('users')
-          .doc(_user!.uid)
+          .doc(user.uid)
           .collection('library')
           .snapshots()
           .listen((_) {
@@ -109,7 +110,23 @@ class _ProfileScreenState extends State<ProfileScreen>
           .get();
 
       final data = doc.data();
-      final enabled = data?['dailyStreakReminderEnabled'] == true;
+      var enabled = data?['dailyStreakReminderEnabled'] == true;
+
+      if (enabled) {
+        final scheduled = await NotificationService.scheduleDailyStreakReminder(
+          hour: 20,
+          minute: 0,
+        );
+        if (!scheduled) {
+          enabled = false;
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
+                'dailyStreakReminderEnabled': false,
+              }, SetOptions(merge: true));
+        }
+      }
 
       if (mounted) {
         setState(() => _dailyReminderEnabled = enabled);
@@ -284,28 +301,30 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   // ── DELETE AVATAR ────────────────────────────────────────
   Future<void> _deleteAvatar() async {
-    if (_user == null) return;
+    final user = _user;
+    if (user == null) return;
 
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(_user!.uid)
-          .update({'photoURL': ''});
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update(
+        {'photoURL': ''},
+      );
 
       try {
-        await _user!.updatePhotoURL('');
-      } catch (_) {}
-
-      setState(() {});
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Profile picture deleted'),
-            backgroundColor: Colors.greenAccent,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
+        await user.updatePhotoURL(null);
+        await user.reload();
+      } catch (e) {
+        debugPrint('Could not clear Firebase Auth photo: $e');
       }
+
+      if (!mounted) return;
+      setState(() {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Profile picture deleted'),
+          backgroundColor: Colors.greenAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -321,7 +340,8 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   // ── PICK → CROP → SAVE ───────────────────────────────────
   Future<void> _pickAndSaveAvatar() async {
-    if (_user == null) return;
+    final user = _user;
+    if (user == null) return;
     setState(() => _isPickingImage = true);
 
     try {
@@ -359,15 +379,15 @@ class _ProfileScreenState extends State<ProfileScreen>
       if (cropped == null) return;
 
       final localPath = cropped.path;
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(_user!.uid)
-          .update({'photoURL': localPath});
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update(
+        {'photoURL': localPath},
+      );
 
       try {
-        await _user!.updatePhotoURL(localPath);
+        await user.updatePhotoURL(localPath);
       } catch (_) {}
 
+      if (!mounted) return;
       setState(() {});
     } catch (e) {
       if (mounted) {
@@ -386,6 +406,9 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   // ── EDIT NAME ─────────────────────────────────────────────
   Future<void> _showEditNameDialog(String currentName) async {
+    final user = _user;
+    if (user == null) return;
+
     final ctrl = TextEditingController(text: currentName);
     await showDialog(
       context: context,
@@ -434,11 +457,12 @@ class _ProfileScreenState extends State<ProfileScreen>
               final newName = ctrl.text.trim();
               if (newName.isEmpty) return;
               Navigator.pop(context);
-              await _user!.updateDisplayName(newName);
+              await user.updateDisplayName(newName);
               await FirebaseFirestore.instance
                   .collection('users')
-                  .doc(_user!.uid)
+                  .doc(user.uid)
                   .update({'name': newName});
+              if (!mounted) return;
               setState(() {});
             },
             child: const Text(

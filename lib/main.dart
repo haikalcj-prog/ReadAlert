@@ -16,7 +16,9 @@ Future<void> main() async {
 }
 
 class ReadAlertApp extends StatelessWidget {
-  const ReadAlertApp({super.key});
+  final Stream<User?>? authStateChanges;
+
+  const ReadAlertApp({super.key, this.authStateChanges});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ReadAlertApp extends StatelessWidget {
       // and the whole navigator stack is replaced with LoginScreen
       // automatically — no manual Navigator.pushReplacement() needed anywhere.
       home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
+        stream: authStateChanges ?? FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           // Still waiting for Firebase to respond
           if (snapshot.connectionState == ConnectionState.waiting) {

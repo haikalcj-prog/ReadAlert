@@ -122,16 +122,17 @@ class _ReportsScreenState extends State<ReportsScreen>
         SnackBar(content: Text('Could not load $period report: $e')),
       );
     } finally {
-      if (!mounted) return;
-      setState(() {
-        if (period == 'monthly') {
-          _loadingMonthly = false;
-        } else if (period == 'yearly') {
-          _loadingYearly = false;
-        } else {
-          _loadingWeekly = false;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          if (period == 'monthly') {
+            _loadingMonthly = false;
+          } else if (period == 'yearly') {
+            _loadingYearly = false;
+          } else {
+            _loadingWeekly = false;
+          }
+        });
+      }
     }
   }
 

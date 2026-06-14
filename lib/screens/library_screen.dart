@@ -261,11 +261,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   await LibraryService.createShelf(name);
                                 }
 
+                                if (!ctx.mounted) return;
                                 if (Navigator.canPop(ctx)) {
                                   Navigator.pop(ctx);
                                 }
                               } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                if (!ctx.mounted) return;
+                                ScaffoldMessenger.of(ctx).showSnackBar(
                                   SnackBar(
                                     content: Text('Error: $e'),
                                     backgroundColor: Colors.redAccent,
@@ -448,15 +450,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
           TextButton(
             onPressed: () async {
               await LibraryService.deleteShelf(shelfId);
-              if (mounted) {
-                Navigator.pop(ctx);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Deleted "$shelfName".'),
-                    backgroundColor: Colors.redAccent,
-                  ),
-                );
-              }
+              if (!mounted || !ctx.mounted) return;
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Deleted "$shelfName".'),
+                  backgroundColor: Colors.redAccent,
+                ),
+              );
             },
             child: const Text(
               'Delete',
@@ -1336,16 +1337,15 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                           final fullDoc = await LibraryService.getBookStream(
                             bookId,
                           ).first;
-                          if (fullDoc.exists && mounted) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => BookDetailScreen(
-                                  bookData: _formatBookData(fullDoc),
-                                ),
+                          if (!context.mounted || !fullDoc.exists) return;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => BookDetailScreen(
+                                bookData: _formatBookData(fullDoc),
                               ),
-                            );
-                          }
+                            ),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1449,16 +1449,15 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                           final fullDoc = await LibraryService.getBookStream(
                             bookId,
                           ).first;
-                          if (fullDoc.exists && mounted) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => BookDetailScreen(
-                                  bookData: _formatBookData(fullDoc),
-                                ),
+                          if (!context.mounted || !fullDoc.exists) return;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => BookDetailScreen(
+                                bookData: _formatBookData(fullDoc),
                               ),
-                            );
-                          }
+                            ),
+                          );
                         },
                       );
                     },
@@ -1582,9 +1581,11 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Future.microtask(
-                      () => _showAddBooksToShelfModal(screenContext),
-                    );
+                    Future.microtask(() {
+                      if (screenContext.mounted) {
+                        _showAddBooksToShelfModal(screenContext);
+                      }
+                    });
                   },
                 ),
                 ListTile(
@@ -1598,7 +1599,11 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Future.microtask(() => _showRenameDialog(screenContext));
+                    Future.microtask(() {
+                      if (screenContext.mounted) {
+                        _showRenameDialog(screenContext);
+                      }
+                    });
                   },
                 ),
                 ListTile(
@@ -1615,7 +1620,11 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Future.microtask(() => _showDeleteDialog(screenContext));
+                    Future.microtask(() {
+                      if (screenContext.mounted) {
+                        _showDeleteDialog(screenContext);
+                      }
+                    });
                   },
                 ),
 
@@ -1846,6 +1855,7 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
           TextButton(
             onPressed: () async {
               await LibraryService.deleteShelf(shelfId);
+              if (!context.mounted) return;
               Navigator.pop(context); // Close dialog
               Navigator.pop(context); // Pop back to library screen
             },
@@ -2110,7 +2120,8 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                             widget.shelfId,
                             _selectedBookIds.toList(),
                           );
-                          if (mounted) Navigator.pop(context);
+                          if (!context.mounted) return;
+                          Navigator.pop(context);
                         },
                   child: _isSaving
                       ? const SizedBox(
@@ -2559,6 +2570,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       backgroundColor: const Color(0xFF0F172A),
       appBar: AppBar(
@@ -2575,10 +2588,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: widget.title == 'My Genres'
+        stream: widget.title == 'My Genres' && user != null
             ? FirebaseFirestore.instance
                   .collection('users')
-                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .doc(user.uid)
                   .collection('custom_genres')
                   .snapshots()
             : null,

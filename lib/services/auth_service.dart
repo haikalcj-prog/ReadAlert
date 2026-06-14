@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  FirebaseAuth get _auth => FirebaseAuth.instance;
+  FirebaseFirestore get _firestore => FirebaseFirestore.instance;
 
   static bool _googleInitialized = false;
 
@@ -48,7 +48,12 @@ class AuthService {
       'email': user.email ?? data['email'] ?? '',
     };
 
-    if (user.photoURL != null && user.photoURL!.isNotEmpty) {
+    // Preserve an explicit Firestore value, including an empty string after
+    // the user deletes their avatar. Only seed the provider photo for older
+    // user documents that do not have a photoURL field yet.
+    if (!data.containsKey('photoURL') &&
+        user.photoURL != null &&
+        user.photoURL!.isNotEmpty) {
       updateData['photoURL'] = user.photoURL;
     }
 

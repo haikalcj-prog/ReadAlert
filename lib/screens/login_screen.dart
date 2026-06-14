@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'auth_widgets.dart';
-import 'main_screen.dart';
 import 'register_screen.dart';
 
 // ════════════════════════════════════════════════════════════
@@ -105,17 +104,7 @@ class _LoginScreenState extends State<LoginScreen>
     });
 
     try {
-      final user = await _auth.login(
-        _emailCtrl.text.trim(),
-        _passwordCtrl.text.trim(),
-      );
-
-      if (user != null && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        );
-      }
+      await _auth.login(_emailCtrl.text.trim(), _passwordCtrl.text.trim());
     } catch (e) {
       if (mounted) setState(() => _errorMsg = _parseError(e.toString()));
     } finally {
@@ -132,14 +121,7 @@ class _LoginScreenState extends State<LoginScreen>
     });
 
     try {
-      final user = await _auth.signInWithGoogle();
-
-      if (user != null && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        );
-      }
+      await _auth.signInWithGoogle();
     } catch (e) {
       if (mounted) setState(() => _errorMsg = _parseError(e.toString()));
     } finally {

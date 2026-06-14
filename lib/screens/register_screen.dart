@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'auth_widgets.dart';
-import 'main_screen.dart';
 
 // ════════════════════════════════════════════════════════════
 //  REGISTER SCREEN — ReadAlert
@@ -103,19 +102,11 @@ class _RegisterScreenState extends State<RegisterScreen>
     });
 
     try {
-      final user = await _auth.register(
+      await _auth.register(
         _nameCtrl.text.trim(),
         _emailCtrl.text.trim(),
         _passwordCtrl.text.trim(),
       );
-
-      if (user != null && mounted) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-          (route) => false,
-        );
-      }
     } catch (e) {
       if (mounted) setState(() => _errorMsg = _parseError(e.toString()));
     } finally {
@@ -132,15 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen>
     });
 
     try {
-      final user = await _auth.signInWithGoogle();
-
-      if (user != null && mounted) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-          (route) => false,
-        );
-      }
+      await _auth.signInWithGoogle();
     } catch (e) {
       if (mounted) setState(() => _errorMsg = _parseError(e.toString()));
     } finally {

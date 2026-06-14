@@ -461,6 +461,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _showIsbnDialog() {
     final isbnController = TextEditingController();
+    final messenger = ScaffoldMessenger.of(context);
     showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -586,10 +587,11 @@ class _SearchScreenState extends State<SearchScreen> {
                               _cleanAndFilterResults(results),
                             );
                         } catch (e) {
-                          if (mounted)
-                            ScaffoldMessenger.of(context).showSnackBar(
+                          if (mounted) {
+                            messenger.showSnackBar(
                               const SnackBar(content: Text('Book not found!')),
                             );
+                          }
                         } finally {
                           if (mounted) setState(() => _isLoading = false);
                         }
