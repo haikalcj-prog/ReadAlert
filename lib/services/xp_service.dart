@@ -68,20 +68,19 @@ class XpService {
 
     final int xpIntoTier = totalXp - tierStarts[tierIndex];
     final int step = tierSteps[tierIndex];
-    final int levelsGained = (xpIntoTier ~/ step).clamp(0, 9);
+    
+    int levelsGained = xpIntoTier ~/ step;
+    if (tierIndex < tierStarts.length - 1) {
+      levelsGained = levelsGained.clamp(0, 9);
+    }
 
     int currentLevel = (tierIndex * 10) + 1 + levelsGained;
-    if (currentLevel > 100) currentLevel = 100;
 
     final int currentLevelBaseXp =
         tierStarts[tierIndex] + (levelsGained * step);
-    final int nextLevelXp = currentLevel == 100
-        ? currentLevelBaseXp
-        : currentLevelBaseXp + step;
+    final int nextLevelXp = currentLevelBaseXp + step;
 
-    final double progress = currentLevel == 100
-        ? 1.0
-        : (totalXp - currentLevelBaseXp) / step.toDouble();
+    final double progress = (totalXp - currentLevelBaseXp) / step.toDouble();
 
     return {
       'level': currentLevel,

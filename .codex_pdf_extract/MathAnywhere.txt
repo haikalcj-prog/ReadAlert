@@ -1,0 +1,3643 @@
+ 
+ 
+UNIVERSITI TEKNOLOGI MARA 
+ 
+ 
+ 
+ 
+ 
+MATHANYWHERE: 
+INTERACTIVE WEBSITE FOR 
+LEARNING DIFFERENITATION 
+ 
+ 
+ 
+ 
+ 
+ 
+LUTFI NAIM BIN SYAHRONIZAM 
+ 
+ 
+ 
+ 
+ 
+BACHELOR OF COMPUTER SCIENCE 
+(HONS.) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+JULY 2025 
+ 
+  
+ 
+ 
+UNIVERSITI TEKNOLOGI 
+MARA 
+ 
+ 
+ 
+MATHANYWHERE: 
+INTERACTIVE WEBSITE FOR 
+LEARNING DIFFERENITATION 
+ 
+ 
+ 
+LUTFI NAIM BIN SYAHRONIZAM 
+ 
+ 
+ 
+ 
+Report submitted in fulfilment of the 
+requirements for Bachelor of Computer 
+Science (Hons.)  
+Faculty of Computer and Mathematical 
+Sciences 
+ 
+ 
+ 
+ 
+ 
+ 
+JULY 2025 
+ 
+ 
+ 
+  
+ii 
+ 
+SUPERVISOR APPROVAL 
+ 
+ 
+MATHANYWHERE: INTERACTIVE WEBSITE FOR LEARNING 
+DIFFERENTIATION 
+ 
+By 
+ 
+LUTFI NAIM BIN SYAHRONIZAM  
+2022841556 
+ 
+This report was prepared under the supervision of the supervisor, Dr Khairulliza Binti 
+Ahmad Salleh. It was submitted to the Faculty of Computer and Mathematical 
+Sciences and was accepted in partial fulfilment of the requirements for the degree of 
+Bachelor of Computer Science (Hons.) 
+ 
+ 
+ 
+Approved by 
+ 
+ 
+ 
+Dr. Khairulliza Binti Ahmad Salleh 
+Project Supervisor 
+ 
+ 
+JULY 17, 2025
+  
+iii 
+ 
+STUDENT DECLARATION 
+ 
+ 
+I certify that this report and the project to which it refers is the product of my own 
+work and that any idea or quotation from the work of other people, published or 
+otherwise are fully acknowledged in accordance with the standard referring of the 
+discipline. 
+ 
+ 
+ 
+…………………….. 
+Lutfi Naim Bin Syahronizam 
+2022841556 
+ 
+ 
+ 
+JULY 17, 2025
+  iv  
+ACKNOWLEDGEMENT 
+ 
+ 
+First and foremost, I would like to express my deepest gratitude to Allah SWT for 
+granting me the strength, patience, and perseverance to complete this Final Year 
+Project successfully. 
+ 
+I would like to extend my sincere appreciation to my supervisor, Dr Khairulliza, for 
+the invaluable guidance, constructive feedback, and continuous support throughout 
+every stage of this project. Their expertise and encouragement have been instrumental 
+in shaping this work. 
+ 
+My heartfelt thanks also go to my parents Mama, Papa & Adik for their endless love, 
+prayers, and unwavering support. Their sacrifices and encouragement have been the 
+foundation of my journey. 
+ 
+I would also like to thank all my lecturers, as well as my friends and course mates, for 
+their assistance, motivation, and insightful discussions, which greatly contributed to 
+the progress of this project. 
+ 
+Finally, I am grateful to all respondents, testers, and experts who participated in the 
+surveys and evaluations, providing valuable feedback that enhanced the quality of this 
+research. 
+ 
+Thank you to everyone who has supported me directly or indirectly throughout this 
+journey.
+v 
+ 
+ABSTRACT 
+ 
+ 
+Differentiation, a core concept in calculus, is often perceived as abstract and 
+challenging by students, leading to difficulties in comprehension and practical 
+application. Traditional teaching methods, relying primarily on static lectures and 
+textbooks, frequently fail to provide the interactive and personalized learning 
+experiences needed to effectively convey such complex mathematical concepts. To 
+address this gap, this project introduces MathAnywhere: Interactive Website for 
+Learning Differentiation, a web-based educational platform specifically designed to 
+support UiTM students studying Calculus I (MAT183 and MAT421). The platform 
+integrates real-time feedback, interactive tutorials, dynamic visualization tools, and 
+adaptive progress tracking to promote deeper understanding and sustained 
+engagement. Developed using HTML, CSS, JavaScript, and Firebase, the system 
+offers features such as a derivative calculator, function graphing tool, step-by-step 
+problem-solving guidance, and achievement badges. Evaluation through expert 
+reviews and user testing with 20 participants indicated high levels of satisfaction, ease 
+of use, and alignment with the UiTM syllabus. Results suggest that MathAnywhere 
+effectively enhances students' conceptual understanding and offers a promising 
+supplement to traditional learning approaches. Future recommendations include 
+expanding to additional calculus topics, improving mobile compatibility, and 
+incorporating collaborative learning features. 
+vi 
+ 
+TABLE OF CONTENTS 
+ 
+ 
+CONTENT                  PAGE 
+ 
+SUPERVISOR APPROVAL ii 
+STUDENT DECLARATION iii 
+ACKNOWLEDGEMENT iv 
+ABSTRACT v 
+TABLE OF CONTENTS vi 
+LIST OF FIGURES ix 
+LIST OF TABLES xi 
+ 
+CHAPTER ONE: INTRODUCTION  
+ 
+    1.1  Background of Study 1 
+    1.2  Problem Statement 2 
+    1.3  Project Objectives 3 
+    1.4  Project Scope 4 
+    1.5   Project Significance 4 
+    1.6  Conclusion 5 
+ 
+CHAPTER TWO: LITERATURE REVIEW  
+ 
+    2.1  Overview of Research Domain 7 
+         2.1.1 Mathematics Education 8 
+         2.1.2 Calculus and Differential Calculus 10 
+    2.2   Overview of Interactive Learning Systems 11 
+         2.2.1 Real-Time Feedback 11 
+         2.2.2 Collaborative Learning Systems 16 
+         2.2.3 Gamified Learning Systems 17 
+    2.3  Comparison of Existing Systems/Applications 19 
+vii 
+ 
+         2.3.1 Khan Academy 20 
+         2.3.2 WolframAlpha 21 
+         2.3.3 Desmos 22 
+    2.4  Justification on the Chosen Techniques and Features 24 
+    2.5  Conclusion 25 
+ 
+CHAPTER THREE: METHODOLOGY  
+ 
+    3.1  Introduction 27 
+    3.2  Project Methodology 27 
+         3.2.1 Phase 1: Define Phase 28 
+         3.2.2 Phase 2: Design Phase 29 
+         3.2.3 Phase 3: Development Phase 31 
+         3.2.4 Phase 4: Demo & Feedback Phase 32 
+         3.2.5 Phase 5: Release Phase 33 
+    3.3  Summary of Project Methodology 34 
+    3.4  System Architecture 36 
+    3.5  Hardware & Software Requirement 37 
+         3.5.1 Hardware Requirements 37 
+         3.5.2 Software Requirements 38 
+    3.6  Conclusion 40 
+ 
+CHAPTER FOUR: PROJECT DESIGN, IMPLEMENTATION, AND RESULT  
+ 
+     4.1  Introduction 41 
+     4.2  Project Design 41 
+         4.2.1 Use-Case Diagram 42 
+         4.2.3 Flowchart 43 
+         4.2.4 Data Model Design 47 
+    4.3  Project Development 48 
+         4.3.1 Integration of MathAnywhere 49 
+         4.3.2 Developing MathAnywhere: Interactive Website for Learning 
+Differentiation 50 
+viii 
+ 
+    4.4  Testing 68 
+    4.5  Expert Feedback 71 
+    4.6  User Feedback 73 
+    4.7  Conclusion 80 
+ 
+CHAPTER FIVE: CONCLUSION AND RECOMMENDATION FOR FUTURE 
+WORK  
+ 
+    5.1  Introduction 81 
+    5.2  Summary of Findings 81 
+    5.3  Objective Achievement 82 
+         5.3.1 First Objective 82 
+         5.3.2 Second Objective 82 
+         5.3.3 Third Objective 83 
+    5.4  Limitation 83 
+    5.5  Recommendation 84 
+    5.6  Conclusion 85 
+ 
+REFERENCES  
+ 
+  
+ix 
+ 
+LIST OF FIGURES 
+ 
+ 
+FIGURE              PAGE 
+2.1 Concept Map 7 
+2.2 Traditional Mathematics Education 8 
+2.3 Progress Tracking in Khan Academy 13 
+2.4 Dynamic Visualization of Mathematical Graphs in Desmos 14 
+2.5 Step-by-Step Answer Verification in WolframAlpha 15 
+2.6 Interface of Khan Academy's Differential Calculus Section. 20 
+2.7 Example of an interactive Problem on Limits 21 
+2.8 Examples of Step-by-step Solutions 22 
+2.9 Students’ views about how Desmos contribute to learning experiences 23 
+2.10 Experiences in using Desmos 23 
+3.1 Agile Development Cycle 27 
+3.3 System Architecture of MathAnywhere: Interactive website for Learning 
+Differentiation 36 
+4.1 Use-Case Diagram of MathAnywhere 43 
+4.2 User Authentication Flowchart Diagram 44 
+4.3 Main Application & Tools Flowchart Diagram 45 
+4.4 Profile, Progress & Achievements Flowchart Diagram 46 
+4.5 Firestore Database Structure 48 
+4.6 Sign-in and Sign-up screen 51 
+4.7 Coding Snippets of Sign-in Function 53 
+4.8 Coding Snippets of Sign-up Function 56 
+4.9 Home Page Screen 57 
+4.10 Coding Snippets of Home Page Function 58 
+4.11 Topics Section 59 
+4.12 Coding Snippets of Module Page Function 60 
+4.13 Derivative Calculator 61 
+4.14 Graphing Tool 61 
+4.15 Coding Snippets of Derivative Calculator Javascript Function 62 
+4.16 Coding Snippets of Graph Generation JavaScript Function 64 
+x 
+ 
+4.17 MathAnywhere Achievement Badges 64 
+4.18 Coding Snippets of Achievement System 66 
+4.19 Overall Student Progress 67 
+4.20 Student Learning Progress by Difficulty Level 67 
+4.21 Coding Snippets of Progress Update 68 
+4.22 Overall Impression based on Expert 71 
+4.23 Evaluation of the pedagogical structure employed by MathAnywhere 72 
+4.24 Recommendation for future improvement of the MathAnywhere platform 72 
+4.25 Feedback regarding on how well MathAnywhere addresses the needs of its target 
+audience 73 
+4.26 Gender and Age Distribution 74 
+4.27 Participants reference for using educational websites 75 
+4.28 User feedback on the intuitiveness of MathAnywhere 76 
+4.29 User Feedback on Content Alignment with UiTM Syllabus 77 
+4.30 User Feedback on the Speed of MathAnywhere compared to Traditional 
+textbooks 78 
+4.31 User Feedback on the Clarity of Step-by-Step Explanations 78 
+4.32 User Likelihood of Recommending MathAnywhere 79 
+  
+xi 
+ 
+LIST OF TABLES 
+ 
+ 
+TABLE               PAGE 
+2.1 Comparison of Interactive Learning Systems 18 
+2.2 Comparison of Learning Platforms for Learning Differentiation 24 
+3.1 Overview of Define Phase 29 
+3.2 Overview of Design Phase 30 
+3.3 Overview of Development Phase 32 
+3.4 Overview of Demo & Feedback Phase 33 
+3.5 Summary of Project Methodology 34 
+3.6 Hardware Requirements 37 
+3.7 Software Requirements 38 
+4.1 Functionality Testing 69 
+ 
+ 
+1 
+ 
+ 
+CHAPTER 1 
+ 
+ 
+INTRODUCTION 
+ 
+ 
+This chapter presents an introduction to the project. The chapter starts with the 
+background of study followed by the problem statement. Afterwards, the project 
+objectives are outlined, and the scope of the study is defined. The chapter ends with 
+an explanation of the project’s significance.  
+  
+1.1 Background of Study  
+   
+Over the years, the role of technology in the classroom has become more 
+prominent generally, but especially in higher-level courses such as calculus. 
+One of the key concepts in calculus is differentiation, which described the 
+behaviour and functioning of various functions (Grizzle, 2025). Fields such as 
+engineering, physics, economics, and many others applied differentiation to 
+determine rates of change, optimize processes, and conduct data analysis. Due 
+to its algebraic nature, sophistication, and the level of mathematical experience 
+required to solve real-life problems, differentiation was often considered a 
+difficult concept for students, yet it remained a vital knowledge. Traditional 
+methods like textbooks and lectures often lacked the practical experience and 
+personalized feedback necessary for a deep understanding of complex ideas. 
+Disparities in teaching methods also hindered students’ capacity to apply 
+differentiation in more advanced contexts (Tian & Wahid, 2024). While 
+textbooks and lectures were essential, they frequently lacked the engagement 
+and tailored feedback needed for better knowledge retention. This lack of 
+interactive instruction methods made topics harder to learn and further limited 
+students’ understanding of differentiation. These challenges, however, could be 
+addressed through interactive learning platforms, where the pace and approach 
+to learning were controlled by the students themselves.  
+2 
+ 
+ 
+To solve this problem, there was a need to develop interactive interfaces that 
+incorporated graphical and multimedia animations as well as real-time 
+decision-making tools to enhance communication of mathematical concepts 
+and related resources (Ming Chew et al., 2022). These tools facilitated active 
+learning, enabled students to review challenging ideas, and provided 
+personalized feedback, thus enhancing their comprehension of differentiation 
+(Li et al., 2023). This project aimed to provide an interactive and flexible 
+learning platform for learning differentiation, intending to address the 
+shortcomings of conventional teaching techniques and foster a more inclusive 
+and effective educational environment. 
+   
+1.2 Problem Statement  
+  
+Ideally, having the ability to draw or visualize what one was learning in 
+mathematics would have been greatly helpful in the long run. Students would 
+have been able to consider differentiation from a more practical perspective, 
+especially when supported by diagrams, graphs, and detailed breakdowns of 
+general problem-solving processes. It would also have been useful for students 
+to have alternative methods or tools like those they accessed in other learning 
+environments, rather than learning the concept of differentiation solely through 
+traditional approaches.   
+  
+However, many students failed to understand the basics of differentiation even 
+though it was a fundamental topic included in calculus and had practical real-
+world applications. Students often reported feeling overloaded and frustrated 
+with differentiation because of its abstract nature and the challenges they 
+encountered when applying differentiation rules in various situations (Zaharin 
+et al., 2021). Although conventional classroom teaching was effective for 
+covering foundational content, it might not have provided students with the 
+one-on-one attention and individualized practice needed to fully grasp the 
+underlying ideas. Teachers in large classes might not have had enough time to 
+support each student individually or to adapt their lessons to suit different 
+3 
+ 
+learning preferences (Jamaluddin et al., 2017). According to past research, 
+students faced difficulties in solving differentiation problems due to the lack of 
+interactive and adaptive learning tools that could provide them with instant 
+feedback and guidance (Tian & Wahid, 2024).  
+ 
+Most current online platforms are somewhat static, making it difficult for 
+students to see how differentiation works or to get feedback that is relevant to 
+their own struggles. Consequently, students frequently take in knowledge 
+without actively seeking it out, leading to diminished effectiveness in terms of 
+long-term retention and comprehension. Most of the learning tools available 
+today do not have visual aid capabilities (e.g. graphs and problem-solving 
+process breakdown), so students have no choice but to depend on theoretical 
+explanations, which may not be enough to help them develop practical 
+problem-solving abilities (Aini Jaafar et al., 2022). Hence, it is evident that 
+there is a need for a platform that offers individualized feedback, interactive 
+problem-solving activities, and real-time graphing. 
+ 
+To solve some of the issues, this project suggested creating a web-based tool 
+with a focus on differentiation concepts. This alternative teaching method 
+crafted for students complement real-time graphing, a calculator for a 
+derivative equation, and provide feedback on students’ problem solving to 
+prepare students for real-life application of the concept. 
+  
+1.3 Project Objectives  
+  
+The objectives of this project are:  
+  
+I. To design an interactive web-based educational platform for 
+studying differentiation.  
+II. To develop an interactive web-based educational platform for 
+studying differentiation that provides tailored feedback according to 
+student performance. 
+III. To assess the platform’s usability, interactivity, and the effectiveness 
+of its feedback through user testing and expert evaluation. 
+4 
+ 
+1.4 Project Scope  
+  
+This project is intended for UiTM students who are studying MAT183 and 
+MAT421 which are the course codes for Calculus I (Diploma and bachelor’s 
+degree level), with a particular emphasis on those who require more practice 
+and a more thorough comprehension of differentiation. The platform was 
+developed as a web-based application and was constructed based on the 
+calculus syllabi of Universiti Teknologi MARA (UiTM) to align with the 
+educational setting. The website uses English as the medium of teaching to 
+meet the requirements of UiTM students.  
+ 
+In contrast to previous research that explored additional information through 
+constrained variable exploration, this platform allowed students to alter 
+variables and immediately see the consequences, thus facilitating active 
+exploration to enhance the overall learning environment and provide real-life 
+experience. By using adaptive assessments and quizzes, the learning 
+experience was tailored to match each student’s level of understanding. 
+ 
+Customized learning paths and personalized feedback were provided to address 
+individual needs and guide students in areas where they required additional 
+support. The platform enabled students to manipulate variables to observe real-
+time outcomes, fostering active exploration and delivering a more engaging, 
+hands-on learning experience. Additionally, the learning experience was 
+further customized through adaptive quizzes and assessments, allowing 
+students to monitor their progress and strengthen their understanding.  
+ 
+1.5  Project Significance  
+  
+The significance of this project lies in transforming the conventional methods 
+of teaching and learning differentiation into a more personalized and 
+innovative approach to course delivery. Students received better instruction 
+and practice since the platform offered a personalized learning approach that 
+catered to their needs and performance levels. This customization was essential 
+5 
+ 
+to address specific areas where students encountered difficulties, making 
+learning easier and more efficient.  
+ 
+By incorporating elements such as feedback, quizzes, and graphics, the 
+platform enhanced students’ engagement and activity. Differentiation was often 
+a complicated concept to grasp since it was abstract and not concrete. However, 
+the features of dynamic visualizations and real-time problem-solving activities 
+made the subject more comprehensive and user-friendly than many similar 
+resources. These characteristics encouraged students to take an active role in 
+their learning, manipulate variables that affected their understanding, and study 
+outcomes, allowing them to gain a deeper understanding of the concepts.  
+ 
+Furthermore, the platform’s web-based architecture provides seamless 
+accessibility and adaptability. The learning resources are accessible to students 
+at any time and from any location, allowing them to learn at their own pace and 
+convenience. This feature is especially advantageous for students who are 
+exceedingly occupied or who require additional time to review complex 
+subjects. In general, the project’s objective is to develop an educational 
+resource that is both adaptable and inclusive, enabling students to conquer 
+differentiation in a manner tailored to their unique learning style. Additionally, 
+this platform offers significant value to lecturers by serving as a supplementary 
+teaching tool. It allows lecturers to monitor students’ progress more effectively, 
+identify areas where students face challenges, and provide targeted support. By 
+integrating this web-based platform into their teaching strategies, lecturers can 
+enhance classroom engagement, deliver more personalized instruction, and 
+promote a more interactive and student-centered learning environment.  
+  
+1.6 Conclusion  
+ 
+In this chapter, the idea behind the creation of a web-based, interactive learning 
+platform designed to assist students in learning differentiation was presented. 
+The goal was to make the process of studying more individualized to meet each 
+student’s needs, thereby making the understanding of calculus more effective. 
+6 
+ 
+The platform that was developed aimed to explain complex ideas clearly and 
+to keep students motivated through animated explanations and related 
+interactive tools. It served as an effective addition to mainstream instructional 
+strategies, offering greater flexibility for students to control their own learning 
+process and enabling them to study at their own convenience, at their preferred 
+time, and in their preferred place. Altogether, the objective of this effort was to 
+provide students with the essential support they needed to confidently 
+understand and apply differentiation in their studies and future professions. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+7 
+ 
+CHAPTER 2 
+ 
+ 
+LITERATURE REVIEW 
+ 
+ 
+This section discusses research related works and related studies concerning to the 
+project in discussion. The chapter presents the outcome of a review conducted on 
+books, journals, articles, and other research sources concerning the project, which 
+emphasizes interactivity and mathematics, specifically differential calculus. In 
+addition, it examines the strategies available to create an interactive learning system 
+in web-based learning environment; real-time feedback during learning process; real 
+time performance indicators; and visualization tools. Also, the review highlights other 
+platforms and systems in use in mathematics education currently, with details, its 
+advantages, and disadvantages. This comparison reveals lack of elements in the 
+existing solutions and lays the foundation for proposing an interactive environment for 
+learning about differentiation in calculus. 
+ 
+ 
+Figure 2.1 Concept Map  
+    
+2.1  Overview of Research Domain  
+ 
+Mathematics is a core competency in problem-solving and abstract thinking 
+processes, which are determent to scientist and other STEM education students. 
+However, teaching and learning have been a thorny issue in the school more so 
+8 
+ 
+when conveying concepts from simple knowledge areas to complex areas of 
+study such as calculus. This means that the transition is often challenging 
+because students have mismatches in their prior knowledge of such common 
+concepts as variables and functions (Thompson & Harel, 2021). Moreover, 
+inequalities in access to quality resources and technological tools worsen 
+performance gaps among students from different socioeconomic backgrounds.  
+For example, Boulaaras et al. (2023) highlight that students in underprivileged 
+communities often lack access to modern educational tools, which hinders their 
+ability to engage with interactive learning platforms and deepens the 
+educational divide. Solving these challenges needs basic knowledge and 
+understanding of the conceptual and pragmatic questions of mathematical 
+learning, especially of differential calculus, to offer effective strategies which 
+boost the interest of students and their results.  
+  
+ 
+   Figure 2.2 Traditional Mathematics Education  
+(Source: https://iep.jsu.edu/degrees/undergraduate/arts-humanities-
+sciences/mcis/mathematicstraditional.html)  
+  
+ 2.1.1 Mathematics Education   
+  
+Mathematics learning involves various learning contents such as calculus, 
+probability, geometry and so on that are vital for building analysis proficiency. 
+These domains provide the prerequisites for the subsequent work and calculus 
+assumes an important function because of its substantial applicability for 
+solving practical problems as well as its significance in connecting science, 
+technology, engineering, and mathematics disciplines (Thompson & Harel, 
+2021).  
+   
+9 
+ 
+There are primary, secondary and tertiary Mathematics education in Malaysia, 
+and the curriculum is designed to provide the basic skills and building a pathway 
+to advanced skills. At the primary level, students are instructed to learn numeracy 
+in arithmetic and geometric shape and measurements initially. Teaching algebra, 
+trigonometry and bit of calculus in second year of secondary education demands 
+different cognitive processes. In the tertiary level, students, study differential and 
+integral calculus, linear algebra and statistical methods in more advanced and 
+special field in preparation for STEM careers. Nevertheless, there are structured 
+levels, yet transitional difficulties are likely to arise, particularly when 
+instructing concepts such as calculus. Restricted access to educational resources 
+and technology is a significant factor influencing learning outcomes. Recent 
+modifications aimed to render education technology-centric and individualized 
+(Fazwan Kharuddin et al., 2021).  
+ 
+Classroom teaching through lecturing is a common approach which serves more 
+to teach content by rote and less for learning with understanding or meaningful 
+links to practice. This approach minimizes the interaction and dominion of such 
+attributes and especially in things like differentiation (Barana et al., 2021). 
+Additionally, limited access to resources and technologies exacerbates learning 
+disparities, especially in underprivileged communities (Boulaaras et al., 2023).  
+  
+This project aims at filling these gaps by directing its emphasis on the teaching 
+and learning of differentiation in the context of calculus only. The use of such 
+forms as interactive tools and feedback facilities should improve students’ 
+interest levels and promote improved knowledge regarding the concept in 
+question. These manipulatives give students the ability to see symbolic 
+representations and how they translate to the geometric and the practical 
+application. Such feedback enhances this process through real-time provision 
+that allows for emergent corrections of any wrong practices making the students 
+continue to be engaged in their learning processes. By these innovations, the 
+hope of this project is to develop an integrated and flexible learning system that 
+addresses the need of the students. 
+  
+10 
+ 
+2.1.2 Calculus and Differential Calculus   
+ 
+Calculus is an essential domain of the learning of mathematics that enables the 
+description and analysis of processes involving change. But because of this 
+abstract nature, it became difficult for students to grasp and then apply. Students 
+encounter significant difficulties in grasping the basic concepts, like limits, 
+derivatives and integrals, as concepts separated from each other, rather than 
+being a family of concepts. Calculus is an abstract knowledge to this end and 
+consequently differential calculus cannot be applied in the practical situation 
+since it is disconnected (Thompson & Harel, 2021). Moreover, the extensive 
+knowledge acquisition necessary for integrating theory with problem-solving 
+can be overwhelming for students, particularly when there is insufficient 
+support and foundation in the courses provided (Biza et al., 2022).   
+ 
+Differential calculus is a crucial component of calculus, yet it is complex due 
+to its integration of algebra and geometry. Students frequently struggle to 
+connect algebraic representations with geometric representations, such as the 
+slopes of tangent lines and rates of change (Ely, 2021). It is unfortunate that 
+conventional teaching methods fail to integrate visual aids, which could bridge 
+this gap, resulting in students lacking sufficient context to comprehend these 
+concepts. Moreover, the absence of application-based integration hinders 
+students’ engagement and diminishes the significance of differentiation in 
+practical contexts (Torres-Peña et al., 2024). The research indicates that the 
+practical application of mathematical theories significantly enhances student 
+engagement and understanding, particularly for concepts lacking obvious real-
+world relevance, such as calculus (Barana et al., 2021).  
+ 
+This is a concern because, despite the availability of numerous tools for creating 
+effective graphs in classrooms, their implementation is not always realized. Due 
+to constraints such as limited resources and insufficient teacher training, the 
+implementation of most of these technologies is inadequate (Boulaaras et al., 
+2023). To address these challenges, educational systems must guarantee that 
+students in all schools have secure and efficient access to these technologies, 
+11 
+ 
+and that teachers engage in continuous professional development to effectively 
+integrate these tools into instruction.  
+  
+2.2  Overview of Interactive Learning Systems  
+ 
+This research area focuses on interactive learning systems, as Integrated 
+Systems components like Real-time Feedback Systems, Collaborative Systems 
+and Gamification Learning Systems. There are aspects of the learning process 
+in mathematics education, especially within calculus, that are included. 
+However, differentiate the specific advantages and disadvantages. This 
+proposed project is a real-time feedback system due to its ability to provide 
+immediate feedback thus encourages students to interact with it and ultimately 
+aid in concept retention when it comes to learning Calculus. It discusses the 
+components, why they are important to the chosen project focus and challenges 
+faced when dealing with these components.  
+  
+2.2.1 Real-Time Feedback  
+ 
+Real-time feedback systems are crucial in contemporary learning models, 
+particularly in mathematics and STEM education, where responses occur in 
+real-time, addressing students' actions. These systems tackle a fundamental 
+challenge in education: delayed feedback, which can adversely affect students 
+by reinforcing incorrect understandings without anyone available to correct 
+them (Barana et al., 2021). Given that students can readily identify errors 
+during the initial phases of computing, real-time feedback serves as an optimal 
+instrument to maintain both learner engagement and the learning process. The 
+primary advantage of a real-time feedback system lies in its provision of 
+continuous feedback to students. Certain features may serve as process 
+indicators, facilitate user interaction with visualizations, provide answer 
+verification mechanisms, adjust to learning preferences through suggested 
+pathways, and incorporate game-related incentives such as badges and 
+rewards. However, not all these features are applicable to this project. While 
+adaptive pathways and gamified elements are valuable in some contexts, this 
+project were focus on three key features: process indicators, interactive tools 
+12 
+ 
+with visual feedback, and answer verification systems. These were examined 
+thoroughly in the following sections.  
+  
+I.    Progress Indicators  
+  
+Lesson completion, accuracy and proficiency level work as a progress indicator 
+which monitor students' mastery of learning outcomes in real-time. These tools 
+allow the students to gauge their work and locate their areas of failure or areas 
+where they are still not up with the work. For instance, Khan Academy offers 
+basic report card tools to demonstrate the progress of students in different areas 
+and to give students a certain level of self-control of the learning journey  
+(Barana et al., 2021).  
+  
+Although all progress tracking tools effectively enhance motivation, they 
+frequently lack precision. Normally, they will give students’ an average strategy 
+score without mentioning the areas where the disposal might have been a task. 
+This is a limitation which prevents educators from filling the learning gaps of 
+their students. To help progress indicators be even more effective, by 
+integrating progress bar displays that are more enhanced and customizable and 
+adjusted to individual student needs. Introducing practice aids, like tools that 
+recommend tailored suggestions to specific students, or tools that identifies 
+common mistakes, can substantially improve learning outcomes (Nakamoto et 
+al., 2023).  
+  
+Adding progress indicators can even further add to student engagement. 
+Milestones are tracked as elements that leave an interactive experience that 
+motivates students to stay with their education. This tool, in addressing these 
+challenges, can be a great transformational tool in education especially in such 
+subjects such as mathematics and calculus.  
+  
+13 
+ 
+ 
+Figure 2.3 Progress Tracking in Khan Academy  
+(Source: https://www.khanacademy.org/khan-for-educators/k4e-
+usdemo/xb78db74671c953a7:using-course-mastery-on-khan-
+academygr/xb78db74671c953a7:using-khan-academy-s-activity/a/help-your-students-track-
+theirlearning)   
+  
+II. Interactive Tools and Visual Representation Feedback 
+ 
+Graphing calculators and other dynamic visualisation tools are very valuable 
+when it comes to teaching students concepts in mathematics. It is helpful in 
+showing the user a graphical representation of functions as the user learns them 
+which helps close the gap between theory and practise.  
+ 
+For instance, on a platform such as Desmos, students could enter equations, and 
+see the corresponding graphs directly, opening a new way of exploring 
+derivatives and integrals in their mathematical sense (Nakamoto et al., 2023). 
+Graphing tools work best to show the connections between symbolic 
+representations and geometric interpretations. Research shows that dynamic 
+visualizations help students see, for example, the slope of a tangent or the area 
+under a curve more easily than they would in a static context (Ely, 2021). It 
+does not do anything to teach students how their abstract thoughts have 
+practical effects, building a deeper, more robust foundation for solving issues 
+that are even more difficult. While effective, interactive tools often do not have 
+integrated theoretical guidance or brochure explanations of how to do step-by-
+step problem solving. For instance, though tools like Desmos do a great job at 
+visualization, it is still missing tailored instructional components as well as a 
+ 
+14 
+ 
+theoretical justification of the visual outputs that have accomplished (Hajizada 
+et al., 2022). Being unable to escape this limitation can’t prevent students from 
+fully connecting the observed outputs to underlying mathematical principles.  
+  
+A vision of these tools is expanded to address the need for adaptive feedback 
+systems and to incorporate educational features. Studies indicate that when by 
+combining visual tools with contextual explanations and personalized feedback 
+on similar abstract concepts it will lead to significant increase in comprehension 
+and retention of such abstract concepts (Torres-Peña et al., 2024). When 
+addressing these limitations, tools can become a more complete resource to 
+mathematics education, especially in facilitating more conceptual 
+understanding of calculus.  
+ 
+ 
+     Figure 2.4 Dynamic Visualization of Mathematical Graphs in Desmos 
+(Source: https://www.desmos.com/calculator) 
+  
+III.   Answer Verification Systems  
+  
+Important tools in modern education are the answer verification systems which 
+allow to provide students with immediate detailed feedback about 
+correct/incorrect answers, quiz suggestions etc. These systems 'break down' the 
+complex problems into simpler, more manageable steps that help students to 
+see where they went wrong and to understand why correct solutions are correct. 
+For example, students have come to love WolframAlpha for its step-by-step 
+solutions, which not only build confidence but also help students become 
+stronger problem solvers (Hajizada et al., 2022). However, these systems give 
+ 
+15 
+ 
+the students clear explanations of every step, allowing students to focus on an 
+understanding of the process rather than ‘getting’ the right answer. By learning 
+iteratively, it is reinforced learning of key concepts and reduces the probability 
+of recurring on error. According to research, detailed feedback of this sort 
+dramatically improves comprehension and retention of mathematical principles 
+especially in difficult areas like calculus (Torres-Peña et al., 2024).  
+ 
+A drawback of many answer verification systems, however, is that they are 
+static. They are exceptional at clarifying predetermined ideas but cannot 
+determine how to adjust to assorted learning styles or to essentially believe the 
+individual misconceptions of their students in a spontaneous manner. However, 
+the inability to adapt can prevent personalized learning, especially for students 
+who need individual or simple rephrased instructions (Ely, 2021).  
+ 
+To compensate these shortcomings, these can be improved by integrating 
+dynamic and interactive feedback with answer verification systems, thereby 
+increasing their flexibility and responsiveness. Such systems can address 
+students learning needs, by analysing students’ responses and providing 
+suitably tailored feedback to ensure intervention to the gaps in understanding. 
+These features reduce problem guessing and improve the efficacy of answer 
+verification systems to promote conceptual understanding and long-term 
+mastery of mathematical concepts.   
+  
+ 
+Figure 2.5 Step-by-Step Answer Verification in WolframAlpha  
+(Source: https://www.wolframalpha.com/examples/pro-features/step-by-step-solutions)    
+ 
+16 
+ 
+ 2.2.2 Collaborative Learning Systems   
+ 
+Collaborative Learning Systems exploit peer interaction in which students can 
+share their insights and solve problems together. However, such systems 
+promote critical thinking and teamwork in the important search for a robust 
+understanding of these mathematical concepts. Students tend to share goals, 
+negotiate solutions to problems, and interact and depend on each other to 
+degrees that are critical to effective collaborative learning during collaborative 
+activities (Garcia et al., 2024; Chen et al., 2025). 
+ 
+Computer Supported Collaborative Learning (CSCL) has become a leading 
+paradigm that brings digital tools for collaboration and to improve learning 
+outcomes. CSCL uses technologies like forums, shared workspaces and instant 
+messaging to facilitate communication of the students so effectively. It is shown 
+that this approach improves cognitive and social development in collaborative 
+tasks. For instance, Garcia et al. (2024) demonstrated that multi-device support 
+in collaborative design systems helped students contribute more to the 
+conversation and pulled in individual and group learning. Furthermore, the 
+integration of transparent learning analytics enables real-time monitoring and 
+supports individual accountability, ensuring that all participants actively 
+contribute (Zhou et al., 2024). 
+ 
+Collaborative systems often include interactive hints and tips, which give 
+students suggestions on what to do without outright answering the students. 
+Firdaus et al. (2021) discussed how collaborative exercises were encouraged by 
+platforms like Khan Academy for users to become engaged with and even 
+participate in problem solving with each other. All this is made possible 
+similarly by tools like eMUSE, a tool which integrates collaborative features 
+into a social media platform, to allow students to exchange ideas and educators 
+to monitor their progress (Garcia et al., 2024). 
+ 
+However, there are still problems in the effective implementation of 
+collaborative learning systems. It is just the case that students who learn well 
+17 
+ 
+alone or need tailored instruction struggle to get full advantage of collaborative 
+setups. Moreover, it is difficult for educators to evaluate group work and elicit 
+contributions by individual students in a group setting. Due to this limitation, 
+there is usually an uneven workload distribution with some of the students 
+underperforming while others try to compensate (Garcia et al., 2024). 
+ 
+Features of collaborative learning systems to overcome these challenges are 
+necessary they should facilitate group engagement while ensuring individual 
+accountability. Real-time monitoring systems, such as transparent learning 
+analytics dashboards, can aid in tracking contributions and motivate fair 
+participation (Zhou et al., 2024). Furthermore, calibrating instruments to 
+measure collaboration effectively, as suggested by Garcia et al. (2024), can 
+improve the reliability of these systems in supporting educational outcomes. 
+  
+2.2.3 Gamified Learning Systems   
+ 
+The idea of gamified learning systems is built on the idea that the systems use 
+game mechanics, like points, badges, and leaderboards, to increase student 
+engagement and motivation. These systems convert abstract concepts into 
+engaging and approachable experiences by transforming traditional learning 
+activities into interactive experiences. For instance, Khan Academy offers 
+badges when students have completed exercises, whereas Brilliant.org follows 
+the puzzles and challenges to stimulate students’ critical thinking. It has been 
+established during research that gamification boosts student participation in and 
+interest for mathematics education (Nurbekova et al., 2022; Tah Jutin & Binti 
+Maat, 2024). 
+ 
+Nevertheless, systems that incorporate gamification often privilege 
+entertainment over deep learning and therefore gamified examinations of 
+advanced topics such as differentiation can be superficial by nature. To 
+overcome this, gamification should be accompanied with other features that put 
+attention to conceptual understanding and skill improvement (Aguirre Acosta 
+& Espinola Carballo, 2022). Moreover, poorly designed gamification can 
+18 
+ 
+hinder learning by reducing intrinsic motivation and promoting shallow 
+interaction (‘ghost effect’) (Anselme & Hidi, 2024). 
+ 
+Each of the three types of interactive learning systems mentioned real-time 
+feedback systems, collaborative learning systems, and gamified learning 
+systems can provide unique functionalities to help in mathematics education. 
+They seek to touch different parts of the learning experience, serving up 
+different benefits and hurdles. Considering that this system is a real-time 
+system, in which it gives immediate corrective feedback, it is an active learning 
+feedback mechanism that also eliminates misconceptions as they happen. The 
+project aims to increase engagement and strengthen conceptual understanding 
+in the learning of calculus, focusing on how to master differentiation by 
+emphasizing the use of real-time feedback systems. The contributions of the 
+three interactive learning systems to effective learning are illustrated in Table 
+2.1. 
+ 
+Table 2.1 Comparison of Interactive Learning Systems  
+ Feature/ 
+Aspect  
+Real-Time Feedback 
+System  
+Collaborative Learning 
+system  
+Gamified Learning 
+System  
+Core 
+Functionality  
+provides immediate  
+corrective feedback of 
+students’ actions to  
+reducing 
+misconceptions and 
+promoting active 
+learning.  
+Enhances peer to peer 
+interaction and creates  
+teamwork for  
+problem solving and 
+critical thinking.  
+Uses game elements 
+like  
+points, badges,  
+and leaderboards to 
+boost  
+engagement and 
+motivation.  
+Primary 
+Benefits  
+o enables users to 
+improve 
+engagement 
+through instant 
+error correction.  
+o Individualized 
+learning pathways.  
+o Encouraged active 
+problem-solving.  
+o It improves 
+communication and 
+teamwork ability.  
+o Promotes mutual 
+learning and  
+o differences of 
+opinion.  
+o Builds a sense of 
+community.  
+o Makes learning 
+pleasant and 
+interactive.  
+o Increases student 
+motivation via 
+rewarding.  
+o Improves the 
+participation in 
+routine tasks.  
+Limitations  o Requires reliable 
+infrastructure for 
+real-time 
+processing.  
+o Frequent 
+corrections may 
+'overwhelm' 
+students.  
+o Less suited to 
+students who  
+o prefer to learn 
+independently.  
+Not easy to 
+evaluate claims of 
+individual 
+contributions.  
+o Rewards may get 
+in the way of 
+conceptual 
+understanding.  
+19 
+ 
+Technologica
+l 
+Tools/Compo
+nents  
+o Immediate 
+feedback.  
+o Adapted for 
+progress indication. 
+o Interactive 
+visualization tools.  
+o Shared online 
+workspaces.  
+o Real time 
+collaboration and 
+messaging tools.  
+o Peer discussion 
+forums.  
+o Points and 
+rewards systems.  
+o Quizzes and 
+challenges are 
+game like.  
+o Interactive 
+elements of 
+storytelling.  
+Example 
+Platforms  
+Platforms incorporating 
+instant feedback like  
+certain LMS systems 
+and custom tools for 
+STEM education.  
+Computer- 
+Supported  
+Collaborative  
+Learning (CSCL) tools 
+such as Google  
+Workspace for  
+Education,  
+Microsoft Teams, etc.  
+Khan Academy  
+(gamified elements),  
+Brilliant.org, 
+Duolingo.  
+Suitability for 
+Calculus  
+Basically, effective in 
+correcting 
+differentiation concept 
+through  
+immediate correction 
+and step by step 
+feedback.  
+It’s useful for 
+collaborative discussion 
+of complex  
+problems, but not so 
+effective for individual 
+skill building in  
+abstract topics like 
+STEM and art.  
+Good for maintaining  
+engagement on  
+the foundational 
+topics, however, does 
+not have a  
+lot of depth for the 
+larger  
+concepts of calculus.  
+Focus of 
+Project  
+The project focuses on 
+this system to provide 
+real-time feedback, 
+improve engagement, 
+and  
+enhance conceptual 
+understanding. 
+Not integrated as a 
+primary  
+component of the 
+project.  
+Not integrated as a 
+primary component of 
+the project. 
+  
+2.3 Comparison of Existing Systems/Applications  
+  
+Desmos, Khan Academy, WolframAlpha and other educational platforms have 
+played an essential role in developing mathematics education due to its 
+distinctive features. Each system deals with different parts of the learning 
+process visualization, guided practice and problem solving. Yet, these 
+platforms are significantly lacking in key features, such as providing true real-
+time feedback, personalized learning paths, and comprehensive support of 
+mastery of more advanced topics like differentiation. The strengths and 
+limitations of both are analysed in detail in the following sections.  
+  
+  
+20 
+ 
+2.3.1 Khan Academy  
+ 
+Khan Academy, on the other hand, is a very popular educational platform which 
+includes interactive videos, structured exercises and automatic progress tracking 
+across subjects’ mathematics included. Being a systematic approach, with 
+interactive exercises and real time progression tracking, it effectively improves 
+mathematical foundation learning (ULUM, 2023).  
+  
+The platform provides instant feedback and uses visual aids, such as graphs and 
+interactive examples, to make abstract concepts like differentiation more 
+accessible. But that is static and not adaptive for, say, differentiation or higher 
+calculus. It closes educational inequities by providing free access to quality 
+content, yet its dependence on self-driven learning poses a challenge to some 
+students who need direction instruction or find difficulty in motivating themselves. 
+Even as an excellent supplementary tool, Khan Academy needs adaptations in 
+adaptive feedback and personalized support to fit all learning needs. 
+  
+ 
+Figure 2.6 Interface of Khan Academy's Differential Calculus Section.  
+(Source: https://www.khanacademy.org/profile/me/progress)   
+ 
+21 
+ 
+ 
+Figure 2.7 Example of an interactive Problem on Limits  
+(Source: https://www.khanacademy.org/profile/me/progress)   
+  
+2.3.2 WolframAlpha  
+ 
+Wolfram Alpha is a well-known computational engine that is heavily capable 
+of solving complex mathematical problems including calculus. It gives 
+detailed, step-by-step solutions and generates visual graphs to make abstract 
+things such as differentiation, integration, etc. more intuitive, helping the 
+student to relate their algebraic computations to geometric interpretations (Nur 
+et al., 2020).  
+  
+This allows students to understand calculus better, by computing derivatives, 
+and showing the slopes of tangent lines. Besides, it may be used in dealing with 
+advanced items like limits and integration by substitution. In the classroom, 
+however, WolframAlpha's solution focus rather than interactive learning means 
+it has its drawbacks. It is a weaker resource for use in interactive instruction 
+due to lacking adaptive feedback and personalized guidance and is best suited 
+as a supplementary tool for self-directed students.  
+  
+ 
+22 
+ 
+ 
+Figure 2.8 Examples of Step-by-step Solutions  
+(Source: https://www.wolframalpha.com/examples/pro-features/step-by-step-solutions)    
+  
+2.3.3 Desmos  
+ 
+Desmos is a user friendly & innovative graphing calculator platform that pairs 
+interactive exploration of mathematical functions with environment, context, 
+and community to help educators and students learn by doing. In allowing real 
+time graph manipulation, it makes complex calculations, like differentiation 
+and integration easier to understand. According to (Chechan et al., 2023), 
+Desmos enhances students' understanding of function properties through 
+dynamic graph interaction and immediate visualization of changes.  
+  
+Desmos is a key strength because it allows students to make abstract concepts 
+into something easy to understand and students can visualize relationships 
+between the algebraic and geometric representations by playing with features 
+of a graph such as parameters. It is challenged however, by factors such as 
+limited familiarity with digital tools, and technical constraints. Despite these 
+limitations, Desmos remains a powerful supplementary tool for promoting 
+mathematical exploration and conceptual understanding. With its intuitive 
+interface and real time visualization, it is a great tool for facilitating the use of 
+calculus in classroom to help engage and promote learning for students.  
+  
+ 
+23 
+ 
+ 
+Figure 2.9 Students’ views about how Desmos contribute to learning experiences  
+(Source: Chechan et al., 2023)  
+  
+  
+  
+Figure 2.10 Experiences in using Desmos 
+(Source: Chechan et al., 2023) 
+ 
+In the following table 2.2 outlined three outstanding options for learning 
+differentiation by comparing key features, strengths, and limitations. Each 
+platform offers unique tools to aid learning: Khan Academy offers videos of 
+interactive experience with step-by-step solutions, WolframAlpha provides the 
+symbolic differentiation solving with more detail, Desmos is the best platform 
+for graphing and visualization. Although these tools are valuable resources, 
+they do have their limitations, for example the tools lack the ability to provide 
+  
+  
+24 
+ 
+real time adaptive feedback or tailored learning features, which are mentioned 
+to help guide users in selecting the most appropriate platform for their needs.  
+  
+Table 2.2 Comparison of Learning Platforms for Learning Differentiation 
+System/Application  Key Features  Strengths  Limitations  
+Khan Academy  Interactive videos, 
+step-by-step 
+solutions  
+Wide accessibility, 
+high-quality content  
+Lacks real-time 
+adaptive feedback 
+for differentiation  
+WolframAlpha  Symbolic  
+differentiation  
+solver, step-by-step 
+guides  
+Provides detailed 
+solutions and 
+explanations  
+Focuses more on 
+answers than 
+interactive learning  
+Desmos  Graphing and 
+visualization tools  
+Excellent for graph-
+based calculus 
+learning  
+Limited in 
+providing  
+personalized 
+feedback  
+MathAnywhere: 
+Interactive 
+Website for 
+Learning 
+Differentiation  
+Real-time 
+feedback, process 
+indicators,  
+interactive tools,  
+answer verification 
+systems  
+Provides immediate 
+corrective feedback,  
+personalized learning 
+pathways, and  
+conceptual  
+understanding through 
+interactive features  
+Requires 
+significant  
+development and 
+resources for 
+implementation  
+ 
+2.4 Justification on the Chosen Techniques and Features  
+  
+This project was motivated by challenges in mathematics education, in calculus 
+and differentiation, in particular. Students find traditional lectures which 
+emphasize rote memorization to be far from engaging or helpful in connecting 
+to more abstract concepts (Thompson & Harel, 2021). Understandably, many 
+of the learning students with struggling with the differentiation fundamentals, 
+including the geometric interpretation of derivatives and its relation to real 
+world applications constrain their problem-solving skills (Ely, 2021). 
+Visualisation and computation tools such as Desmos and WolframAlpha are 
+adept in this area but are restricted to their use in visualisation and computation 
+without real time feedback, personalised learning pathways and contextual 
+application (Barana et al. 2021; Torres-Peña et al. 2024).  
+  
+Based on the importance of real time feedback for dealing with misconceptions 
+instantly and encouraging active learning Hajizada et al. (2022), this project 
+intends to design an interactive learning system that is based on such feedback. 
+Students are guided by Progress indicators that keep track of their performance, 
+25 
+ 
+find gaps, and keep the students engaged with complex topics like 
+differentiation (Nakamoto et al., 2023).  
+  
+Interactive visualization tools are used to bridge the gap between abstract 
+calculus theories and their geometric interpretations through dynamic 
+exploration of algebraic and geometric concepts that enhance conceptual 
+understanding (Torres-Peña et al., 2024). Desmos offers strong graphing, but 
+this project adds to that by including guided explanations and interactive 
+problem solving.  
+  
+Lastly, answer verification systems offer detailed, purpose specific feedback to 
+facilitate learning and build self-confidence. The goal of this project is to build 
+on tools such as WolframAlpha by adding personalized and interactive 
+mechanisms for providing feedback (Barana et al., 2021).  
+  
+This platform fills gaps in current educational tools by combining real time 
+feedback, progress indicators, interactive visualization tools, and answer 
+verification systems to increase engagement, increase understanding, and 
+promote personalized learning differentiation.  
+  
+2.5 Conclusion   
+ 
+In this chapter, the challenges of mathematics education, primarily in 
+differential calculus, were discussed and the ways that modern technologies can 
+help solve these challenges were analysed. However, traditional methods of 
+teaching to learn the basics of differentiation through learning these abstract 
+concepts, typically do not explain what concepts they are trying to teach or 
+engage the student enough to make the concepts clearer. Furthermore, useful 
+existing platforms including Desmos, Khan Academy, or WolframAlpha do not 
+have crucial capability that is real time feedback, personalized learning paths 
+and adaptive scaffolding towards the needs of individual students.  
+ 
+Real time feedback systems were shown to provide immediate corrective 
+responses that fostered active learning and therefore greater engagement and 
+26 
+ 
+understanding. The review process revealed key features like interactive tools, 
+visualizations, and mechanisms to verify answers as important constituents in 
+simplifying the complex concepts for personalized learning. The results of 
+these findings serve as the foundation of the proposed project, where a robust 
+real time feedback system tailored towards perfecting differentiation learning 
+was developed. The system attempts to fill gaps in the existing tools in 
+education by integrating immediate feedback with interaction tools, enhance 
+students' conceptual understanding and provide a personalized engaging 
+learning experience.  
+  
+27 
+ 
+CHAPTER 3 
+ 
+ 
+METHODOLOGY 
+ 
+ 
+3.1 Introduction 
+ 
+This chapter presents the methodology that was employed in developing the 
+Interactive Website for Learning Differentiation. The Agile Prototyping 
+approach was selected for its iterative and user-focused nature, allowing 
+continuous refinement through regular testing and feedback. This methodology 
+supports flexibility in addressing project objectives, ensuring a user-centered 
+and functional platform. 
+ 
+3.2 Project Methodology 
+ 
+The chosen methodology for developing the Interactive Website for Learning 
+Differentiation is the Agile Development Methodology, a structured and 
+flexible framework known for its adaptability and suitability in fast-changing 
+environments. Agile was selected to enable a phased approach that supports 
+continuous improvements, frequent feedback, and iterative development to 
+meet project objectives effectively (Behrens et al., 2021). Figure 3.1 illustrates 
+the Agile Development Cycle planned for this project. 
+ 
+ 
+Figure 3.1 Agile Development Cycle 
+ 
+28 
+ 
+As the project is undertaken individually, the Agile methodology is adapted to 
+focus on iterative self-assessments and improvements rather than collaborative 
+feedback. The phases of this methodology Define, Design, Develop, Demo and                                                                                      
+Feedback, Release phase was taken through evaluations based on predefined 
+user needs and testing scenarios. 
+ 
+While Agile typically involves collaboration and feedback from stakeholders, 
+this project modifies the methodology to fit the sole developer framework. 
+Feedback was gathered through self-assessment and usability testing based on 
+anticipated user needs, which were identified during the Define phase. This 
+ensures the iterative nature of Agile is preserved, even in the absence of direct 
+user input. 
+ 
+This methodology supports a systematic approach to the project by breaking it 
+into manageable phases and allowing for iterative refinement at each stage. By 
+focusing on flexibility and user-centred design principles, the Agile 
+methodology ensures that the resulting platform meets its functional and non-
+functional requirements effectively while aligning with the project’s overall 
+objectives. 
+ 
+3.2.1 Phase 1: Define Phase 
+ 
+The Define Phase for MathAnywhere: Interactive Website for Learning 
+Differentiation focuses on identifying and analysing the requirements 
+necessary to develop a functional and user-friendly platform. As the project is 
+undertaken by a sole developer, this phase emphasizes an independent 
+exploration of anticipated user needs, project goals, and technical feasibility. 
+Key features, such as interactive tutorials, progress tracking, and personalized 
+feedback mechanisms, were identified through a review of existing educational 
+platforms, academic literature, and user-centred design principles. Instead of 
+formal user stories, a prioritized list of functionalities was prepared to guide 
+the development process. 
+ 
+29 
+ 
+Given the absence of external collaborators or users during this phase, iterative 
+planning and self-assessment were applied to manage the scope and maintain 
+clarity. Challenges in defining comprehensive requirements were addressed by 
+focusing on high-value features and ensuring flexibility to adapt as 
+development progresses (Hoy & Xu, 2023). This phase provides a solid 
+foundation for the project, aligning the planned functionalities with the 
+project’s objectives and setting the stage for structured development in 
+subsequent phases. 
+ 
+Table 3.1 Overview of Define Phase 
+Phase Activities Technique/software Deliverables 
+Define Identify project objectives, 
+scope, and needs based on 
+Chapter 1. 
+Microsoft Word Documented project 
+objectives and scope. 
+Analyse literature to 
+identify relevant 
+methodologies and 
+techniques for interactive 
+learning. 
+Mendeley 
+Reference Manager 
+Comprehensive literature 
+review summary. 
+Specify functional and non-
+functional 
+requirements based on 
+findings from Chapter 1 
+and 2. 
+Microsoft Word Systems requirements 
+and objectives document. 
+ 
+3.2.2 Phase 2: Design Phase 
+ 
+The Design Phase for MathAnywhere: Interactive Learning Website for 
+Learning Differentiation focuses on planning a functional and user-friendly 
+system design tailored to the project’s objectives. The design process 
+emphasizes independent planning, prototyping, and iterative self-reviews to 
+ensure alignment with the goals established during the Define Phase. Tools 
+such as Figma and Diagrams.net (Draw.io) was used to create basic prototypes, 
+30 
+ 
+wireframes, and workflow diagrams to visualize the platform’s features, 
+including interactive tutorials, progress tracking, and personalized feedback 
+mechanisms. 
+ 
+The phase prioritizes simplicity and essential features to ensure feasibility 
+within the project’s scope. The process relies on self-assessment and adherence 
+to best practices for usability and functionality. While modular and scalable 
+design principles are considered, the focus remains on delivering core 
+functionalities that address the project’s primary objectives. Planned activities 
+also include simulated user interaction tests to identify potential usability 
+issues. 
+ 
+This phase is expected to result in a comprehensive design blueprint, including 
+wireframes and workflow diagrams, which was serve as a foundation for the 
+Development Phase. These planned deliverables aim to ensure that the platform 
+design aligns with the objectives defined in Chapter 1 and the insights gained 
+from Chapter 2. Table 3.2 summarizes the planned activities for the Design 
+Phase. 
+ 
+Table 3.2 Overview of Design Phase 
+Phase Activities Technique/software Deliverables 
+Design Draft the graphical user 
+interface (GUI). 
+Figma User-friendly and 
+interactive website UI. 
+Create wireframes for key 
+features. 
+Canva Wireframes for tutorials 
+and feedback systems. 
+Visualize system 
+architecture and workflows. 
+Draw.io System architecture 
+diagrams. 
+Refine prototypes based on 
+feedback. 
+Google Form Improved UI and feature 
+prototypes. 
+ 
+The user interface (UI) and user experience (UX) designs were planned with a 
+focus on simplicity, intuitiveness, and engagement. Key UI elements were 
+31 
+ 
+designed to ensure seamless navigation through interactive tutorials and 
+feedback sections. Figure 3.2 illustrates the planned UI/UX design concepts for 
+the website. 
+ 
+ 
+Figure 3.2 UI/UX Design Concepts for MathAnywhere Website 
+ 
+3.2.3 Phase 3: Development Phase 
+ 
+The Development Phase for MathAnywhere: Interactive Website for Learning 
+Differentiation were focus on implementing core platform features using Agile 
+methodologies. By leveraging the principles of the Agile Influence and Impact 
+Model (AIIM), the planned development process was emphasizing iterative 
+sprints, early testing, and flexibility to address evolving requirements, ensuring 
+high-quality outputs and alignment with project objectives (Neumann & 
+Diebold, 2024). 
+ 
+Each sprint is planned to deliver functionalities such as user authentication, 
+lesson modules, and progress tracking, with iterative reviews and testing to 
+refine these features. Test-driven development (TDD) will guide the coding 
+process to maintain quality, and modular design principles was applied to 
+ensure scalability and reusability of components. Front-end technologies like 
+HTML, CSS, and JavaScript were used, while Firestore were handle back-end 
+32 
+ 
+functionality. Continuous integration (CI) tools were explored to streamline 
+testing and deployment, enabling the identification and resolution of issues 
+efficiently. The goal of this phase is to create a functional and adaptable 
+platform integrating all core elements such as interactive tutorials and progress 
+tracking, with potential for future enhancements. Table 3.3 outlines the planned 
+process for the Development Phase. 
+ 
+Table 3.3 Overview of Development Phase 
+Phase Activities Technique/Software Deliverables 
+Development Write and debug the code 
+for the platform. 
+WebStorm A fully functional 
+platform integration 
+core feature. 
+Implement features like 
+user authentication, 
+tutorials, and progress 
+tracking. 
+Firestore, HTML, 
+CSS, JavaScript 
+Completed core 
+functionalities. 
+Test system components 
+iteratively. 
+Test-Driven 
+Development (TDD) 
+A scalable and 
+reusable system 
+architecture. 
+Conduct continuous 
+integration and 
+deployment. 
+Continuous Integration 
+(CI) Tools 
+A platform ready 
+for deployment and 
+future 
+enhancements. 
+ 
+3.2.4 Phase 4: Demo & Feedback Phase 
+ 
+The Demo and Feedback Phase for MathAnywhere: Interactive Website for 
+Learning Differentiation is planned to focus on gathering feedback through 
+self-assessment and user interactions, as the project is being developed 
+individually without external stakeholders. The phase was involve evaluating 
+key features such as interactive tutorials, progress tracking, and personalized 
+feedback mechanisms to ensure they align with the project’s objectives and 
+anticipated user needs. Feedback was systematically documented and 
+prioritized for refinement in subsequent sprints. User feedback was used to 
+identify usability and functionality gaps, with adjustments made iteratively to 
+improve the platform. Agile practices such as self-reviews and iterative 
+refinements were to ensure effective adaptation to evolving project 
+33 
+ 
+requirements (Ghimire & Charters, 2022). The planned outcome of this phase 
+is a refined platform with improved interactivity and usability, laying the 
+groundwork for final deployment. Table 3.4 outlines the planned activities for 
+the Demo and Feedback Phase. 
+ 
+Table 3.4 Overview of Demo & Feedback Phase 
+Phase Activities Technique/Software Deliverables 
+Demo & 
+Feedback 
+Simulate user 
+interactions and 
+evaluate platform 
+features. 
+Browser Testing, 
+Manual review 
+Insights on platform 
+usability and 
+functionality. 
+Document findings and 
+prioritize areas for 
+improvement. 
+Microsoft word Documented list of 
+refinements. 
+Refine platform based 
+on findings from self-
+assessment. 
+Agile planning tools Updated and 
+improved platform 
+addressing 
+feedback. 
+Conduct usability 
+testing to validate 
+refinements. 
+Manual observation, 
+Browser testing 
+Finalized platform 
+with enhanced 
+usability. 
+ 
+3.2.5 Phase 5: Release Phase 
+ 
+The Release Phase for MathAnywhere: Interactive Website for Learning 
+Differentiation focuses on the final steps required to ensure the platform is 
+ready for future deployment and use. As this is a Final Year Project (FYP) and 
+not an actual production-level project, this phase emphasizes the preparation 
+of testing, documentation, and evaluation rather than actual deployment. 
+Guided by the principles outlined during earlier phases, this phase was aimed 
+to finalize the platform’s readiness for potential real-world usage. 
+ 
+The phase was including user & expert testing to validate the platform’s 
+functionality and usability. These simulations were identified and address any 
+potential usability issues or design flaws, ensuring the system aligns with the 
+objectives set in earlier phases. Deliverables for this phase was including 
+comprehensive documentation, such as user guides and system architecture 
+34 
+ 
+references, to support future maintenance or deployment efforts. By focusing 
+on thorough testing and preparation, this phase ensures that the platform meets 
+its defined objectives and lays a foundation for potential scalability and further 
+enhancements (Almeida & Bálint, 2024). 
+ 
+3.3 Summary of Project Methodology 
+ 
+The project methodology for developing MathAnywhere: Interactive Website 
+for Learning Differentiation is designed to provide a structured yet flexible 
+framework for addressing the project objectives. Table 3.5 summarizes how 
+each objective aligns with the corresponding phases, activities, and 
+deliverables, ensuring a systematic progression throughout the project's 
+lifecycle. 
+ 
+This approach highlights the iterative nature of the methodology, emphasizing 
+clear planning, execution, and evaluation steps to meet the project’s goals. The 
+integration of detailed activities and deliverables across each phase ensures the 
+project remains on track and focused on delivering a functional and user-
+friendly platform. 
+ 
+Table 3.5 Summary of Project Methodology 
+Objectives Phases Activities Deliverable 
+ 
+Define 
+❖ Identify project 
+objectives, scope 
+and platform goals. 
+ 
+❖ Conduct 
+literature review on 
+differentiation 
+learning and tools. 
+ 
+❖ Documented 
+project 
+objectives, 
+scope and goals. 
+ 
+❖ Literature 
+review 
+summary. 
+ 
+35 
+ 
+To design an 
+interactive web-
+based educational 
+platform for 
+studying 
+differentiation. 
+Design 
+❖ Develop wireframes 
+and prototypes of the 
+website interface. 
+ 
+❖ Create system 
+architecture and data 
+flow diagrams. 
+ 
+ 
+ 
+❖ Initial wireframes 
+and system 
+architecture 
+diagrams. 
+ 
+❖ Visualize platform 
+layout. 
+ 
+To develop an 
+interactive web-
+based educational 
+platform for 
+studying 
+differentiation that 
+provides tailored 
+feedback according 
+to student 
+performance 
+Development 
+ 
+❖ Implement user 
+authentication, 
+interactive tutorials, and 
+progress tracking 
+features  
+ 
+❖ Build front-end and 
+back-end systems 
+ 
+❖ Perform iterative testing 
+and debugging  
+ 
+❖ Refine features for 
+usability and accuracy  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+❖ Functional platform 
+modules. 
+ 
+❖ Tested system ready 
+for the next phase. 
+ 
+❖ Debugged and 
+validated system 
+components 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To assess the 
+platform’s 
+usability, 
+interactivity, and 
+the effectiveness of 
+its feedback 
+through user 
+testing and expert 
+evaluation 
+Demo & 
+Feedback  
+❖ Conduct usability 
+testing sessions with 
+potential users. 
+ 
+❖ Document feedback and 
+refine features  
+❖ User feedback 
+documentation  
+ 
+❖ Improved platform 
+features 
+36 
+ 
+ 
+Release  
+❖ Finalize the platform 
+for presentation. 
+ 
+❖ Prepare project 
+documentation and user 
+guide  
+❖ Finalized platform 
+ready for 
+demonstration 
+ 
+❖ Completed 
+documentation for 
+evaluation  
+ 
+3.4 System Architecture 
+ 
+The system architecture for MathAnywhere: Interactive Website for Learning 
+Differentiation is designed to streamline user interaction and ensure seamless 
+navigation through its core functionalities. The architecture incorporates 
+various components, such as user interfaces, server-side applications, and a 
+database system, to provide an intuitive and interactive learning environment. 
+The platform caters to students by delivering personalized and interactive 
+tutorials and progress-tracking mechanisms. Figure 3.3 illustrates the system 
+architecture of the website. 
+ 
+ 
+Figure 3.3 System Architecture of MathAnywhere: Interactive website for Learning Differentiation 
+ 
+37 
+ 
+Figure 3.3 shows the MathAnywhere platform's architecture begins with a 
+straightforward development and deployment pipeline. Code is developed 
+locally using the WebStorm IDE and then committed to a central GitHub 
+repository. This repository is connected to GitHub Pages, which automatically 
+deploys the static files HTML, CSS, and JavaScript creating a live, publicly 
+accessible website without the need for a traditional web server. 
+ 
+When a user visits the website on their device, the browser loads and runs the 
+application directly. This client-side application contains all the interactive 
+features, such as the tutorials, progress indicators, and user profiles. For 
+dynamic functionality, the application communicates directly with Firebase, 
+which handles all backend services. This includes managing user 
+authentication for logins and signups, as well as reading and writing all 
+application data to the Firestore database. 
+ 
+3.5 Hardware & Software Requirement 
+ 
+The development of the Interactive Learning Website for Learning 
+Differentiation required specific hardware and software components to ensure 
+efficient design, development, testing, and deployment. This section details the 
+hardware and software specifications that was used during the development 
+process. 
+ 
+3.5.1 Hardware Requirements 
+ 
+The hardware components used for this project include a laptop for 
+development and testing of the website. Table 3.6 lists the specifications and 
+descriptions of the hardware used for this project. 
+ 
+Table 3.6 Hardware Requirements 
+Specification Description 
+Name Acer Nitro an515-55 
+Processor Intel(R) Core (TM) i7-10750H CPU @ 2.60GHz   2.59 GHz 
+38 
+ 
+RAM 16 GB 
+Operating 
+System 
+Windows 11 
+Function To run development tools (e.g.,WebStorm, GitHub, Firebase) and 
+browsers for website testing 
+ 
+The Acer Nitro was chosen for its reliable processing capabilities, adequate 
+RAM. These specifications ensured seamless performance of development 
+tools like WebStorm, Firebase, and Figma, as well as effective website testing 
+in modern browsers such as Safari and Chrome. Its stable OS Windows 11 
+environment provided a robust platform for Agile-based development, 
+ensuring efficient coding, debugging, and iterative testing processes. 
+ 
+3.5.2  Software Requirements 
+ 
+Software requirements were integral components of the development 
+infrastructure, defining the essential tools that enabled the creation and 
+functionality of the Interactive Website for Learning Differentiation. These 
+software tools played critical roles in the development, testing, and deployment 
+phases. Table 3.7 lists the software used along with their descriptions. 
+ 
+Table 3.7 Software Requirements 
+Software Description 
+ 
+WebStorm 
+To write, debug, and manage the website’s code during development. 
+ 
+Firebase 
+To manage and store user data, including progress tracking and lesson 
+content, API development for seamless communication between the 
+front-end and back-end systems. 
+39 
+ 
+ 
+Figma 
+To design the graphical user interface (GUI) and wireframes for the 
+platform. 
+ 
+Diagram.net 
+To create system architecture diagrams and flowcharts for 
+documentation. 
+ 
+Google Forms 
+To gather user feedback during the demo and testing phases. 
+ 
+Microsoft 
+Word 
+To draft and finalize project documentation. 
+ 
+Mendeley 
+To manage references and citations for research-related documentation. 
+ 
+The software tools listed above served essential functions in ensuring the 
+success of the project. WebStorm played a central role in writing and 
+debugging the platform's code, while Firestore supported API development for 
+seamless communication between the front-end and back-end systems. 
+Firebase handled all database operations, ensuring secure and reliable data 
+storage. Design tools like Figma and Diagrams.net were instrumental in 
+creating user interfaces and visual representations of the system. Google Forms 
+enabled efficient collection of user feedback, while Microsoft Word facilitated 
+detailed project documentation. Finally, Mendeley Reference Manager ensured 
+proper acknowledgment of research sources, enhancing the credibility of the 
+project. 
+ 
+  
+40 
+ 
+3.6 Conclusion 
+ 
+In conclusion, this chapter presented a comprehensive overview of the project 
+methodology, highlighting the Agile Development Methodology adopted for 
+the development of MathAnywhere: Interactive Website for Learning 
+Differentiation. Each phase of the methodology, including Define, Design, 
+Development, and Demo & Feedback, was discussed in detail, offering a clear 
+understanding of the sequential development process. 
+ 
+The system architecture was outlined, showcasing the structural representation 
+of the website’s components and their interrelationships, including the web 
+server, and database. The chapter also detailed the hardware and software 
+requirements, ensuring that the necessary resources were in place for the 
+effective development and operation of the platform. This comprehensive 
+exploration provided a strong foundation for the subsequent stages of the 
+project, ensuring that the objectives were met efficiently while aligning with 
+the needs of the target users.  
+41 
+ 
+CHAPTER 4 
+ 
+ 
+PROJECT DESIGN, IMPLEMENTATION, AND RESULT 
+  
+ 
+4.1 Introduction  
+  
+This chapter presents the design, results and findings derived from the 
+development of MathAnywhere: Interactive Website for Learning 
+Differentiation, which was made to overcome the difficulties which students 
+encounter when introduced to the abstract nature of calculus, especially 
+differentiation. The system supported by interactive tutorials, real time 
+feedback, visualization tools, and individual progress tracking will combine to 
+increase the engagement and comprehension of students via a more practical, 
+responsive and student centered learning environment. These outcomes are 
+arranged according to the project goals so as to make clear the effectiveness of 
+all the parts, and the discussion section elaborates these results against 
+available studies in the field so as to reveal the possible contribution of this 
+system to enhancing mathematics education, in particular, in the topics that are 
+usually hard to be mastered with trends of traditional teaching. 
+ 
+4.2 Project Design  
+ 
+The MathAnywhere Website was designed in such a way that simplicity, 
+functionality, and interactivity would be the main characteristics of good 
+design that can enhance learning. This interface was created manually by direct 
+coding without any external designing tool like Figma or Canva, using HTML 
+JavaScript and CSS. System architecture incorporates the front-end interface 
+designed with a backend based on Firestore, and the database management is 
+performed with Firebase to save data about the user, their progress, and 
+learning resources. The site will be hosted on Github, and this has a stable and 
+secure cloud hosting system, making it easy to access and scale up. To enable 
+students to get more actively involved into the idea of differentiation, visualize 
+42 
+ 
+mathematical problem solving and get the immediate feedback, important 
+features were designed and implemented including interactive tutorials, real-
+time feedback systems, dynamic graphing and progress dashboards. 
+ 
+4.2.1 Use-Case Diagram  
+ 
+The use case diagram will describe the interaction of users with 
+MathAnywhere Website. Users begin by signing up, a first quiz, and profile. 
+The system allows the recommendation of suitable modules using a level 
+placement algorithm based on their performance. Topics can be chosen, and 
+the learning module can be taken with hints offered as needed. Once they have 
+finished quizzes, they get scores and feedback and can have a second chance. 
+Its users are continuously supported and engaged in their learning process 
+through the system which monitors their progress, rewards their achievements, 
+and authenticates their mastery. Use case diagram of the system is presented in 
+figure 4.1. 
+ 
+43 
+ 
+Figure 4.1 Use-Case Diagram of MathAnywhere 
+ 
+4.2.3 Flowchart 
+ 
+I. User Authentication   
+ 
+The flowchart based on figure 4.2 illustrates the user authentication process for 
+the MathAnywhere platform, beginning when a user decides to either sign up 
+or sign in. To a new user, the system will check the credentials that a user 
+provides, write the details into the database, and authenticate the account with 
+Firebase Authentication, and generate a user session. In case of a current user 
+existed, the system checks their credential against Firebase and retrieves 
+his/her profile in the database and then creates a session. Incase of any error 
+like an incorrect input signal or case of authentication failure, a suitable 
+44 
+ 
+message is served to make the user enter the correct data. Both successful paths 
+will join up at the end and direct the authenticating user through Connector (A) 
+to main application. 
+ 
+ 
+Figure 4.2 User Authentication Flowchart Diagram 
+ 
+  
+45 
+ 
+II. Main Application & Tools  
+ 
+The flowchart in figure 4.3 illustrates the main application loop, which begins 
+after a user is authenticated via Connector (A). At the central decision hub, the 
+user can choose to use the derivative calculator, generate a graph, navigate to 
+their profile, or logout. If a tool is selected, the system takes user input, calls a 
+predefined subroutine for the calculation, and displays either a result or an error 
+before returning the user to the central hub. Choosing to view the profile 
+redirects the flow to Connector (B), which leads to the profile page logic, while 
+selecting logout terminates the session, ending the process. 
+ 
+ 
+Figure 4.3 Main Application & Tools Flowchart Diagram 
+ 
+III. Profile, Progress & Achievements 
+ 
+Figure 4.4 shows the flowchart process of the generation of the profile page of 
+the user has been described in the flowchart starting at Connector (B). The 
+system will initially retrieve the profile and the progress of the user in the 
+database after which the username and level will be shown on screen. It then 
+46 
+ 
+goes into a do... loop to iterate through each difficulty level, to calculate the 
+average progress and the amount of passed modules and change the UI with 
+this data. The page reveals unlocked achievement data after processing all 
+levels by a subroutine that scans through all the unlocked achievements and 
+results are available in the page. Lastly, this process ends at the same 
+application hub by which the user was targeted through Connector (A) to 
+navigate further on 
+ 
+ 
+Figure 4.4 Profile, Progress & Achievements Flowchart Diagram 
+ 
+  
+47 
+ 
+4.2.4 Data Model Design  
+  
+As the system runs on Firebase, a NoSQL cloud database is used as opposed to 
+a relational database. Although Firebase does not use hard relational concepts 
+such as Entity-Relationship Diagram (ERD), the logical structure of the data is 
+based on the collection-document model where the key actors in the system are 
+mapped. The key sets designed in the Firebase Firestore are the following ones: 
+ 
+ Users Collection: Stores user information such as userID, email, display 
+name, user role, current level, and profile data. 
+ Topics Collection: Contains documents for each differentiation topic, 
+including topic name, description, difficulty levels, and related modules. 
+ Modules Collection: Sub-collection under each topic, which holds 
+detailed learning materials, tutorials, and exercises for different difficulty 
+levels (Novice, Intermediate, Advanced). 
+ Assessments Collection: Stores initial diagnostic quiz data, questions, and 
+assessment results used for level placement. 
+ Progress Collection: Tracks individual user progress, including completed 
+modules, quiz results, mastery status, and recommended next topics. 
+ Achievements Collection: Maintains records of badges and achievements 
+unlocked by users based on their learning progress. 
+Graphing Collection: Stores recent graphing activity logs and user inputs 
+for dynamic visualization features. 
+ 
+As shown in figure 4.5, the MathAnywhere database in the Cloud Firestore can 
+have its information communicated with similar collections, with the only 
+difference that its central collection is defined as `users`, where each document 
+is linked to a particular registered user through its own unique User ID. The 
+chosen user file demonstrates the structure of the data as arranged in the fields, 
+in the case of achievements system. It has a hierarchy of objects that specify 
+several achievements with their titles, descriptions and an icon and with a 
+boolean value `unlocked` to keep a check of the achievement obtained by the 
+user. This NoSQL, hierarchically organised database enables the application to 
+48 
+ 
+efficiently save and load customised user data, e.g. advents and achievements 
+to give a consistent, customised experience over sessions 
+ 
+ 
+Figure 4.5 Firestore Database Structure 
+ 
+ Although Firebase does not enforce direct relationships between collections, 
+references between collections are managed programmatically to ensure data 
+consistency. As an example, every progress document will refer both to the 
+user document and to the topic document it belongs to. Such a loosely bound 
+data structure can be capable of dynamic scaling related to real-time 
+processing, flexible interaction feedback, and trouble-free cross-platform 
+accessibility of the interactive learning system. 
+ 
+4.3 Project Development 
+ 
+The development of the MathAnywhere website was carried out using an 
+Agile-based iterative approach, where the system was continuously improved 
+through multiple development phases. The front-end interface of the platform 
+is made with HTML, CSS, JavaScript, whereas the Firebase platform was used 
+to implement authentication, deploy and host the application on the cloud, and 
+manage the NoSQL database. The architecture of the system provided the 
+49 
+ 
+possibility of synchronizing all data in real-life, which made it possible to 
+provide the features like instant feedback, progress and achievement systems, 
+and make this kind of interaction possible. The key modules: user registration, 
+tutorials based on topics, dynamic graphing tools, interactive quizzes with real-
+time feedback were developed as the focus of each sprint. At every 
+development cycle, simulated user testing was carried out to find out usability 
+problem areas and improve user flows and system stability. It was able to do 
+this by using Firebase cloud hosting, which offered a perfect deployment, 
+scalability, and accessibility to users as they could visit the platform anytime 
+and anywhere. The final system incorporates several elements into a functional 
+and friendly learning environment that enables students to learn differentiation 
+by keeping the students actively involved and learning differently. 
+ 
+4.3.1 Integration of MathAnywhere 
+ 
+MathAnywhere is an interactive learning tool that enhances students to learn 
+differentiation via interactive learning. The development includes numerous 
+modules i.e. tutorials, interactive exercises, quizzes, real-time visualization 
+tools. It embraced the full use of HTML, CSS and JavaScript to create a clean 
+responsive and an easy navigable frontend interface. As the primary backend 
+platform, Firebase took care of user authentication, data synchronization in 
+real-time, and cloud hosting, which enables the ability of students to access the 
+system at any desired time and any desired device. 
+ 
+Integration of MathQuill is among the main properties as the student can 
+submit their written mathematical equations in a complete form, and it can be 
+simpler to work on differentiation tasks with notations requiring complication. 
+An interactive graphing feature is also incorporated in the system as students 
+are now able to graph mathematical functions, tangent lines, and the results of 
+differentiation in real-time. The visualization aids students to grasp the abstract 
+concept in mathematics as they visualize the graphical representation of the 
+problem. 
+ 
+50 
+ 
+The progress of the students going through system is automatically stored in 
+Firebase. The system provides personal goals and progress, mastery 
+recognition, and achievable rewards according to their performance. 
+Incorporation of real-time feedback on the quizzes is a feature that enables 
+students to learn on their mistakes as they occur and provides hints that will 
+direct students towards the proper solution. All these ingredients have made the 
+overall interactive learning experience to focus on helping students to learn 
+about differentiation in a manner, which is livelier and more effective overall. 
+ 
+4.3.2  Developing MathAnywhere: Interactive Website for  
+ Learning Differentiation  
+ 
+The development of MathAnywhere was carried out using HTML, CSS, and 
+JavaScript for the frontend, while Firebase handled authentication, real-time 
+database, and hosting services. Each module such as tutorials, quizzes, 
+graphing tools, and progress tracking was developed separately and later 
+integrated into one system. MathQuill was used for mathematical input, 
+allowing students to enter differentiation problems easily. The graphing 
+module helped students visualize functions and derivatives in real-time. 
+Simulated user testing was done throughout development to ensure 
+functionality and improve user experience. Continuous debugging and testing 
+were conducted until the final version was fully functional and ready for 
+deployment. 
+ 
+I. Sign-in and Sign-up  
+ 
+The login and signup pages handle user authentication and registration 
+processes for the MathAnywhere platform. The login page validates user 
+credentials and, upon successful verification and email confirmation, navigates 
+the user to the level selection screen. If there are issues, such as incorrect 
+credentials or an unverified email, the page displays appropriate error 
+messages. The signup page manages new user registration by validating the 
+form, creating a new user account, and sending a verification email. After 
+51 
+ 
+successful registration, the user is signed out and shown a success message, 
+while any issues such as an already used email trigger error notification. 
+Additionally, the forgot password page facilitates password reset by validating 
+the user’s email and sending a password reset link. If the email is found, the 
+user receives the reset link and a success message is shown, whereas an 
+unrecognized email results in an error message. Figure 4.6 showcases the app’s 
+registration, sign-in, and password reset functionalities. 
+ 
+ 
+Figure 4.6 Sign-in and Sign-up screen 
+ 
+52 
+ 
+window.signIn = async function () { 
+    const email = document.getElementById("email").value; 
+    const password = 
+document.getElementById("password").value; 
+ 
+    if (!email || !password) { 
+        document.getElementById("loginError").style.display 
+= "block"; 
+        document.getElementById("loginError").textContent = 
+"Please enter both email and password."; 
+        return; 
+    } 
+ 
+    try { 
+        showLoading(); 
+        const userCredential = await 
+signInWithEmailAndPassword(auth, email, password); 
+        const user = userCredential.user; 
+ 
+        // Get user data from Firestore 
+        const userRef = doc(db, "users", user.uid); 
+        const userDoc = await getDoc(userRef); 
+ 
+        if (userDoc.exists()) { 
+            const userData = userDoc.data(); 
+            const username = userData.username || 
+user.email.split('@')[0]; 
+            
+            // Set consistent session storage for existing 
+users 
+            sessionStorage.setItem("userName", username); 
+            sessionStorage.setItem("username", username); 
+            sessionStorage.setItem("userEmail", 
+user.email); 
+            sessionStorage.setItem("level", userData.level 
+|| "Beginner"); 
+            sessionStorage.setItem("progress", 
+userData.progress || "0"); 
+            sessionStorage.setItem("moduleProgress", 
+JSON.stringify(userData.moduleProgress || {})); 
+            
+            // Set analytics data if available 
+            if (userData.masteryData) { 
+                sessionStorage.setItem("masteryData", 
+JSON.stringify(userData.masteryData)); 
+            } 
+            if (userData.learningPath) { 
+                sessionStorage.setItem("learningPath", 
+JSON.stringify(userData.learningPath)); 
+            } 
+            if (userData.achievements) { 
+                sessionStorage.setItem("achievements", 
+JSON.stringify(userData.achievements)); 
+            } 
+        } else { 
+            // Create comprehensive user document for new 
+users 
+            const username = user.email.split('@')[0]; 
+            const newUserData = { 
+                username: username, 
+53 
+ 
+                email: user.email, 
+                level: "Beginner", 
+                progress: 0, 
+                moduleProgress: {}, 
+                overallProgress: 0, 
+                weakTopics: [], 
+                recommendations: [], 
+                practiceAttempts: {}, 
+                correctAnswers: {}, 
+                createdAt: new Date().toISOString(), 
+                lastUpdated: new Date().toISOString() 
+            }; 
+            
+            await setDoc(userRef, newUserData); 
+            
+            // Set session storage for new users 
+            sessionStorage.setItem("userName", username); 
+            sessionStorage.setItem("username", username); 
+            sessionStorage.setItem("userEmail", 
+user.email); 
+            sessionStorage.setItem("level", "Beginner"); 
+            sessionStorage.setItem("progress", "0"); 
+            sessionStorage.setItem("moduleProgress", "{}"); 
+        } 
+ 
+        hideLoading(); 
+        alert("✅ Signed in successfully!"); 
+        window.location.href = "index.html"; 
+    } catch (error) { 
+        hideLoading(); 
+        document.getElementById("loginError").style.display 
+= "block"; 
+        
+        // Display user-friendly error messages 
+        let errorMessage = "Sign in failed. Please try 
+again."; 
+        switch (error.code) { 
+            case 'auth/user-not-found': 
+                errorMessage = "No account found with this 
+email. Please sign up first."; 
+                break; 
+            case 'auth/wrong-password': 
+                errorMessage = "Incorrect password. Please 
+try again."; 
+                break; 
+            case 'auth/invalid-email': 
+                errorMessage = "Please enter a valid email 
+address."; 
+                break; 
+        } 
+        
+        document.getElementById("loginError").textContent = 
+errorMessage; 
+    } 
+}; 
+Figure 4.7 Coding Snippets of Sign-in Function  
+ 
+ 
+54 
+ 
+Figure 4.8 shows a function manages the user sign-up process. It collects the 
+email, password, confirm password, and (optionally) username from input 
+fields, performing validation to ensure all fields are filled, passwords match, 
+and the password is at least six characters long. If validation passes, it creates 
+a new user account using Firebase authentication. Upon successful account 
+creation, it saves a comprehensive user profile to Firestore with default 
+beginner values and stores key user information in session storage. The user is 
+then welcomed and redirected to their profile page. If any errors occur, such as 
+an existing account, invalid email, or weak password, a clear error message is 
+displayed to guide the user. Loading indicators are shown and hidden 
+appropriately during the process. 
+ 
+window.signUp = async function () { 
+    const email = document.getElementById("email").value; 
+    const password = 
+document.getElementById("password").value; 
+    const confirmPassword = 
+document.getElementById("confirmPassword").value; 
+ 
+ 
+    // Validation 
+    if (!email || !password || !confirmPassword) { 
+        document.getElementById("loginError").style.display 
+= "block"; 
+        document.getElementById("loginError").textContent = 
+"Please fill in all fields."; 
+        return; 
+    } 
+ 
+ 
+    if (password !== confirmPassword) { 
+        document.getElementById("loginError").style.display 
+= "block"; 
+        document.getElementById("loginError").textContent = 
+"Passwords do not match."; 
+        return; 
+    } 
+ 
+ 
+    if (password.length < 6) { 
+        document.getElementById("loginError").style.display 
+= "block"; 
+        document.getElementById("loginError").textContent = 
+"Password must be at least 6 characters long."; 
+        return; 
+    } 
+ 
+ 
+    try { 
+        showLoading(); 
+55 
+ 
+        const userCredential = await 
+createUserWithEmailAndPassword(auth, email, password); 
+        const user = userCredential.user; 
+ 
+ 
+        // Get username from user input or use email 
+        let username = 
+document.getElementById("username").value; 
+        if (!username) { 
+            username = user.email.split('@')[0]; 
+        } 
+ 
+ 
+        // Save comprehensive user data to Firestore 
+        const newUserData = { 
+            username: username, 
+            email: user.email, 
+            level: 'Beginner', 
+            progress: 0, 
+            moduleProgress: {}, 
+            overallProgress: 0, 
+            weakTopics: [], 
+            recommendations: [], 
+            practiceAttempts: {}, 
+            correctAnswers: {}, 
+            createdAt: new Date().toISOString(), 
+            lastUpdated: new Date().toISOString() 
+        }; 
+        
+        await setDoc(doc(db, "users", user.uid), 
+newUserData); 
+ 
+ 
+        // Set consistent session storage 
+        sessionStorage.setItem("userName", username); 
+        sessionStorage.setItem("username", username); 
+        sessionStorage.setItem("userEmail", user.email); 
+        sessionStorage.setItem("level", "Beginner"); 
+        sessionStorage.setItem("progress", "0"); 
+        sessionStorage.setItem("moduleProgress", "{}"); 
+        sessionStorage.setItem("practiceAttempts", "{}"); 
+        sessionStorage.setItem("correctAnswers", "{}"); 
+ 
+ 
+        hideLoading(); 
+        alert("✅ Account Created Successfully! Welcome to 
+MathAnywhere!"); 
+        window.location.href = "profile.html"; 
+    } catch (error) { 
+        hideLoading(); 
+        document.getElementById("loginError").style.display 
+= "block"; 
+        
+        // Display user-friendly error messages 
+        let errorMessage = "Account creation failed. Please 
+try again."; 
+        switch (error.code) { 
+            case 'auth/email-already-in-use': 
+                errorMessage = "An account with this email 
+already exists. Please sign in instead."; 
+56 
+ 
+                break; 
+            case 'auth/invalid-email': 
+                errorMessage = "Please enter a valid email 
+address."; 
+                break; 
+            case 'auth/weak-password': 
+                errorMessage = "Password is too weak. Please 
+choose a stronger password."; 
+                break; 
+        } 
+        
+        document.getElementById("loginError").textContent = 
+errorMessage; 
+    } 
+}; 
+Figure 4.8 Coding Snippets of Sign-up Function 
+ 
+II. Home page 
+ 
+The home page of MathAnywhere serves as the main landing page for users 
+after successful login or account creation. It is designed to be simple, 
+welcoming, and informative. At the top of the page, the navigation bar allows 
+users to easily access different sections such as Lessons & Exercises, Journey, 
+Graphing Tool, and user profile options. The center of the page features the 
+platform’s branding and tagline “Anywhere, Anytime, Anyplace,” 
+emphasizing the accessibility of the system. A welcome section introduces the 
+developer and highlights key features such as the graphing tool and lesson 
+modules. The layout is visually engaging, using colors, icons, and hover effects 
+to guide users interactively. The home page acts as a dashboard that sets the 
+tone for the entire learning experience, encouraging users to explore and begin 
+their differentiation journey. Figure 4.9 illustrates the home page of the 
+website. 
+ 
+57 
+ 
+ 
+Figure 4.9 Home Page Screen 
+ 
+Figure 4.10 shows the function listens for the page to finish loading and then 
+checks if a user is logged in using Firebase authentication. If the user is signed 
+in, it retrieves their username and level (from session storage or defaults), 
+updates the welcome message and level display on the page, shows user-
+specific content, and hides any login prompts. If the user is not signed in, it 
+redirects them to the sign-in page. Additionally, it defines a navigation function 
+that directs users to different lesson pages based on their current level, or to a 
+quiz page if no level is set. 
+ 
+document.addEventListener('DOMContentLoaded', function() { 
+    // Check if user is logged in 
+    onAuthStateChanged(auth, (user) => { 
+        if (user) { 
+            // User is signed in 
+            const username = 
+sessionStorage.getItem('username') || 
+user.email.split('@')[0]; 
+            const level = sessionStorage.getItem('level') || 
+'Beginner'; 
+            
+            // Update welcome message 
+            const welcomeElement = 
+document.getElementById('welcome-message'); 
+            if (welcomeElement) { 
+                welcomeElement.textContent = `Welcome back, 
+${username}!`; 
+            } 
+            
+            // Update level display 
+            const levelElement = 
+document.getElementById('user-level'); 
+            if (levelElement) { 
+                levelElement.textContent = `Current Level: 
+${level}`; 
+            } 
+58 
+ 
+            
+            // Show user-specific content 
+            const userContent = 
+document.querySelector('.user-content'); 
+            if (userContent) { 
+                userContent.style.display = 'block'; 
+            } 
+          
+            const loginPrompt = 
+document.querySelector('.login-prompt'); 
+            if (loginPrompt) { 
+                loginPrompt.style.display = 'none'; 
+            } 
+            
+        } else { 
+            // User is not signed in 
+            window.location.href = 'Sign-in.html'; 
+        } 
+    }); 
+    window.navigateToLessons = function() { 
+        const level = sessionStorage.getItem('level') || 
+'Beginner'; 
+        switch(level) { 
+            case 'Novice': 
+                window.location.href = 'Novice.html'; 
+                break; 
+            case 'Intermediate': 
+                window.location.href = 'Intermediate.html'; 
+                break; 
+            case 'Advanced': 
+                window.location.href = 'Advanced.html'; 
+                break; 
+            default: 
+                window.location.href = 'quiz.html'; 
+        } 
+    }; 
+    
+    window.navigateToProfile = function() { 
+        window.location.href = 'profile.html'; 
+    }; 
+    
+    window.navigateToModules = function() { 
+        window.location.href = 'modules.html'; 
+    }; 
+}); 
+ 
+Figure 4.10 Coding Snippets of Home Page Function 
+ 
+III. Topics Section  
+  
+The topic selection page in MathAnywhere serves as the starting point for users 
+to begin their learning journey. It is designed with a clean and structured layout, 
+where users can choose topics by navigating through labeled tabs such as 
+Section 1, Section 2, and Section 3. Each topic is displayed as an interactive 
+card that features a title and relevant visual, making it easy for users to 
+59 
+ 
+recognize and select. The design ensures smooth navigation and promotes 
+independent learning by allowing students to choose topics based on their 
+interest or recommended path. This approach supports personalized learning, 
+where users can access content at their own pace while maintaining clarity and 
+engagement through an intuitive interface. Figure 4.11 shows the topics section 
+where the students can engage with the topics and the content. 
+ 
+ 
+Figure 4.11 Topics Section 
+ 
+Figure 4.12 shows a HTML snippet creates a tab navigation interface using 
+Bootstrap’s tab component. It features three tabs labelled "Section 1," 
+"Section 2," and "Section 3." Each tab is represented by a button within 
+a navigation list, and clicking a tab will display its corresponding content pane 
+(not shown here). The first tab ("Section 1") is set as active by default. The 
+structure uses Bootstrap classes and attributes (nav nav-tabs, data-bs-
+toggle="tab", etc.) to enable interactive tab switching and 
+accessibility features. 
+ 
+<!-- HTML: Tab Navigation Structure from index.html --> 
+<div class="container-fluid"> 
+    <div class="row"> 
+        <ul class="nav nav-tabs" id="myTab" role="tablist"> 
+            <li class="nav-item" role="presentation"> 
+                <button class="nav-link active" id="chapter1-
+tab" data-bs-toggle="tab" 
+                        data-bs-target="#chapter1-tab-pane" 
+type="button" role="tab" 
+                        aria-controls="chapter1-tab" aria-
+selected="true">Section 1</button> 
+            </li> 
+60 
+ 
+ 
+            <li class="nav-item" role="presentation"> 
+                <button class="nav-link" id="marketing-tab" 
+data-bs-toggle="tab" 
+                        data-bs-target="#marketing-tab-pane" 
+type="button" role="tab" 
+                        aria-controls="marketing-tab-pane" 
+aria-selected="false">Section 2</button> 
+            </li> 
+ 
+            <li class="nav-item" role="presentation"> 
+                <button class="nav-link" id="finance-tab" 
+data-bs-toggle="tab" 
+                        data-bs-target="#finance-tab-pane" 
+type="button" role="tab" 
+                        aria-controls="finance-tab-pane" 
+aria-selected="false">Section 3</button> 
+            </li> 
+        </ul> 
+    </div> 
+</div> 
+ Figure 4.12 Coding Snippets of Module Page Function 
+ 
+IV. Graphing Tool & Derivative Calculator 
+  
+The Graphing Tool in MathAnywhere is a dual-function feature that integrates 
+both a Derivative Calculator and a Function Graph Generator. Users can input 
+mathematical expressions using a LaTeX-style editor and immediately 
+visualize the calculated derivative. The Derivative Calculator section 
+simplifies the process of finding derivatives by offering pre-built mathematical 
+buttons and instant results display. Meanwhile, the Function Graph Generator 
+allows users to plot the original function alongside its derivative on a 
+coordinate plane. This visualization enhances understanding by letting students 
+compare function behavior and rate of change in real time. The tool is 
+interactive, user-friendly, and visually clear, making it especially helpful for 
+learners who benefit from graphical representation. It supports better 
+conceptual learning by bridging symbolic computation with visual 
+interpretation. 
+ 
+61 
+ 
+ 
+Figure 4.13 Derivative Calculator 
+ 
+Figure 4.13 illustrates where it allows users to input mathematical expressions 
+and instantly calculate the derivative in a clear and interactive format and figure 
+4.14 enables users to plot mathematical functions and their derivative 
+providing visual representation. 
+ 
+ 
+Figure 4.14 Graphing Tool  
+ 
+Figure 4.15 shows a function computes the derivative of a mathematical 
+expression entered by the user. It first checks if the MathQuill input field is 
+ready and contains input. The function then converts the LaTeX input to a 
+math.js-compatible format, parses it, and calculates the derivative with respect 
+to xx. The result is converted back to LaTeX, displayed on the page, 
+and rendered using MathJax for proper mathematical formatting. Throughout 
+the process, toast notifications provide feedback to the user about errors (such 
+as missing input or invalid expressions) or confirm successful calculation. 
+62 
+ 
+ 
+function calculateDerivative() { 
+    if (!derivativeField) { 
+        showToast('Error', 'MathQuill not initialized', 
+'error'); 
+        return; 
+    } 
+    const latex = derivativeField.latex(); 
+    if (!latex.trim()) { 
+        showToast('Input Required', 'Please enter a function 
+to differentiate', 'warning'); 
+        return; 
+    } 
+    try { 
+        // Convert LaTeX to math.js compatible format 
+        const mathExpression = convertLatexToMathJS(latex); 
+        console.log('Math expression:', mathExpression) 
+        // Parse and differentiate 
+        const parsedFunction = math.parse(mathExpression); 
+        const derivative = math.derivative(parsedFunction, 
+'x'); 
+        
+        // Convert result back to LaTeX 
+        const resultLatex = 
+convertMathJSToLatex(derivative.toString()); 
+        
+        // Display result 
+      
+document.getElementById('derivativeResult').style.display = 
+'block'; 
+        document.getElementById('derivativeLatex').innerHTML 
+= `\\[${resultLatex}\\]`; 
+        
+        // Re-render MathJax 
+        if (window.MathJax && window.MathJax.typesetPromise) 
+{ 
+            
+window.MathJax.typesetPromise([document.getElementById('deri
+vativeLatex')]); 
+        } 
+        showToast('Success!', 'Derivative calculated 
+successfully', 'success'); 
+        
+    } catch (error) { 
+        console.error('Derivative calculation error:', 
+error); 
+        showToast('Calculation Error', 'Invalid mathematical 
+expression. Please check your input.', 'error'); 
+    } 
+} 
+ 
+Figure 4.15 Coding Snippets of Derivative Calculator JavaScript Function 
+ 
+Figure 4.16 shows a function generates a graph 
+of a mathematical function entered by the user. It first checks if the MathQuill 
+input field is initialized and contains input. The function then converts the 
+63 
+ 
+LaTeX input to a math.js-compatible format, compiles it, and evaluates the 
+function at multiple points between -10 and 10 to generate x and y values. 
+Only valid, finite results are used for plotting. If valid points are found, the 
+function calls createChart to display the graph and shows the graph container. 
+Throughout the process, toast notifications inform the user of errors 
+(such as missing input or invalid expressions) or confirm successful graph 
+generation. 
+ 
+function generateGraph() { 
+    if (!graphField) { 
+        showToast('Error', 'MathQuill not initialized', 
+'error'); 
+        return; 
+    } 
+    const latex = graphField.latex(); 
+    if (!latex.trim()) { 
+        showToast('Input Required', 'Please enter a function 
+to graph', 'warning'); 
+        return; 
+    } 
+ 
+    try { 
+        // Convert LaTeX to math.js compatible format 
+        const mathExpression = convertLatexToMathJS(latex); 
+        console.log('Graph expression:', mathExpression); 
+ 
+ 
+        // Parse the expression 
+        const expr = math.compile(mathExpression); 
+        
+        // Generate data points 
+        const xValues = []; 
+        const yValues = []; 
+        
+        for (let x = -10; x <= 10; x += 0.1) { 
+            try { 
+                const y = expr.evaluate({ x }); 
+                if (isFinite(y) && !isNaN(y)) { 
+                    xValues.push(x); 
+                    yValues.push(y); 
+                } 
+            } catch (e) { 
+                // Skip invalid points 
+            } 
+        } 
+ 
+        if (xValues.length === 0) { 
+            throw new Error('No valid points generated'); 
+        } 
+        createChart(xValues, yValues, `f(x) = ${latex}`, 
+false); 
+        
+64 
+ 
+        
+document.getElementById('graphContainer').style.display = 
+'block'; 
+        showToast('Success!', 'Graph generated successfully', 
+'success'); 
+        
+    } catch (error) { 
+        console.error('Graph generation error:', error); 
+        showToast('Graph Error', 'Unable to generate graph. 
+Please check your function.', 'error'); 
+    } 
+} 
+Figure 4.16 Coding Snippets of Graph Generation JavaScript Function 
+ 
+V. Achievement Badges  
+ 
+The Achievements system in MathAnywhere is designed to recognize and 
+encourage user progress by awarding badges for completing specific learning 
+tasks such as finishing modules, advancing through difficulty levels, or taking 
+quizzes. This feature helps motivate users by providing a sense of 
+accomplishment and clear indicators of their learning journey. It supports 
+consistent learning habits and reinforces user commitment by highlighting 
+milestones, which in turn helps build confidence and encourages continued 
+effort. By visually tracking progress, the system also helps users understand 
+their learning patterns and stay focused on their educational goals. Figure 4.17 
+portrays the available Achievement badges. 
+ 
+ 
+Figure 4.17 MathAnywhere Achievement Badges 
+ 
+Figure 4.18 shows a function generates a list of achievement objects for a user 
+based on their progress in various calculus modules. It checks the user's current 
+65 
+ 
+level and retrieves their module progress from session storage. The function 
+defines several achievements such as "Novice Master," "Intermediate Master," 
+"Advanced Master," and "Perfectionist"—each with an icon, title, description, 
+and an "unlocked" status. The "Master" achievements are unlocked when the 
+user completes all modules at a given level with at least 80% progress, while 
+the "Perfectionist" achievement is unlocked by achieving 100% in any module. 
+The function returns an array of these achievement objects, which can be 
+used to display the user's accomplishments on their profile. 
+ 
+function generateAchievements(userData) { 
+    const level = userData.level || 
+sessionStorage.getItem('level') || 'Beginner'; 
+    const moduleProgress = 
+JSON.parse(sessionStorage.getItem('moduleProgress') || '{}'); 
+    const browseTopics = [ 
+        'Introduction to derivatives', 
+        'The definition of Derivative', 
+        'Rules of Differentiation', 
+        'Equation of Tangent', 
+        'Second Derivative', 
+        'Implicit Differentiations', 
+        'Linear Approximation & Differentials' 
+    ]; 
+    const achievements = [ 
+      { 
+        icon: '🟢', 
+        title: 'Novice Master', 
+        description: 'Complete all Novice level modules', 
+        unlocked: browseTopics.every(topic => 
+(moduleProgress[`${topic} - Novice`] || 0) >= 80) 
+      }, 
+      { 
+        icon: '🟡', 
+        title: 'Intermediate Master', 
+        description: 'Complete all Intermediate level 
+modules', 
+66 
+ 
+        unlocked: browseTopics.every(topic => 
+(moduleProgress[`${topic} - Intermediate`] || 0) >= 80) 
+      }, 
+      { 
+        icon: '🔴', 
+        title: 'Advanced Master', 
+        description: 'Complete all Advanced level modules', 
+        unlocked: browseTopics.every(topic => 
+(moduleProgress[`${topic} - Advanced`] || 0) >= 80) 
+      }, 
+      { 
+        icon: '💯', 
+        title: 'Perfectionist', 
+        description: 'Achieve 100% on any module', 
+        unlocked: 
+Object.values(moduleProgress).some(progress => progress >= 
+100) 
+      } 
+    ]; 
+    return achievements; 
+} 
+Figure 4.18 Coding Snippets of Achievement System 
+ 
+VI. Learning Progress Bar  
+  
+The Learning Progress Bar in MathAnywhere provides users with a clear and 
+organized view of their advancement through the platform. It displays both the 
+overall course completion percentage and individual progress across difficulty 
+levels—Novice, Intermediate, and Advanced. This breakdown helps learners 
+visually track their achievements, understand how much content they’ve 
+completed, and identify which areas still need attention. The progress bars are 
+updated in real-time as users’ complete modules, offering continuous feedback 
+and encouraging steady progression. By making progress visible, this feature 
+supports self-monitoring and helps users stay motivated and goal-focused 
+throughout their learning journey. Figure 4.19 and Figure 4.20 illustrate the 
+overall student progress and detailed learning progress by difficulty level 
+respectively showcasing how users can visually track their achievements. 
+67 
+ 
+ 
+ 
+Figure 4.19 Overall Student Progress 
+ 
+ 
+Figure 4.20 Student Learning Progress by Difficulty Level  
+ 
+Figure 4.21 shows function updates the user interface with the current user's 
+information and progress. It displays the username and level, 
+then calculates and updates progress for each difficulty level (Novice, 
+Intermediate, Advanced) across all calculus topics. For each level, 
+it determines how many modules have at least 80% completion, computes the 
+average progress percentage, and updates the corresponding progress bar, 
+percentage label, and completion details on the page. This provides users with 
+a clear and visual summary of their achievements and progress in each module 
+category. 
+ 
+function updateUI(username, level, moduleProgress, 
+overallProgress) { 
+    // Update user info 
+s    document.getElementById('username').textContent = 
+username; 
+    document.getElementById('level').textContent = `Level: 
+${level}`; 
+68 
+ 
+    
+    // Calculate progress for each difficulty level 
+    const browseTopics = [ 
+      'Introduction to derivatives', 
+      'The definition of Derivative', 
+      'Rules of Differentiation', 
+      'Equation of Tangent', 
+      'Second Derivative', 
+      'Implicit Differentiations', 
+      'Linear Approximation & Differentials' 
+    ]; 
+    
+    const difficultyLevels = ['Novice', 'Intermediate', 
+'Advanced']; 
+    
+    // Calculate progress for each difficulty level 
+    difficultyLevels.forEach(difficulty => { 
+      let completedModules = 0; 
+      let totalProgress = 0; 
+      
+      browseTopics.forEach(topic => { 
+        const moduleKey = `${topic} - ${difficulty}`; 
+        const progress = moduleProgress[moduleKey] || 0; 
+        totalProgress += progress; 
+        if (progress >= 80) { 
+          completedModules++; 
+        } 
+      }); 
+      
+      const averageProgress = Math.round(totalProgress / 
+browseTopics.length); 
+      const difficultyLower = difficulty.toLowerCase(); 
+      
+      // Update progress bar 
+      document.getElementById(`${difficultyLower}-progress-
+bar`).style.width = `${averageProgress}%`; 
+      document.getElementById(`${difficultyLower}-progress-
+percentage`).textContent = `${averageProgress}%`; 
+      document.getElementById(`${difficultyLower}-
+details`).textContent = `${completedModules} of 
+${browseTopics.length} modules completed`; 
+    }); 
+} 
+ 
+ Figure 4.21 Coding Snippets of Progress Update 
+ 
+4.4 Testing 
+  
+The third objective was to assess the platform’s usability, interactivity, and the 
+effectiveness of its feedback through user testing and expert evaluation of the 
+MathAnywhere platform to ensure that all features and tools worked as 
+intended. Testing was crucial to verify the platform's functionality, 
+performance, reliability, and overall user experience. It aimed to identify 
+69 
+ 
+potential system issues, such as usability flaws or technical glitches, and ensure 
+the platform's consistency.  
+ 
+Furthermore, this phase provided valuable insights into how effectively the 
+platform supported students in learning differentiation concepts, allowing for 
+necessary improvements in design, interactivity, and instructional content. 
+Table 4.1 lists the components that were evaluated during the testing process. 
+Each component, including the interactive tutorials, real-time feedback system, 
+graphing tool, and progress tracker, was thoroughly examined to confirm 
+proper operation and alignment with the project’s objectives. The tests were 
+conducted by the developer and simulated users based on predefined scenarios 
+to ensure comprehensive evaluation from multiple perspectives. 
+ 
+Table 4.1 Functionality Testing 
+Functionality  Description  Testing Steps  Expected Result Pass/Fail 
+Login Allows existing 
+users to sign into 
+their accounts 
+Enter valid email 
+and password 
+User is logged in 
+successfully and 
+redirected to the home 
+page  
+Pass 
+Enter Registered 
+email with an 
+incorrect password 
+An “Invalid Password” 
+error message is 
+displayed  
+Pass 
+Enter an email that 
+does not exist in the 
+system 
+A “User not found” 
+error message is 
+displayed  
+Pass 
+Sign up  Enables new users to 
+create an account  
+Enter a unique 
+email, password and 
+other required 
+details. 
+A new user account is 
+created, and the user is 
+logged in  
+Pass 
+Enter an email 
+address that is 
+already registered  
+An “Email already in 
+use” error message is 
+displayed 
+Pass 
+Leave a required 
+field (e.g., 
+password) blank  
+A validation message 
+“Password is required” 
+is shown  
+Pass 
+70 
+ 
+Home Page  Displays the main 
+landing page for 
+logged-in users  
+Access the home 
+page after logging in  
+The page displays a 
+“where do I start” button 
+to begin a placement 
+quiz  
+Pass 
+Clicks on the 
+“Topics” navigation 
+link. 
+The user is redirected to 
+the Topics Section Page 
+Pass 
+User were taken to 
+the Profile page as 
+returning with an 
+assigned level 
+The page displays user’s 
+progress  
+and available modules  
+Pass 
+Topics 
+Section  
+Lists all available 
+learning topics  
+Navigate to the 
+topics page  
+All available topics 
+Are displayed as cards  
+Pass 
+  Click on a specific 
+topic card (e.g., The 
+Definition of 
+Derivative). 
+The user is taken to the 
+main page for that 
+learning module   
+Pass 
+Derivative 
+Calculator 
+A tool to compute 
+the derivative of a 
+function  
+Enter a standard 
+function 
+(e.g., y =3 𝑥  ) 
+The correct derivative 
+and steps are calculated 
+and displayed  
+Pass  
+Enter an invalid 
+expression  
+(e.g., abc+xyz) 
+An “Invalid input 
+syntax” error message is 
+displayed  
+Pass 
+Graphing 
+Tool  
+A tool to visualize 
+functions and their 
+derivatives  
+Enter a function to 
+plot  
+(e.g., y = sin(x)) 
+The graph is correctly 
+rendered  
+Pass 
+Achievement 
+Badges 
+Rewards users with 
+badges for 
+completing modules  
+Successfully 
+complete all quizzes 
+in a topic for the 
+first time 
+A new badge is added to 
+their profile  
+Pass 
+Navigate to the user 
+profile page  
+All earned badges are 
+displayed in a dedicated 
+“Achievements” section  
+Pass 
+Learning 
+Progress bar  
+Visually tracks a 
+user’s completion of 
+modules  
+Complete one of 
+three modules in a 
+topic  
+The progress bar for that 
+level updates to show 
+completion  
+Pass 
+71 
+ 
+Complete all 
+modules and 
+learning paths  
+The topic is marked as 
+completed and the 
+progress bar for overall 
+progress shows 100% 
+Pass 
+ 
+4.5 Expert Feedback  
+  
+The expert feedback was obtained from Dr. Mohamad Hidayad bin Ahmad 
+Kamal, a senior lecturer from the Faculty of Computer and Mathematical 
+Sciences (FSKM) who was invited to review the MathAnywhere platform from 
+a professional and pedagogical perspective. Dr. Hidayad was provided with 
+access to the platform and encouraged to explore its features, structure, and 
+content in depth, simulating the experience of an educational evaluator. After 
+this exploration, he completed a Google Form survey specifically designed to 
+capture expert insights on key aspects such as the platform’s instructional 
+design, technical implementation, user interface, and potential for educational 
+impact. The targeted questions in the survey ensured that the feedback was 
+both detailed and relevant, providing valuable guidance for the ongoing 
+development and refinement of MathAnywhere. 
+ 
+ 
+Figure 4.22 Overall Impression based on Expert 
+ 
+Figure 4.22 presents expert feedback from Dr. Mohamad Hidayad bin Ahmad 
+Kamal regarding his overall impression of the MathAnywhere platform. Dr. 
+Hidayad notes that MathAnywhere provides a positive learning 
+experience by teaching differentiation from different perspectives compared to 
+traditional techniques. He highlights that the platform enables users to 
+approach and understand differentiation in new and varied ways, which 
+enriches the learning process and offers a broader conceptual grasp of the 
+72 
+ 
+subject. This expert insight underscores MathAnywhere’s value in 
+delivering innovative and effective calculus instruction. 
+ 
+ 
+Figure 4.23 Evaluation of the pedagogical structure employed by MathAnywhere 
+ 
+Figure 4.23 displays Dr. Mohamad Hidayad bin Ahmad Kamal’s evaluation of 
+the pedagogical structure employed by MathAnywhere, which organizes 
+content into Novice, Intermediate, and Advanced levels. Dr. Hidayad rated the 
+effectiveness of this tiered approach as a 4 out of 5, indicating a strong 
+endorsement of the platform’s ability to support learning in calculus through 
+progressive difficulty levels. This feedback suggests that the structured 
+progression is seen as a valuable feature, helping learners build their 
+understanding step by step while accommodating different skill levels within 
+the subject. 
+ 
+ 
+Figure 4.24 Recommendation for future improvement of the MathAnywhere platform  
+ 
+Figure 4.24 presents Dr. Mohamad Hidayad bin Ahmad Kamal’s 
+recommendation for future improvement of the MathAnywhere platform. Dr. 
+Hidayad points out that the differentiation calculator currently lacks 
+compatibility with all types of functions. Some complex functions cannot be 
+73 
+ 
+calculated accurately, which limits the tool's flexibility and usefulness. 
+Enhancing the calculator’s capabilities in future versions will allow it to 
+support a wider range of mathematical expressions and improve its overall 
+effectiveness.  
+ 
+ 
+Figure 4.25 Feedback regarding on how well MathAnywhere addresses the needs of its target audience  
+ 
+Figure 4.25 summarizes Dr. Mohamad Hidayad bin Ahmad 
+Kamal’s assessment of how well MathAnywhere addresses the needs of its 
+target audience, including both students and educators. Dr. Hidayad notes that 
+the platform is effective in covering differentiation topics that are well-aligned 
+with the syllabus, ensuring its relevance for academic use. Additionally, he 
+highlights the value of MathAnywhere’s interactive and visual tools, which 
+provide engaging ways for users to explore and understand differentiation 
+concepts. This feedback underscores the platform’s strengths in both 
+curriculum alignment and the provision of dynamic learning resources. 
+  
+4.6 User Feedback  
+ 
+The user feedback involved a group of 20 students, with a majority aged 
+between 15 and 23. The participants were randomly selected from students who 
+were interested in learning differentiation, ensuring a variety of backgrounds 
+and learning levels. They were required to explore and interact with the 
+MathAnywhere platform independently, with minimal guidance, to simulate a 
+real-user experience. Following their interaction, they completed a Google 
+Form survey designed to assess their experience. The survey gathered feedback 
+on various aspects of the platform, including functionality, educational value, 
+ease of use, and overall satisfaction. The straightforward questions in the 
+74 
+ 
+Google Form ensured that the responses were both comprehensible and 
+valuable for evaluating the platform’s usability and effectiveness. 
+ 
+Section 1: About the User  
+ 
+This section captures the basic demographic information, including the gender 
+and age of each student participating in the user testing. 
+ 
+ 
+ 
+Figure 4.26 Gender and Age Distribution 
+ 
+Figure 4.26 presents the demographic breakdown of the user feedback 
+collected from 20 participants. The age group chart reveals that most 
+respondents (85%) fall within the 18–23 age range, which closely matches the 
+intended audience of UiTM students for the MathAnywhere platform. Smaller 
+proportions are represented by those aged 24–30 (10%) and above 30 (5%), 
+with no participants under 18. The gender distribution indicates that 70% of 
+respondents are male and 30% are female. This demographic profile suggests 
+that the feedback primarily reflects the experiences and perspectives of young 
+adult learners, with a notable male majority, providing valuable insights into 
+the platform’s usability and appeal among its core target users. 
+ 
+75 
+ 
+ 
+Figure 4.27 Participants reference for using educational websites  
+ 
+Figure 4.27 displays the participants’ preferences regarding the use of 
+educational websites for learning. The data shows that a substantial majority 
+75% of respondents incorporate educational websites into their learning 
+routines, with 45% using them “frequently” and 30% “occasionally.” An 
+additional 20% reported using such resources “rarely,” while only a small 
+fraction (5%) indicated that they do not use educational websites at all. These 
+results suggest that most participants are already comfortable with and 
+receptive to online learning tools, highlighting a strong potential user base and 
+confirming the relevance of platforms like MathAnywhere for supporting their 
+educational needs. 
+ 
+  
+76 
+ 
+Section 2: Using the App 
+ 
+This section assesses the core usability and user experience of the 
+MathAnywhere platform. The evaluation focuses on the user's journey from 
+their initial entry into the site to their interaction with key features. It aims to 
+identify any friction points in the user flow and to verify that the platform's 
+design is both intuitive and effective. 
+ 
+ 
+Figure 4.28 User feedback on the intuitiveness of MathAnywhere 
+ 
+Figure 4.28 displays the results of user feedback regarding the intuitiveness of 
+the MathAnywhere interface, as rated on a scale from 1 to 5. All 20 participants 
+rated the interface highly, with 55% awarding the maximum score of 5 and the 
+remaining 45% selecting a score of 4. Notably, there were no ratings below 4, 
+indicating unanimous agreement among participants that the platform is easy 
+to navigate without assistance. This strong positive response underscores the 
+effectiveness of MathAnywhere’s user interface design, suggesting that users 
+find the platform straightforward and accessible, which is essential for 
+supporting independent learning. 
+ 
+  
+77 
+ 
+Section 3: Learning  
+ 
+This section evaluates the educational effectiveness and engagement of the 
+MathAnywhere platform. Its primary focus is to determine whether the 
+platform succeeds as a learning tool and fulfills its core objective of enhancing 
+students' comprehension of differentiation. 
+ 
+ 
+Figure 4.29 User Feedback on Content Alignment with UiTM Syllabus 
+ 
+Figure 4.29 illustrates user feedback on the extent to which MathAnywhere 
+enables students to study specific differentiation topics aligned with the UiTM 
+syllabus. All 20 participants rated this aspect highly, with 60% giving the 
+maximum score of 5 and the remaining 40% selecting a score of 4. There were 
+no ratings below 4, indicating unanimous agreement that the platform’s content 
+is closely aligned with the required syllabus topics. This strong positive 
+response highlights MathAnywhere’s effectiveness as a supplementary 
+learning resource tailored to the academic needs of UiTM students. 
+ 
+78 
+ 
+ 
+Figure 4.30 User Feedback on the Speed of MathAnywhere compared to Traditional textbooks 
+ 
+Figure 4.30 presents user feedback on whether MathAnywhere is significantly 
+faster than using traditional textbooks, rated on a scale from 1 to 5. Most 
+participants (55%) awarded the highest score of 5, indicating they found the 
+platform much faster, while an additional 20% rated it a 4. Another 20% gave 
+a neutral score of 3, and only one participant (5%) rated it a 2; no participants 
+selected the lowest score of 1. These results suggest that most users perceive 
+MathAnywhere as a more efficient and accessible learning tool compared to 
+traditional textbooks, with a strong overall preference for the platform’s speed 
+and convenience. 
+ 
+ 
+Figure 4.31 User Feedback on the Clarity of Step-by-Step Explanations  
+ 
+Figure 4.31 presents user feedback on the clarity and ease of following the step-
+by-step derivative explanations offered by MathAnywhere. All 20 participants 
+79 
+ 
+rated this aspect positively, with 55% giving the highest score of 5 and 45% 
+selecting a score of 4. Notably, there were no ratings below 4, indicating 
+unanimous satisfaction with the quality of the explanations. This strong positive 
+consensus suggests that the platform’s instructional content is well-
+structured and accessible, effectively helping users understand and follow the 
+process of solving derivative problems step by step. 
+ 
+Section 4: Overall Experience  
+ 
+This section assesses the overall engagement of the students with 
+MathAnywhere website and captures how they are to recommend the website to 
+other UiTM students. 
+ 
+ 
+Figure 4.32 User Likelihood of Recommending MathAnywhere 
+ 
+Figure 4.32 reflects participants’ willingness to recommend 
+MathAnywhere to other Calculus I students. The results are overwhelmingly 
+positive, with 90% of respondents indicating “Yes,” they would 
+enthusiastically recommend the platform, and the remaining 10% selecting 
+“Maybe.” Notably, no participants chose “No.” This strong endorsement 
+highlights a high level of user satisfaction and confidence in the platform’s 
+value, suggesting that most users not only benefited from MathAnywhere 
+themselves but also recognize its potential to support and enhance the learning 
+experience of their peers. 
+ 
+80 
+ 
+4.7 Conclusion 
+ 
+This chapter provided the description of the successful design, implementation, 
+and testing of the MathAnywhere platform, demonstrating its effectiveness 
+and appeal to students of calculus. The project design phase focused on 
+creating a clear structure and a user-friendly interface to ensure an intuitive 
+learning environment. During development, standard web technologies 
+including HTML, CSS, and JavaScript were utilized to build the platform, 
+while Firebase was implemented to manage real-time data and user 
+authentication.The testing phase validated the platform’s functionality and user 
+experience, revealing that it was well-received, intuitive, and highly engaging. 
+Feedback from the user acceptability testing highlighted the platform's 
+success in enhancing students' comprehension of differentiation, with a high 
+percentage of participants expressing satisfaction and a unanimous willingness 
+to recommend the platform to their peers. Overall, the MathAnywhere 
+platform effectively met its objectives, providing a valuable educational tool 
+for students. 
+ 
+   
+81 
+ 
+CHAPTER 5 
+ 
+ 
+CONCLUSION AND RECOMMENDATION FOR FUTURE 
+WORK 
+ 
+ 
+5.1 Introduction  
+  
+This chapter will end the development discourse of the project MathAnywhere: 
+Interactive Website for Learning Differentiation by speculating the overall 
+results of the project, evaluating the success of each goal remained, the 
+encountered restrictions, and forthcoming advancement. It is also noted in the 
+chapter that the project is important in assisting students to develop knowledge 
+in differentiation and how it can be useful in the learning of mathematics 
+particularly in the study of calculus. 
+ 
+5.2 Summary of Findings 
+ 
+The development of MathAnywhere site has successfully solved the limitations 
+encountered by students in terms of learning differentiation at using the 
+common ways of doing it. The embedded tutoring system and real-time 
+questioning and quizzes, interactive graphing tools, and progress monitoring 
+can be customized to ensure that the site encourages conceptual learning in a 
+more interactive and approachable manner. The positive responses by 20 user 
+reports aged between 18-23, revealed that the feedback was overwhelmingly 
+favourable with many rating the site at the top when it came to ease of interface, 
+the interface aligned with the UiTM syllabus and the parsing of the step-by-
+step explanations. More users also thought that MathAnywhere was easy to use 
+and more successful than conventional textbooks and expressed their high 
+interest to recommend to other students. 
+ 
+The effectiveness of the platform as an education tool was confirmed by the 
+expert reviews which particularly appealed to its ability to present numerous 
+82 
+ 
+approaches and facilitate the progressive development by its levels structure. 
+The experimenter approved it’s as a promising additional teaching aid and 
+talked about modifications in the differentiation calculator. Comprehensively, 
+these study results indicate that MathAnywhere is an effective means of 
+improving the understanding of differentiation among students and that it 
+possesses great prospects both as a resource for student- and teacher-centered 
+learning as well as teacher-supportive software. 
+ 
+5.3 Objective Achievement 
+ 
+5.3.1 First Objective  
+ 
+The first objective was to design an interactive web-based educational platform 
+for studying differentiation and this was accomplished by creating an interface 
+that is user-friendly and aesthetically appealing and enables the user to navigate 
+through modules easily so that the students can access the lessons, quizzes, 
+graphing tools and track progress without difficulties. Besides the interface, the 
+design involved the extensive system planning by utilizing use case diagrams 
+and flowcharts, which described user interactions, authentication procedures, 
+primary application logic, and progress tracking. These design features 
+provided a structured and easy to understand system architecture, which can 
+support an interactive and easy to learn experience that fits the needs of the 
+students. 
+   
+5.3.2 Second Objective 
+ 
+The second objective is to develop an interactive web-based educational 
+platform for studying differentiation that provides tailored feedback according 
+to student performance. This objective was accomplished by implementing 
+real-time feedback in the quizzes, a progress tracking dashboard, and an 
+adaptive topic suggestion feature. The system evaluates students' performance 
+and recommends topics that need improvement, providing personalized 
+learning support based on individual progress. 
+83 
+ 
+ 
+5.3.3 Third Objective 
+  
+The third objective is to assess the platform’s usability, interactivity, and 
+effectiveness of the feedback provided through user testing and expert 
+evaluation. This was done by carrying out testing with 20 participant users and 
+one expert reviewer, with the following areas of concern: ease of use, well-
+designed interface, real-time feedback, and general learning experience. The 
+findings showed that students considered the platform quite user-friendly and 
+engaging, and the explanations were clear, and the platform aligned well with 
+the UiTM syllabus. Moreover, most of them were highly satisfied and ready to 
+recommend the platform to others. The professional responses also confirmed 
+the platform advantages in terms of offering interactive learning and 
+emphasized its potential as an additional teaching tool. These results validate 
+the fact that the platform was able to achieve its objectives of providing an 
+effective and supportive learning platform to study differentiation. 
+ 
+5.4 Limitation  
+ 
+The existing platform has been mainly developed and fine-tuned to use desktop 
+browsers, where the screen size is larger, and the interaction is more convenient 
+using a keyboard and a mouse. Consequently, it has not undergone rigorous 
+testing, nor has it been optimized fully to fit in smaller devices like tablets and 
+smartphones. Those students who use the platform on these devices could 
+experience some issues such as poorly aligned interface elements, text or 
+buttons that cannot be tapped with precision, overlapping content, and the 
+inability to use interactive tools such as the graphing tool or MathQuill input 
+fields. Such problems may have a negative effect on user experience, making 
+it less user-friendly and easier to navigate on mobile. This limitation might 
+limit accessibility, engagement, and overall effectiveness of the system in 
+supporting a diverse range of learners because many students would like to 
+have the flexibility of learning on their phones or tablets. 
+ 
+84 
+ 
+Additionally, according to the reviews of expert, the derivative calculator is not 
+yet compatible with all the types of mathematical functions, and some 
+complicated expressions cannot be processed with its help. This drawback 
+decreases the flexibility of the calculator and can limit its effectiveness when 
+students must solve more complex or diverse differentiation tasks. Overcoming 
+this shortcoming in future improvement would contribute to the reliability of 
+the platform and its educational worth even more. 
+ 
+5.5 Recommendation  
+  
+Based on the findings and the limitations encountered during development and 
+evaluation, the following recommendations are proposed to enhance the 
+effectiveness, scope, and usability of the MathAnywhere website: 
+ 
+ Increase the scope of the curriculum. Make the platform go beyond 
+differentiation into other fundamentals of calculus like integration, 
+limits, and applications of derivatives to make it more of a resourceful 
+learning tool. 
+ Enhance adaptive learning, Improve the recommendation engine so that 
+it can sift deeper into performance data and delivers even more 
+customised learning paths and tailored practice. 
+ Improve accessibility. Include options such as multilingual 
+functionality, changing font sizes, using high-contrast modes, and 
+screen-reader accessibility so that all learners with varied needs will be 
+catered. 
+ Deal with mobile compatibility. Enhance usability and accessibility 
+using smaller devices; optimize tablet and smartphone interface and 
+functionalities. 
+ Improve calculator capability. Expand the scope of mathematical 
+functions of the differentiation calculator and make it more reliable and 
+helpful with solving complex problems involving calculus. 
+ Introduce collaborative tools. Include discussion forums, peer-
+reviewing activities or group problem-solving tasks in your course to 
+85 
+ 
+promote communication and knowledge-building collectively and a 
+sense of belonging. 
+ Iterate on UI/UX design. Make the interface dynamic by periodically 
+refining the feedback by modifying the layout, graphics and the 
+interaction styles to make it interesting, current and convenient to use. 
+ 
+5.6 Conclusion 
+  
+The MathAnywhere: Interactive Learning Website for Learning Differentiation 
+has proven to be efficient in addressing major challenges that students 
+encounter upon learning differentiation. The combination of interactive 
+tutorials, real-time feedback quizzes, dynamic graphing tools, and progress 
+tracking allows creating an empowering learning experience that is rich, 
+adaptive, and encourages the learner to learn the material at his/her pace and 
+concentrate his/her efforts on his/her weak spots. All three project goals of 
+designing an intuitive web interface, using performance-based feedback and 
+user testing the effectiveness of the learning process have been achieved, and 
+the final product is a system allowing students to discover the conceptual 
+foundation and stay motivated in the process of learning. 
+ 
+Regardless of the barriers, like the fact that the current focus of the project is 
+only on the topics of differentiation, it has a solid ground to expand and grow 
+in the future. Comprehensive, inclusive learning tool can be achieved with 
+suggested improvements in calculus coverage, superior adaptive algorithms, 
+and accessibility, additional collaboration features, and continuous UI 
+improvements. In conclusion, MathAnywhere becomes an excellent addition 
+to and alternative to conventional teaching because it provides confidence and 
+competency in calculus, as well as being a product that could be expanded to 
+an all-purpose learning tool in the teaching of mathematics.  
+  
+86 
+ 
+REFERENCES 
+ 
+Aguirre Acosta, A. C., & Espinola Carballo, G. (2022). The Use of Immersive Tools 
+in Higher Education: Escape Rooms. ACM International Conference 
+Proceeding Series, 75–80.  
+ 
+Aini Jaafar, N., Rohani, S., Nor, M., Norrulashikin, S. M., Arina, N., Kamisan, B., 
+& Mohamad, A. Q. (2022). Increase Students’ Understanding of Mathematics 
+Learning Using the Technology-Based Learning. In International Journal of 
+Advanced Research in Future Ready Learning and Education (Vol. 28). 
+ 
+Almeida, F., & Bálint, B. (2024). Approaches for Hybrid Scaling of Agile in the IT 
+Industry: A Systematic Literature Review and Research Agenda. In 
+Information (Switzerland) (Vol. 15, Issue 10). Multidisciplinary Digital 
+Publishing Institute (MDPI).  
+ 
+Anselme, P., & Hidi, S. E. (2024). Acquiring competence from both extrinsic and 
+intrinsic rewards. Learning and Instruction, 92.  
+ 
+Barana, A., Marchisio, M., & Sacchet, M. (2021). Interactive feedback for learning 
+mathematics in a digital learning environment. Education Sciences, 11(6).  
+ 
+Behrens, A., Ofori, M., Noteboom, C., & Bishop, D. (2021). A systematic literature 
+review: how agile is agile project management? Issues in Information Systems, 
+22(3), 278–295.  
+ 
+Biza, I., González-Martín, A. S., & Pinto, A. (2022). ‘Scaffolding’ or ‘Filtering’: A 
+Review of Studies on the Diverse Roles of Calculus Courses for Students, 
+Professionals and Teachers. International Journal of Research in 
+Undergraduate Mathematics Education, 8(2), 389–418.  
+ 
+Boulaaras, S., Jan, R., & Pham, V. T. (2023). Recent advancement of fractional 
+calculus and its applications in physical systems. In European Physical 
+Journal: Special Topics (Vol. 232, Issues 14–15, pp. 2347–2350). Springer 
+Science and Business Media Deutschland GmbH.  
+ 
+Chechan, B., Ampadu, E., & Pears, A. (2023). Effect of using Desmos on high 
+school students’ understanding and learning of functions. Eurasia Journal of 
+Mathematics, Science and Technology Education, 19(10).  
+ 
+Chen, Y., Preston, J. C., & Li, Y. (2025). Enhancing Collaboration and Critical 
+Thinking in CSCL Environments: The Interplay Between Team Dynamics and 
+Pedagogical Innovation. International Journal of E-Collaboration, 21(1).  
+ 
+Ely, R. (2021). Teaching calculus with infinitesimals and differentials. ZDM - 
+Mathematics Education, 53(3), 591–604.  
+ 
+Fazwan Kharuddin, A., Azid, N., Razak, A., Lumpur, K., & SMK Jeram, M. (2021). 
+Mathematics and Technology Integrated Education in Malaysia. In 
+International Journal of Management, Accounting (Vol. 1, Issue 1). 
+87 
+ 
+ 
+Firdaus, M., Mukhtar, Darari, M. B., & Azis, Z. (2021). Designing Interactive 
+Videos in Online Multivariable Calculus Course to Support Student’s Critical 
+Thinking. Journal of Physics: Conference Series, 1819(1).  
+ 
+Garcia, R., Treude, C., & Valentine, A. (2024). Application of Collaborative 
+Learning Paradigms within Software Engineering Education: A Systematic 
+Mapping Study. SIGCSE 2024 - Proceedings of the 55th ACM Technical 
+Symposium on Computer Science Education, 1, 366–372.  
+ 
+Ghimire, D., & Charters, S. (2022). The Impact of Agile Development Practices on 
+Project Outcomes. Software, 1(3), 265–275.  
+ 
+Grizzle, J. (2025). Calculus for the Modern Engineer: Putting the Joy Back in 
+Learning Advanced Mathematics.  
+ 
+Hajizada, E., Berggold, P., Iacono, M., Glover, A., & Sandamirskaya, Y. (2022, July 
+27). Interactive continual learning for robots: a neuromorphic approach. ACM 
+International Conference Proceeding Series.  
+ 
+Hoy, Z., & Xu, M. (2023). Agile Software Requirements Engineering Challenges-
+Solutions—A Conceptual Framework from Systematic Literature Review. In 
+Information (Switzerland) (Vol. 14, Issue 6). MDPI.  
+ 
+Jamaluddin, J., Mahali, M., Din, N. M., Ahmad, M. A. N., Jabar, F. A., Fadzillah, N. 
+S. M., & Malek, M. A. A. (2017). A comparison of students’ performance in 
+gamification approach versus conventional approach of accounting teaching 
+and learning. Advanced Science Letters, 23(8), 7733–7736.  
+ 
+Li, M., Ma, S., & Shi, Y. (2023). Examining the effectiveness of gamification as a 
+tool promoting teaching and learning in educational settings: a meta-analysis. 
+In Frontiers in Psychology (Vol. 14). Frontiers Media SA.  
+ 
+Ming Chew, Y., Shien, K. N., & Eng, P. C. (2022). GAMIFICATION TOOLS IN 
+MATHEMATICS COURSE: STUDENTS’ ACCEPTANCE. In Borneo 
+Akademika (Vol. 6, Issue 2). 
+ 
+Nakamoto, R., Flanagan, B., Dai, Y., Yamauchi, T., Takami, K., & Ogata, H. (2023). 
+Enhancing Self-Explanation Learning through a Real-Time Feedback System: 
+An Empirical Evaluation Study. Sustainability (Switzerland), 15(21).  
+ 
+Neumann, M., & Diebold, P. (2024). Towards A Double-Edged Sword: Modelling 
+the Impact in Agile Software Development.  
+ 
+Nur, W., Wan, S., Rosly, M., Sarimah, S., Abdullah, S., Norsyiha, F., & Shukri, A. 
+(2020). The uses of Wolfram Alpha in Mathematics. In Articles of Teaching 
+and Learning in Higher Education (Vol. 1). https://www.wolframalpha.com/, 
+ 
+Nurbekova, Z., Nurbekov, B., Maulsharif, M., Naimanova, D., & Baimendinova, A. 
+(2022). Using Virtual Learning Objects in Educational Content. ACM 
+International Conference Proceeding Series, 174–178.  
+88 
+ 
+ 
+Tah Jutin, N., & Binti Maat, S. M. (2024). The Effectiveness of Gamification in 
+Teaching and Learning Mathematics: A Systematic Literature Review. 
+International Journal of Academic Research in Progressive Education and 
+Development, 13(1).  
+ 
+Thompson, P. W., & Harel, G. (2021). Ideas foundational to calculus learning and 
+their links to students’ difficulties. ZDM - Mathematics Education, 53(3), 507–
+519.  
+ 
+Tian, T. W., & Wahid, N. (2024). Development of a Mobile Learning Application 
+for Form 5 Mathematics with a Gamification Approach. Applied Information 
+Technology And Computer Science, 5(1), 335–354.  
+ 
+Torres-Peña, R. C., Peña-González, D., Chacuto-López, E., Ariza, E. A., & Vergara, 
+D. (2024). Updating Calculus Teaching with AI: A Classroom Experience. 
+Education Sciences, 14(9).  
+ 
+ULUM, H. (2023). The Impact of Khan Academy Learning Platform on 
+Mathematics Achievement in Primary School Fourth Grade Students. 
+Necatibey Eğitim Fakültesi Elektronik Fen ve Matematik Eğitimi Dergisi, 
+17(Özel Sayı), 530–552.  
+ 
+Zaharin, F. Z., Suriya, N., Karim, A., Adenan, N. H., Wahida, N., Junus, M., Tarmizi, 
+R. A., Zila, N., Hamid, A., & Latib, L. A. (2021). Gamification in Mathematics: 
+Students’ Perceptions in Learning Perimeter and Area. 11.  
+ 
+Zhou, Q., Suraworachet, W., & Cukurova, M. (2024). Harnessing Transparent 
+Learning Analytics for Individualized Support through Auto-detection of 
+Engagement in Face-to-Face Collaborative Learning. ACM International 
+Conference Proceeding Series, 392–403.  
+ 

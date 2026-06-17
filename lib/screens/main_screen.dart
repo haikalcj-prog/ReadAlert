@@ -1,9 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home_screen.dart';
 import 'search_screen.dart';
 import 'library_screen.dart';
 import 'profile_screen.dart';
+import 'onboarding_dialog.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -49,6 +52,50 @@ class _MainScreenState extends State<MainScreen> {
       const LibraryScreen(),
       const ProfileScreen(),
     ];
+    _checkOnboarding();
+  }
+
+  Future<void> _checkOnboarding() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    try {
+      final doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      final data = doc.data();
+      final hasSeenOnboarding = data?['hasSeenOnboarding'] == true;
+
+      if (!hasSeenOnboarding && mounted) {
+        // Small delay so the main screen renders first
+        await Future.delayed(const Duration(milliseconds: 500));
+        if (!mounted) return;
+
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          barrierColor: Colors.black.withOpacity(0.75),
+          builder: (_) => OnboardingDialog(
+            onComplete: () => _markOnboardingSeen(user.uid),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint('Onboarding check error: $e');
+    }
+  }
+
+  Future<void> _markOnboardingSeen(String uid) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .set({'hasSeenOnboarding': true}, SetOptions(merge: true));
+    } catch (e) {
+      debugPrint('Mark onboarding error: $e');
+    }
   }
 
   void _onItemTapped(int index) {

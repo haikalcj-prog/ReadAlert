@@ -1,0 +1,4260 @@
+ 
+UNIVERSITI TEKNOLOGI MARA 
+ 
+ 
+ 
+ 
+ 
+F.I.K.H. (Fun Islamic Knowledge Hub):  
+A Game-Based Learning App Focused on Aqidah,  
+Fiqh, and Akhlak for Learners of All Ages 
+ 
+ 
+ 
+ 
+ 
+ 
+FAKHRUL NASRI SUFI BIN SUFIAN 
+ 
+ 
+ 
+ 
+ 
+BACHELOR OF COMPUTER SCIENCE (Hons.) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+JULY 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+Universiti Teknologi MARA 
+ 
+ 
+ 
+F.I.K.H. (Fun Islamic Knowledge Hub):  
+A Game-Based Learning App Focused on Aqidah,  
+Fiqh, and Akhlak for Learners of All Ages 
+ 
+ 
+ 
+Fakhrul Nasri Sufi Bin Sufian 
+ 
+ 
+ 
+ 
+Thesis submitted in fulfillment of the requirements for a  
+Bachelor of Computer Science (Hons.)  
+Faculty of Computer Science and Mathematics 
+ 
+ 
+ 
+ 
+ 
+ 
+July 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SUPERVISOR APPROVAL 
+ 
+ 
+F.I.K.H. (FUN ISLAMIC kNOWLEDGE HUB): A GAME-BASED LEARNING 
+APP FOCUSED ON AQIDAH, FIQH AND AKHLAK FOR LEARNERS OF 
+ALL AGES 
+ 
+By 
+ 
+FAKHRUL NASRI SUFI BIN SUFIAN 
+2022478674 
+ 
+This thesis was prepared under the supervision of the project supervisor, Lily Marlia 
+Binti Abdul Latif. It was submitted to the Faculty of Computing, Informatics, and 
+Mathematics and was accepted in partial fulfillment of the requirements for the 
+degree of Bachelor of Computer Science. 
+ 
+ 
+ 
+Approved By 
+ 
+ 
+ 
+……………………… 
+Lily Marlia Binti Abdul Latif 
+Project Supervisor 
+ 
+ 
+17 JULY, 2025 
+ 
+ 
+ 
+STUDENT DECLARATION 
+ 
+ 
+I certify that this thesis and the project to which it refers is the product of my own 
+work and that any idea or quotation from the work of other people, published or 
+otherwise, are fully acknowledged in accordance with the standard referring practices 
+of the discipline.  
+ 
+ 
+ 
+………………………. 
+FAKHRUL NASRI SUFI BIN SUFIAN 
+2022478674 
+ 
+ 
+ 
+17 JULY, 2025 
+ 
+ 
+ 
+ACKNOWLEDGEMENT 
+ 
+ 
+Alhamdulillah, all praises and thanks to Allah for His Almighty and His utmost 
+blessings, I was able to finish this thesis within the time duration given. Firstly, I 
+extend my heartfelt thanks to my supervisor, Lily Marlia Binti Abdul Latif, and my 
+CSP650 lecturer, Dr. Azilawati Binti Azizan, for their invaluable guidance, support, 
+and encouragement throughout this journey. Their expertise and advice have been 
+crucial in shaping this thesis and providing me with the direction needed to complete 
+it successfully.  
+ 
+Special appreciation also goes to my beloved parents, especially my mother, 
+Norrihan Binti Ngadiman. I deeply appreciate her sacrifices and the challenges she 
+faced in raising me, which have shaped me into the person I am today. I also want to 
+thank my father, Sufian Bin Zainal, for his support. Their endless love, prayers, and 
+sacrifices have been my foundation and strength. Their unwavering support and 
+belief in me have kept me motivated even during the most difficult times. I also want 
+to thank my beloved siblings Fatin Nazurah Sufi Binti Sufian, Filzah Nadhrah Sufi 
+Binti Sufian, Fadhil Nuqman Sufi Bin Sufian and Faiq Nawi Sufi Bin Sufian for their 
+support and assistance. Their presence has been a great source of comfort and 
+motivation throughout this journey.  
+ 
+Lastly, I want to express my sincere gratitude to my friends and classmates who 
+created a supportive and collaborative environment. Their insightful discussions, 
+valuable feedback, and encouragement have enriched my learning experience and 
+significantly contributed to this thesis. Throughout this journey, their understanding, 
+support, and company have been priceless sources of solace and inspiration.  
+iii 
+ 
+ 
+ABSTRACT 
+ 
+ 
+In today’s digital age, many students spend most of their time using mobile devices, 
+which makes traditional Islamic education often based on textbooks and lectures less 
+effective and less appealing. As a result, young Muslims, new converts (mu’allaf), 
+and non-Muslims interested in Islam may struggle to stay engaged or understand key 
+teachings. To solve this problem, F.I.K.H. (Fun Islamic Knowledge Hub) was 
+developed as a mobile application that applies game-based learning to make learning 
+Islamic knowledge more interesting, interactive, and enjoyable. This project focuses 
+on three main areas of Islamic learning which are Aqidah (beliefs), Fiqh (practices), 
+and Akhlak (ethics), with added content from Hadith to support deeper 
+understanding. The app was designed using the Game Development Life Cycle 
+(GDLC) method and includes three games, Laluan Hijrah (Snakes & Ladders), Kotak 
+Fathonah (Bingo), and Padanan Fikrah (Memory Match), each linked to one of the 
+core learning areas. It also features flashcards with 20 subtopics per subject and 50 
+authentic Hadiths from sources like Bukhari and Muslim. To encourage regular 
+learning, the app uses gamification elements such as streak bars, leaderboards, daily 
+tasks, badges, and scores. The application was developed using Android Studio, 
+Firebase, and Figma, and went through usability testing with 20 respondents. Results 
+showed that learners were more motivated and found the learning experience more 
+engaging compared to traditional study methods. In conclusion, F.I.K.H. shows how 
+Islamic education can evolve by using technology to better connect with modern 
+learners. By combining core religious knowledge with game-based learning and 
+interactive tools, the app helps users not only learn but also enjoy and apply Islamic 
+teachings in their daily lives. 
+ 
+iv 
+ 
+ 
+TABLE OF CONTENTS 
+ 
+ 
+CONTENT PAGE 
+SUPERVISOR APPROVAL 
+i 
+STUDENT DECLARATION ii 
+ACKNOWLEDGEMENT iii 
+ABSTRACT iv 
+TABLE OF CONTENTS v 
+LIST OF FIGURES viii 
+LIST OF TABLES x 
+LIST OF ABBREVIATIONS xi 
+CHAPTER ONE: INTRODUCTION 
+ 1.1 Background of Project 1 
+ 1.2 Problem Statement 2 
+ 1.3 Objectives 4 
+ 1.4 Scope 5 
+ 1.5 Significance 6 
+ 1.6 Conclusion 7 
+CHAPTER TWO: LITERATURE REVIEW 
+ 2.1 Overview of Islamic Learning 10 
+  2.1.1 Akhlak 11 
+  2.1.2 Aqidah 11 
+  2.1.3 Fiqah 12 
+v 
+ 
+  2.1.4 Hadiths 12 
+ 2.2 Overview of Game-Based Learning 13 
+  2.2.1 Types of Game 14 
+  2.2.2 Game Elements 17 
+ 2.3 Existing Applications 20 
+  2.3.1 Deen Quiz 20 
+  2.3.2 Muslim Kids Educational Games 21 
+  2.3.3 Muslim Kids TV 22 
+  2.3.4 Comparison of Existing Applications 23 
+ 2.4 Justification on Game Elements and Features Selection 24 
+ 2.5 Conclusion 26 
+CHAPTER THREE: METHODOLOGY 
+ 3.1 Project Methodology (GDLC) 27 
+  3.1.1 Concept/Design 30 
+  3.1.2 Alpha Version 31 
+  3.1.3 Beta Version 32 
+  3.1.4 Gold Master/Release Version 33 
+ 3.2 Summary of Project Methodology 34 
+ 3.3 System Architecture 35 
+ 3.4 Hardware and Software Requirements 37 
+  3.4.1 Hardware Requirements 37 
+  3.4.2 Software Requirements 38 
+ 3.5 Conclusion 39 
+CHAPTER FOUR: RESULT AND DISCUSSIONS 
+ 4.1 Selected Application Elements 41 
+vii 
+ 
+  4.1.1 Type of Games 41 
+  4.1.2 Game Based Elements 47 
+  4.1.3 Applied Game Mechanics 53 
+ 4.2 Application Development Process 54 
+  4.2.1 User Interfaces (UI) and Experience (UX) Design 55 
+  4.2.2  Code Snippets 67 
+ 4.3 Application Evaluation 71 
+  4.3.1 Test Setup 71 
+  4.3.2 Testing 71 
+ 4.4 Conclusion 90 
+CHAPTER FIVE: CONCLUSION, LIMITATIONS AND 
+RECOMMENDATIONS 
+ 5.1 Overall 93 
+ 5.2 Research Objectives Achievement 94 
+  5.2.1 Objectives 1 94 
+  5.2.2 Objectives 2 95 
+  5.2.3 Objectives 3 95 
+ 5.3 Limitations 95 
+ 5.4 Recommendations for Future Work 96 
+ 5.5 Final Remarks 98 
+REFERENCES 
+99 
+ 
+ 
+vii 
+ 
+ 
+LIST OF FIGURE 
+ 
+ 
+FIGURE PAGE 
+2.1 Conceptual Map for F.I.K.H. 9 
+2.2 Game Elements Used in Game-Based Learning from 5 Years 
+Recent Paper 
+18 
+2.3 Deen Quiz User Interfaces 20 
+2.4 Muslim Kids Educational Games User Interface 21 
+2.5 Muslim Kids TV User Interfaces 22 
+3.1 Game Development Life Cycle  28 
+3.2 System Architecture of F.I.K.H. Application 35 
+4.1 First Draft in Canva 56 
+4.2 Second Draft in Figma 57 
+4.3 Finalized Design in Android Studio 59 
+4.4 Overlay/Login/Register Page 60 
+4.5 Home Page/Task Dialog Fragment 61 
+4.6 Topic Page/Game Interface 62 
+4.7 Profile/View Profile/Edit Profile Page 63 
+4.8 Leaderboard/Badges/Titles Page 64 
+4.9 Flashcard/View Card Page/Enlarge Card View 66 
+4.10 Interactive Flashcard System (BaseFlashActivity.java) 67 
+4.11 Dynamic Level Display System (TitlesActivity.java) 68 
+4.12 Bingo Learning Game (BingoActivity.java) 68 
+4.13 Snake & Ladder Learning Game (SnakeLadderActivity.java) 69 
+4.14 Memory Match Game (MemoryMatchActivity.java) 70 
+4.15 Percentage of Respondents Age 79 
+viii 
+ 
+4.16 Background of Respondents 80 
+4.17 Percentage of Respondents Familiar with F.I.K.H Game Mechanics 81 
+4.18 Percentage of User Navigating the App Easily 81 
+4.19 Percentage of Respondents Felt More Motivated with Existing 
+Game Elements 
+82 
+4.20 Efficiency of Flashcard Features in Game Journey 83 
+4.21 Efficiency of Progress Bar in Flashcard Page 83 
+4.22 Efficiency of Progress Bar in Title page 84 
+4.23 Increases Knowledge of Islam to Users  85 
+4.24 Accuracy of Islamic Content 85 
+4.25 Percentage of Usefulness of Hadiths Implementation 86 
+4.26 Overall Respondent Satisfaction 87 
+4.27 Percentage of Respondent loving the UI Design 87 
+4.28 Effectiveness of Gamification Elements 88 
+4.29 Two (2) Most Favored Game Elements 89 
+4.30 Most Favored Game 89 
+ 
+ 
+ix 
+ 
+ 
+LIST OF TABLES 
+ 
+ 
+TABLES PAGE 
+2.1 Game-based learning vs. Gamification 14 
+2.2 Comparison of Existing Applications 23 
+3.1 Brief Description of Each Phases in Game Development Life 
+Cycle (GDLC) 
+29 
+3.2 Brief description of Each Version in Game Development Life 
+Cycle (GDLC) 
+29 
+3.3 Hardware Requirements 37 
+3.4 Software Requirements 38 
+4.1 Game Mechanics Overview – Laluan Hijrah 41 
+4.2 Visual Feedback in Laluan Hijrah 42 
+4.3 Game Mechanics Overview – Kotak Fathonah 43 
+4.4 Game Mechanics Overview – Padanan Fikrah 44 
+4.5 Comparison Table of Games 46 
+4.6 Details Conditions on Player’s Title 48 
+4.7 Details Conditions on Player Badges (Learning Milestones) 51 
+4.8 Details Conditions on Player Badges (Gameplay 
+Achievements) 
+51 
+4.9 Details Conditions on Player Badges (Habits and 
+Engagements) 
+52 
+4.10 Applied Game Mechanics  54 
+4.11 Functionality Test 72 
+ 
+ 
+ 
+ 
+x 
+ 
+LIST OF ABBREVIATIONS 
+ 
+F.I.K.H. Fun Islamic Knowledge Hub 
+GBL Game-Based Learning 
+GDD Game Design Document 
+GDLC Game Development Life Cycle 
+IDE Integrated Development Environment 
+iOS iPhone Operating System 
+PBUH Peace Be Upon Him 
+SDLC System Development Life Cycle 
+TDD Technical Design Document 
+UI User Interfaces 
+UX User Experience 
+ 
+xi 
+ 
+CHAPTER 1 
+ 
+ 
+INTRODUCTION 
+ 
+ 
+This chapter provided the discussion of the background of the project, ideal situation 
+regarding the project direction, reality scenario, consequences of the gap between 
+ideal and reality situation and the solution to bridge the gap. In addition, three (3) 
+objectives that this project was set to accomplish were also highlighted in this 
+chapter. Then, the significance of this project and the scope which determined the 
+coverage of this project were also outlined. In the concluding part of this chapter, an 
+end conclusion was done to wrap up the discussed content. 
+ 
+1.1 ​ Background of Project 
+ 
+F.I.K.H. (Fun Islamic Knowledge Hub) is a game-based learning application 
+focused on teaching Aqidah, Fiqh, and Akhlak to learners of all ages. 
+Traditionally, Islamic education has been delivered through direct instruction 
+from an ustaz, teacher, or mentor. While effective, this method may not 
+always be comfortable or accessible for every individual. For instance, some 
+learners, especially older Muslims might feel hesitant to seek help due to fear 
+of embarrassment or judgment. F.I.K.H. fills this gap by offering a 
+welcoming, learner-centered environment where users can explore Islamic 
+teachings at their own pace, regardless of age, background, or prior 
+knowledge. 
+ 
+In today’s era of mobile technology and digital interactivity, engaging 
+platforms are increasingly essential. Game-based learning (GBL) lies at the 
+heart of F.I.K.H.'s approach, enabling users to interact with content in a way 
+that promotes active participation and sustained interest. As noted by Greipl 
+et al. (2020), GBL enhances learning by integrating rewards, challenges, and 
+a sense of progress, all of which contribute to a more effective educational 
+experience. Similarly, Khadijah et al. (2022) emphasize that GBL elevates 
+1 
+ 
+both teaching and learning to new levels of interactivity and enjoyment. By 
+embedding Islamic education within a game-based framework, F.I.K.H. seeks 
+to make learning not only informative but also meaningful and motivating. 
+ 
+1.2 ​ Problem Statement 
+ 
+Learning Islam should be an enlightening, clear, and accessible experience for 
+everyone. Ideally, Islamic studies such as Aqidah, Fiqh, and Akhlak should 
+not confuse or overwhelm learners. The learning journey should feel inviting 
+and simple, allowing individuals to explore their faith with confidence and 
+clarity. In today’s era of mobile technology and fast-paced lifestyles, digital 
+tools have become essential in making learning more efficient and adaptable. 
+They provide flexibility, access to resources, and opportunities for interactive 
+learning. With the right design, digital platforms can support learners in a 
+personalized and meaningful way. Game-based learning (GBL) is one such 
+modern method that has proven to be especially effective. According to 
+Pratama and Azhari (2020), gamified learning encourages factual memory 
+and sustained engagement, making it an optimal method for long-term 
+understanding. Rather than relying solely on traditional teaching, digital 
+solutions can complement religious education with modern strategies that 
+increase motivation. When combined with authentic content, digital tools can 
+turn the study of Islam into a more enjoyable and lasting experience. The 
+potential is high, what is needed is the right balance between credible Islamic 
+knowledge and engaging learning formats that meet the needs of today’s 
+learners. 
+ 
+Despite the availability of learning resources, the reality is that many people 
+still struggle when trying to learn Islam especially new Muslims (muallaf) or 
+non-Muslims who are simply curious. For them, the journey can be confusing 
+and isolating. They often do not know where to start, what to read, or who to 
+ask. This hesitation may be worsened by the fear of being judged or 
+misunderstood. Older Muslims who are trying to return to the path of learning 
+often share this fear as well. Islamic knowledge spans many areas, and the 
+sheer amount of information can feel overwhelming to anyone starting from 
+2 
+ 
+scratch. Moreover, current digital tools often lack either the depth or 
+authenticity needed to truly help. As Memon et al. (2020) observed, the lack 
+of engaging tools in religious learning environments places the burden 
+entirely on teachers, many of whom rely on outdated methods. Mohamad 
+Yusof and Zulkifli (2021) also pointed out that some Islamic educators 
+themselves are untrained or unprepared to use effective strategies, especially 
+for teaching foundational subjects like Jawi. Meanwhile, Khadijah H. et al. 
+(2022) found that many Islamic learning environments are still slow to adopt 
+innovative, digital-based solutions that could make learning more accessible 
+and engaging. This leads towards the creation of such classroom situations 
+where students are seen as mere recipients of information, instead of 
+inquisitive and active participants of their own educational experience. 
+ 
+As a result of these challenges, the experience of learning Islam can often feel 
+dry, repetitive, or even discouraging. Without the right support and 
+engagement, learners may find it hard to connect with the content in a 
+meaningful way. Even if they manage to absorb the information, it often feels 
+disconnected from their daily lives, making it difficult to apply. This lack of 
+relevance leads to shallow understanding, and learners may fail to see the 
+reasoning or wisdom behind Islamic teachings. Adriian Segura-Robles et al. 
+(2020) explained that students who are not emotionally engaged not only 
+struggle academically but also develop weak personal connections with what 
+they are learning. Without emotional involvement, there is a higher risk of 
+misunderstanding or misinterpreting the actual teachings of Islam. The 
+material may be memorized but not internalized. Furthermore, as Abdullah 
+and Abdul Razak (2021) stated, important educational elements such as 
+challenge, feedback, and motivation are crucial for meaningful learning 
+experiences, yet often missing in traditional approaches. If learners remain 
+uninterested or disconnected, their spiritual growth may be delayed, and 
+worse, they might lose the desire to learn more about their faith altogether. 
+ 
+To overcome these barriers, the F.I.K.H. (Fun Islamic Knowledge Hub) 
+application is designed as a digital solution to make Islamic learning more 
+accessible, relatable, and effective. It offers structured content that focuses on 
+3 
+ 
+authentic, essential Islamic knowledge covering areas like Aqidah, Fiqh, and 
+Akhlak. The app ensures that anyone regardless of age, background, or 
+experience, can benefit from its user-friendly and inclusive platform. F.I.K.H. 
+incorporates game-based learning (GBL) principles to make the learning 
+process more interactive and exciting. GBL improves learner motivation and 
+enhances information retention, which is particularly helpful for both 
+beginners and returning learners. Research by Smiderle et al. (2020) confirms 
+that games in education improve satisfaction and stimulate learning, 
+especially for young audiences. Annasaii and Mohd Aderi (2020) also 
+emphasize that gamified systems, such as Kahoot, can transform Islamic 
+education by making it collaborative and dynamic. With this approach, 
+F.I.K.H. makes Islamic learning feel less intimidating and more approachable. 
+By combining authenticity with digital interactivity, the app redefines how 
+people connect with Islamic knowledge, offering a modern, supportive 
+learning environment that keeps users engaged while deepening their 
+understanding of faith. 
+ 
+1.3 ​ Objectives 
+ 
+This project had three objectives that were aimed to be achieved, which were: 
+i. To identify the most suitable game types and elements that effectively 
+support the learning context of game-based learning (GBL) for the F.I.K.H. 
+mobile application. 
+ii. To design and develop the F.I.K.H. mobile application as an engaging, 
+enjoyable, and accessible for learners of all backgrounds and age groups. 
+iii. To evaluate the functionality and usability test of the F.I.K.H. application 
+for interactive learning. 
+ 
+ 
+ 
+ 
+4 
+ 
+1.4 ​ Scope 
+ 
+F.I.K.H. application is a mobile application designed to deliver Islamic 
+knowledge in an interactive, engaging, and welcoming way. Built for 
+Android, this fully developed platform integrates game-based learning (GBL) 
+and implements gamification strictly as supporting game elements to make 
+the process of learning Islam more accessible and enjoyable for all users. This 
+is consistent with the findings of Abdullah and Abdul Razak (2021), who 
+identified that gamified education raises the interest and acceptance of 
+religious study among the learners. The app focuses on four key areas of 
+Islamic Learning which are Fiqh (jurisprudence), Aqidah (creed), Akhlak 
+(morality), and Hadith (Prophetic traditions). These are introduced through 
+three educational games such as Laluan Hijrah, Kotak Fathonah, and Padanan 
+Fikrah, each tied to one of the main topics. Every game includes 50 
+multiple-choice quiz questions, adding up to 150 questions in total, with 
+instant feedback to aid learning and improve retention. 
+ 
+Beyond gameplay, F.I.K.H. features a flashcard module containing 20 
+subtopics each for Fiqh, Aqidah, and Akhlak, offering concise definitions and 
+explanations. The Hadith section contains 50 authentic hadiths sourced from 
+reputable collections such as Bukhari, Muslim, and Tirmidhi, helping users 
+connect with the teachings of the Prophet Muhammad (PBUH) in a clear and 
+simplified way. To enhance motivation, the app uses game elements such as 
+leaderboards, score systems, badges, streak bars, progress bars, titles, and 
+daily challenges. These are designed to promote consistency, celebrate 
+achievement, and maintain user interest over time. The application is intended 
+for everyone, regardless of age, religious background, or familiarity with 
+Islamic teachings, welcoming young learners, adults, reverts (muallaf), and 
+even non-Muslims. 
+ 
+Developed using the Game Development Life Cycle (GDLC), the app went 
+through key phases such as requirement analysis, game design, development, 
+and testing. While the main interface is in English, Malay is used for 
+5 
+ 
+localized terms like game titles and badge names. The scope of this 
+application is limited to online learning and does not include advanced 
+Islamic topics, multiplayer modes, or offline access. Instead, it focuses on 
+delivering basic, authentic content suitable for beginners and intermediate 
+learners, and can also be used as a self-study tool or classroom supplement. 
+ 
+1.5 ​ Significance 
+ 
+The F.I.K.H. application is crucial in transforming the Islamic education 
+environment by providing a contemporary, all embracing, and learner central 
+environment that supports the emerging demands of the current society. In its 
+essence, the app is important in the sense that it offers a ground to every 
+individual no matter age, background, exposure to Islam and Islam like 
+doctrines, to learn and reinforce their knowledge based on major precepts of 
+Islam The F.I.K.H. application is significant because it directly responds to 
+the evolving needs of various learners in today’s digital age. Designed as an 
+inclusive and learner-centered platform, it serves as a modern gateway for 
+users of all backgrounds, young learners, adults, muallaf (converts), 
+non-Muslims, teachers, and parents, to access authentic Islamic knowledge in 
+an interactive and meaningful way. 
+ 
+For young learners, the use of game-based learning (GBL) transforms 
+religious education into a more enjoyable experience. Studies show that the 
+use of games significantly increases motivation, satisfaction, and engagement 
+in younger audiences (Smiderle et al., 2020). By combining games with 
+essential Islamic content, F.I.K.H. helps children build a strong foundation in 
+Fiqh, Aqidah, Akhlak, and Hadith without feeling burdened. For adults and 
+muallaf, learning can often feel intimidating, especially when there is fear of 
+embarrassment or judgment. F.I.K.H. addresses this by offering a private, 
+self-paced learning environment that encourages lifelong learning, allowing 
+users to learn at their own convenience. According to Khadijah H. et al. 
+(2022), gamification promotes motivation and learning outcomes, which are 
+essential for those who might hesitate to ask questions in a traditional setting. 
+6 
+ 
+Similarly, Adriian Segura-Robles et al. (2020) emphasize that emotional 
+connection to the material increases when learners feel engaged and 
+unpressured, something the app fosters well. 
+ 
+Non-Muslims who are curious about Islam also benefit from the app’s simple, 
+structured, and non-judgmental format. The app offers accessible and 
+error-free information that removes barriers often associated with 
+approaching religious topics for the first time. For teachers, the application 
+acts as a supplementary teaching tool. While it doesn not replace formal 
+instruction, it complements it by offering diverse methods to reinforce 
+classroom topics. Memon et al. (2020) noted that educators often struggle to 
+maintain engagement due to outdated tools. F.I.K.H. helps bridge that gap. 
+Likewise, parents can use the app to guide their children in home-based or 
+informal learning, delivering content in an engaging and age-appropriate way. 
+ 
+On a broader scale, F.I.K.H. contributes to building stronger communities by 
+promoting accurate Islamic knowledge, moral values like patience, honesty, 
+and compassion, and reducing misinformation. As Abdullah and Abdul Razak 
+(2021) found, gamified education fosters better acceptance of religious 
+learning, making this application a meaningful tool for both individual growth 
+and community development. 
+ 
+1.6 ​ Conclusion 
+ 
+In an era where digital learning has become essential, the F.I.K.H. application 
+stands as a meaningful response to the challenges of traditional Islamic 
+education. It reimagines how people engage with religious knowledge, 
+offering not just accessibility, but also dignity and encouragement to those 
+who may have once felt lost, hesitant, or excluded from structured learning. 
+This initiative is more than just a tool, it is a bridge connecting authentic 
+Islamic teachings with the dynamic expectations of modern learners through 
+interactive, gamified experiences that foster understanding, confidence, and 
+moral growth. By focusing on foundational Islamic knowledge and designing 
+7 
+ 
+it to be inclusive, engaging, and culturally mindful, F.I.K.H. invites users 
+from all walks of life into a learning journey that is personal yet communal, 
+spiritual yet relatable. Its contribution lies not only in what it teaches, but in 
+how it makes that knowledge approachable, memorable, and empowering. As 
+such, F.I.K.H. does not merely fill a gap in religious learning, it reshapes the 
+way it is delivered, perceived, and embraced in the digital age. 
+ 
+ 
+8 
+ 
+CHAPTER 2 
+ 
+ 
+LITERATURE REVIEW 
+ 
+ 
+In this chapter,  a new approach to game-based learning (GBL) that is the key to the 
+F.I.K.H. mobile application is introduced. It explains why GBL is helpful in covering 
+Islamic subjects like Aqidah, Fiqh, Akhlak and Hadith and which type of games can 
+be used. The existing Islamic learning apps are compared and analyzed in order to 
+determine their advantages and drawbacks. Lastly, this chapter described the game 
+types and elements chosen and which will be adopted to F.I.K.H. to increase user 
+engagement and learning effectiveness. Figure 2.1 represents the conceptual map of 
+the application. 
+ 
+ 
+Figure 2.1: Conceptual Map for F.I.K.H. 
+ 
+ 
+9 
+ 
+2.1 ​ Overview of Islamic Learning 
+ 
+Islam is a monotheistic faith revealed by Allah (God) to Prophet Muhammad 
+(peace be upon him) in the 7th century CE on the Arabian Peninsula. The 
+word Islam means submission to the will of Allah, promoting peace, moral 
+virtue, and devotion to divine guidance. Muslims believe that the Prophet 
+Muhammad (PBUH) is the final messenger in a line of prophets, regarded as 
+the ideal model of leadership, compassion, and integrity (Santoso, 2024). The 
+two main sources of Islamic knowledge are the Qur’an, the holy book, and 
+the Sunnah, which includes the sayings, actions, and approvals of the Prophet. 
+The Sunnah plays a vital role in understanding the Quran and applying its 
+teachings in daily life (Ashimi, 2023). 
+ 
+Islamic learning is not restricted to a formal period but is a continuous 
+journey of developing knowledge, behavior, and spirituality. Islamic Studies, 
+as an academic field, explores Islam through branches like Tafsir, Hadith, 
+Fiqh, Aqidah, Akhlak, Sirah, Usul al-Fiqh, Islamic history, Tasawwuf, and 
+Arabic. Hadith provides moral and legal guidance next to the Qur’an 
+(Ashimi, 2023). Akhlak focuses on personal ethics, promoting values such as 
+humility, patience, and responsibility (Ashimi, 2023). Sirah, the Prophet’s 
+biography, offers a historical and ethical model of exemplary living (Santoso, 
+2024). These fields complement each other, shaping not only intellect but also 
+spiritual character (Safariani et al., 2023). Ultimately, the goal of Islamic 
+education is not just knowledge, but the formation of morally upright 
+individuals guided by divine values (Santoso, 2024). 
+ 
+While Islamic Studies often takes place in academic or religious institutions, 
+Islamic learning can happen anywhere. In the digital age, mobile applications 
+offer an opportunity to reach broader audiences especially muallaf, youth, and 
+non-Muslims exploring Islam. The F.I.K.H. application focuses on three 
+essential topics such as Fiqh, Aqidah, and Akhlak, which together form the 
+foundation of Islamic belief, practice, and moral character. The inclusion of 
+Hadith serves strictly as an additional topic to reinforce the core teachings 
+10 
+ 
+and provide practical context through the sayings and actions of the Prophet 
+Muhammad (PBUH). By integrating interactive, game-based learning, 
+F.I.K.H. serves as a bridge between traditional Islamic knowledge and 
+modern learning methods, enabling users to understand, internalize, and live 
+by Islamic teachings in a meaningful and relevant way. 
+ 
+2.1.1 ​Akhlak  
+ 
+Akhlak in the Islamic learning system is the moral and ethical code that 
+guides a Muslim’s conduct toward Allah, oneself, and others. It goes beyond 
+outward etiquette, reflecting the condition of the heart and soul, and plays an 
+essential role in shaping individual behavior and fostering a harmonious 
+society (Nabi U. et al., 2024). It is expressed through dimensions such as 
+worship, sincerity, self-discipline, kindness, and respect. Ruzairi and Jasmi 
+(2022) highlight aspects like goodness, unity, morality, politeness, and 
+humanity as core components of Islamic manners that help build character 
+and influence social interaction. Akhlak also promotes positive traits such as 
+honesty, patience, compassion, humility, and warns against negative values 
+like arrogance, envy, and dishonesty. In Islam, Prophet Muhammad (peace be 
+upon him) is regarded as uswatun hasanah (an excellent example), embodying 
+the highest standard of character in all aspects of his life (Santoso, 2024). 
+Furthermore, Akhlak is closely connected to Aqidah, serving as a reflection 
+of faith through ethical conduct and spiritual development (Risma, 2022). 
+ 
+2.1.2 ​Aqidah 
+ 
+Aqidah is described as the core beliefs that constitute the foundation of the 
+faith of a Muslim. It contains fundamental religious principles like the faith in 
+the Oneness of God (Tawheed), angels, the revelations, the prophets, the Day 
+of Resurrection and the predestination of God, (Qada and Qadar). These 
+principles define the perception of the world around a Muslim and his/her 
+spiritual self. The concept of Aqidah is so fundamental when it comes to 
+aligning the believer and Allah coupled with the establishment of a sense of 
+meaning and responsibility in life (Ashimi, 2023). According to Kauser 
+11 
+ 
+(2022), a solid understanding of Aqidah will block the road to misconceptions 
+and support the emotional and intellectual commitment to Islam. 
+ 
+2.1.3 ​Fiqah  
+ 
+Fiqh, by contrast, simply means Islamic jurisprudence, the science of 
+comprehending and practicing the Islamic rulings of litigation in everyday 
+life. It regulates both acts of worship (ibadah) including prayer, fasting, zakat 
+and pilgrimage, and also in the dealings of a person with another person 
+including marriage, business and fair governance. Fiqh is based on the Quran 
+and sunnah and is read by study of those whose consensus and reasoning has 
+preceded. It is an effective guide that Muslims use to carry out their religious 
+duties as well as make sound ethical choices (Ashimi, 2023). Flexibility of 
+Fiqh also makes this religion adaptable to the changing contexts without loss 
+of core Islamic principles (Solihin, Haryadi, & Rohanda, 2024). 
+ 
+2.1.4 ​Hadiths 
+ 
+As well as after the Quran, Hadiths, which are the sayings and actions of 
+Prophet Muhammad (peace be upon him), are the second most authoritative 
+source in Islam that teaches Muslims about what they should and should not 
+do or believe or behave. In F.I.K.H application, Hadiths will be presented as 
+an extra flash card subject to assist and complement the study of Aqidah, 
+Fiqh, and Akhlak. It contains 50 well-chosen Hadiths, which are authentic 
+days like Bukhari, Muslim, Tirmidhi, Abu Dawood, Ibn Majah, and Ahmad. 
+The central Islamic teachings can be found in these Hadiths are principles of 
+mercy, honesty, intent, self-control, and the sense of social responsibility, 
+which makes them particularly appropriate to users of any age. Hadiths do not 
+relate to a specific game, but they give the flashcards spiritual richness and 
+common sense. Because Hadiths are provided, along with plain explanations 
+of the same, anyone using them gets the feeling of how the teachings can 
+work in his or her own day-to-day activities, and learning becomes more 
+pleasant, familiar, and change-inducing. 
+ 
+12 
+ 
+2.2 ​ Overview of Game-Based Learning 
+ 
+Game-Based Learning (GBL) is a structured educational method that 
+integrates the mechanics and design of games to deliver learning content in a 
+more engaging and interactive way. As explained by Nisbet J. (2023), GBL 
+fosters a play-based learning environment that motivates learners through 
+immersive gameplay, reinforcing educational outcomes effectively. Cascella 
+M. et al. (2023) define GBL as the merging of instructional content and 
+gameplay, creating meaningful experiences that educate while entertaining. 
+This approach enhances learner participation and simplifies complex concepts 
+through interactivity and visual elements. According to Sabirah K. et al. 
+(2024), graphics in GBL play a crucial role by turning abstract ideas into 
+concrete, relatable visuals, improving both understanding and engagement. 
+GBL offers several advantages, including short-term rewards, point systems, 
+and healthy competition, making learning enjoyable. Its flexibility allows it to 
+cater to all age groups from preschoolers to university students, and can be 
+delivered in individual or group formats, online or face-to-face. 
+ 
+In contrast, gamification involves applying game-like elements (such as 
+points, rules, and feedback systems) to non-game settings to enhance 
+motivation and engagement (H. P. Lu & Ho, 2020). Unlike GBL, 
+gamification does not rely on actual games but incorporates game mechanics 
+into traditional tasks to make them more enjoyable (Zhang Qi, 2022; Studart 
+N., 2022). Its widespread use in education, healthcare, and finance reflects its 
+ability to satisfy human desires for recognition, achievement, and competition 
+(Gachkova et al., 2020; Kamboj et al., 2020). 
+ 
+While GBL and gamification are distinct, they are complementary. In the 
+F.I.K.H. application, both approaches are synergized effectively. GBL is the 
+core instructional technique, represented through fully developed games like 
+Laluan Hijrah, Kotak Fathonah, and Padanan Fikrah. Meanwhile, 
+gamification elements strictly act as supporting game elements such as 
+leaderboards, badges, score systems, progress tracking, and streak bars. It 
+serves as motivational tools without altering core content. These layers 
+13 
+ 
+enhance user commitment and learning retention (Dubois A. et al., 2023; 
+Farreras M. et al., 2022). As Sabirah K. et al. (2024) note, GBL enriched with 
+gamified features offers a deeper and more sustained educational experience, 
+aligning perfectly with F.I.K.H. 's goal of meaningful and enjoyable Islamic 
+learning. 
+ 
+Table 2.1 highlights the distinction between Gamification and Game-Based 
+Learning, emphasizing their goals, implementation, and assessment strategies. 
+Gamification can also play a key role in increasing the effectiveness of 
+Game-Based Learning when it is used intelligently.  
+ 
+Table 2.1: Game-based learning vs. Gamification (Nisbet J., 2023) 
+Gamification Game-Based Learning 
+Gamification is adding game 
+elements to a non-game scenario. 
+GBL flips gamification on its head 
+by using actual games to teach. 
+Examples: Adding elements like 
+badges or experience points to 
+lessons. 
+Examples: Using games (e.g., 
+Minecraft) for learning objectives. 
+Motivation: Likely extrinsically 
+rewarding (e.g., tied to grades). 
+Motivation: Intrinsically 
+rewarding, designed to be engaging 
+and fun. 
+Assessment: Not part of the game 
+itself. 
+Assessment: Integrated within the 
+game. 
+Adaptation: Game-like aspects are 
+adjusted to fit lesson content. 
+Adaptation: Lesson content is 
+adjusted to fit the game. 
+ 
+2.2.1 ​Types of Game 
+ 
+When exploring Game-Based Learning (GBL), we find different types of 
+games that can be used to support learning for people of various ages and 
+backgrounds. One important type is called a serious game. A serious game is 
+not necessarily difficult or complicated, it simply means the game is designed 
+with a clear educational purpose rather than just for fun. It can still be easy to 
+14 
+ 
+use, fun, and simple, as long as it helps learners understand something 
+important. In the case of the F.I.K.H. application, serious games are a great fit 
+because the app is created for a wide audience, including young learners, 
+muallaf, and non-Muslims who are curious about Islam. These learners may 
+feel shy or unsure about where to start, and serious games offer a 
+non-threatening, enjoyable way to explore Islamic knowledge. As Sabirah K. 
+et al. (2024) point out, combining traditional Islamic education with modern 
+visual tools can help meet the needs of today’s learners. 
+ 
+According to Nisbet J. (2023), there are seven major types of games in GBL 
+which are card games, puzzles, word games, simulation games, video games, 
+role-playing games, and board games. In the F.I.K.H. app, only three types 
+are used, puzzle games, card games, and board games. These were selected 
+because they are simple, effective, and easy to understand, making them ideal 
+for self-learning and classroom-based environments. Each game type has its 
+own educational strengths and helps users stay engaged while learning. By 
+using serious games that are friendly and accessible, the F.I.K.H. application 
+can support learners from any background, regardless of their level of 
+knowledge about Islam. It provides a safe and fun environment where users 
+can grow their understanding of Islamic teachings without feeling 
+overwhelmed. 
+ 
+●​ Puzzle Games 
+ 
+As Padfield J. (2024) noted in puzzling games, there are numerous ways 
+using which a user is compelled to analyze a problem in puzzling games, 
+thereby solving multiple issues of developing the mind, at once. Such games 
+facilitate a productive learning strategy considering that learners will apply 
+their wisdom in an experimental manner towards solving those games and in 
+the process will facilitate essential critical development. Regarding the 
+educational dimension, puzzle games stimulate critical thinking and 
+strengthen concepts thereby offering a fun and exciting means to tackle 
+difficulties, which can result in increased learning about the material (Speidel 
+15 
+ 
+U. and Manoharan S., 2022). It helps to make the material less dull and to 
+enable learners to discover methods to the issue where they might liberate 
+some new realizations. Other than that, puzzles, in addition to making the 
+process of learning not only amusing but also a more active process, serve to 
+reinforce and practice knowledge through the introduction of problem-solving 
+mechanics into the gameplay. 
+ 
+●​ Card Games 
+ 
+One of the most interactive teaching aids tools that can be employed in any 
+and all aspects of learning in order to teach various subjects in different fields 
+is card games. The card games are the most useful in such spheres, as it goes, 
+according to Lima Caminha, L.O., and Marques, A.B. (2024), when it comes 
+to software architecture and learning new vocabulary that in these cases, 
+practical problems and predicaments could be modeled, and users provoked 
+to practice them. These type of games are usually interactive, and players are 
+forced to use their minds to think critically and apply what they have learned 
+to the situation which improves learning and memory retention. One of the 
+main advantages of card games is that the players receive feedback in the 
+process of playing a game itself. This type of feedback causes the learners to 
+correct the mistakes they make as they make them, and this aids in better 
+comprehension of the lesson, as well as keeps the learners interested and 
+motivated. Incorporated into purely educational materials, card games are an 
+effective practical use of transforming learning into a more exhilarating form 
+of knowing, arousing action-packed learning that takes place through active 
+exploration and conquest of knowledge. 
+ 
+●​ Board Games 
+ 
+Board games have also been instituted as important tools of concept-tutorial 
+in the sense that board games offer ways of instructing course subjects such 
+as science, language and mathematics. According to Premthaisong, S., and 
+Srisawasdi, N. (2020) and Wen, J.M. et al. (2021) further state that these 
+16 
+ 
+games do not only result in the motivation growth, they also motivate learners 
+to contribute and think critically, which results in the learners having a higher 
+level of knowledge of the concepts. Accomplishing missions, the 
+implementation of levels allows the user to see the material in an efficient and 
+engaging way, contributes to memorizing important information, and the 
+consolidation of knowledge. Board games are not only beneficial in that they 
+have certain teaching and learning benefits that pertain to their particular 
+subject but also activate thinking and learning within a group. Alexiou, T. and 
+Karasimos, A. (2023) note that the majority of board games involve group 
+problem-solving, group inquiry, and working together. These elements can be 
+used to ensure that board games are extremely appropriate in improving 
+teamwork, communication and problem solving skills, which are applicable 
+both in the academic world and in the real world. 
+​  
+2.2.2 ​Game Elements 
+ 
+The F.I.K.H. application uses carefully chosen game elements such as scores, 
+badges, leaderboards, streak bars, progress bars, titles, and daily tasks, to 
+make the learning process more engaging and motivating. These features are 
+not games themselves but serve to support learning by providing feedback, 
+structure, and a sense of reward. As noted by Zhang Qi (2022) and Studart N. 
+(2022), such elements help turn routine tasks into enjoyable, purposeful 
+experiences. Gachkova et al. (2020) and Kamboj et al. (2020) further 
+highlight that gamification taps into users’ desire for recognition and 
+achievement. In F.I.K.H., learners are encouraged to keep progressing 
+through visible milestones and rewards, which improves focus and 
+participation. Dubois A. et al. (2023) and Farreras M. et al. (2022) also 
+support the idea that combining learning with game elements increases 
+motivation and sustained effort, ultimately leading to better retention and 
+learning outcomes. Figure 2.2 illustrates the variety of game elements 
+implemented in GBL over the past five years, as reported in recent scholarly 
+publications, highlighting the evolving trends and growing adoption of these 
+strategies in educational technology. 
+17 
+ 
+ 
+ 
+Figure 2.2: Game Elements Used in Game-Based Learning from 5 Years 
+Recent Paper (Juhari et al., 2020) 
+ 
+Following the framework of F.I.K.H. application, only 7 game elements were 
+implemented which are Challenges, Score, Progress Bar, Leaderboards, 
+Streak Bar, Badges and titles. 
+ 
+●​ Challenges 
+ 
+Challenges in gamification create interactive experiences that test a user’s 
+application of knowledge and creativity. Ehécatl Morales-Trujillo (2020) 
+describes challenges or quests as tasks involving active skill use to reach 
+specific outcomes. These include quizzes, puzzles, and tasks that gradually 
+increase in difficulty, promoting consistent learning and skill growth. Adding 
+quests fosters competence by confronting users with stimulating activities 
+(Adams & Du Preez, 2022). As Gandasari & Mauritsius (2023) explain, these 
+challenges work similarly to game quests by motivating users through 
+rewards like points, badges, or unlockable features. 
+ 
+ 
+18 
+ 
+●​ Score 
+ 
+Scores in gamified systems offer immediate feedback, measuring 
+performance and progress. In education, they help learners track accuracy and 
+mastery of topics. Hamari & Tuunanen (2021) found that score-based systems 
+in mobile learning promote engagement and knowledge retention. They also 
+encourage competition, self-motivation, and sustained attention by rewarding 
+correct answers, task completion, or overcoming challenges. 
+ 
+●​ Leaderboards 
+ 
+Leaderboards visually rank users based on success in tasks or challenges. 
+According to Ferro (2021), they highlight performance levels and encourage 
+improvement. Cui & Yang (2023) suggest that comparing scores motivates 
+users to engage consistently, as leaderboards foster friendly competition, 
+improve performance, and keep learners striving for better results. 
+ 
+●​ Badges & Titles 
+ 
+Badges and titles act as symbolic recognition for accomplishments. Jung & 
+Lee (2021) found that badges boost motivation by making success visible. 
+Titles add status based on cumulative achievements. Teixeira et al. (2020) 
+emphasize that such persistent rewards increase user interaction and 
+commitment, especially in purpose-driven learning environments. They 
+support self-paced progress and sustained engagement. 
+ 
+●​ Streak Bar 
+ 
+Streak bars track consistent use over time, promoting routine and 
+commitment. Based on commitment bias, users are motivated not to break 
+their progress streaks (Gupta & Pathak, 2022). Pereira et al. (2021) note that 
+streaks improve retention and support long-term interaction by reinforcing 
+daily learning habits with visual progress and occasional bonus rewards. 
+ 
+19 
+ 
+●​ Progress Bar 
+ 
+Progress bars provide a visual indicator of learning advancement. They make 
+goals more tangible, reducing cognitive load and motivating task persistence. 
+Santos et al. (2021) report that well-designed progress indicators improve 
+motivation and satisfaction, especially in self-paced settings, by offering 
+feedback and reinforcing achievement through visible milestones. 
+ 
+2.3 ​ Existing Applications 
+ 
+In this section, the existence of other apps with similar characteristics as this 
+project is going to be examined and compared, and the illumination of 
+similarities and differences between them is going to be achieved with 
+reference to their background, scope, importance, and user interface (UI). The 
+current applications that will be drawn in comparison in this section are Deen 
+Quiz, Muslim Kids Educational Games, and Muslim Kids TV. 
+ 
+2.3.1 ​Deen Quiz 
+​  
+Deen Quiz is a mobile phone app that ensures learning and growth of 
+knowledge about Islam by users by participating in a chain of stimulating 
+activities including quizzes. The design of the user interface of Deen Quiz 
+mobile application is shown in figure 2.3. 
+ 
+ 
+Figure 2.3: Deen Quiz User Interfaces 
+20 
+ 
+ 
+The app is aimed at adults, as well as older children and it encompasses a 
+variety of the Islamic knowledge such as the Quran, Hadith, Prophets, Islamic 
+history, and elementary Fiqh. It has multiple choice questions and scoring 
+platforms as well as the difficulty levels and leaderboards that are utilized to 
+create a mood of competition and success. Deen Quiz is a game-based 
+platform that motivates one to keep learning, and it is especially practical for 
+those that seek to strengthen their Islamic knowledge through a 
+straightforward and easy-to-learn interface. It also does not have deep 
+interactive gameplay and graphics rather than game-based platforms such as 
+F.I.K.H. 
+ 
+2.3.2 ​Muslim Kids Educational Games 
+ 
+Muslim Kids Educational Games is an Islamic educational app carefully 
+designed to be used among young children. The user interface design 
+displayed in figure 2.4 shows the key screen of Muslim Kids Educational 
+Games mobile application. 
+ 
+ 
+Figure 2.4: Muslim Kids Educational Games User Interfaces 
+ 
+21 
+ 
+It provides education and entertainment combined since it uses colorful 
+mini-games, puzzles, and animations to teach young children the principles of 
+basic Islam. The app presents the theme about duas of the day, Arabic 
+alphabet, five pillars of Islam, and Islamic etiquette (adab) in an interactive 
+easel manner. It is tailored to fit the learning needs of preschoolers and 
+emerging learners with focus on visual learning and awards; it assists in 
+inculcating Islamic values at a tender age. Whereas it also has the gamified 
+soul of F.I.K.H., its contents are very basic and not centered on systematic 
+topics of Aqidah, Fiqh, or Akhlak 
+ 
+2.3.3​ Muslim Kids TV 
+ 
+Muslim Kids TV is an integrated electronic platform where Islamic teaching 
+materials on kids are available. Figure 2.5 will reflect the user interface 
+design of Muslim Kids TV mobile application. 
+ 
+ 
+Figure 2.5: Muslim Kids TV User Interfaces 
+ 
+The application has cartoons, songs, games, and eBooks which encourage 
+Islamic morals, history and values. It hopes to develop a dominant Islamic 
+identity with its media rich storytelling and interactive experiences, the 
+content is produced in a child friendly and interesting format. However, 
+compared to F.I.K.H., Muslim Kids TV is higher on the entertainment 
+22 
+ 
+spectrum of learning and even though F.I.K.H. is designed around 
+curriculum-oriented game-based learning, it is heavier in its areas of interest 
+in the foundational aspects of Aqidah, Fiqh, Akhlak, and Hadiths. 
+ 
+2.3.4 ​Comparison of Existing Applications 
+ 
+Table 2.5 presents a comprehensive comparison of key features across 
+existing mobile applications relevant to Islamic education and the proposed 
+application of this project, known as the F.I.K.H. (Fun Islamic Knowledge 
+Hub) app. This table highlights the similarities and differences in 
+functionality, user engagement strategies, content delivery, gamification 
+elements, and overall user experience. By evaluating these aspects, the table 
+aims to justify the need for the proposed F.I.K.H. application by showcasing 
+its enhanced features and value-added components designed specifically to 
+improve Islamic learning through a game-based and interactive approach. 
+ 
+Table 2.2: Comparison of Existing Applications 
+Feature Deen Quiz Muslim Kids 
+Educational 
+Games 
+Muslim Kids 
+TV 
+F.I.K.H. (Fun 
+Islamic 
+Knowledge Hub) 
+Target 
+Audience 
+Teens and 
+adults 
+Preschool and 
+primary 
+children 
+Children (3–12 
+years) 
+Learners from all 
+ages group and 
+backgrounds 
+Educational 
+Focus 
+General 
+Islamic 
+knowledge 
+Basic Islamic 
+concepts (duas, 
+adab, pillars) 
+Islamic morals, 
+history, and 
+identity 
+Aqidah, Fiqh, 
+Akhlak, and 
+Hadiths 
+Content 
+Structure 
+Quiz-based, 
+broad-topic 
+questions 
+Mini-games, 
+puzzles, and 
+flashcards 
+Videos, games, 
+songs, eBooks 
+Structured lessons 
+with 3 games and 
+flashcard mode 
+Learning 
+Method 
+Trivia 
+quizzes 
+Game-based 
+learning 
+Edutainment 
+and storytelling 
+Curriculum-based 
+game learning 
+using GDLC 
+Gamification 
+Features 
+Score, 
+levels, 
+leaderboard 
+Rewards, 
+animations, 
+sound effects 
+Interactive 
+media with 
+minimal 
+gamification 
+Leaderboard, 
+streak bar, 
+progress bar, 
+badges, titles 
+Visual & 
+Interactive 
+Design 
+Simple 
+interface, 
+text-focused 
+Colorful, 
+animation-base
+d 
+Rich 
+multimedia 
+design 
+Game-based UI 
+with Islamic 
+23 
+ 
+themes and 
+characters 
+Islamic Studies 
+Integration 
+Light Fiqh, 
+Qur’an, 
+Seerah 
+Basic adab, 
+daily practice 
+Morality, Sirah, 
+values 
+In-depth Aqidah, 
+Fiqh, Akhlak, 
+Hadiths 
+Unique Selling 
+Point (USP) 
+Knowledge 
+testing via 
+quizzes 
+Child-friendly 
+Islamic 
+mini-games 
+Media-rich 
+platform with 
+diverse content 
+Holistic, 
+curriculum-aligne
+d Islamic learning 
+through games 
+Language English Multilingual English, Arabic, 
+Malay 
+English (with 
+Malay titles for 
+badges) 
+Platform Android/iOS Android/iOS Android/iOS + 
+web-based 
+Android/iOS 
+(proposed) 
+ 
+The table is an evaluation of four Islamic applications in terms of audience, 
+content and learning style. Deen Quiz is targeted at teens and adults as well as 
+it teaches general Islamic knowledge in the form of quizzes. Muslim Kids 
+Educational Games and Muslim Kids TV target children of younger age and 
+teach them the rudiments of Islamic values through mini-games and online 
+video materials. 
+ 
+F.I.K.H. stands out as it is a program that covers all the age groups, 
+particularly targeting new Muslims and kids and covers the Aqidah, Fiqh, 
+Akhlak and Hadiths through organized courses and games. It contains more 
+sophisticated gamification elements, such as leaderboards, streak bar, and 
+badges and aims at making Islamic education interesting and rewarding and 
+ensuring it can be followed effortlessly. F.I.K.H is the most complete and 
+interactive learning of all the four. 
+ 
+2.4 ​ Justification on Game Elements and Feature Selection 
+ 
+The purpose of the F.I.K.H. (Fun Islamic Knowledge Hub) application is to 
+modernize Islamic education by making it more accessible, structured, and 
+engaging for users of all ages and backgrounds. The app focuses on three 
+main areas of Islamic knowledge which are Aqidah (creed), Fiqh 
+(jurisprudence), and Akhlak (morality), with Hadith included as an additional 
+24 
+ 
+topic to enrich understanding. These subjects were selected because they 
+provide a strong foundation in belief, practice, and character which is 
+essential for any Muslim, whether young, new to the faith, or rediscovering it. 
+Learning these topics helps individuals develop not only religious knowledge 
+but also spiritual and ethical behavior (Ashimi, 2023; Santoso, 2024). 
+ 
+To support this learning, F.I.K.H. uses Game-Based Learning (GBL) as the 
+core strategy. GBL promotes active participation, improves retention, and 
+makes complex ideas easier to grasp (Nisbet J., 2023; Sabirah K. et al., 2024). 
+The app includes three game types such as board games (Laluan Hijrah), card 
+games (Kotak Fathonah), and puzzle games (Padanan Fikrah). These were 
+chosen because they are simple, suitable for a wide audience, and adaptable 
+to both individual and classroom learning (Nisbet J., 2023). 
+ 
+In addition to GBL, gamification is implemented strictly as game elements to 
+increase motivation and engagement. Elements like scores, badges, 
+leaderboards, streak bars, progress bars, and titles provide visual feedback 
+and a sense of achievement without altering the educational content. These 
+components help track performance, encourage consistency, and foster a 
+sense of reward (Hamari & Tuunanen, 2021; Jung & Lee, 2021; Gupta & 
+Pathak, 2022; Santos et al., 2021). Challenges and quizzes further enhance 
+learning by prompting users to apply their knowledge in increasingly difficult 
+scenarios (Morales-Trujillo, 2020; Adams & Du Preez, 2022). 
+ 
+Compared to existing apps like Deen Quiz, Muslim Kids Educational Games, 
+and Muslim Kids TV, F.I.K.H. provides a more complete and interactive 
+experience. While those apps offer fun and educational content, they often 
+lack features like progress tracking, personalized feedback, or gamified 
+reinforcement. F.I.K.H. addresses these gaps by combining structured Islamic 
+knowledge with motivational game elements, making it both effective and 
+enjoyable (Cui & Yang, 2023; Teixeira et al., 2020). 
+ 
+In conclusion, F.I.K.H. is justified in its approach because it meets today’s 
+digital learning needs while staying rooted in Islamic values. Its thoughtful 
+25 
+ 
+selection of content, game design, and supporting elements ensures a 
+meaningful and motivating learning journey for all. 
+ 
+2.5 ​ Conclusion 
+ 
+To conclude, the F.I.K.H. mobile application brings a fresh and much-needed 
+change to how Islamic knowledge can be learned today. It shows that with the 
+right tools, learning religion does not have to feel boring, confusing, or 
+difficult. Instead, it can be something that feels personal, enjoyable, and 
+motivating. F.I.K.H. creates a space where people of all ages and backgrounds 
+can learn at their own pace, feel supported, and grow in their understanding 
+without fear of judgment or pressure. This application is more than just a tool 
+for studying, it is a new way of learning that respects both the importance of 
+Islamic teachings and the way people learn in today’s digital world. It takes 
+learning out of the old routine and brings it into a space that feels alive and 
+meaningful. By focusing on clear goals and building a learning journey that 
+encourages progress, reflection, and consistency, F.I.K.H. helps learners stay 
+interested and inspired. At its core, F.I.K.H. proves that when faith and 
+technology come together with purpose, it can lead to something powerful. It 
+turns the act of learning into something that is not just useful, but something 
+that truly matters. 
+ 
+ 
+26 
+ 
+CHAPTER 3 
+ 
+ 
+METHODOLOGY 
+ 
+ 
+This chapter has described methodology of the project development process of 
+F.I.K.H. mobile application. In the first part of the paper, the project methodology, 
+six (6) stages of the Game Development Life Cycle (GDLC) were exhaustively 
+described. The second section then gave a summary of the project methodology. The 
+third part dwelled on the architecture of the system in order to reveal the structural 
+design inherent in the smooth operation of FIKH. Not to mention, at the end of this 
+chapter the requirements of the hardware and software needed to create this project 
+were also listed 
+ 
+3.1 ​ Project Methodology (GDLC) 
+ 
+Ramadiani R. et al. (2021) define Game Development Life Cycle as a unique 
+process specifically aimed at supporting characteristics and challenges that 
+game development faces and cannot be effectively managed by the 
+conventional System Development Life Cycle (SDLC). The development of 
+video games, as any other kind of products, is a process that is modelled by 
+Game Development Life Cycle (GDLC). This is as small as how one would 
+approach creating a game, or as large as how to react to a group of developers 
+to create or to certify that a game is technologically up to date, artistically 
+pleasing, and overall functional or useful. According to Dirgantara H.B. and 
+Choiriyati N. (2022), the loosely defined direction of the ISO/IEC 29110 
+standards, following the waterfall model, is problematic to the industry 
+because game development is highly dependent on the agile practices 
+composed of short iterations cycles. GDLC is also linear and 
+milestone-based, being concentrated upon the key stages of making a 
+computer game.  
+ 
+27 
+ 
+The approaches introduced by GDLC are aimed at subdividing the game 
+creation process into more specific phases which are accompanied by the 
+specific targets, clearly defined phases each of them with specific targets and 
+the requirements. The GDLC has four (4) versions and each version has its 
+own stages operating in individual ways in an attempt to bring out the best in 
+the finished product. The different versions of GDLC are concept/design, 
+alpha version, beta version and gold master. The Game Development Life 
+Cycle usually comprises seven stages, although it may slightly change 
+according to the development methodology or framework adhered to. As 
+Dirgantara H.B. and Choiriyati N. (2022) explain, the GDLC tends to have 
+six (6) phases namely initiation, pre production, production, testing, beta, and 
+release. Such phases include primary idea generation, asset construction, 
+system development, trial, external trial, and publication (Dirgantara H.B. and 
+Choiriyati N., 2022). Nonetheless, in this project there were only five (5) 
+phases that were used to complete it, which are initiation, pre-production, 
+production, testing and beta phases, since the mobile application was not 
+deployed thus the gold master or release and post-release phases were not in 
+use and thus they were not vital and were not used. The Game Development 
+Life Cycle illustrated in figure 3.1. 
+ 
+ 
+Figure 3.1: Game Development Life Cycle (Amin F. et al., 2023) 
+ 
+ 
+28 
+ 
+Table 3.1 describes the phases in the Game Development Life Cycle and their 
+respective tasks, showcasing how each phase contributes to building 
+functional game based applications. Detailed explanation about each phase 
+will be provided in their own respective subtopic.  
+ 
+Table 3.1: Brief Description of Each Phases in Game Development Life 
+Cycle (GDLC) 
+Phases of GDLC Description 
+Initiation Ideation, concept art, narrative design, and prototyping 
+ 
+Pre-Production 
+Create detailed blueprints for the game, including gameplay 
+mechanics, level design, character creation, and UI/UX, 
+storyboarding and prototyping. 
+Production Developing assets, coding, level design, and mechanics. 
+Testing Quality assurance, bug fixing, playtesting, and balancing 
+Beta Releasing the game to the market 
+Release  Updates, bug fixes, and additional content 
+ 
+Table 3.1 gives a short description of the six stages of the Game Development 
+Life Cycle. Initiation phase is the stage used to come up with the ideas, 
+creation of concept art and making the first prototypes. Pre-Production 
+involves writing comprehensive designs of the game such as its gameplay 
+programming, character, and level design as well as user interface (UI/UX) 
+design. Production is where the development takes place- this involves 
+making assets, the logic and the development of the game and the game 
+features. Testing also guarantees quality on the game by fixing bugs, 
+balancing the game and playtesting the game. Beta phase is the one in which 
+the game is released to a small number of people to be tested. Last but not 
+least, the Release phase comprises commercial release (final version of the 
+game) and updates and extra content. 
+ 
+ 
+ 
+ 
+ 
+29 
+ 
+Table 3.2: Brief description of Each Version in Game Development Life 
+Cycle (GDLC) 
+Version Objectives Key Activities Outcome 
+Concept/Design Develop game 
+concept 
+Conceptualization, 
+design documentation, 
+use of frameworks 
+Comprehensive game 
+design 
+Alpha Version Develop 
+functional 
+game 
+Initial development, 
+iterative testing, 
+feedback integration 
+Playable version with core 
+features 
+Beta Version Refine and 
+polish game 
+Extensive testing, 
+content completion, 
+user feedback 
+Near-complete, stable 
+version 
+Gold Master Prepare for 
+release 
+Final testing, 
+optimization, release 
+preparation 
+Final version ready for 
+distribution 
+ 
+Table 3.2 explains a detailed process of developing a game in stages starting 
+with the Concept/Design phase where the idea of the game is developed and 
+then written and organized by design frameworks. This is then followed by 
+the Alpha Version which is the creation of a basic functioning version of the 
+game inclusive of basic features and subjected to initial testing and feedback. 
+The Beta Version is the next phase where the game is fine-tuned and polished 
+due to much testing and filling the content and ending up with a much more 
+stable and final-looking state. In the end, the Gold Master stage is about final 
+testing, optimization, and getting ready to release and an end product is 
+created, finally ready to go out. 
+ 
+3.1.1 ​Concept/Design  
+ 
+●​ Initiation Phase 
+ 
+According to Ramadiani R. et al. (2021), the first stage in the Game 
+Development Life Cycle (GDLC) is where the idea for the game is formed. 
+This stage is very important because it sets the direction for the whole project. 
+It includes planning the scope, getting support from others involved, and 
+setting clear goals. Amin F. et al. (2023) explain that this phase begins with a 
+rough idea or concept of the game, including a basic description of how it 
+works. This is when the theme, main purpose, and learning goals of the game 
+30 
+ 
+are brainstormed and discussed. It’s also common to create a Game Design 
+Document (GDD) at this stage, which outlines the game idea and checks if it 
+is possible to build within the available time and resources. This early step is 
+crucial, as it helps avoid confusion, disorganization, and possible risks later in 
+the development. 
+ 
+●​ Pre-production Phase 
+ 
+The pre-production stage is the early phase in the Game Development Life 
+Cycle (GDLC) where raw ideas are developed into clear, workable plans. 
+According to Amin F. et al. (2023), this stage includes planning and reshaping 
+the game idea, writing the Game Design Document (GDD), deciding on the 
+game’s genre, story, and gameplay, and building a prototype to test the 
+concept. It usually starts with brainstorming, where the team works on the 
+game’s core idea, story, art style, mechanics, and who the game is for. 
+Ramadiani R. et al. (2021) also highlight that this stage focuses on developing 
+the game’s concept, its target users, and what makes it stand out. Nash A. 
+(2022) adds that it is also important to check if the idea is practical based on 
+technical needs, budget, and timeline. To test this, teams often create simple 
+versions of the game, known as prototypes. Pre-production also includes 
+selecting the tools and technology, creating basic visuals like concept art or 
+wireframes, and preparing clear documents like the GDD and Technical 
+Design Document (TDD) to help keep all team members on the same page 
+before full development begins. 
+ 
+3.1.2 ​Alpha Version 
+ 
+●​ Production Phase 
+ 
+During the production phase, more intricate plans will be made to make the 
+game concept a reality. Designers create levels, mechanics of gameplay, 
+interfaces, and stories, and make sure the game contains the engaging and 
+consistent experience. As stated by Ramadiani R. et al. (2021), the main 
+concern of the production stage is the establishment of the systems of the 
+game, such as the mechanics of the game, its user interface, etc. The design of 
+31 
+ 
+characters and all the surrounding environments are complete, but a system 
+such as AI behavior, game physics, and progression mechanics are 
+documented. Joint sessions of work in the form of workshops are popular, 
+during which designers, writers, technical leads participate in the idea 
+improvement and solving of possible difficulties. This is an iterative stage, 
+where prototypes and mock-ups can be utilized to evaluate the design 
+concepts and identify ways that it will fit expectations of the players.  
+ 
+●​ Testing Phase 
+ 
+Testing stage is more concerned with assuring quality and compliance of the 
+game with the technical requirements and user experience. The same thing is 
+also mentioned by Sinnatwah, J. D. (2021) who says that another important 
+thing during the testing phase is making the game user-friendly and appealing 
+to the expectations of the target audience. This includes timing the interface, 
+the controls and the general user experience of the game. Playtesting is done 
+on a huge scale by testers to find bugs, glitches, and problems of usability. 
+Paduraru C. et al. (2021) note that identifying and resolving bugs is also the 
+main aim of the testing phase. This involves functional testing, performance 
+testing (to make sure that it will remain stable on the different platforms) as 
+well as compatibility testing. Further, it measures gameplay, in terms of 
+balance, difficulty, and enjoyment. Developers get detailed feedback through 
+testers and require them to go over and over correcting errors that have been 
+given. This will be accomplished by re-testing the game once they have made 
+some changes to it to make sure the new code did not create other bugs (Yu J. 
+et al., 2023). This stage will go on until the game is steady, polished and 
+prepared to launch. 
+ 
+3.1.3 ​Beta Version 
+ 
+●​ Beta Phase 
+ 
+During this step, a Beta Version of the game is released to a small number of 
+testers or the general populace. Galeano I. et al. (2022) argue that the beta 
+phase in the game development life process is a decisive step after the alpha 
+32 
+ 
+one when the game is still tested on the real world by a certain, but not all 
+external audience, receiving feedback and responding to critical problems in 
+order to enhance its features and usability and the overall experience of using 
+the game, preparing to its release on a larger market. Compared to previous 
+tests with the inside of testing, the beta version is typically feature-complete 
+but might include bugs or other gameplay changes. In the Beta Phase, the 
+game is tested in a real-life environment, which gives testers insightful data 
+on how the game performs, is used, and by the players. It is at this phase that 
+developers determine problems that could not be identified in internal testing, 
+like bugs related to specific platforms, server stability (in online games), or 
+gameplay mechanics balance. The information received as responses to the 
+players also assist in adjusting the difficulty, pacing, and features of the game 
+in a bid to create expectations of the audience.  
+ 
+3.1.4 ​Gold Master/Release Version 
+ 
+●​ Release 
+ 
+As it is stated by Amin F. et al. (2023), release stage is the last stage of game 
+development, as it includes the game launch, project documentation, sharing 
+of knowledge, post-mortem, and future maintenance planning, and expansion. 
+Release stage of the GDLC is the period when the game is released to the 
+players. Once all the development is done, such as design, coding, testing as 
+well as error rectification, the game is ready to be rolled out. This part is the 
+end where all the things are completed in order to ensure the game plays and 
+is set out entertaining the masses. Developers make all features to be present 
+and the game is tested once again with the purpose to fix all the issues. After 
+completion of this, the game is then posted on app stores or the games 
+websites where it is downloadable by the players to play. This step also 
+includes post-release monitoring of the game to identify the issues that might 
+occur and implement change, in case it is necessary. 
+ 
+ 
+33 
+ 
+3.2 ​ Summary of Project Methodology 
+ 
+The Game Development Life Cycle is precisely designed to form a game 
+application. It is aimed at solving problems which are not similar to those 
+traditional System Development Life Cycle but which fall into the game 
+industry. GDLC categorizes the development process in phases which have to 
+meet functional, usable and pleasing aspects features. It is composed of 
+Concept/Design, Alpha, Beta and Gold Master phases among which there are 
+six (6) major milestones which are initiation, pre production, production, 
+testing, beta and release. During the development of this project, only five (5) 
+phases of software were performed, which were, initiation, pre production, 
+production, testing and beta but no release phase because there was no 
+deployment of the application on walls. 
+ 
+The initiation stage sets up the initiation of the game idea through the 
+formulation of abstractions, and the formalization of such items as the GDD. 
+In the pre-production the ideas are refined, assessed on what can be done to 
+implement them, and efforts are made to come up with the real prototypes. 
+The production stage mechanics, systems and also game-related assets are 
+developed using successive evaluations to the expected objectives. The 
+testing phase is focused on finding errors, bugs, compatibility problems, 
+functionality and usability testing to make the further work smooth and to 
+improve the overall user experience. Finally, the beta phase ports a fully 
+functional game into a real world situation though in a smaller audience and 
+gathering user feedback to address performance and user interface related 
+issues. Therefore, both of these stages ensure a logical building involving 
+effective development strategy aimed at the realisation of the successful final 
+product, an entertaining game. 
+ 
+ 
+ 
+ 
+34 
+ 
+3.3 ​ System Architecture 
+ 
+System architecture is the entire layout of a system which demonstrates how 
+the various components of the system would interact and it serves as a 
+blueprint and indicates the construction and operation of the application. The 
+system architecture of F.I.K.H. mobile application is depicted in figure 3.2. 
+ 
+ 
+Figure 3.2: System Architecture of FIKH Application 
+35 
+ 
+ 
+The system architecture illustrates the design of a mobile application aimed at 
+enhancing Islamic learning through GBL techniques. The application is built 
+with the user at the center, providing an engaging and interactive platform for 
+all age groups to learn Islamic values and concepts. Users access the system 
+through a mobile application that serves as the main interface. The design of 
+the F.I.K.H. mobile application is user-friendly and engaging. Its user 
+interface was created with Figma, a collaborative design platform that allows 
+quick prototyping and visualization of layouts. These designs were then 
+implemented in Android Studio, the official integrated development 
+environment (IDE) for Android. The user interface serves as the portal for 
+accessing Islamic content, flashcards, games, and gamification features. 
+ 
+The core of the F.I.K.H. application is its Islamic learning modules, which 
+focus on Aqidah, Fiqh, and Akhlak as fundamental fields of knowledge. 
+These modules are presented through both interactive games and revision 
+tools. The flashcard system helps users memorize and revise concepts at their 
+own pace before playing games. The flashcards are divided into four sets such 
+as 20 cards on Aqidah, 20 on Fiqh, 20 on Akhlak, and an additional 50 cards 
+on Hadiths. Hadiths act as an extra module to expand the learning content. 
+ 
+To improve the learning experience, the application combines GBL with 
+consistent gamification elements. While GBL revolves around educational 
+games, gamification adds supporting elements to increase engagement and 
+motivation. Features include leaderboards, badges, titles, challenges, scores, 
+streak bars, and progress bars. Each element encourages users to stay 
+motivated, track progress, and receive immediate feedback. The application 
+offers three main categories of games which are card games, board games, 
+and puzzle games, to suit different interests, focus levels, and skills while 
+reinforcing Islamic concepts in an entertaining way. 
+ 
+The backend of the F.I.K.H. application uses Firebase, a cloud-based 
+database. Firebase manages data such as user progress, scores, identification, 
+flashcard usage, and ranking. This smooth cloud connection ensures data is 
+36 
+ 
+synchronized across sessions, allowing learners to access their materials 
+consistently. It also enables the app to provide a more personalized learning 
+path. By integrating Firebase, the application ensures a secure, fast, and 
+reliable environment, creating a hassle-free experience for learners as they 
+explore and grow their knowledge of Islam. 
+ 
+3.4 ​ Hardware and Software Requirements 
+ 
+The requirements of the hardware and the software needed to develop and run 
+the mobile application in this section are listed also along with the 
+specifications and features. This part is necessary to establish a standardized 
+area of identification, design, development, prototyping and testing that leads 
+to an easier development process as well as better user experience. 
+ 
+3.4.1 ​Hardware Requirements 
+ 
+Table 3.3 presents the hardware specifications that were applied in developing 
+the mobile application. Enhanced and well equipped hardware environment 
+eases the development process and makes it responsive and this ultimately 
+assists in production of quality and successful mobile applications.  
+ 
+Table 3.3: Hardware Requirements 
+Hardware Description Purpose 
+Android 
+Smartphone 
+• Product name: Vivo Y20 
+• Model name:vivo v2043 
+• OS: Android 10, Funtouch 11 
+• Chipset: Mediatek MT6765 
+Helio P35 (12 nm) 
+• CPU: Octa-core (4x2.35 GHz 
+Cortex-A53 & 4x1.8 GHz 
+Cortex-A53) 
+The Android Smartphone was 
+used to assess the overall 
+performance of the developed 
+mobile application during the 
+prototyping and testing phase. 
+ 
+Laptop • Product name: Lenovo 
+ThinkPad X1 Carbon 7th 
+Generation 
+• Processor: Intel(R) Core(TM) 
+i5-8265U CPU @ 1.60GHz   1.80 
+GHz 
+• Installed RAM: 8.00 GB 
+• Window Edition: Windows 10 
+The laptop was used to develop 
+the mobile application, including 
+writing, editing, and compiling 
+code, designing the user 
+interface, and completing project 
+documentation during the 
+identification, design, and 
+development phases. 
+37 
+ 
+Pro 
+ 
+Hardware requirements are essential as they directly affect the effectiveness 
+and performance of the mobile application development process. The main 
+hardware used included an Android smartphone and a laptop, which were 
+utilized for compiling the code and running emulations. These devices 
+supported the development, prototyping, and testing phases by enabling the 
+team to emulate mobile functions and ensure the application performed as 
+intended across different stages. 
+ 
+3.4.2 ​Software Requirements 
+ 
+The following segment defines the software requirements that were used in 
+the design of the F.I.K.H. mobile application. It has tools, platforms and 
+technologies which support the design, development and deployment 
+processes. Such requirements make the application work and achieve the 
+proposed learning outcomes. Table 3.4 illustrates the software specification 
+that was applied in this development of mobile application. 
+ 
+​ Table 3.4: Software Requirements 
+Phases Software Description 
+Initiation 
+ 
+Google Docs Used for overall reporting, including writing 
+the project proposal. 
+Mendeley References 
+Manager 
+References and citations. 
+Design 
+ 
+Draw.io Designing the conceptual maps, methodology 
+phase, and system architecture diagram 
+Canva Designing the storyboard, and a rough look of 
+user interfaces 
+Figma Designing the first draft of user interfaces with 
+interactive button 
+Flaticon Used to source various icons, figures, and 
+graphic elements. 
+Development  
+ 
+Android Studio Initial look of what the project would look like 
+and code editor to write code. 
+38 
+ 
+Firebase Cloud-based service that stores, manages, and 
+retrieves data, user authentication, and real time 
+synchronization 
+​  
+Table 3.4 shows that various software tools were used across different phases. 
+From documentation and design to development tools like Android Studio 
+and Firebase, each supported efficient planning, creative design, and reliable 
+implementation. 
+ 
+ 
+3.5 ​ Conclusion  
+ 
+This chapter presents a reflective and comprehensive development of a 
+mobile application development aimed at facilitating Islamic education for 
+people of all ages through GBL) The development followed the GDLC, 
+covering five phases which are Initiation, Pre-production, Production, 
+Testing, and Beta, with the Gold Master/Release stage omitted as the app has 
+not yet been deployed, which is acceptable for academic projects. The 
+Initiation phase defined the vision and purpose of the app, while 
+Pre-production translated ideas into working designs, prototypes, and 
+documentation such as the GDD. Production focused on developing real 
+game mechanics, UI/UX elements, and assets, followed by Testing, which 
+evaluated technical functions and user experience. The Beta stage enabled 
+real-life feedback to guide improvements before potential release. The system 
+architecture emphasizes user interaction on mobile platforms, integrating 
+Islamic content such as Aqidah, Fiqah, Akhlaq, and Hadith, through 
+flashcards, learning games (card, board, puzzle), and game elements like 
+scores, streak bars, challenges, and leaderboards. Back-end integration with 
+Firebase ensures real-time synchronization and data consistency across 
+devices. Clear hardware and software requirements, along with tools such as 
+Android Studio, Figma, and Firebase, demonstrate a professional and 
+industry-aligned development approach supported by suitable testing device 
+specifications. Overall, the FIKH application was carefully designed and 
+developed using a structured process, integrated Islamic content with 
+39 
+ 
+engaging gamification, and applied professional tools, iterative design 
+improvements, and thorough testing to create a functional, accessible, and 
+user-friendly learning platform that is capable of inspiring long-term interest 
+and meaningful educational growth. 
+40 
+ 
+CHAPTER 4 
+ 
+ 
+RESULT AND DISCUSSIONS 
+ 
+ 
+The chapter reports on the process of development and evaluations of F.I.K.H. (Fun 
+Islamic Knowledge Hub): A Game-Based Learning App Focused on Aqidah, Fiqh, 
+and Akhlak for Learners of All Ages. The tool combines different forms of game to 
+present contents of islamic studies in a more entertaining, reachable and interactive 
+manner. This chapter also discusses the preferred game mechanics and application 
+features, the way the application was developed and designed, and the evaluation 
+testing which was practiced among the users. 
+ 
+4.1 ​ Selected Application Element 
+ 
+In order to develop a positive and feasible learning experience, the most 
+important thing was to figure out beforehand which kinds of games and 
+elements would best fit the implementation of Islamic content. Based on a 
+literature review, educational gaming platform and learner behaviour three (3) 
+games were found to be perfect across all ages because they are very familiar, 
+easy to learn and flexible enough to suit the education purpose. A number of 
+main application elements were chosen and applied in FIKH in order to 
+provide a learning environment that could be described as interactive and 
+engaging. They were motivated by gamification strategies and best practices 
+used in education practices and were first used to encourage student 
+motivation, retention, and user experience. 
+ 
+4.1.1 ​Type of Games 
+ 
+Three (3) primary games were integrated into the application to support 
+learning through gameplay. Which are Laluan Hijrah, Kotak Fathonah and 
+Padanan Fikrah, with each game assigned to each main area in islamic 
+studies, Fiqh, Aqidah and Akhlak. 
+41 
+ 
+ 
+●​ Laluan Hijrah (adapted from Snake and Ladder): 
+ 
+Laluan Hijrah is a snakes and ladder type of game with which Fiqh (Islamic 
+jurisprudence) is learned interactively in F.I.K.H. application. The name is 
+interpreted as the Path of Migration, which is the spiritual and practical 
+pathway of a Muslim person on the way to righteousness as the Prophet 
+(PBUH) migrated Makkah into Madinah. The situation is simulated in a game 
+board through which players can move around and experience ups and downs 
+in terms of decision-making and outcomes in Islamic practice. It indicates the 
+very way through which nothing can be learned without following a gradual 
+path of knowledge, discipline and honest effort when it comes to the 
+utilization of Fiqh. 
+ 
+Table 4.1: Game Mechanics Overview – Laluan Hijrah 
+Component Description 
+Dice Roll The player rolls a virtual dice, receiving a value from 1 to 6. 
+Initial 
+Movement 
+The rolled number determines how many steps the player moves on the 
+board. 
+Question Prompt After moving, a random islamic question is displayed to the player. 
+Correct Answer The player moves an additional 3 steps forward and gains 5 points. 
+Incorrect 
+Answer 
+The player reverses 3 steps and loses 3 points. 
+Ladder Position If a player lands on a ladder tile, they are advanced further instantly. 
+Snake Position Landing on a snake tile causes the player to fall back multiple steps. 
+Objective Reach the final step of the board with the highest possible score. 
+ 
+ 
+Table 4.1.1. indicates the overview game mechanics of Laluan Hijrah. Players 
+start by rolling a virtual dice in this game and values of 1 to 6 are created, 
+which is used to make a number of steps forward on the board. When landing 
+on a new position, an Islamic question is asked randomly. When the player 
+correctly answers a question, the player is given three (3) more steps in the 
+42 
+ 
+front and five (5) points, which further entices the player to learn and move 
+forward. But a wrong answer will make the player roll three (3) steps 
+backward and forfeit three (3) points, also adding a slight challenge to boost 
+the learning process due to responsibility.  
+ 
+Ladders and snakes, which are a traditional element of board, are also present 
+in the game. When the player lands on a ladder, the player is automatically 
+moved forward, which is like a positive reinforcement. Landing on a snake, 
+on the other hand, will pull the player back several spaces as a sign of setback 
+caused by wrong moves or knowledge deficits. The general purpose of 
+Laluan Hijrah is to be able to get to the last square of the board and earn as 
+many points as needed. The game is a successful concept that has combined 
+religion content and traditional game playing models to enhance 
+entertainment and educational work to the learners. 
+ 
+​ Table 4.2: Visual Feedback in Laluan Hijrah 
+Condition Visual Feedback 
+ 
+ 
+player steps on a snake 
+ 
+ 
+ 
+player steps on a ladder 
+ 
+ 
+ 
+player answers a question 
+correctly 
+ 
+43 
+ 
+ 
+ 
+player answers a question 
+incorrectly 
+ 
+ 
+Table 4.2 shows visual feedback implemented in Laluan Hijrah. Whenever 
+the player interacts with these special steps or answers a question, a figure is 
+displayed on the right side of the screen for three (3) seconds to provide 
+immediate visual feedback. 
+ 
+●​ Kotak Fathonah (inspired by Bingo): 
+ 
+Kotak Fathonah is a Bingo-based game that was implemented in F.I.K.H. 
+mobile application that helps in educating Aqidah in an interactive 
+game-based learning experience. Its name translates to Box of Wisdom, or the 
+contemplative and tactical form of playing of the game as well as the Islamic 
+knowledge that Wise is all about. 
+ 
+Table 4.3: Game Mechanics Overview – Kotak Fathonah 
+Component Description 
+Grid Setup Players are allowed to arrange numbers 1 to 25 within a 5x5 grid 
+manually. 
+Number Roll A random number between 1 and 25 is drawn by the system. 
+Question Prompt A random main islamic studies-related question tied to that number is 
+displayed. 
+Correct Answer The box containing that number is highlighted in green. 
+Incorrect Answer The box remains unmarked. 
+Winning Condition The player must complete one full horizontal or vertical line of green 
+boxes. 
+Mode Can be played in single-player or two-player (competitive turn-based) 
+mode. 
+​ ​  
+44 
+ 
+Table 4..3 displays the overall mechanics of the game of Kotak Fathonah. 
+Such users start with a grid with numbers running between 1 and 25 placed 
+wherever they like on the grid. In every game turn the user will roll randomly 
+a number between 1 and 25. A random question based on islamic studies will 
+then be rolled out relating to the number. Once the user is right then the box 
+with that number becomes green. When the question is not answered 
+correctly the box remains unmarked. The aim is to fill a whole line either 
+horizontally or vertically with designated (green) squares. This form 
+embraces an aspect of strategy, memory and repetition, in that the players 
+seek to strike winning combinations with strategic knowledge and chance. 
+ 
+●​ Padanan Fikrah (inspired by memory matching) 
+ 
+Padanan Fikrah is a memory-match game that aims at reinforcing the 
+knowledge of Akhlak (morality and ethics) in F.I.K.H. application. Its name is 
+Mismatch of thoughts which means the reflective fit between knowledge and 
+behavior. Gamers choose important words and connect them with their 
+definitions or examples, supporting such values as honesty, compassion and 
+humility. Besides for the development of memory skills, this game is 
+designed to instill good character traits in all players who must repeat the 
+process through the provided fun and reflective learning process. 
+ 
+Table 4.4: Game Mechanics Overview – Padanan Fikrah 
+Component Description 
+Grid Layout A 3x4 grid containing hidden card pairs 
+Memorization Phase 30 seconds to view and memorize card positions 
+Card Matching Players flip two cards; if matched, they stay face up 
+Correct Pair Player earns 10 points 
+Incorrect Pair Cards are flipped back down; player loses 3 points 
+Completion Condition Game ends when all pairs are successfully matched 
+Learning Strategy Enhances memory, pattern recognition, and attention 
+ 
+45 
+ 
+Table 4.4 displays the overview of game mechanics of memory match in 
+F.I.K.H. app. The game's grid is 3x4 squares and has pairs of hidden cards 
+with an Islamic motif. In the beginning, the players are provided with 30 
+seconds to look at the position of the cards and memorize them. In an attempt 
+to get pairs, they turn over two cards simultaneously when playing the game. 
+In case cards picked are of the same type, then they stay up and the player 
+gets 10 points. In the event of the cards not matching the cards are turned face 
+down and the player loses three (3) scores. The game can proceed up until all 
+the card pairs have been correctly matched.  
+ 
+This game is not only fun to learn, memory, and focus, and pattern 
+recognition skills can be enhanced as well. Memory games such as Padanan 
+Fikrah based on cognitive load theory and the principles of dual coding can 
+boost memory retention because of involvement of visual and verbal 
+processing streams. In an Islamic educational setting though, this form is both 
+entertaining and instructive to reinforce important instruction. 
+ 
+The inclusion of Laluan Hijrah, Kotak Fathonah, and Padanan Fikrah in the 
+FIKH application was not to include entertainment only but to increase the 
+knowledge of the users of the Islamic principles in the forms of high-interest 
+learning exercises. All the games have a different but complementary 
+instructional goal, which accords with the present learning theories and 
+Islamic morals. 
+ 
+Laluan Hijrah reflects the spiritual experience of a Muslim in the form of a 
+game format election between chance and morality. Right and wrong answers 
+to questions of the Islam faith bring progress or failures to encourage 
+thoughtfulness and responsibility. The practice of dice rolls, instant feedback, 
+and scoring corrections introduces a degree of excitement and further 
+supports the main teachings by actions. Spaced repetition and reward-based 
+mechanics enhance memory and attention as well as engagement among the 
+students as validated by Abdullah and Razak (2021). 
+ 
+46 
+ 
+Just like Bingo, Kotak Fathonah is a number game where number strategy is 
+paired with Islamic quizzes aimed at boosting critical thinking and memory. 
+The randomized number draws create an even challenge, and the correct 
+answers create some visual response to check learning. Abdullah and Razak 
+(2021) on the other hand point out that a well-balanced difficulty in learning 
+games is a lot more efficient in increasing levels of focus and retention among 
+young learners. 
+ 
+Padanan Fikrah is a visual matching game to promote visual memory, pattern 
+recognition and short term memory reinforced by Islamic theme content. The 
+learning process is made engaging and educational since a timed 
+memorization phase is also followed by the strategy to match the cards to 
+make them remember and learn how to concentrate. 
+ 
+Laluan Hijrah, Kotak Fathonah and Padanan Fikrah, when combined, offer 
+quite a lot of learning preferences. Laluan Hijrah is popular among those 
+learners, who prefer sequential and reflective assignments. Kotak Fathonah 
+aids those learners who are analytical and visual learners. In the meantime, 
+Padanan Fikrah interacts with people of excellent visual memory and detail 
+orientedness. When combined, they form a multimodal learning experience 
+that will encourage more in-depth learning, sustained engagement and even 
+enjoyment of Islamic learning. 
+ 
+Table 4.5 shows the comparison of the integrated games within the F.I.K.H. 
+(Fun Islamic Knowledge Hub) application in terms of various essential game 
+design and learning elements. This comparative overview helps to illustrate 
+how each game in the FIKH app is intentionally crafted to support Islamic 
+learning in an engaging, interactive, and pedagogically sound manner. 
+ 
+Table 4.5: Comparison Table of Games 
+Feature Laluan Hijrah Kotak Fathonah Padanan Fikrah 
+Game 
+Inspiration 
+Snake & Ladder Bingo Memory Match 
+47 
+ 
+Core Gameplay Dice-based 
+movement with 
+Q&A 
+Grid-based number 
+selection with Q&A 
+Card matching with 
+memorization and 
+scoring 
+Learning 
+Strategy 
+Moral reflection, 
+spaced repetition 
+Strategic thinking, 
+active recall 
+Visual memory, pattern 
+recognition 
+Player 
+Interaction 
+Single-player, 
+turn-based 
+Single or two-player Single-player 
+Win Condition Reach final tile 
+with high score 
+Complete a line of 
+correct answers 
+Match all pairs with 
+positive score 
+Feedback 
+System 
+Score and 
+movement changes 
+per answer 
+Grid marking based 
+on accuracy 
+Cards stay 
+flipped/move score 
+accordingly 
+Replayability 
+Factor 
+High – randomness 
+of dice and 
+positions 
+High – customizable 
+grid and questions 
+High – different card 
+arrangements 
+Educational 
+Value 
+Moral consequence 
+modeling, 
+repetition 
+Analytical thinking 
+and strategy 
+Memory training, 
+Islamic content recall 
+ 
+4.1.2 ​Game Based Elements 
+ 
+To support motivation, consistency, and effective knowledge reinforcement, 
+FIKH integrates a range of gamified components designed to enrich the 
+Islamic learning experience for users from all age groups and backgrounds. 
+ 
+●​ Leaderboards 
+ 
+Show cumulative real-time rankings using points to create healthy 
+competition with the goal of propelling the users to do better by gauging their 
+performance against others. 
+ 
+●​ Scoring System 
+ 
+Give scores on every correct answer, positive engagements in the F.I.K.H 
+application. Score accumulation leads toward leaderboard positions and are 
+added to unlock badges and learning titles which solidify a sense of 
+accomplishment. 
+48 
+ 
+ 
+●​ Challenges 
+ 
+Comes in a different way such as quizzes and daily tasks. In daily tasks, 
+introduce a rundown of rotating daily tasks. It is a form of hidayah to the 
+muslims users since it actually contains the activities that are to do with 
+islamic way. Meanwhile, quizzes presented in the game itself as part of the 
+game mechanics. 
+ 
+●​ Player Titles 
+ 
+Assign learning titles depending on the sum of score acquired. These titles are 
+like motivation levels, an indicator of learning achievement and level. 
+ 
+Table 4.6: Details Conditions on Player’s Title 
+Title Score Sub-Title Image Meaning/Purpose 
+Pemula 0-49 Purity Novice I 
+ 
+Beginner – just 
+getting started 
+50-99 Purity Novice II 
+ 
+100-149 Purity Novice III 
+ 
+Pelajar 
+Rajin 
+150-299 Worship Seeker I 
+ 
+Diligent Student – 
+showing effort 
+49 
+ 
+300-449 Worship Seeker II 
+ 
+450-599 Worship Seeker 
+III 
+ 
+Pelajar 
+Bijak 
+600-799 Fiqh Student I 
+ 
+Smart Learner – 
+consistent correct 
+answers 
+800-999 Fiqh Student II 
+ 
+1000-1199 Fiqh Student III 
+ 
+Ustaz 
+Muda 
+1200 – 
+1599 
+Knowledge 
+Disciple I 
+ 
+Young Scholar – 
+demonstrating 
+understanding 
+1600-1999 Knowledge 
+Disciple II 
+ 
+2000-2399 Knowledge 
+Disciple III 
+ 
+50 
+ 
+Penjelaja
+h Ilmu 
+2400 – 
+2899 
+Junior Faqih I 
+ 
+Knowledge 
+Explorer – curious 
+and advanced 
+learner 
+2900 – 
+3399 
+Junior Faqih II 
+ 
+3400 – 
+3999 
+Junior Faqih III 
+ 
+Pendakwa
+h 
+Harapan 
+4000 – 
+4999 
+Guardian of Deen 
+I 
+ 
+Hopeful Da’i – 
+model learner, 
+excellent 
+knowledge 
+5000-6499 Guardian of Deen 
+II 
+ 
+6500+ Guardian of Deen 
+III 
+ 
+ 
+ 
+●​ Badges 
+ 
+Badges refer to virtual markers or icons awarded to users as a form of 
+recognition for their success, progress, or specific achievements within a 
+system. They serve as a visual reward mechanism, commonly used in 
+learning platforms and gamified environments to encourage motivation, 
+celebrate accomplishments, and provide clear feedback on progression. In the 
+context of the F.I.K.H. application, badges are thoughtfully designed and 
+51 
+ 
+categorized to reflect different aspects of user engagement and development. 
+They are divided into three main categories which are learning milestones, 
+game play achievements, habits and engagements badges 
+ 
+A.​ Learning Milestones: 
+ 
+Learning Milestone Badges are awarded to a user when they have achieved a 
+certain learning goal or have reached a significant moment of their 
+educational experience. For example, passed a lesson, mastered a skill or 
+passed a quiz with maximum marks. These badges can record progress, 
+encourage learners and the learning experience seems fun and pleasant. 
+ 
+Table 4.7: Details Conditions on Player Badges (Learning Milestones) 
+Badges Name How to Earn Badges Logo 
+Penakluk Laluan Hijrah Score 100% accuracy in Laluan 
+Hijah game thrice 
+ 
+Cendekiawan Bijaksana Score 100% accuracy in Kotak 
+Fathonah game thrice 
+ 
+Ingatan Emas Score 100% accuracy in 
+Padanan Fikrah game five times 
+ 
+Pelita Ummah Earned Penjelajah Hijrah, 
+Cendekiawan Bijaksana, and 
+Ingatan Emas badges 
+ 
+ 
+ 
+ 
+ 
+52 
+ 
+B.​ Gameplay Achievements 
+ 
+Gameplay Achievement Badges are awarded by excelling in the game related 
+factors of a platform. Examples of these may be victory in a game, passing a 
+level without failure or scoring high. Achievements keep players motivated, 
+add excitement, and encourage them to explore more of the game. 
+ 
+​ Table 4.8: Details Conditions on Player Badges (Gameplay Achievements) 
+Badges Name How to Earn Badges Logo 
+Penjelajah  Hijrah Win 10 rounds of Laluan Hijrah 
+game 
+ 
+Khalifah Fathonah Win 10 Kotak Fathonah game 
+ 
+Padanan Arif Win 20 Padanan Fikrah game 
+ 
+Mujahid Teratas Reaches number one (1) in 
+leaderboard for the first time 
+ 
+ 
+C.​ Habits and Engagements 
+ 
+The Habit & Engagement Badges are awarded to users who can interact 
+regularly with the platform or develop good routines over time. Any of these 
+include making daily log-ins, frequent tasks, participating in challenges, or 
+discovering several app features. These pins emphasize extended service, 
+reliability and full engagement. 
+ 
+53 
+ 
+​ Table 4.9: Details Conditions on Player Badges (Habits and Engagements) 
+Badges Name How to Earn Badges Logo 
+Rajin Login Log in 7 days in a row 
+ 
+Pemain Setia Use the app for 30 days total 
+ 
+Pahlawan Sunnah Earned Penjelajah Hijrah, 
+Cendekiawan Bijaksana, Ingatan 
+Emas, Penakluk laluan hijrah, 
+Khalifah Fathonah and Padanan 
+Arif  
+Hafiz Hikmah Complete all the flashcard for all 
+topics 
+ 
+ 
+●​ Progress Bars 
+ 
+Progress is a visual representation used to show how much progress has the 
+user made. It motivates them to complete tasks and gives a clear sense of 
+achievement. It supports goal-setting, engagement, and encourages 
+consistency in learning. 
+ 
+●​ Streak Bar 
+ 
+A seven-day streak bar on the home screen highlights consecutive daily 
+logins. Completing a full week rewards bonus points. Missing a day resets the 
+streak, encouraging habit formation and continuous interaction with the app. 
+ 
+These elements transform Islamic learning into a dynamic, engaging 
+experience tailored to the cognitive and emotional needs of learners from all 
+age groups. Users may feel more involved and inclusive with the application 
+54 
+ 
+as these elements track their activities. By that means, these game elements 
+make the app seem more interactive and fun to play. 
+ 
+4.1.3 ​Applied Game Mechanics 
+ 
+All the games included in FIKH were elaborately developed and designed 
+based on central pillars of gamification that draw on the structure of GBL. 
+These mechanics were also added with the intent both on increasing 
+enjoyment but also improving learning results via creating significant 
+interaction, duplication, and positive feedback. The following components in 
+table 4.3.1 were implemented across all games. 
+ 
+Table 4.10: Applied Game Mechanics  
+Element Description 
+Progression Learners move forward in the game by answering questions correctly. 
+This structured advancement helps them track their improvement and 
+encourages consistent participation. 
+Instant 
+Feedback 
+The app provides immediate feedback, both visual and textual after 
+each response. This helps learners quickly identify mistakes and 
+reinforce correct understanding in real time 
+Rewards Points are awarded for correct answers, contributing to overall scores. 
+These scores unlock badges and titles that act as rewards, recognizing 
+achievement and encouraging effort. 
+Challenge & 
+Chance 
+Elements such as dice rolls in Laluan Hijrah and number draws in 
+Kotak Fathonah introduce randomness. This unpredictability keeps 
+gameplay exciting while promoting strategic thinking. 
+ 
+These mechanics were carefully chosen so as to make Islamic learning more 
+enjoyable and efficient mixing up repetition, challenge and fun. They promote 
+steady communication and promote the cognitive/emotional growth of users 
+via motivation through games 
+ 
+ 
+ 
+ 
+ 
+55 
+ 
+4.2 ​ Application Development Process 
+ 
+The F.I.K.H. mobile application was developed as an educational platform for 
+all age groups and different backgrounds. It was built using Java in Android 
+Studio for native Android development. Android Studio allowed efficient 
+coding, real-time testing, and streamlined debugging throughout 
+development. For the backend, the app uses Firebase to provide scalable and 
+real-time services. The Firebase Realtime Database stores dynamic user data 
+such as profiles, quiz scores, progress, and preferences. Real-time 
+synchronization ensures data is always consistent across devices. In addition, 
+Firebase Authentication manages secure login and registration through email 
+and password.  
+ 
+During the early development stages, special focus was given to UI/UX 
+design. Canva and Figma were used to create wireframes, visual drafts, and 
+layout prototypes. These tools supported iterative design, feedback 
+incorporation, and team collaboration. Canva was used for creating colorful 
+educational visuals, while Figma helped build interactive prototypes and 
+responsive layouts. Resources from Flaticon such as icons, badges, and 
+graphics were integrated to create a vibrant and playful interface. These 
+graphic elements support navigation, reward systems, and in-game 
+achievements to help boost motivation. 
+ 
+The final design of the FIKH Mobile Application combines robust backend 
+technology with thoughtful UI/UX design. Firebase ensures real-time data 
+handling and secure authentication. Canva, Figma, and Flaticon contribute to 
+both the aesthetic and functional aspects of the design. The result is a 
+comprehensive, reliable, and enjoyable educational tool for users of all ages 
+and different backgrounds. 
+ 
+ 
+ 
+ 
+56 
+ 
+4.2.1 ​User Interface (UI) and Experience (UX) Design 
+ 
+The design was planned to be interactive, user‑friendly, colorful, and 
+engaging for users of all ages. It focuses on creating a visual experience that 
+sparks curiosity and encourages exploration. Bright colors, playful 
+illustrations, and intuitive navigation make the interface welcoming and easy 
+to use. Large buttons, clear icons, and simple animations create a lively 
+atmosphere that captures attention and supports learning. These design 
+choices were intentionally applied in the draft to achieve the goal of making 
+educational content enjoyable and approachable. 
+ 
+●​ First Draft UI/UX Design of FIKH in Canva: 
+ 
+To ensure that the FIKH application is both user-friendly and visually 
+appealing to all age groups, the UI design process began with initial drafts 
+created in Canva, a graphic design platform known for its simplicity and 
+accessibility. Canva was used to sketch out the early visual ideas and layout 
+arrangements in a quick and intuitive way. These initial concepts helped 
+guide the overall design direction before moving into more advanced tools. 
+ 
+57 
+ 
+ 
+Figure 4.1: First Draft in Canva 
+ 
+The first draft of FIKH features a simple, approachable design aimed at easy 
+use. A soft color scheme of yellow and beige creates a warm and welcoming 
+feel. Clear typography and helpful icons support understanding and reduce 
+cognitive load. Each screen focuses on one main function, making navigation 
+straightforward and focused. The design blends modern interface elements 
+with subtle Islamic themes, including traditional patterns in the background. 
+Topics are organized around the three (3) main areas of Islamic studies which 
+are Akidah, Fiqh, and Akhlak, ensuring alignment with the educational goals. 
+To encourage engagement, a point system and leaderboard introduce light 
+gamification, helping maintain interest while supporting learning. Overall, 
+this draft provides a user-friendly, culturally relevant environment suitable for 
+all ages. 
+ 
+ 
+ 
+ 
+58 
+ 
+●​ Second Draft UI/UX Design of FIKH in Figma: 
+ 
+The design process then moved to Figma, an online tool used to create app 
+designs and prototypes. Figma made it easier to plan how each screen would 
+look and function, including the layout, buttons, colors, and text styles, 
+without writing any code. This early design stage allowed quick testing and 
+improvement of ideas through personal reviews, feedback from others, and 
+checking overall usability. It also helped visualize how users would move 
+through the app, such as login transitions, game selection menus, and in‑game 
+interactions, before the actual coding began. 
+​  
+ 
+Figure 4.2: Second Draft in Figma 
+ 
+The second draft of FIKH introduces a modern, colorful, and interactive 
+interface designed to engage users of all ages. A bright palette of blue, 
+orange, green, and pink creates a cheerful, game-like atmosphere rather than a 
+formal learning tool. Cartoon-style illustrations and icons give the app a 
+friendly look, helping users easily recognize and navigate content. The 
+interface is clear and intuitive, with simple navigation from sign-up to the 
+59 
+ 
+home page and topic modules. Large buttons and consistent icons guide users 
+without relying heavily on text instructions. Game-based elements such as 
+leaderboards, badges, and daily tasks motivate users to stay engaged. Progress 
+indicators show completed modules, helping users track their achievements. 
+Overall, this version offers a cleaner layout, balanced spacing, and a 
+well-organized structure that makes mobile learning both effective and 
+appealing, especially for younger audiences. 
+ 
+●​ Finalized Design in Android Studio: 
+ 
+Once the wireframes and high‑fidelity mockups were finalized in Figma, they 
+were converted into functional layouts in Android Studio. The UI components 
+were built using XML for layout structure and Java for backend logic. Every 
+detail such as button placement, image sizing, and font styling, was carefully 
+recreated to match the Figma designs. Special attention was given to using 
+vibrant Islamic‑themed colors, rounded card elements, and user‑friendly font 
+sizes to ensure both accessibility and visual appeal. Icons and illustrations, 
+including avatars and game assets, were designed to fit the FIKH theme, 
+creating a consistent visual identity throughout the app. This structured 
+approach bridged the gap between concept and execution, resulting in a 
+smooth and intuitive user experience. 
+ 
+60 
+ 
+ 
+Figure 4.3: Finalized Design in Android Studio 
+ 
+The FIKH (Fun Islamic Knowledge Hub) mobile application features a 
+vibrant and user‑friendly interface designed to make Islamic education 
+engaging and interactive. The layout follows an intuitive flow, starting from a 
+welcoming splash screen to a clean login and registration interface, ensuring 
+smooth navigation and a distraction‑free learning experience. The design 
+emphasizes accessibility, gamification, and structured educational content that 
+is easy to follow. 
+ 
+The theme is bright and cheerful, using vivid colors such as blue, orange, 
+green, and purple to create a fun yet purposeful atmosphere. Each topic Fiqh, 
+Aqidah, Akhlak, and Hadith, is color‑coded to help recognition and memory 
+retention. These colors enhance visual appeal, improve engagement, and 
+support effective learning. The interface also incorporates interactive 
+flashcards, rounded icons, and game‑like animations to create a lively and 
+motivating environment. 
+ 
+61 
+ 
+Conceptually, the app blends traditional Islamic learning with modern 
+gamification. Flashcards aid understanding, while leaderboards, badges, 
+streak bars, and titles track progress and provide motivation. Titles and 
+badges mark milestones, giving users a sense of achievement. Leaderboards 
+and dashboards encourage friendly competition, while Game Results screens 
+offer uplifting feedback. Overall, FIKH balances faith‑based content with 
+modern design, making learning enjoyable and meaningful. 
+ 
+Key UI Screens: 
+ 
+●​ Overlay/Login/Register Page  
+ 
+ 
+Figure 4.4: Overlay/Login/Register Page 
+ 
+The Welcome Page acts as the app’s entry point, showing a full-screen splash 
+image with minimal UI. After a short delay, a "Tap Anywhere to Continue" 
+prompt appears alongside rotating Islamic Hadiths. Tapping the screen 
+smoothly transitions the user to the Login Page. 
+ 
+62 
+ 
+The Login Page features a clean interface with input fields for email and 
+password, a green login button, a "Sign Up" link, and a Google Sign-In 
+option. Successful login redirects users to the Home Page. 
+ 
+The Sign-Up Page allows new users to create an account by entering personal 
+details like name, email, password, and birthday, along with selecting a 
+profile picture. Input validation ensures data accuracy. Upon successful  
+registration, users redirect to the Home Page. 
+ 
+●​ Home Page/Task Dialog Fragment  
+​  
+ 
+Figure 4.5: Home Page/Task Dialog Fragment 
+ 
+The Home Page acts as the main dashboard, showing the user’s profile 
+picture, daily streak tracker, current score (medals), and rank (trophies). It 
+offers two main learning options: "Play" for topic-based activities and 
+"Flashcard" for focused reviews. Navigation is handled by a bottom 
+navigation bar, and a note button opens the Task Page. User actions include 
+sound feedback, and real-time data like streaks and scores are synced with 
+Firebase. 
+63 
+ 
+The Task Page appears as a pop-up window with a motivational title and daily 
+verse. It displays three rotating tasks pulled from a text file, with a system 
+that prevents repeat tasks. Completed tasks trigger a smooth animation and 
+are tracked using SharedPreferences, ensuring progress stays consistent 
+between sessions. 
+ 
+●​ Topic Page/Game Interface  
+ 
+ 
+Figure 4.6: Topic Page/Game Interface  
+ 
+The Topic Page serves as the main UI hub for navigating different learning 
+modules. Topics are displayed as interactive cards with clear visuals and 
+responsive touch interactions. The layout is clean and user-friendly, using 
+slide animations for smooth transitions between screens. A consistent visual 
+hierarchy, intuitive icons, and clear navigation cues help users move through 
+the app easily while maintaining a cohesive and attractive design. 
+ 
+The Laluan Hijrah interface adopts a board game–style layout with a 10x10 
+grid of vibrant tiles, animated dice, and clear positional indicators. Smooth 
+transitions, visual highlights, and a structured layout enhance clarity and user 
+engagement. The design communicates progress through visual cues and 
+maintains a lively look that aligns with the app’s theme. 
+ 
+64 
+ 
+The Kotak Fathonah interface features a 5x5 grid with dynamic highlighting 
+and roulette-style animations that capture user attention. Color coding and 
+iconography provide clear visual feedback, while a grid-locking effect 
+ensures a tidy, organized interaction flow. The overall layout is simple, 
+responsive, and visually engaging. 
+ 
+The Padanan Fikrah interface uses a card-matching 4x3 grid layout with flip 
+animations and soft transitions that support user focus. A visually integrated 
+countdown timer and distinct icons and colors help users differentiate cards. 
+Elements such as score, moves, and timer are arranged strategically for clarity 
+without overwhelming the screen. Each interface emphasizes playful 
+aesthetics balanced with clear usability. 
+ 
+●​ Profile/View Profile/Edit Profile Page 
+ 
+ 
+      Figure 4.7: Profile/View Profile/Edit Profile Page 
+ 
+The Profile Page gives users an overview of their account, showing their 
+profile picture, score (medals), and rank (trophies). It includes buttons to 
+access Details, Badges, and Titles sections. The layout is clean, with smooth 
+65 
+ 
+slide transitions and consistent navigation. The profile picture updates based 
+on the selected avatar, and all data is synced in real-time with Firebase. 
+The View Profile Page displays key user info such as name, email, birthday, 
+profile picture, and achievements. Users can edit their profile or log out 
+directly from this screen. It includes transition animations, Firebase 
+integration for real-time updates, and error handling for smooth operation. 
+The Edit Profile Page lets users update their profile with editable fields for 
+name, email, and birthday (with a date picker). It features a scrollable avatar 
+selection with 19 choices, as well as options to change passwords or delete 
+the account. The activity includes input validation, confirmation dialogs, 
+visual feedback, and error handling for a reliable user experience. 
+ 
+●​ Leaderboard/Badges/Titles Page 
+ 
+ 
+Figure 4.8: Leaderboard/Badges/Titles Page 
+ 
+The Leaderboard Page displays user rankings in a podium-style layout for the 
+top three, followed by a scrollable list of other users with their name, profile 
+picture, score, and rank. The design is clean and competitive, with smooth 
+66 
+ 
+animations and real-time Firebase updates to reflect score changes and rank 
+adjustments. 
+ 
+The Badges page features a clean, grid-based layout with a 3-column 
+structure that efficiently displays all available badges. At the top, there's a 
+simple header with a back button and "Badges" title. The main content area 
+uses a ScrollView containing a GridLayout that dynamically populates badge 
+items. Each badge is presented in a card-like format within its grid cell, with 
+proper margins and spacing for visual separation. Unlocked badges are 
+displayed as colorful, square images with the badge name below them. When 
+users clicked on unlocked badges, a tooltip appeared showing congratulatory 
+text about how they earned the badge. Locked badges, on the other hand, 
+appear as gray text showing the badge name followed by the user's current 
+progress toward unlocking it. Clicked on the locked badges shows a tooltip 
+with the requirements needed to unlock them. 
+ 
+The Titles page follows a similar design philosophy but with a more 
+structured approach that emphasizes progression. The page is divided into 
+two main sections which are a progress tracking section at the top and a titles 
+grid below. The progress section displays the user's current level, next level 
+target, a visual progress bar showing advancement toward the next level, 
+current score progress, and the exact score needed to reach the next level. The 
+titles grid uses the same 3-column layout as the badges page, but with a 
+different visual treatment. Unlocked titles appear as distinctive title images 
+that represent different achievement levels. These images are displayed at full 
+column width to emphasize their importance as status symbols. Locked titles 
+show as gray text with the title name and the score range required to unlock 
+them Both unlocked and locked titles have clicked tooltips that provide 
+context about the user's achievement or what's needed to progress further. 
+ 
+ 
+ 
+ 
+ 
+67 
+ 
+●​ Flashcard/View Card Page/Enlarge Card View 
+ 
+ 
+Figure 4.9: Flashcard/View Card Page/Enlarge Card View 
+ 
+The Main Flashcard Page (FlashcardActivity) serves as the central UI hub for 
+accessing flashcard topics. It uses a soft beige background (#F5F5DC) to 
+create a calm and neutral look. At the top, a simple toolbar provides a back 
+button and the title “Flashcards.” Below this, four large topic cards are 
+arranged in a 2×2 grid with distinct color themes, purple, orange, green, and 
+blue, each featuring clear icons for quick recognition. 
+ 
+Each Individual Flashcard Topic Page follows a consistent layout while 
+maintaining a unique color theme. A back button is placed at the top left, and 
+the topic title is centered for clarity. A horizontal progress bar at the top 
+visually indicates completion. Flashcards are presented in a clean two‑column 
+grid, with smooth animations that provide responsive feedback when cards 
+are interacted with. 
+ 
+When a card is tapped, it opens into an Enlarged Card View with a dimmed 
+background, drawing focus to the content. A scale‑up and 3D flip animation 
+enhance the experience, creating a sense of depth and interactivity. The 
+68 
+ 
+design allows swiping between cards and uses consistent transitions for a 
+fluid feel. Progress is clearly visualized through cards turning green when 
+viewed and a progress bar that updates in real time, supporting an intuitive 
+and engaging user journey. 
+ 
+4.2.2 ​Code Snippets 
+ 
+Below are simplified code snippets that illustrate some of the core 
+functionalities implemented in the FIKH application, highlighting key 
+features and how they work within the app. 
+ 
+protected void showEnlargedCard(int position) { 
+    // Animate scale up with smooth transitions 
+    cardContainer.setScaleX(0.8f); 
+    cardContainer.setScaleY(0.8f); 
+    cardContainer.animate() 
+        .scaleX(1f) 
+        .scaleY(1f) 
+        .setDuration(200) 
+        .start(); 
+} 
+Figure 4.10: Interactive Flashcard System (BaseFlashActivity.java) 
+ 
+Figure 4.3 is the code snippet from the BaseFlashActivity.java file and shows 
+a simplified version of how the interactive flashcard system animates the 
+display of an enlarged flashcard. When a flashcard is selected, the 
+showEnlargedCard(int position) method is called. Inside this method, the 
+card's container is first scaled down to 80% of its original size (both width 
+and height) to prepare for the animation. Then, an animation is started that 
+smoothly scales the card back up to its full size (100%) over 200 
+milliseconds. This creates a smooth "zoom in" effect, making the flashcard 
+appear to pop up or enlarge interactively for the user. This animation helps 
+make the flashcard system feel more dynamic and engaging. 
+ 
+ 
+69 
+ 
+private View createLevelView(Level level) { 
+    if (userScore >= level.minScore) { 
+        // Unlocked level with dynamic image loading 
+        ImageView levelImage = new ImageView(this); 
+        levelImage.setScaleType(ImageView.ScaleType.FIT_CENTER); 
+        return levelImage; 
+    } else { 
+        // Locked level with dynamic text formatting 
+        TextView levelText = new TextView(this); 
+        String scoreRange = "(" + level.minScore + " - " + level.maxScore 
++ ")"; 
+        levelText.setText(level.name + "\n" + scoreRange); 
+        return levelText; 
+    } 
+} 
+Figure 4.11: Dynamic Level Display System (TitlesActivity.java) 
+ 
+Figure 4.3.1 is the simplified code from TitlesActivity.java that shows how 
+the app displays different levels to the user based on their score. The 
+createLevelView method checks if the user's score is high enough to unlock a 
+level. For unlocked levels (when userScore >= level.minScore), an 
+ImageView shows the level’s graphic with ScaleType.FIT_CENTER, offering 
+immediate visual feedback and a sense of accomplishment. Meaning it creates 
+and returns an image view to show a picture for that level. However for 
+locked levels, a TextView displays the level's name along with the required 
+score range ("minScore - maxScore"), guiding users toward their next 
+milestone. Meaning if the level is still locked, it creates a text view instead, 
+showing the level's name and the score range needed to unlock it. This way, 
+the display changes dynamically depending on whether the user has reached 
+the required score for each level.  
+ 
+private void handleAnswer(String userAnswer) { 
+    if (userAnswer.equalsIgnoreCase(correctAnswer)) { 
+        markCell(number); 
+        currentScore += CORRECT_ANSWER_POINTS; 
+        correctAnswers++; 
+        showMessage("Correct!"); 
+        correctSound.start(); 
+    } else { 
+        currentScore = Math.max(0, currentScore - 
+70 
+ 
+WRONG_ANSWER_PENALTY); 
+        showMessage("Wrong answer!"); 
+        wrongSound.start(); 
+    } 
+} 
+Figure 4.12: Bingo Learning Game (BingoActivity.java) 
+ 
+Figure 4.3.2 is the code sample from BingoActivity.java that shows how the 
+app checks the user's answer in the Bingo learning game. When the user 
+submits an answer, the handleAnswer method compares it to the correct 
+answer. If the answer is correct, the app visually marks the Bingo cell 
+(markCell(number)) with green color, plays a celebratory sound 
+(correctSound.start()), increases the score and correct answer count., and 
+shows a confirmation message (showMessage(“Correct!”);). If the answer is 
+wrong, it subtracts points (but not below zero) by applying a score penalty 
+using Math.max(0, ...), and displays an error message (showMessage(“Wrong 
+answer!”);), and plays a negative sound (wrongSound.start()). This responsive 
+feedback system both visual and auditory, enhances engagement and 
+reinforces learning, making the experience intuitive and rewarding. This 
+makes the game interactive and gives instant feedback to the user. 
+ 
+private void movePlayer(int diceValue) { 
+    // Educational gameplay mechanics 
+    if (targetPosition <= 100) { 
+        animatePlayerMovement(currentPosition, targetPosition, () -> { 
+            // Question-based learning 
+            showQuestion(); 
+            // Reward/Penalty system 
+            if (correctAnswer) { 
+                score += 5; 
+                moveForward(3); 
+            } else { 
+                score -= 3; 
+                moveBackward(3); 
+            } 
+        }); 
+    } 
+} 
+Figure 4.13: Snake & Ladder Learning Game (SnakeLadderActivity.java) 
+71 
+ 
+ 
+This code from SnakeLadderActivity.java shows how the Snake & Ladder 
+learning game works when a player moves. When the player rolls the dice, 
+the game checks if the new position is valid.  It ensures player movement 
+stays within board limits (≤100) and uses animatePlayerMovement for 
+smooth, visual transitions. If it is, the player’s token is animated to the new 
+spot. Then, a question is shown to the player through the function  
+showQuestion(). If the player answers correctly, they earn a score (score += 
+5) and move forward (moveForward(3)). If the answer is wrong, they lose 
+score (score -= 3) and move backward (moveBackward(3)). This system 
+combines learning with the classic board game, rewarding correct answers 
+and giving penalties for mistakes, this blends gameplay and education, 
+reinforcing learning through interactive consequences. 
+ 
+private void startMemorizationPhase() { 
+    // Show all cards face up 
+    for (int i = 0; i < cards.size(); i++) { 
+        MemoryMatch card = cards.get(i); 
+        card.setFlipped(true); 
+        updateCardView(i); 
+    } 
+ 
+    // 20-second memorization timer 
+    timer = new CountDownTimer(MEMORIZATION_TIME, 1000) { 
+        @Override 
+        public void onTick(long millisUntilFinished) { 
+            timerText.setText("Time: " + (millisUntilFinished / 1000) + "s"); 
+        } 
+    }.start(); 
+} 
+Figure 4.14: Memory Match Game (MemoryMatchActivity.java) 
+ 
+Figure 4.3.4 shows simplified code from MemoryMatchActivity.java that 
+shows how the memory match game starts its memorization phase. When the 
+phase begins, all the cards are turned face up using card.setFlipped(true) so 
+the player can see them. At the same time, CountDownTimer (set for 30 
+seconds) then starts, updating the remaining time every second via 
+timerText.setText(...). This visible countdown adds urgency and keeps users 
+72 
+ 
+focused during the memorization period. This gives the player a short period 
+to memorize the positions of the cards before they are flipped back down and 
+the matching part of the game begins. This structured approach blends 
+cognitive challenge with interactive UI, forming the foundation for the 
+matching phase and reinforcing memory retention through timed observation. 
+ 
+4.3 ​ Application Evaluation 
+ 
+To ensure the effectiveness and user-friendliness of the F.I.K.H. mobile 
+application, a usability test was conducted among the target audience which is 
+all age groups. The goal was to observe how real users interacted with the app 
+and evaluate whether the app effectively promoted learning and engagement. 
+ 
+4.3.1 ​Test Setup 
+​  
+The test setup was designed to gather both qualitative and quantitative 
+feedback regarding user experience, engagement, and learning outcomes after 
+interacting with the F.I.K.H. application. Participants were informed about the 
+purpose of the application, the core content areas it covers such as Fiqah, 
+Aqidah, and Akhlak, and how it aims to support the community in mastering 
+Islamic concepts through interactive learning. A total of 20 users agreed to 
+participate. Their involvement was entirely voluntary, and ethical 
+considerations such as anonymity, non-compulsory participation, and the 
+right to withdraw at any time were clearly communicated. To assess both 
+learning impact and user satisfaction, the evaluation was conducted using 
+Google Forms. 
+ 
+4.3.2 ​Testing 
+ 
+Functionality and usability testing were conducted to ensure that the 
+application meets user requirements and provides a smooth experience. 
+Functionality testing confirmed that all features operate correctly, while 
+usability testing assessed the application's ease of use and user satisfaction 
+73 
+ 
+ 
+●​ Functionality Testing 
+ 
+Functional testing, performed by the developer, ensured the application met 
+its requirements and maintained quality. This process involved test cases that 
+evaluated both user experiences of the application: client site and admin site. 
+It also covered the user interface, database storage, and various features. This 
+confirmed that all components function correctly, ensuring an efficient user 
+experience. Table 4.4.1 shows the tested components and their outcomes on 
+the client site. 
+ 
+​ Table 4.11: Functionality Test 
+1. Overlay Page 
+No Test Scenario Expected Result Actual Result Pass Fail 
+1 App launches Hadith quote is 
+displayed 
+Hadith quote is 
+displayed 
+✓  
+2 Wait 5 seconds "Tap Anywhere to 
+Continue" appears 
+with fade-in 
+"Tap Anywhere to 
+Continue" appears 
+with fade-in 
+✓  
+3 Tap Anywhere 
+on overlay 
+Navigates to Login 
+Page 
+Navigates to 
+Login Page 
+✓  
+2. Login Page 
+4 Login with 
+valid 
+email/passwor
+d​  
+User is logged in 
+and directed to 
+Home Page 
+User is logged in 
+and directed to 
+Home Page​  
+✓  
+5 Login with 
+invalid 
+credentials
+​  
+Error message is 
+displayed​  
+Error message is 
+displayed​  
+✓  
+6 Click "Sign 
+Up"​  
+Navigates to SignUp 
+Page 
+Navigates to 
+SignUp Page 
+✓  
+7 Login with 
+Google​  
+User is logged in 
+and directed to 
+Home Page​  
+User is logged in 
+and directed to 
+Home Page​  
+✓  
+3. SignUp Page 
+8 Sign up with 
+valid info
+Account created, 
+directed to Home 
+Account created, 
+directed to Home 
+✓  
+74 
+ 
+​  Page Page 
+9 Sign up with 
+invalid info
+​  
+Error message is 
+displayed​  
+Error message is 
+displayed​  
+✓  
+4. Home Page 
+10 Click "Play" 
+button 
+Navigates to Topic 
+Page 
+Navigates to 
+Topic Page 
+✓  
+11 Click 
+"Flashcard" 
+button 
+Navigates to 
+Flashcard Page 
+Navigates to 
+Flashcard Page 
+✓  
+12 Click "Note" 
+button 
+TaskDialogFragmen
+t is shown​  
+TaskDialogFragm
+ent is shown​  
+✓  
+13 View streak 
+bar​  
+Streak info is 
+displayed​  
+Streak info is 
+displayed​  
+✓  
+14 View profile 
+image 
+Correct avatar is 
+shown​  
+Correct avatar is 
+shown​  
+✓  
+5. Task Page 
+15 Open Task 
+dialog 
+3 random tasks are 
+shown​  
+3 random tasks 
+are shown​  
+✓  
+16 Click a task
+​  
+Task is replaced 
+with a new one, 
+button animates​  
+Task is replaced 
+with a new one, 
+button animates​  
+✓  
+17 Click "Close" 
+button 
+Dialog is dismissed Dialog is 
+dismissed 
+✓  
+6. Leaderboard Page 
+18 Open 
+Leaderboard 
+Top 3 users and list 
+are displayed​  
+Top 3 users and 
+list are displayed​  
+✓  
+19 User's rank is 
+updated​  
+User's rank is shown 
+correctly​ 
+User's rank is 
+shown correctly​  
+✓  
+20 Click back 
+button 
+Returns to previous 
+page​  
+Returns to 
+previous page​  
+✓  
+7. Profile Page 
+21 View profile 
+image 
+Correct avatar is 
+shown​  
+Correct avatar is 
+shown​  
+✓  
+22 Click "Details" 
+button 
+Navigates to View 
+Profile Page 
+Navigates to View 
+Profile Page 
+✓  
+23 Click 
+"Badges"
+​
+button 
+Navigates to Badges 
+Page 
+Navigates to 
+Badges Page 
+✓  
+75 
+ 
+24 Click "Titles" 
+button 
+Navigates to Titles 
+Page 
+Navigates to 
+Titles Page 
+✓  
+8. View Profile Page 
+25 View profile 
+info​  
+Name, email, 
+birthday, avatar 
+shown​  
+Name, email, 
+birthday, avatar 
+shown​  
+✓  
+26 Click "Edit" 
+button 
+Navigates to Edit 
+Profile Page 
+Navigates to Edit 
+Profile Page 
+✓  
+27 Click "Logout" 
+button 
+Returns to Login 
+Page 
+Returns to Login 
+Page 
+✓  
+28 Click back 
+button 
+Returns to Profile 
+Page 
+Returns to Profile 
+Page 
+✓  
+9. Edit Profile Page 
+29 Open Edit 
+Profile page 
+User info (name, 
+email, birthday, 
+avatar) is pre-filled 
+User info (name, 
+email, birthday, 
+avatar) is 
+pre-filled 
+✓  
+30 Click on 
+birthday field 
+Date picker dialog 
+appears 
+Date picker dialog 
+appears 
+✓  
+31 Select a new 
+avatar 
+Avatar selection is 
+highlighted and 
+previewed 
+Avatar selection is 
+highlighted and 
+previewed 
+✓  
+32 Change 
+name/email/bir
+thday and click 
+"Save" button 
+Info is updated in 
+Firebase, toast 
+"Profile information 
+updated 
+successfully!" 
+shown 
+Info is updated in 
+Firebase, toast 
+"Profile 
+information 
+updated 
+successfully!" 
+shown 
+✓  
+33 Change email 
+and click 
+"Save" button 
+Email is updated in 
+Firebase Auth, toast 
+"Email updated 
+successfully!" 
+shown 
+Email is updated 
+in Firebase Auth, 
+toast "Email 
+updated 
+successfully!" 
+shown 
+✓  
+34 Change 
+password and 
+click "Save" 
+button 
+Password is updated 
+in Firebase Auth, 
+toast "Password 
+updated 
+successfully!" 
+shown 
+Password is 
+updated in 
+Firebase Auth, 
+toast "Password 
+updated 
+successfully!" 
+shown 
+✓  
+35 Enter 
+mismatched 
+passwords and 
+click "Save" 
+button 
+Toast "Passwords do 
+not match." shown, 
+no update occurs 
+Toast "Passwords 
+do not match." 
+shown, no update 
+occurs 
+✓  
+76 
+ 
+36 Click "Save" 
+button with no 
+changes 
+Toast "No changes 
+detected." shown, no 
+update occurs 
+Toast "No changes 
+detected." shown, 
+no update occurs 
+✓  
+37 Click back 
+button with no 
+changes 
+Confirmation dialog 
+"No changes have 
+been made..." 
+appears 
+Confirmation 
+dialog "No 
+changes have been 
+made..." appears 
+✓  
+38 Click back 
+button after 
+making 
+changes 
+Navigates to View 
+Profile Page, 
+changes are saved 
+Navigates to View 
+Profile Page, 
+changes are saved 
+✓  
+39 Click "Delete 
+Account" 
+Confirmation dialog 
+appears 
+Confirmation 
+dialog appears 
+✓  
+40 Confirm delete User is deleted from 
+Firebase Auth and 
+database, navigates 
+to LoginActivity, 
+toast "Profile 
+deleted 
+successfully!" 
+shown 
+User is deleted 
+from Firebase 
+Auth and 
+database, 
+navigates to 
+LoginActivity, 
+toast "Profile 
+deleted 
+successfully!" 
+shown 
+✓  
+41 Cancel delete Dialog is dismissed, 
+no action taken 
+Dialog is 
+dismissed, no 
+action taken 
+✓  
+42 Try to save 
+with empty 
+required fields 
+Error/toast shown, 
+no update occurs 
+Error/toast shown, 
+no update occurs 
+✓  
+10. Badges Page 
+43 Open Badges 
+page 
+All badges are 
+displayed 
+All badges are 
+displayed 
+✓  
+44 Long press 
+unlocked 
+badge 
+Tooltip with 
+achievement info 
+shown 
+Tooltip with 
+achievement info 
+shown 
+✓  
+45 Long press 
+locked badge 
+Tooltip with 
+requirement info 
+shown 
+Tooltip with 
+requirement info 
+shown 
+✓  
+11. Titles page 
+46 Open Titles 
+page 
+All titles/levels are 
+displayed 
+All titles/levels 
+are displayed 
+✓  
+47 Long press 
+unlocked title 
+Tooltip with 
+congrats message 
+Tooltip with 
+congrats message 
+✓  
+48 Long press 
+locked title 
+Tooltip with 
+requirement info 
+Tooltip with 
+requirement info 
+✓  
+77 
+ 
+12. Topic Page 
+49 Click Topic 1 
+button 
+Navigates to 
+Module1 page 
+(Laluan Hijrah) 
+Navigates to 
+Module1 page 
+✓  
+50 Click Topic 2 
+button 
+Navigates to 
+Module2 Page 
+(Kotak Fathonah) 
+Navigates to 
+Module2 Page 
+✓  
+51 Click Topic 3 
+button 
+Navigates to 
+Module3 Page 
+(Padanan Fikrah) 
+Navigates to 
+Module3 Page 
+✓  
+52 Click back 
+button 
+Returns to Home 
+Page 
+Returns to Home 
+Page 
+✓  
+13. Module Page 
+53 Click "Start" 
+button 
+Navigates to 
+respective game 
+(Laluan Hijrah, 
+Kotak Fathonah, 
+Padanan Fikrah) 
+Navigates to 
+respective game 
+(Laluan Hijrah, 
+Kotak Fathonah, 
+Padanan Fikrah) 
+✓  
+54 Click back 
+button 
+Returns to Topic 
+Page 
+Returns to Topic 
+Page 
+✓  
+14. Game Page (Laluan Hijrah) 
+55 Roll dice Player moves, dice 
+animates 
+Player moves, 
+dice animates 
+✓  
+56 Land on 
+snake/ladder 
+Player moves 
+accordingly, sound 
+plays 
+Player moves 
+accordingly, 
+sound plays 
+✓  
+57 Answer 
+question 
+Score updates, 
+player moves 
+Score updates, 
+player moves 
+✓  
+58 Finish game Result Page is 
+shown, score saved 
+Result Page is 
+shown, score 
+saved 
+✓  
+59 Click quit 
+button 
+Confirmation dialog, 
+returns to Topic 
+Page 
+Confirmation 
+dialog, returns to 
+Topic Page 
+✓  
+15. Game Page (Kotak Fathonah) 
+60 Fill grid 1-25 Numbers fill, roll 
+enabled after 25 
+Numbers fill, roll 
+enabled after 25 
+✓  
+61 Roll Random number 
+shown, question 
+asked 
+Random number 
+shown, question 
+asked 
+✓  
+62 Answer 
+question 
+Score updates, cell 
+marked 
+Score updates, 
+cell marked 
+✓  
+78 
+ 
+63 Complete line Win message, score 
+saved 
+Win message, 
+score saved 
+✓  
+64 Click quit 
+button  
+Confirmation dialog, 
+returns to Topic 
+Page 
+Confirmation 
+dialog, returns to 
+Topic Page 
+✓  
+16. Game Page (Padanan Fikrah) 
+65 Memorization 
+phase 
+All cards shown for 
+20s 
+All cards shown 
+for 20s 
+✓  
+66 Match cards Score updates, cards 
+turn green 
+Score updates, 
+cards turn green 
+✓  
+67 Complete all 
+pairs 
+Win message, score 
+saved 
+Win message, 
+score saved 
+✓  
+68 Click quit 
+button 
+Confirmation dialog, 
+returns to Topic 
+Page 
+Confirmation 
+dialog, returns to 
+Topic Page 
+✓  
+17. Flashcard Page 
+69 Open 
+Flashcard page 
+Four topic buttons 
+(Topic 1-4) are 
+displayed 
+Four topic buttons 
+(Topic 1-4) are 
+displayed 
+✓  
+70 Click Topic 1 
+button 
+Navigates to 
+Flashcard 1 Page, 
+flashcards for topic 
+1 are shown 
+Navigates to 
+Flashcard 1 Page, 
+flashcards for 
+topic 1 are shown 
+✓  
+71 Click Topic 2 
+button 
+Navigates to 
+Flashcard 2, 
+flashcards for topic 
+2 are shown 
+Navigates to 
+Flashcard 2, 
+flashcards for 
+topic 2 are shown 
+✓  
+72 Click Topic 3 
+button 
+Navigates to 
+Flashcard 3, 
+flashcards for topic 
+3 are shown 
+Navigates to 
+Flashcard 3, 
+flashcards for 
+topic 3 are shown 
+✓  
+73 Click Topic 4 
+button 
+Navigates to 
+Flashcard 4, 
+flashcards for topic 
+4 are shown 
+Navigates to 
+Flashcard 4, 
+flashcards for 
+topic 4 are shown 
+✓  
+74 Click back 
+button 
+Returns to previous 
+page (Home Page) 
+Returns to 
+previous page 
+(Home Page) 
+✓  
+18. View Card Page (Flashcard 1, 2, 3, 4 Page) 
+75 Open flashcard 
+topic 
+Flashcards for topic 
+are shown 
+Flashcards for 
+topic are shown 
+✓  
+76 Flip card Card flips to show 
+answer 
+Card flips to show 
+answer 
+✓  
+79 
+ 
+77 Mark as 
+learned 
+Progress is saved Progress is saved ✓  
+78 Complete all 
+cards 
+Progress is 100% Progress is 100% ✓  
+79 Tap the card 
+(View Mode) 
+Card is displayed in 
+enlarged view 
+Card is displayed 
+in enlarged view 
+✓  
+80 Viewed Card Card becomes green Card becomes 
+green 
+✓  
+ 
+Based on the results of the functionality testing, all test scenarios for each 
+page and feature of the application have produced the expected results, with 
+every scenario marked as "Pass." This indicates that all components and 
+functionalities of the application are working correctly as intended according 
+to the requirements and design specifications. The successful completion of 
+all test cases demonstrates that the application is stable, reliable, and ready for 
+deployment or further stages of development. Users can expect a smooth and 
+error-free experience when interacting with the app’s features, including 
+sign-in/sign-up, profile management, flashcards, games, badges, titles, and 
+other core functionalities. In summary, the application has passed the 
+functionality test and meets the acceptance criteria for all tested features. 
+ 
+ 
+●​ Usability Testing 
+ 
+Usability testing was conducted to evaluate how effectively users could 
+interact with the F.I.K.H. application, focusing on navigation, design clarity, 
+game engagement, and educational value. This phase was essential to confirm 
+that the app’s gamified features and content delivery aligned with the learning 
+objectives of the Islamic Content. A total of 20 respondents participated in the 
+evaluation. The survey was administered through Google Forms and was 
+divided into five sections which are user information, learnability, efficiency, 
+educational content, and overall satisfaction. The feedback gathered from this 
+process provided valuable insights into how well the interface and 
+game-based elements supported the intended learning experience. 
+ 
+ 
+80 
+ 
+●​ Section A: User Information 
+ 
+Figure 4.15 shows that the majority of respondents are between the ages of 21 
+and 24. However, the overall age range of respondents spans from 10 to 49, 
+indicating that the F.I.K.H. application is suitable and accessible for users 
+across various age groups.Furthermore, the age distribution, which spans 
+from 10 to 49 years old, also demonstrates that the application is not limited 
+to a specific generation but is accessible and engaging for both younger and 
+older learners. 
+ 
+ 
+Figure 4.15: Percentage of Respondents Age 
+ 
+Figure 4.16 illustrates that the respondents come from diverse backgrounds, 
+including both Muslim and non-Muslim participants. This highlights the 
+F.I.K.H. application is designed to cater to a broader audience, extending its 
+usability beyond only Muslim users, at the same time underlining app’s 
+inclusivity and broad appeal. It can be concluded that F.I.K.H. is not only 
+effective in delivering Islamic learning materials but also serves as an 
+educational platform that welcomes and benefits a wider audience. 
+ 
+81 
+ 
+ 
+Figure 4.16: Background of Respondents 
+ 
+Based on Figures 4.15 and 4.16, it is right to say that the F.I.K.H. application 
+has successfully reached a broader audience. The data shown in these figures 
+indicate that users come from various age groups and diverse backgrounds, 
+demonstrating the app’s inclusivity and wide appeal. This reflects the 
+effectiveness of its design and content in attracting not only different 
+generations but also individuals with different levels of familiarity with 
+Islamic knowledge. By accommodating a wide range of users, the F.I.K.H. 
+application proves its potential as an accessible and engaging learning 
+platform that goes beyond specific demographics. 
+ 
+●​ Section B: Learnability 
+​  
+Figure 4.17 shows that most of the respondents are familiar with the game 
+mechanics in the F.I.K.H. application, highlighting the effectiveness of its 
+interactive design. This familiarity suggests that the mechanics are intuitive, 
+user-friendly, and well aligned with the expectations of the target audience, 
+which is crucial for sustaining engagement and enhancing the overall learning 
+experience. Moreover, even though the users come from different age groups 
+and diverse backgrounds, the chosen game mechanics remain familiar across 
+generations, ensuring ease of use and accessibility for a broader range of 
+users. 
+ 
+82 
+ 
+ 
+Figure 4.17: Percentage of Respondents Familiar with F.I.K.H Game 
+Mechanics 
+ 
+Figure 4.18 shows that all of the respondents found it easy to navigate 
+through the F.I.K.H. application with the help of icons and visual feedback, 
+indicating that the app’s user interface is intuitive and effectively structured. 
+This suggests that key elements such as menu layout, button placement, 
+visual hierarchy, and labeling were well-designed to support user 
+expectations. The smooth navigation experience ensures that learners can 
+focus on the educational content without confusion or frustration. 
+ 
+ 
+Figure 4.18: Percentage of User Navigating the App Easily 
+ 
+ 
+83 
+ 
+Figure 4.19 shows that most of the respondents felt more motivated by the 
+existing game elements, such as the leaderboard, badges, and titles. This 
+indicates that the incorporation of gamification features as supporting game 
+elements successfully enhances user engagement by fostering a sense of 
+achievement, competition, and progress. These elements not only make the 
+learning process more enjoyable but also encourage continuous participation 
+and goal-oriented behavior among users. 
+ 
+ 
+Figure 4.19: Percentage of Respondents Felt More Motivated with Existing 
+Game Elements 
+ 
+●​ Section C: Efficiency  
+ 
+Figure 4.20 shows that the existing flashcard feature is effective in educating 
+users about Islamic learning. This indicates that the feature not only delivers 
+content clearly but also enhances knowledge retention and reinforcement 
+through its simple, interactive format. By allowing users to actively engage 
+with the material, the flashcard system makes it easier for them to review and 
+recall key concepts, ultimately supporting continuous learning in an enjoyable 
+and accessible way. 
+ 
+84 
+ 
+ 
+Figure 4.20: Efficiency of Flashcard Features in Game Journey 
+ 
+Figure 4.21 shows the result of efficiency of progress bar in flashcard page. 
+These results demonstrate that the progress bar feature in the flashcard page is 
+highly effective and well-received. The majority of users found it useful in 
+tracking their learning progress and understanding how much more they need 
+to review. The absence of low ratings suggests that the progress bar 
+contributes positively to the user experience and supports self-directed 
+learning within the F.I.K.H. application. 
+ 
+ 
+Figure 4.21: Efficiency of Progress Bar in Flashcard Page 
+ 
+ 
+ 
+85 
+ 
+Figure 4.22 shows that all respondents felt more guided and aware of their 
+learning journey through the existing progress bar on the title page. This 
+finding highlights that the progress bar serves as a crucial UI element, 
+offering users a clear sense of direction and visibility of their overall progress. 
+By showing completed and remaining tasks or modules, it not only helps 
+users track their accomplishments but also acts as a motivational tool, 
+encouraging them to continue and complete their learning journey. 
+ 
+ 
+Figure 4.22: Efficiency of Progress Bar in Title page 
+ 
+●​ Section D: Educational Content 
+ 
+Figure 4.23 shows that all of the respondents agreed they learned something 
+new about Islam through the app, even though the users come from different 
+age groups and backgrounds, including both Muslims and non‑Muslims. This 
+highlights that the application is not only informative but also rich in Islamic 
+learning materials, capable of providing valuable insights and reinforcing 
+knowledge for a wide range of users, regardless of their prior familiarity with 
+the religion. 
+ 
+86 
+ 
+ 
+Figure 4.23: Increases Knowledge of Islam to Users  
+ 
+Figure 4.24 shows that all respondents agreed the Islamic materials and 
+content in the app are accurate. This indicates that the F.I.K.H. application 
+relies on high‑quality and reliable sources for its Islamic learning content. 
+Such feedback reflects the app’s strong commitment to authenticity and 
+credibility, ensuring that users from various backgrounds receive trustworthy 
+information aligned with proper Islamic teachings. 
+ 
+ 
+Figure 4.24: Accuracy of Islamic Content 
+ 
+ 
+ 
+87 
+ 
+Figure 4.25 shows that the majority of respondents appreciated the Hadith 
+features available in both the flashcard page and the overlay page, noting that 
+they could relate the presented Hadiths to their daily life activities. This 
+highlights that the integration of Hadiths within the application has the 
+potential to positively influence users’ perspectives and behaviors in their 
+everyday lives by reinforcing Islamic values through relevant and practical 
+teachings.  
+ 
+ 
+Figure 4.25: Percentage of Usefulness of Hadiths Implementation 
+ 
+●​ Section E: Satisfaction 
+ 
+Figure 4.26 shows that all respondents thoroughly enjoyed using the F.I.K.H. 
+application. This demonstrates the app’s success in delivering a positive user 
+experience through its engaging design, interactive features, and meaningful 
+Islamic content. Notably, this enjoyment was shared by users from different 
+age groups and diverse backgrounds, including both Muslim and non‑Muslim 
+participants, highlighting the app’s ability to appeal broadly and make the 
+learning process both enjoyable and impactful for a wide range of users. 
+ 
+88 
+ 
+ 
+Figure 4.26: Overall Respondent Satisfaction 
+ 
+Figure 4.27 shows that all of the respondents agreed that the F.I.K.H. 
+application features a highly interactive and engaging interface, appealing to 
+users across different age groups. This indicates that the application's design 
+successfully balances functionality with visual appeal, making it accessible, 
+user-friendly, and attractive to a wide range of users regardless of age.  
+ 
+ 
+Figure 4.27: Percentage of Respondent loving the UI Design 
+ 
+ 
+ 
+ 
+ 
+89 
+ 
+Figure 4.28 shows that all of the respondents agreed that the integration of 
+game elements such as badges, titles, leaderboard, streak bar, and progress 
+bar has significantly enhanced their experience, making the use of the 
+F.I.K.H. application is more enjoyable. This suggests that the gamification 
+features as supporting game elements has effectively increased user 
+engagement and motivation, transforming the learning process into a more 
+dynamic and rewarding experience.  
+ 
+ 
+Figure 4.28: Effectiveness of Gamification Elements 
+ 
+Figure 4.29 shows that the two (2) most favored game elements among 
+respondents are the leaderboard and badges. These results highlight that the 
+reward and recognition aspects such as badges and leaderboards are the most 
+effective in enhancing engagement and enjoyment. This aligns with common 
+gamification principles, where visible achievements and competitive elements 
+strongly motivate users. The findings suggest that prioritizing and further 
+refining these top‑preferred elements could further strengthen the user 
+experience within the F.I.K.H. application. 
+90 
+ 
+ 
+Figure 4.29: Two (2) Most Favored Game Elements 
+ 
+Figure 4.30 shows that most respondents enjoyed the integration of the 
+Padanan Fikrah game within the F.I.K.H. application. The inclusion of a time 
+record feature appears to significantly enhance user involvement and 
+excitement, as it introduces a sense of challenge and urgency that motivates 
+players to stay focused and responsive. This finding indicates that 
+incorporating timed gameplay elements can effectively enrich the overall 
+learning experience by making it more interactive, engaging, and stimulating, 
+encouraging users to actively participate while reinforcing their learning. 
+ 
+ 
+​ Figure 4.30: Most Favored Game 
+ 
+ 
+91 
+ 
+Overall, these findings confirm that F.I.K.H. successfully blends authentic 
+Islamic knowledge with modern, interactive design principles to support both 
+meaningful learning and personal growth. 
+ 
+4.4 ​ Conclusion 
+ 
+This chapter presents a comprehensive overview of the development and 
+evaluation of the FIKH (Fun Islamic Knowledge Hub) mobile application, 
+which was designed to deliver Islamic educational content to users of all age 
+groups and backgrounds through an engaging game-based learning approach. 
+The application integrates three main games which are Laluan Hijrah, Kotak 
+Fathonah, and Padanan Fikrah, each aligned with cognitive development 
+principles and Islamic educational objectives. These games encourage moral 
+reflection, strategic thinking, and memory enhancement through 
+question-based progression, randomized challenges, and visual learning 
+activities. In addition to these core games, the application incorporates scores, 
+tiered titles, leaderboards, daily challenges, badges, streak bars, and progress 
+indicators as supporting game elements to drive motivation and engagement. 
+ 
+The technical development of the FIKH application was carried out using 
+Java within Android Studio, supported by Firebase for secure authentication, 
+real-time database management, and seamless data synchronization. User 
+interface and experience were carefully designed using Canva and Figma, 
+resulting in vibrant color schemes, smooth animations, and accessible layouts, 
+all tailored for an enjoyable and intuitive learning environment. 
+ 
+Two types of testing were conducted which are functionality testing with 
+alpha testers and usability testing with beta testers. The results showed that all 
+features worked as intended and that the app provides a positive, 
+user-friendly, and effective learning experience. Users appreciated its intuitive 
+navigation, engaging UI design, accurate Islamic content, and motivating 
+game elements, confirming that FIKH is a reliable and impactful educational 
+tool 
+92 
+ 
+CHAPTER 5 
+ 
+ 
+CONCLUSION, LIMITATIONS AND RECOMMENDATIONS 
+ 
+ 
+The chapter will contain the final considerations of the research conducted on 
+creation of F.I.K.H. ( Fun Islamic Knowledge Hub ) mobile application. It revisits the 
+research objectives, determines how well they were met, describes the limitations 
+faced during the design and execution of the project, and presents forward-looking 
+recommendations on how to improve on application functionalities and accessibility, 
+and learning. The general idea is to summarize the most important project findings as 
+well as to outline feasible strategies of its further expansion and implementation on a 
+larger scale. 
+ 
+5.1 ​ Overall 
+ 
+To conclude, F.I.K.H. application has shown that game-based learning can be 
+an effective way of providing introductory Islamic education in the form of an 
+interactive, modern interactive, and student-friendly. By applying the 
+well-chosen game formats and gamification elements, the app was planned to 
+help the targeted audience concentrate on three basic pillars of the Islamic 
+knowledge that are Aqidah (faith), Fiqh (jurisprudence) and Akhlak (ethics 
+and morality). The use of the concept of the Game Development Life Cycle 
+has helped guide the project and the development process in general as, 
+throughout all these stages, the project was both systematic and results driven, 
+allowing to create a functional learning application, specifically developed to 
+meet the needs of targeted users, which is all age groups. The fact that the 
+application incorporated various types of games that include puzzle, board, 
+and card games enabled it to deliver Islamic content in an interesting and 
+pedagogical manner. Every game fit into particular learning outcomes in 
+terms of Aqidah, Fiqh and Akhlak so that learners not only engaged with the 
+contents but also the learners were challenged to think about the meaning and 
+relevance of the content in everyday situations. The gamification elements, 
+93 
+ 
+such as badges, streak bars, progress indicators, leaderboards, and scoring 
+concepts, were designed on purpose, with an approach to increase motivation, 
+encourage long-lasting play, and support the achievement of some of the main 
+learning goals. The application was positively accepted during usability 
+testing and conducted on both young and older users who showed much 
+greater interests and appreciation as in the traditional text-based layouts. 
+These data imply that F.I.K.H. application has fulfilled its goal of making 
+Islamic learning more accessible, relevant, and more fun to a more youthful 
+and technology-savvy audience. 
+ 
+5.2 ​ Research Objectives Achievement 
+ 
+To make sure the direction of system development conforms with the original 
+purpose, the accomplishment of each research objective is also outlined in 
+this chapter.  The success of the F.I.K.H. application can be measured by 
+revisiting the original research objectives. This will assist in keeping the most 
+vital parts in focus after acknowledging and contemplating the aspects that 
+were never part of the original scheme. 
+ 
+5.2.1​ Objective 1 
+ 
+The first objective aimed to identify the most suitable types of games and 
+game elements to be used in the context of game-based Islamic learning. This 
+has been achieved by conducting an extensive review of the literature and 
+comparative study with those of similar Islamic learning applications already 
+in the market. The study facilitated the choice of puzzle, board, and card 
+games as the most effective types of the targeted age group as each of them 
+provides a specific cognitive and interactive experience of divulging religious 
+knowledge. These game types were attributed to the titles under Aqidah, Fiqh 
+and Akhlak based on which the educational content may be presented in a 
+structured order in a playful manner. 
+ 
+ 
+94 
+ 
+5.2.2​ Objective 2 
+ 
+The second objective focused on the development of a fully functioning 
+mobile learning platform designed to make the study of Islamic teachings 
+more interactive and appealing. The GDLC structure informed the app 
+development process and the development tools used included Android 
+Studio, Firebase to manage backend information, and the UI designing tools 
+Figma, and Canva. The final product was a concise prototype which covered 
+game play modules, scoring systems, game progress and easy to navigate 
+interfaces. All these elements have been meticulously designed with an aim 
+of being in line with the values and teaching developed on the basis of 
+Islamic education, so that the spiritual and moral elements of the contents 
+were not lost even in the digital, gamified environment. 
+ 
+5.2.3​ Objective 3 
+ 
+The third objective centered on evaluating the usability and effectiveness of 
+the application. Through internal functionality tests, it was affirmed that there 
+was smooth functioning of all parts of the application without any significant 
+technical problems. Usability testing included actual users of the target 
+demographic who used the application and responded to it in structured 
+forms. There were no actual pre- and post-tests, but the feedback collected 
+indicated that the application had provided a dramatic increase in motivation 
+and curiosity with the subject content of the learners. As the observations 
+conducted during testing showed, the games with the elements of 
+gamification positively affected the engagement of the users in Islamic 
+teachings and thus served the purpose of the third objective. 
+ 
+5.3 ​ Limitations 
+ 
+The difference between a good and bad application is the ability to recognize 
+and address its limitations to keep meeting user needs. Although the F.I.K.H. 
+application was successful overall, several limitations were identified during 
+95 
+ 
+its development. One major issue is the need for a stable internet connection. 
+Since the app uses cloud storage and real-time data sync, it cannot function 
+properly without internet access. This becomes a problem for users in rural 
+areas or places with poor connectivity, limiting the app’s accessibility and 
+usability. The lack of offline gameplay is inconvenient for these users. 
+ 
+Another limitation is related to the technology used. The app was built using 
+Java and XML in Android Studio, which restricts the quality of animations 
+and modern user interface design. Newer frameworks like Flutter or React 
+Native offer more dynamic and attractive designs, which are important for 
+today’s users, especially younger ones who expect high visual and interactive 
+standards in learning apps. 
+ 
+Lastly, the F.I.K.H. application is only available on Android devices. Users 
+with iPhones or iPads cannot access the app, which reduces its reach and 
+inclusiveness. Expanding to iOS would allow more users to benefit from the 
+app. While these limitations do not take away from the app’s value, they are 
+important to consider for future improvements. 
+ 
+5.4 ​ Recommendations for Future Work 
+ 
+In order to consider what the current application lacks, it is necessary to 
+provide recommendations to facilitate the work conducted in the future and 
+enhance the functionality of F.I.K.H. application. Such improvements will be 
+geared towards the remedying of the existing limitations besides ensuring 
+further harmonization of the application with users whom it serves. 
+ 
+One of the key improvements is to enable offline functionality. As the current 
+app relies on a stable internet connection due to its use of real-time database 
+features, users in areas with poor connectivity may struggle to access learning 
+content. Supporting offline mode by allowing storage of core lessons and 
+game elements locally will let users continue their learning without 
+interruptions. Synchronization can occur once the device reconnects to the 
+internet. Additionally, migrating the development from Java and XML to 
+96 
+ 
+modern cross-platform frameworks like Flutter or React Native would 
+enhance the app’s appearance, responsiveness, and animations, while also 
+supporting easier updates and maintenance. This transition would also enable 
+F.I.K.H. to become available on iOS devices, thus reaching a broader 
+audience and increasing inclusivity. 
+ 
+Another enhancement is the addition of multiplayer functionality, where users 
+can compete or collaborate in learning games. Social features such as adding 
+friends and enabling chat functions would build a sense of community, 
+making the learning journey more interactive and engaging. These features 
+would especially benefit learners who thrive in cooperative or competitive 
+environments. 
+ 
+Moreover, the application can be improved by creating specific learning 
+modules tailored to different user backgrounds, such as younger Muslims, 
+older Muslims, new converts/muallaf, and non-Muslims. Each category can 
+have a unique theme and lesson approach suited to their level of 
+understanding and learning style. Additionally, a Quran recitation and 
+translation module should be added to support users in reading and 
+understanding the Quran easily. This feature would make F.I.K.H. a more 
+comprehensive Islamic learning tool that supports spiritual growth alongside 
+educational development. 
+ 
+In conclusion, these future enhancements aim to position F.I.K.H. as a more 
+inclusive, flexible, and engaging platform. By addressing technical 
+limitations, expanding accessibility, personalizing learning content, and 
+fostering a connected user community, the application has the potential to 
+significantly enrich the way Islamic knowledge is delivered and experienced 
+across diverse user groups 
+ 
+ 
+ 
+ 
+ 
+97 
+ 
+5.5 ​ Final Remarks 
+ 
+The results of this project clearly highlight the potential and importance of 
+applying game-based learning (GBL) in Islamic education. The F.I.K.H. (Fun 
+Islamic Knowledge Hub) application successfully demonstrates how core 
+Islamic subjects like Aqidah, Fiqh, and Akhlak, can be taught in a way that is 
+not only informative but also highly engaging. By combining authentic 
+Islamic knowledge with modern learning techniques and interactive 
+gameplay, F.I.K.H. makes religious education more accessible, enjoyable, and 
+meaningful for learners of all ages and backgrounds. 
+ 
+From its structured flashcards and integrated Hadith content to its diverse 
+game types and gamification features such as leaderboards, streak bars, and 
+badges, F.I.K.H. creates a complete learning ecosystem that promotes both 
+motivation and knowledge retention. It addresses the challenges faced by 
+traditional learning environments, especially for muallaf, youth, and those 
+hesitant to seek help in person, by offering a safe and learner-friendly digital 
+space. 
+ 
+Despite some current limitations such as the need for internet connectivity, 
+limited graphics capability due to the current tech stack, and Android-only 
+support, F.I.K.H. has proven to be a promising and scalable educational tool. 
+With further enhancements like offline access, cross-platform availability, 
+richer user experiences, and personalized learning paths for different user 
+groups, F.I.K.H. can evolve into an even more inclusive and impactful 
+application. 
+ 
+In conclusion, F.I.K.H. stands as a major step forward in the evolution of 
+Islamic education through technology. It preserves the integrity of religious 
+teachings while embracing innovation, transforming how Islamic knowledge 
+is taught and experienced. It is not just a learning tool, it is a platform that 
+renews interest, deepens understanding, and nurtures faith in a way that is 
+aligned with the needs of today’s digital learners. 
+98 
+99
+REFERENCES
+Abdullah, F., & Abdul Razak, K. (2021). Tahap Minat dan Penerimaan Pelajar
+Terhadap Gamifikasi dalam Bidang Sirah: Level of Interest and Acceptance of
+Students Towards Gamification in Islamic History. Journal of Quran Sunnah
+Education & Special Needs, 5(1), 27–38.
+Adams, S. P., & Du Preez, R. (2022). Supporting Student Engagement Through the
+Gamification of Learning Activities: A Design-Based Research Approach.
+Technology, Knowledge and Learning, 27(1), 119–138.
+Adrián Segura-Robles, Arturo Fuentes-Cabrera, Jesús López-Belmonte, M. Elena
+Parra-González. (2020). Gamification in Primary Education Grade. A Project of
+Gamification in Tutorial Action Subject to Increase Motivation and Satisfaction
+of the Students.
+Alexiou, T., & Karasimos, A. (2023). Board games in the CLIL classroom: New
+trends in content and language integrated learning.
+Amin, F., Fhadli, M., Arief, A., & Muin, Y. (2023). Dungeon Code: Educational
+Game for Algorithm and Data Structure Courses by Applying the Game
+Development Life Cycle Method. Technium: Romanian Journal of Applied
+Sciences and Technology, 17. https://www.techniumscience.com
+Annasaii Jamar & Mohd Aderi Che Noh. (2020). Gamifikasi Aplikasi Kahoot dalam
+Pembelajaran dan Pemudahcaraan (Pdpc) Pendidikan Islam. Seminar
+Antarabangsa Isu-Isu Pendidikan (ISPEN 2020), Kolej Universiti Islam
+Antarabangsa Selangor (KUIS).
+Ashimi, D. (2023). The Prophetic Sunnah: A Second Source of Knowledge in Islam.
+International Journal of Research and Innovation in Social Science.
+Bernabé-Pons, L. (2022). Visual (mis)representations of Islam and the Prophet
+Muhammad.
+Cascella, M., Cascella, A., Monaco, F., & Shariff, M. N. (2023). Envisioning
+Gamification in Anesthesia, Pain Management, and Critical Care: Basic
+Principles, Integration of Artificial Intelligence, and Simulation Strategies.
+Journal of Anesthesia, Analgesia and Critical Care.
+Cui, Z., & Yang, H. (2023). From Game Elements to Active Learning Intentions:
+Exploring the Driving Factors in Digital Learning Platforms. SAGE Open, 13(4).
+100
+Dirgantara, H. B., & Choiriyati, N. (2022). Development of Interactive Quiz Game
+Prototype as a Learning Evaluation Media. Proceedings of the 2022 IEEE 7th
+International Conference on Information Technology and Digital Applications
+(ICITDA 2022).
+Dubois, A., & Kelamcherry, B. V. (2023). Gamification as a Tool to Boost
+Employees Engagement. Society of Petroleum Engineers - ADIPEC, ADIP
+2023.
+Ehécatl Morales-Trujillo, M. (2020). Gamification and SQL: An Empirical Study on
+Student Performance in a Database Course.
+Farreras, M., Armengol, J., Bofill, P., & Hernández, A. (2022). Game-Based
+Learning in Computer Engineering: A Workshop. SEFI 2022 - 50th Annual
+Conference of the European Society for Engineering Education, Proceedings.
+Ferro, L. S. (2021). The Game Element and Mechanic (GEM) Framework: A
+Structural Approach for Implementing Game Elements and Mechanics into
+Game Experiences. Entertainment Computing, 36.
+Gachkova, M., Somova, E., & Gaftandzhieva, S. (2020). Gamification of Courses in
+the E-Learning Environment. IOP Conference Series: Materials Science and
+Engineering, 878(1).
+Galeano, I., Merín, M., González, M., & Cernuzzi, L. (2022). MethApp4Mob: A
+Methodological Approach for Mobile Applications Development. CIbSE 2022 -
+XXV Ibero-American Conference on Software Engineering.
+Gandasari, R. A., & Mauritsius, T. (2023). A Study on the Effect of Gamification
+Components on Customer Loyalty Toward a Digital Bank. Journal of
+Theoretical and Applied Information Technology, 31(6).
+Greipl, S., Moeller, K., & Ninaus, M. (2020). Potential and Limits of Game-Based
+Learning. International Journal of Technology Enhanced Learning.
+Gupta, S., & Pathak, G. S. (2022). Gamification and E-Learning Adoption: A
+Sequential Mediation Analysis of Flow and Engagement. Education and
+Information Technologies, 27(3), 3451–3471.
+Hamari, J., & Tuunanen, J. (2021). The Impact of Gamification-Based Performance
+Feedback on Engagement and Motivation in Mobile Learning. Journal of
+Computer Assisted Learning, 37(6), 1482–1493.
+101
+Juhari, A. N., & Abu Bakar, M. H. (2020). Popular Game Elements Used in
+Designing Game-Based Learning STEM Application for School Students – A
+Review. Jurnal Kejuruteraan, 32(4), 559–568.
+Jung, J., & Lee, Y. (2021). The Effects of Gamification on Learner Motivation in
+Online Learning Environments: Focusing on the Mediating Effect of Self-
+Efficacy. Journal of Educational Technology, 37(2), 45–67.
+Kamboj, S., Rana, S., & Drave, V. A. (2020). Factors Driving Consumer
+Engagement and Intentions with Gamification of Mobile Apps. Journal of
+Electronic Commerce in Organizations, 18(2), 17–35.
+Kauser, H. (2022). Misconceptions Regarding Islam in the Contemporary World.
+International Journal of Arts, Humanities and Social Studies, 4(1), 45–50.
+Khadijah H., Nazir Cawangan Miri Maimun Aqsha Lubis, J., & Pembentukan
+Pendidikan Lanjutan dan Profesional, P. (2022, January 1). Kepentingan
+Gamifikasi dalam Pengajaran dan Pemudahcaraan (PDPC) Pendidikan Islam.
+ASEAN Comparative Education Research Journal on Islam and Civilization
+(ACER-J), 5(1).
+Lima Caminha, L. O., & Marques, A. B. (2024). D-LEARN: A Digital Game for
+Software Architecture Education. ACM International Conference Proceeding
+Series.
+Lu, H. P., & Ho, H. C. (2020). Exploring the Impact of Gamification on Users’
+Engagement for Sustainable Development: A Case Study in Brand Applications.
+Sustainability (Switzerland), 12(10).
+Memon, N., Chown, D., & Alkouatli, C. (2020). Descriptions and Enactments of
+Islamic Pedagogy: Reflections of Alumni from an Islamic Teacher Education
+Programme. Pedagogy, Culture & Society.
+Mohamad Yusof, M. R., & Zulkifli, H. (2021). Tahap Kefahaman dan Kemahiran
+Pengajaran Matapelajaran Jawi dalam Kalangan Guru Pendidikan Islam: The
+Level of Understanding and Teaching Skills of Jawi Subjects Among Islamic
+Education Teachers. Journal of Quran Sunnah Education & Special Needs, 5(1),
+39–45.
+Nabi, U., Fayaz, I., Kamal, S. S. L. A., & Shah, S. A. (2024). Akhlāq Scale:
+Development and Estimation of Psychometric Properties. Psychology of
+Religion and Spirituality.
+Nash, A. (2022). The Necessity of Deduction for Efficient and Effective System
+Concept Formulation. IEEE Aerospace Conference Proceedings.
+102
+Nisbet, J. (2023, July 25). Game-Based Learning: Pros, Cons and Implementation
+Tips for Educators. Prodigy Game. https://www.prodigygame.com/main-
+en/blog/game-based-learning/
+Padfield, J. (2024, November). What is Game-Based Learning? DreamBox.
+Retrieved December 8, 2024, from
+https://www.dreambox.com/math/guides/game-based-learning
+Paduraru, C., Paduraru, M., & Stefanescu, A. (2021). Automated Game Testing
+Using Computer Vision Methods. Proceedings of the 2021 36th IEEE/ACM
+International Conference on Automated Software Engineering Workshops
+(ASEW 2021).
+Pereira, F. D., Rodrigues, L., & Isotani, S. (2021). Gamification Suffers from the
+Novelty Effect but Benefits from the Familiarization Effect: Findings from a
+Longitudinal Study. Smart Learning Environments, 8(1), 1–21.
+Premthaisong, S., & Srisawasdi, N. (2020). Supplementing Elementary Science
+Learning with Multi-Player Digital Board Game: A Pilot Study. ICCE 2020 -
+28th International Conference on Computers in Education, Proceedings.
+Pratama, A. B., & Azhari, M. F. (2020). Designing a Mobile Application Based on
+Gamification Method to Increase Muslims’ Reading Interest.
+Ramadiani, R., Respatti, E., Putra, G. M., & Alyamani, H. J. (2021). The
+Development of Borneo Wildlife Game Platform. International Journal of
+Advances in Computer Science and Applications.
+Risma, H. (2022). Islamic Worldview. Tahdzib Al-Akhlaq: Jurnal Pendidikan Islam,
+5(2), 134–140.
+Ruzairi, R., & Jasmi, K. A. (2022). Akhlak dan Adab Generasi Muda Kini. Berita
+Harian.
+Sabirah, K., Bahari, K., Menengah, S., Johari, K. K., & Berop, J. (2024). Grafik
+dalam Pembelajaran dan Pengajaran Ujian Penilaian Kelas Kafa (UPKK) Tahun
+5. 12, 93–104.
+Safariani, N., Suriansyah, A., & Novitawati, N. (2023). Tahfiz al-Qur`an Learning
+Management of Integrated Islamic Early Childhood Education. International
+Journal of Social Science and Human Research, 6(5), 2523–2530.
+103
+Santos, M. F., Rodrigues, M. A., Dias, J. M. S., & Lopes, F. S. (2021). Enhancing
+User Engagement in Educational Platforms with Gamification: The Role of
+Progress Indicators. International Journal of Educational Technology in Higher
+Education, 18(1), 1–15.
+Santoso, S. (2024). Islamic Leadership: Prophet Muhammad as a Role Model of
+Charismatic, Transformational and Servant Leader. Jurnal Syntax
+Transformation, 5(1), 56–68.
+Sinnatwah, J. D., Kenneh, H., Coker, A. A., & Skrip, L. A. (2021). Participatory
+Design and Process Testing to Optimize Utility, Usability, and Acceptability of
+a Mobile Game for Promoting Evidence-Driven Public Health Decision-Making
+in Resource-Constrained Settings. Frontiers in Digital Health.
+Smiderle, R., Rigo, S. J., Marques, L. B., Peçanha de Miranda Coelho, J. A., &
+Jaques, P. A. (2020). The Impact of Gamification on Students’ Learning,
+Engagement and Behavior Based on Their Personality Traits. Smart Learning
+Environments, 7(1).
+Solihin, M., Haryadi, A., & Rohanda, R. (2024). Islamic Jurisprudence (Fiqh Science)
+in an Epistemological Perspective. International Journal of Social Science and
+Human Research, 7(3), 1015–1022.
+Speidel, U., & Manoharan, S. (2022). Strengthening Puzzle-Based Learning with
+Individualization. Proceedings of the 2022 31st Annual Conference of the
+European Association for Education in Electrical and Information Engineering,
+EAEEIE 2022.
+Studart, N. (2022). Gamification as a Design Instructional. Revista Brasileira de
+Ensino de Física.
+Teixeira, D. S., Silva, R. M., & Monteiro, D. (2020). The Impact of Gamification on
+Students’ Motivation and Engagement in Physical Education. Journal of
+Physical Education and Sport, 20(6), 3270–3278.
+Wen, J. M., Lin, C. H., & Liu, E. Z. F. (2021). Integrating Educational Board Game
+in Chinese Learning Environment to Enhance Students' Learning Performance
+and Flow Experience. Research Anthology on Developments in Gamification
+and Game-Based Learning.
+Yu, J., Wu, Y., Xie, X., & Zhang, F. (2023). GameRTS: A Regression Testing
+Framework for Video Games. Proceedings of the International Conference on
+Software Engineering.

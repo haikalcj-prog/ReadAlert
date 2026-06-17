@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:share_plus/share_plus.dart';
 import '../services/library_service.dart';
 import 'full_book_info_screen.dart';
 
@@ -493,6 +494,67 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
+  void _showEditNoteDialog(String currentNote) {
+    final TextEditingController controller = TextEditingController(text: currentNote);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: cardColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Text('Edit Note', style: TextStyle(color: Colors.white)),
+          content: TextField(
+            controller: controller,
+            maxLines: 5,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              hintText: 'Add a personal note about this book...',
+              hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+              filled: true,
+              fillColor: bgColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cancel', style: TextStyle(color: Colors.white.withOpacity(0.5))),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                try {
+                  await LibraryService.updateBookDetailsWithXp(
+                    bookId: _bookId,
+                    updates: {'note': controller.text.trim()},
+                  );
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('Note updated.'),
+                        backgroundColor: accentColor,
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error updating note: $e')),
+                    );
+                  }
+                }
+              },
+              child: Text('Save', style: TextStyle(color: accentColor, fontWeight: FontWeight.bold)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final title = _volumeInfo['title'] ?? 'Unknown Title';
@@ -535,6 +597,36 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                 ),
               ),
             ),
+            actions: [
+              StreamBuilder<DocumentSnapshot>(
+                stream: LibraryService.getBookStream(_bookId),
+                builder: (context, snapshot) {
+                  bool isInLibrary = snapshot.hasData && snapshot.data!.exists;
+                  if (!isInLibrary) return const SizedBox.shrink();
+
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0, top: 8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: cardColor.withOpacity(0.6),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.share_rounded,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          final text = "Check out this book I'm reading: $title by $authors!";
+                          final shareContent = _bookUrl != null ? '$text\n\n$_bookUrl' : text;
+                          Share.share(shareContent);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -965,6 +1057,52 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                         ],
                                       );
                                     },
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: cardColor,
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(color: Colors.white12),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            'NOTE',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10,
+                                              letterSpacing: 1,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () => _showEditNoteDialog(firestoreBookData['note'] ?? ''),
+                                            child: const Icon(Icons.edit_rounded, color: Colors.grey, size: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        (firestoreBookData['note'] == null || firestoreBookData['note'].toString().trim().isEmpty) 
+                                            ? 'Tap the edit icon to add a personal note.'
+                                            : firestoreBookData['note'],
+                                        style: TextStyle(
+                                          color: (firestoreBookData['note'] == null || firestoreBookData['note'].toString().trim().isEmpty) 
+                                              ? Colors.white38 
+                                              : Colors.white,
+                                          fontSize: 14,
+                                          height: 1.4,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],

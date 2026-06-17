@@ -1,0 +1,2264 @@
+ 
+ 
+UNIVERSITI TEKNOLOGI MARA 
+ 
+ 
+ 
+ 
+ 
+READALERT: A GAMIFIED MOBILE 
+APP FOR TRACKING READING 
+PROGRESS 
+ 
+ 
+ 
+ 
+ 
+ 
+MUHAMMAD HAIKAL BIN NOROL SHAHRI 
+ 
+ 
+ 
+ 
+ 
+BACHELOR OF COMPUTER SCIENCE (HONS.) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+JANUARY 2026 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Universiti Teknologi MARA 
+ 
+ 
+ 
+ReadAlert: A Gamified Mobile App For 
+Tracking Reading Progress 
+ 
+ 
+ 
+Muhammad Haikal Bin Norol Shahri 
+ 
+ 
+ 
+ 
+Report submitted in fulfilment of the requirements 
+for Bachelor of Computer Science (Hons.) 
+Faculty of Computer and Mathematical Sciences 
+ 
+ 
+ 
+ 
+ 
+ 
+JANUARY 2026 
+ 
+ 
+ 
+i 
+ 
+SUPERVISOR APPROVAL 
+ 
+ 
+READALERT: A GAMIFIED MOBILE APP FOR TRACKING READING 
+PROGRESS 
+ 
+By 
+ 
+MUHAMMAD HAIKAL BIN NOROL SHAHRI 
+2023699086 
+ 
+This report was prepared under the supervision of the supervisor, Madam Lily Marlia 
+Binti Abdul Latif. It was submitted to the Faculty of Computer and Mathematical 
+Sciences and was accepted in partial fulfilment of the requirements for the degree of 
+Bachelor of Computer Science (Hons.) 
+ 
+ 
+ 
+Approved by 
+ 
+ 
+ 
+…………………………………… 
+Madam Lily Marlia Binti Abdul Latif  
+Project Supervisor 
+ 
+ 
+JANUARY 23, 2026 
+ 
+ 
+ 
+ 
+ 
+ 
+ii 
+ 
+STUDENT DECLARATION 
+ 
+ 
+I certify that this report and the project to which it refers is the product of my own 
+work and that any idea or quotation from the work of other people, published or 
+otherwise are fully acknowledged in accordance with the standard referring of the 
+discipline. 
+ 
+ 
+ 
+…………………………………… 
+Muhammad Haikal Bin Norol Shahri 
+2023699086 
+ 
+ 
+ 
+JANUARY 23, 2026 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+iii 
+ 
+TABLE OF CONTENTS 
+ 
+ 
+CONTENT                                                                                      PAGE 
+ 
+SUPERVISOR APPROVAL i 
+STUDENT DECLARATION ii 
+LIST OF FIGURES v 
+LIST OF TABLES vi 
+ 
+CHAPTER ONE: INTRODUCTION  
+ 
+        1.1   Background of Study 1 
+        1.2   Problem Statement 3 
+        1.3   Project Objectives 4 
+        1.4   Project’s Scope 4 
+        1.5   Significance 6 
+        1.6   Conclusion 7 
+ 
+CHAPTER TWO: LITERATURE REVIEW  
+ 
+         2.1   Overview of Reading 9 
+             2.1.1 Type of Reading Material 10 
+         2.2   Overview of Gamification 14 
+             2.2.1 Type of Gamification 15 
+             2.2.2 Game Elements 17 
+         2.3   Overview Of Recommendation System 20 
+             2.3.1 Machine Learning 21 
+         2.4   Existing Applications 24 
+             2.4.1 Bookmory 24 
+             2.4.2 PagePots 25 
+             2.4.3 Habitica 26 
+             2.4.4 Comparison of Existing Applications 27 
+         2.5   Justification on Game Elements 29 
+iv 
+ 
+          2.6   Conclusion 31 
+ 
+CHAPTER THREE: METHODOLOGY  
+ 
+         3.1    Project Methodology 33 
+              3.1.1 Phase 1: Identification 35 
+              3.1.2 Phase 2: Design 36 
+              3.1.3 Phase 3: Development 39 
+              3.1.4 Phase 4: Prototyping 40 
+              3.1.5 Phase 5: Testing 41 
+         3.2    Summary of Project Methodology 42 
+         3.3    System Architecture 44 
+         3.4    Hardware and Software Requirements 47 
+              3.4.1 Hardware Requirements 47 
+              3.4.2 Software Requirements 48 
+         3.5    Conclusion 49 
+ 
+REFERENCES  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+v 
+ 
+LIST OF FIGURES 
+ 
+ 
+FIGURE                                                                                                              PAGE 
+2.1     Concept Map For ReadAlert 8 
+2.2     Bookmory Interfaces 25 
+2.3     PagePots Interfaces 26 
+2.4     Habitica Interfaces 27 
+3.1     Mobile Application Development Life Cycle (MADLC) Phases   34 
+3.2     Wireframe Storyboard Design for User Interface (UI) 38 
+3.3     System Architecture 45 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+vi 
+ 
+LIST OF TABLES 
+ 
+ 
+TABLE                                                                                                                PAGE 
+2.1     Comparison of Existing Applications And ReadAlert 28 
+3.1     Identification Phase         36 
+3.2     Design Phase 37 
+3.3     Development Phase 40 
+3.4     Prototyping Phase 41 
+3.5     Testing Phase 42 
+3.6     Summary of Project Methodology 43 
+3.7     Hardware Requirements 47 
+3.8     Software Requirements 48 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1 
+ 
+CHAPTER 1 
+ 
+ 
+INTRODUCTION 
+ 
+ 
+This chapter introduces the ReadAlert: Gamified Mobile Application For Tracking 
+Reading Progress, highlighting its purpose, background, and the need for a gamified 
+solution to improve reading motivation. It outlines the study’s background, objectives, 
+scope, and significance to show how the proposed system promotes engagement and 
+organized reading habits. Finally, the chapter concludes with an overview of how the 
+application supports consistent reading behaviour and lifelong learning. 
+ 
+1.1 Background of Study 
+ 
+Reading is one of the key factors in the process of knowledge, the development 
+of critical thinking abilities, and promoting the process of self-directed 
+development. However, maintaining a regular reading routine is a ubiquitous 
+problem especially in the modern digital environment where distractions are 
+rampant. Mobile technology has offered an easily accessible channel of 
+promoting reading habits by inclusion of applications that make it interactive 
+and accessible in learning. Gamification is one of the strategies that are used; 
+in this case, different elements, including tiers, badges, and points, are 
+incorporated to make ordinary tasks more interest based. This combination of 
+the educational and entertainment features has proven to increase the 
+motivation and the participation of the user (Anggrainy et al., 2024). 
+ 
+ 
+Several studies have explored the use of gamification to stimulate reading and 
+motivational dynamics. Li et al. (2024) noted that mobile gamified experiences 
+produce long-term learning behaviours and improve user engagement over 
+time. Similarly, Nursi et al. (2025) highlighted the significance of tracking 
+progress in enhancing self-directed learning and user satisfaction, in general, 
+in mobile education environments. Meng et al. (2024) have stated that effective 
+2 
+ 
+gamified elements improve the user engagement and retention in the web-
+based learning programs. Although these were very promising results, existing 
+studies have been mainly focused on formal education and not on personal 
+reading habits and informal learning and, as such, reflect a gap that can be 
+exploited to investigate the gamification of personal reading progress 
+monitoring and the continuum between academic reading and leisure reading. 
+ 
+ 
+Existing reading cataloguing software are mostly primitive form of data 
+logging applications that lack any incentive elements that can keep a user 
+interested in the software. Wang et al. (2024) observe that the lack of interactive 
+or motivational features regularly results in a user disengagement in the long 
+term. Oliveira et al. (2024) also emphasize that the inadequately integrated 
+gamification designs may suppress the long-term engagement and 
+involvement. As a result, many readers become alienated by their reading goals 
+or quit books halfway, fostering discontinuous habits of reading. All these gaps 
+result in the need to have a platform that could effectively manage the reading 
+lists and encourage its users to continue reading with the help of gamified 
+progress and incentives. 
+ 
+ 
+The elaboration of a mobile reading tracker gamification has scholarly 
+significance, as it is part of the growing body of information on gamification 
+in educational technology and mobile devices. Socially, this kind of initiative 
+instils reading culture and lifelong learning among students and adults. In 
+practice, it provides users with an effective tool that is easy to use to track 
+progress, stay organized, and remain motivated. The integration of gamified 
+design principles in reading applications aligns with current educational 
+technology trends that emphasize engagement, personalization, and self-
+development (Li et al., 2024; Nursi et al., 2025). 
+ 
+ 
+3 
+ 
+The current paper fills the motivation gap that is present in the current reading-
+tracking frameworks by suggesting a mobile app that combines gamification 
+and progress monitoring. The project aims at changing the traditional reading 
+records into the interactive process and, therefore, promote regular reading and 
+the visualization of user progress. This objective directly presents the major 
+objectives of the project, which are to design, develop, and test a gamified 
+mobile application to increase reading motivation and organizational 
+effectiveness. 
+ 
+1.2 Problem Statement 
+ 
+Ideally, readers should possess both the motivation and effective tools to 
+sustain regular reading habits. A structured mobile system would allow users 
+to record their progress, track completed books, and gain satisfaction from 
+measurable achievements. This type of system could encourage users to 
+maintain discipline and enjoyment while reading consistently. 
+ 
+ 
+As a matter of fact, most readers become demotivated halfway through, forget 
+what they have read or give up their goals altogether. The currently available 
+mobile catalogue or reading apps usually offer simple record-keeping 
+capabilities with no interactive or motivational elements. It has been noted that 
+the conventional reading apps do not always keep the user interested due to the 
+lack of effective feedback systems (Anggrainy et al., 2024). On the same note, 
+Wang et al. (2024) indicated that the gamification in learning tools is often 
+implemented at a small scale, which results in less engagement in the long-
+term. Oliveira et al. (2024) also observed that the ability to incorporate the 
+elements of a game is among the key issues to consider in the context of mobile 
+app design to ensure that the user is engaged in the process continuously. 
+ 
+ 
+In case of low motivation and engagement, users are likely to forget about their 
+reading habits and lose the track of their progress. Lack of gamified features 
+4 
+ 
+and visualization of progress leads to the lack of engagement and discipline in 
+reading. Li et al. (2024) found that the lack of visualizing their reading success 
+in learners reduces their motivation in the long run. Nursi et al. (2025) 
+discovered that the users do not stick to the habit of self-directed learning 
+without structured progress tracking. Also, Meng et al. (2024) found that the 
+absence of effective engagement features on online platforms leads to a 
+decrease in participation and motivation among learners. 
+ 
+ 
+To overcome these problems, this project suggests creating a gamified mobile 
+app that can be used to monitor the progress in reading. The system combines 
+digital cataloguing with gamification features like points, badges and levels to 
+make the process of reading a rewarding experience. Progress charts and 
+statistics allow the users to see their progress and thus make reading a fun and 
+organized habit. This strategy is expected to assist users to develop regular 
+reading habits, keep records of books systematically, and improve their general 
+reading motivation. 
+ 
+1.3 Project Objectives 
+ 
+The objectives of this project are: 
+I. To identify suitable gamification element to enhance users’ reading 
+engagement. 
+II. To develop a gamified mobile app that allows users to record and 
+monitor their reading progress. 
+III. To evaluate the functionality of the mobile application. 
+ 
+1.4 Project’s Scope 
+ 
+The system to be developed will be in the form of an android application to 
+make it widely available and compatible with popular mobile devices. The app 
+is designed to be used by students, teachers and casual readers who wants to 
+build their reading discipline and keep records of personal reading activity 
+5 
+ 
+done in the day. Through cantering on mobile technology, the system aspires 
+to increase convenience and flexibility for users so they can take their reading 
+journey wherever or whenever. 
+  
+ 
+The app will have its own data, which includes books added by the users 
+including manual entry of book or scan ISBN & barcode. This facilitates the 
+creation of a customized digital reading collection that fills up with both 
+present and past reads. The recorded data will be used for the purposes of 
+monitoring progress, book classification, and user reading behaviour. This 
+data is the backbone people will need for visualising their progress and 
+keeping a clean list of what they read. 
+ 
+ 
+As to the method, it integrates gaming, visualization, and recommendation 
+technologies so as to stimulate and motivate users when reading. Gamification 
+elements like points, levels and badges are employed to reinforce their regular 
+reading activity and visual charts are introduced to display the reading status 
+update so that they can effortlessly managing and reviewing his/her 
+performance. The system has a simple content-based recommendation feature 
+to suggest books based on the available books' metadata and user's reading 
+history, which would help to improve the personalized reading experience for 
+the user. The recommendation system takes into account data such as genre, 
+author and books saved in the library of the reader to determine the user's 
+reading preferences. The application fetches the relevant book suggestions 
+from the external book sources, such as Google Books API, Open Library API, 
+based on these preferences. This simplistic method works well in the prototype 
+of a mobile application as it doesn't ask for a complex machine learning 
+algorithm, TF-IDF, cosine similarity or a large amount of user data. In 
+summary, by combining gamification, visual feedback of data and personal 
+recommendations; the smart system nudges users to participate perpetually 
+and to evolve using technology-enabled learning. 
+ 
+6 
+ 
+1.5 Significance 
+ 
+This system is important because it enhances reading motivation by including 
+gamified features which results in a feeling of accomplishment and rewards. 
+Elements of gamification such as levels, points and badges aim to encourage 
+user engagement and satisfaction by changing reading from a passive process 
+into something interactive and fun. The system also reinforces users to read 
+continuously and regularly, it provides visible progress as well as recognition 
+for effort, thus supporting them in forming reading habits and maintaining 
+reading motivation overtime. This approach to motivation facilitates the 
+involvement of human's psychological part in learning through using success 
+and improvement as a continuing factor for participation. 
+ 
+ 
+Also, this project offers the feature of reading management in a systematic 
+manner which is another great advantage. With this system, users can enjoy 
+the digital-based platform, and they will be able to record their reading such as 
+logging in, classifying data on what book or novel that is being read, tracking 
+in time of study. With functionality such as inputting barcode or ISBN 
+information, users can easily maintain a catalog of their personal library and 
+its current reading status. It's this structure that minimizes any disorientation, 
+and maximizes convenience, the latter a particularly welcome quality for those 
+who are often juggling several books at once. An application that can visualize 
+and update reading data in one integrated environment to provide a better user 
+experience is possible, and it is very effective for managing time through 
+reading. 
+ 
+ 
+Lastly, the application encourages lifelong learning by imposing a tendency to 
+self-improve and discipline with quantifiable reading goals. The system’s 
+gamified feedback and data-visualisation capabilities ensure users comprehend 
+their progress, encouraging them to set new reading goals. This ongoing 
+process of setting and achieving goals encourages internal motivation and 
+7 
+ 
+helps us grow as people. Through its blend of education, technology and 
+gamification, the app not only promotes reading behaviour but also supports a 
+healthy learning culture worth to last outside scholarly environments. 
+ 
+1.6 Conclusion 
+ 
+This chapter has laid out the importance of reading motivation, and how 
+gamification can leverage engagement through technology. It has analysed 
+existing empirical research on gamified learning platforms which suggest the 
+extent to which a gamified learning platform promotes user engagement and 
+self-regulated learning. But the current systems do not include motivational 
+design to help people self-regulate their reading. The proposed solution is an 
+interactive, structured and entertaining gamified mobile application that will 
+follow the user’s reading track, in that way would potentially solve this gap. 
+The next chapter will present an extensive literature review related to this 
+study and associated theoretical models used to inform the deployment of game 
+elements and progress tracking in educational and personal learning settings 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8 
+ 
+CHAPTER 2 
+ 
+ 
+LITERATURE REVIEW 
+ 
+ 
+This chapter presents the theoretical requirements, and technical factors that drive 
+ReadAlert mobile app development. Their intent is to present a general view of 
+reading in the digital era, focusing on different categories of digital reading material 
+and recommendation services that alleviate attention scarcity. The chapter discusses 
+the concept of gamification, and we highlight why reward, progression, challenge 
+methods are good for keeping users engaged. Reading and habit tracking apps are 
+analysed, competing against each other's applications to be compared on their 
+strengths and weaknesses. Finally, the elements of games and game features used for 
+ReadAlert to increase reading comprehension and foster habit of reading are discussed 
+in this chapter. Conceptual diagram of the application is illustrated in Figure 2.1. 
+ 
+ 
+Figure 2.1 Concept Map For ReadAlert 
+ 
+ 
+9 
+ 
+2.1 Overview of Reading 
+ 
+Reading is a complex and interactive activity in today’s educational 
+environments, which includes not just traditional printed text but also occurs 
+across varied digital modes of communication. In this regard, literacy tasks 
+have traditionally been divided into expressive and receptive skills. Changes 
+in the texts from printed books to digital interactive platforms of reading have 
+had a profound impact on how students interact with text and acquire 
+knowledge. Recent studies have emphasized the changing context of reading 
+patterns, especially among younger populations for whom the mobile device 
+has become a mainstay in both academic and leisurely reading practices (Liu 
+et al., 2023). This transformation is leading to an increasing curiosity around 
+both reading engagement, comprehension and the overall experience of 
+reading across media. 
+ 
+  
+One important focus area is the contrast between printed and digital texts. 
+There are of course countless conveniences to reading digitally, but the science 
+does support that printed materials can lead to better comprehension and longer 
+attention spans. For instance, Parsons et al. (2021) learners preferred the 
+interactive elements of digital reading platforms, yet despite these preferences 
+they continued to prefer printed texts for leisure reading because of tactility 
+and ownership. It reinforces a complex and multi-faceted pattern of behaviour, 
+in which digital can be attractive for its immediacy and game-like properties, 
+but that print continues to play such essential roles in specific reading 
+experiences. 
+ 
+ 
+Furthermore, the motivations driving reading engagement are diverse and 
+context dependent. Liu et al. (2023) discovered that there were four dominant 
+motivational needs driving college students’ mobile reading behaviour, 
+including information need, academic need, social need and emotional need. 
+They found that even students with little time to read in daily life were using 
+10 
+ 
+mobile reading to meet certain informational and academic needs, indicating 
+that mobile reading is not just entertainment but also an important supplement 
+to learning. The study also pointed out that difficulties such as distractions and 
+eye strain could detract from the reading process, which in turn emphasises the 
+importance of well-designed digital reading environments for 
+counterbalancing these obstacles. 
+ 
+ 
+The use of gamification on reading apps is a rich potential field to explore in 
+terms of motivation and engagement. With gameful elements, including points, 
+badges, and leaderboards integrated into digital reading platforms it is possible 
+to create a more interactive and rewarding experience of reading (Parsons et 
+al., 2021) These gamified features are not only capable of motivating accuracy 
+in learning practices but also facilitate the interest of digital natives who want 
+instantaneous feedback and consider competitive as one part of their life 
+learning. Learning what roles material format, user motivation, and 
+technological supports play as reading is changing in the digital era will 
+continue to be important in creating effective interventions and tools for 
+reading. 
+ 
+2.1.1 Type of Reading Material 
+ 
+Texts are written in different types, to fulfil various communicative functions 
+and have effects on the way readers interpret and understand. The rise of 
+digital technology has transformed pre-existing categories of reading 
+materials and fostered novel modes of engagement that are more interactive 
+with a mass audience. These material types must be understood to design 
+systems capable of accommodating different reading practices and values. 
+Recent studies demonstrate how various printed, digital, educational, 
+informational, literacy, visual and technical media influence understanding, 
+motivation and engagement differently. 
+ 
+ 
+11 
+ 
+▪ Printed Material  
+ 
+Printed material refers to physical texts such as books, newspapers, and 
+magazines that offer a tactile reading experience. Studies have shown that even 
+as people continue turn to digital increasingly, they still value reading in print 
+for certain types of content, particularly leisure and deep reading. Parsons et 
+al. (2021) found that students often prefer traditional printed books for leisure 
+reading because of a sense of ownership and an ability to turn pages and 
+underline text. And there's the added phenomenon that print seems to yield 
+better understanding and retention, as readers can touch and turn pages rather 
+than fight off the distractions speakers or other gadgets provide. Traditional 
+reading habits, even among digital natives remain, particularly when the need 
+for prolonged attachment to a narrative is desired. 
+ 
+▪ Digital Material  
+ 
+Digital material refer to an electronic document that can be accessed through 
+using mobile device, tablet, and computer. According to Liu et al. (2023), 
+Mobile reading used to be" a common behaviour that makes texts accessible to 
+readers and readers’ private space in all time and everywhere “it has opened up 
+the possibility for a fragmentary and customizable form of reading that could 
+be carried out during breakeven minutes. Digital texts may involve use of 
+audio, video, in addition to hyperlink in various combinations. 
+ 
+▪ Educational Material  
+ 
+Educational materials are specifically created to aid learning in a subject and 
+the acquisition of knowledge using Learning Management Systems (LMS), 
+mobile apps, among others. As Liu et al. (2023) argue, learning materials are 
+intended to address the ‘academic needs’ of the users in their search for 
+discipline knowledge, academic articles, and the boundaries of research. 
+Learning materials in the mobile learning environment are specifically 
+designed to aid students in the execution of learning tasks, learning in class, 
+12 
+ 
+and theses/examinations. As stated by Ahmed et al. (2025), learning materials 
+are now hosted on cloud services that enable the lecturer to upload learning 
+materials like PDF documents, videos, among others. 
+ 
+▪ Informational Material  
+ 
+Informational material is solely the retrieval of facts and news in a swift 
+manner. Liu et al. (2023) stress that “information needs are one of the 
+fundamental motivations for mobile device reading activities the readers want 
+items such as news stories and stories about employment strategies and general 
+facts as a means of staying informed.” The nature of this material is 
+characterized by its utility and timeliness it is read with the intention of gaining 
+awareness of what is happening in the world around us and for the purpose of 
+expanding one's familiarity with the many facets of life. The motivation for 
+informational material consumption could well be the demand for speedy and 
+comprehensive access to facts. 
+ 
+▪ Literacy Material 
+ 
+Literacy materials are books written for the express purpose of building and 
+strengthening reading, vocabulary, and comprehension skills. Such materials 
+are critical for moving readers from one stage of literacy development to the 
+next, Swiss-cheese-reader pre-readers who have some inkling that the mark on 
+a page corresponds to speech sounds all the way up to sophisticated experts 
+who can use and synthesize complex information. In schools and classrooms, 
+literacy materials are often levelled storybooks or books that focus on specific 
+skills such as print decoding and vocabulary to build a reading practice. 
+ 
+▪ Visual Reading Material  
+ 
+Visual reading materials, which are a combination of texts and images, are used 
+to facilitate understanding for the reader(s), in particular the multimodal 
+learners who benefit from the multimodal input. Chen et al. (2023), who 
+13 
+ 
+investigate the first, also investigate the engagement and flow experienced by 
+learners as they interpret gamified interactive e-books featuring multimedia 
+such as images and animations, to see if it facilitates the recognition and 
+learning of characters for learners. These materials could serve as a scaffolding 
+text for beginning language learners to guide them through the early learning 
+stages, where the pictures serve as a point of reference between the abstract 
+text and the tangible images of objects. When provided with such visual cues 
+that attenuate the cognitive burden involved in message making from text 
+alone, the benefits of reading are made even more apparent. 
+ 
+▪ Technical Material  
+ 
+Technical materials are topic-specific texts that are utilized in the process of 
+teaching complicated materials. Frequently involving high degrees of mental 
+work, and accurate interpretation. Such materials are used in the framework of 
+a described by Ahmed et al. (2025). Students get involved in Object-Oriented 
+Programming (OOP) course. information concerning encapsulation, 
+inheritance and polymorphism. Unlike informational text, technical documents 
+are generally incorporated into general informational text. gamified or cloud-
+based solutions to assist students in mastering the challenging concepts. using 
+organized modules and examinations. This form of reading material is 
+important to vocational and STEM (Science, Technology, Engineering, and  
+Mathematics) where the aim is to close the knowledge gaps on. 
+ 
+ 
+In general, the rising heterogeneity of reading resources are indicators of the 
+changing reading patterns due to the technological revolution. All formats have 
+their advantages and difficulties which affect user motivation, understanding, 
+and consistency in reading. Such differences are the reason to create systems 
+such as gamified reading applications that will support a variety of reading 
+formats and improve the user interaction with the application by the interactive 
+design. 
+ 
+14 
+ 
+ 
+2.2 Overview of Gamification 
+ 
+The concept of gamification has been broadly established within the current 
+academic literature as the deliberate exercise of game design and game 
+mechanics to contexts that do not involve games to increase the engagement, 
+motivation, and participation of the users. Unlike game-based learning, 
+through which new games are developed and implemented (specifically) to be 
+used as educational tools, gamification means altering established learning 
+activities with added elements to encourage a specific behavior and turn 
+otherwise inert activities into interactive ones (adding points, badges, and 
+more). This practice is often based on the Self-Determination Theory (SDT): it 
+is assumed that to maintain intrinsic motivation, it is necessary to fulfill three 
+basic psychological needs in particular competence, autonomy, and 
+relatedness. As stressed by Ahmed et al. (2025), gamification can be viewed as 
+a novel educational approach that does not only enhance productivity but also 
+curbs the usual issues of digital learning setting, including student seclusion 
+and absence of concentration. Gamification creates an environment where the 
+end user feels pressure to engage in the learning process once it is converted to 
+an environment of progress and accomplishment by standing from passive 
+consumption to direct interaction. 
+ 
+ 
+The success of gamification is very dependent on the use of game mechanics, 
+including points, levels, feedback, and leaderboards, which serve to act as 
+motivational levers to track the success and put progress in a visual form. 
+Khaldi et al. (2023) distinguish such tools as points, badges, and leaderboards 
+as the most widespread and most effective in the field of digital higher 
+education to encourage student engagement. These mechanics work by giving 
+direct feedback, which, according to Parsons et al. (2021), is essential in 
+lessening cognitive load and inquiry in the complex activity, maintaining 
+cognitive involvement. Moreover, the addition of such dynamic aspects as day-
+to-day challenges and rankings encourages the values of social interactions and 
+15 
+ 
+purpose-setting which is proven to contribute considerably to the level of 
+emotional involvement and motivation in reading. These elements, when 
+properly drawn, contribute to the accomplishment of redirecting the attention 
+of the user towards more intrinsic gratification instead of focusing on extrinsic 
+rewards as this will allow them to look at reading as worth-while and fun 
+activity. 
+ 
+2.2.1 Type of Gamification 
+ 
+Educational applications of gamification strategies can be popularly classified 
+into the categories of the psychological motivators used to increase user 
+interaction. According to Wang et al. (2024), there are many different methods 
+in instruction in reading that fall into such categories as Reward-Based 
+Gamification and Progression-Based Gamification, where points and badges 
+and levels and progress bars are used respectively to receive immediate 
+satisfaction and assessments of long-term progress; and Challenge-Based 
+Gamification where tasks and quests are applied accordingly to gain mastery. 
+Others are Social Gamification, where the competition with the help of 
+leaderboards promotes engagement by encouraging peer comparison and 
+Avatar Gamification when personalization and identity are in focus, so a user 
+can create a digital personas akin to the example of the Clown Warrior that 
+Chen et al. (2023) described when she creates such a character and puts more 
+attention and emotion into the learning process. 
+ 
+ 
+In the case of the ReadAlert application, three types have been chosen, namely: 
+Reward-Based Gamification, Progression-Based Gamification and Challenge-
+Based Gamification. This choice can be justified by the recent results of Khaldi 
+et al. (2023), who must add that such achievement-orientated affordances as 
+points and challenges, are the most popularly used and effective features in 
+web-based learning platforms. The aim of the system, by balancing both 
+intrinsic and extrinsic motivation with immediate rewards to certify effort, 
+progression systems to trace growth, and challenges to encourage your activity 
+16 
+ 
+daily is to provide you with a balanced environment that can be easily achieved 
+in purely competitive systems through social pressure. 
+ 
+▪ Reward-Based Gamification  
+ 
+Reward-Based Gamification. Providing concrete or symbolic reinforcements 
+of desirable behaviour allows for gratified feedback from the system at the 
+immediate moment. Wang et al. (2024) observed that most common forms of 
+game-based rewards are points and badges, which effectively motivate learners 
+by transforming ordinary learning tasks into more engaging activities. When 
+considering mobile learning system, Ahmed et al. (2025) defined such rewards 
+as an important part of a mechanism which allows instructor to keep track of 
+students' actions and contributions to the system. As an illustration, individual 
+users are rewarded with "coins" or "Experience Points (XP)" for specific 
+interaction activities, such as login, logout, and completion of specific tasks. 
+Such mechanism is most imperative to keep user interested in the system 
+because it provides the user with instant useful feedback, which acts as a form 
+of reward for the user achievement and, assuming equally, a motivation for 
+users to keep on repeating desirable task such as reading. 
+ 
+▪ Progression-Based Gamification 
+ 
+Progress-based Gamification, on the other hand, concentrates the means of 
+visualizing a user's progression, status and development throughout a given 
+period. This variety also often makes use of stages and progress bars to offer 
+players a transparent journey on their progression. According to Wang et al. 
+(2024), as a common tool for primary and secondary education, progress bar 
+is essential to enable students see what proportion of the task or even book they 
+had left to complete by reducing the uncertainty from long-term goals. Ahmed 
+et al. (2025) also note that the more points users get, users "level-up", and that 
+it is an indicator of how consistent and good they are. This mechanism meets 
+the psychological need for competence by showing to users an aggregated view 
+17 
+ 
+of their accomplishments which stimulates them to keep using the application 
+and advance to higher levels of competence 
+ 
+▪ Challenge-Based Gamification 
+ 
+Challenge-Based Gamification: The act of creating tough challenges that the 
+learner must overcome on a quest, mission or daily challenge. Khaldi et al. 
+(2023) consider challenges as "deeper game elements" as they extend beyond 
+superficial rewards to demand cognitive effort and problem solving. Wang et 
+al. (2024) argue that challenge elements are commonly implemented in higher 
+education to promote critical thinking and engagement too. In the ReadAlert 
+system, this is daily goals (e.g., "Read 20 pages today") or comprehension 
+quizzes. At the same time, it achieves a sense of accomplishment and discipline 
+which is difficult for users to develop through their usual passive reading 
+experience by making reading Introduces a series of tasks to accomplish rather 
+than just an activity. 
+ 
+2.2.2 Game Elements 
+ 
+Game Elements are the basic building blocks of gamification and are the 
+interactive mechanics that drive the user's behaviour, motivation and 
+engagement in a non-game environment. Khaldi et al. (2023) identify these 
+elements like points, badges, leaderboards and challenges as essential tools of 
+visualizing progress and rewarding effort in digital learning environments. 
+These components work to meet the psychological needs of the users for 
+competence and achievement. For example, Ahmed et al. (2025) highlight that 
+elements such as experience points (XP) and levels give immediate feedback 
+to students on their contributions that forge abstract learning goals into tangible 
+metrics. Wang et al. (2024) further plainly elucidates the idea that whereas 
+certain elements such as leaderboards prove to be effective in promoting 
+competition, others such as the progress bars and narrative contexts are 
+important in guiding the learners in their educational journey. For the 
+development of the ReadAlert application, specific elements have been chosen 
+18 
+ 
+to emphasize the formation of individual habits and intrinsic motivation, rather 
+than to emphasize on plain competition. Therefore, the system will use Points, 
+Challenges, Badges & Titles, Progress Bars and Streaks as its main 
+motivational drivers. 
+  
+▪ Points  
+ 
+Points are sometimes called Experience Points or XP or coins are the granular 
+unit-based measurements of user efforts and engagement within a gamified 
+system. Ahmed et al. (2025) describe points is a mechanism to record and 
+accumulate student contributions, where points are awarded for some specific 
+actions which can be logging into the system, learning materials or even daily 
+tasks. This immediate quantitative feedback is important in sustaining user 
+interest as the points act as a digital currency which validates successful 
+performance, substituting real-life rewards with a sense of accomplishment 
+that keeps users interested in continuing their interaction. In the context of 
+ReadAlert, points give a sense of accumulation, which is continuous, seeing 
+the direct result of the efforts made by reading in real-time. 
+ 
+▪ Challenges  
+ 
+Challenges, commonly in the form of quests or missions, serve as specific, 
+goal-oriented actions that put a student into active efforts and thinking to 
+accomplish them. Khaldi et al. (2023) categorize challenges as something 
+"deeper game elements" that transcend surface level rewards to require the 
+player to solve a problem and continue focusing on it. Wang et al. (2024) 
+emphasizing that challenges are often used in educational formats to encourage 
+critical thinking skills and it can be distinguished to meet specific goals (such 
+as reading a certain number of pages, passing a comprehension quiz). Chen et 
+al. (2023) further stress that the challenges should be balanced not too hard and 
+not too easy to maintain a state of flow whereby the user remains competent 
+yet challenged by the task at hand. By introducing reading as a set of attainable 
+obstacles, impediments become productive objectives for intellectual mastery. 
+19 
+ 
+▪ Badges & Titles 
+ 
+Badges and titles are visual credentials for the user's achievements, skills 
+acquired or status within the system. Ahmed et al. (2025) explain that badges 
+should be reserved for significant milestones such as mastering a particular 
+topic or achieved a difficult quiz successfully leading to a high score effectively 
+act as a type of digital trophy as a symbol of competence. For example, some 
+achievements may earn one earn different badges such as 'Champion' or 
+'Graduate' if he or she attains some performance standards, so some pride is 
+placed on the user as capable learners. Chen et al. (2023) add that these 
+symbolic rewards meet the user's requirement for recognition and social proof 
+which will motivate the user to keep engaging with the content to receive more 
+accolades and higher title 
+ 
+▪ Progress Bar 
+ 
+A progress bar is a type of interface element that is intended to give the user 
+immediate and ongoing feedback as to how far she or he has progressed toward 
+a specific goal. Parsons et al. (2021) cites how progress bars are important to 
+help create less ambiguity to long-term tasks by letting the user immediately 
+tell how much of a book, chapter, or level there is yet to do. This visualization 
+of "distance to goal" is a highly effective motivator, according to Chen et al. 
+(2023) In a study of apps, discovering that there is instant feedback in an app 
+through visual indicators help maintain cognitive engagement and they 
+encourage users to continue until the task is 100% complete. In ReadAlert, 
+there will be progress bars that track both the reading of individual books and 
+the user's journey to reading their daily or weekly reading targets. 
+ 
+▪ Streaks  
+ 
+Streaks are a behavioural mechanic that is based on the idea of consistency and 
+habit formation applied frequently through fixed reward schedules. Parsons et 
+al. (2021) Talk about the need to promote the daily return to the platform 
+20 
+ 
+through the provision of specific incentives for continuous return to the 
+platform that helps to create a routine. Ahmed et al. (2025) in support of this, 
+points out that reward system of awarding points for day-to-day actions, such 
+as simply logging in to the system, encourages students to ensure they attend 
+regularly and helps in preventing the attrition of learning habits. In the context 
+of ReadAlert, streaks are used to create a visualization of this chain of daily 
+activity, taking advantage of the user's desire to not break his or her run of 
+success to develop long-term discipline and ensure that reading will be a daily 
+practice. 
+ 
+2.3 Overview of Recommendation System 
+ 
+The introduction of the Recommendation Systems (RS) can be seen as a 
+possible solution to the issue of information overload where the abundance of 
+digital content at one's disposal makes it hard to find something that is relevant 
+in an efficient way. According to Rosidah & Dellia (2024), a recommendation 
+system is the approach that offers suggestions to users with the help of available 
+data and choice criteria. In the case of digital libraries and reading applications, 
+they have become especially crucial; otherwise, the abundance of books can 
+repress students, and they will find it hard to use the tools independently and 
+select the reading material that can match their interests. Recommendation 
+systems will simplify the process of discovery by narrowing down on large 
+volumes of data to offer the most pertinent items and provide an overall 
+improved experience to the user. 
+ 
+  
+These systems work in a functional way, where they are used in analysing all 
+the information available on the profile of user, history, and past activities to 
+determine future preferences. The main objective of an effective 
+recommendation system is to deliver simpler personalized responses and 
+suggestions so that the users will make informed choices on the material they 
+read. The use of this kind of system in the educational context is critical to 
+enhancing the level of participation among students; by enabling them to 
+21 
+ 
+access books that suit their personal levels of needs and attraction, the system 
+could contribute immensely towards raising the level of interest in reading and 
+use of library facilities. Recommendation systems, therefore, are an interface 
+between the vast digital content and the individual, particular user 
+requirements. 
+ 
+2.3.1 Machine Learning  
+ 
+Machine Learning (ML) is a subfield of artificial intelligence, whereby one 
+trains algorithms on data to learn patterns to make predictions or choices, 
+without defining the algorithm to perform certain functions. There are four 
+broad types of ML algorithms, namely, supervised learning, unsupervised 
+learning, reinforcement learning, and deep learning. Supervised learning works 
+on a labelled data set whereby the algorithm is trained to covary the inputs to 
+known available output, where it is applicable to such tasks as classification 
+and regression (Siafis et al., 2024). Reinforcement learning is concerned with 
+the training of agents to make series of decisions, where the outcomes desired 
+are rewarded and undesired behaviour punished and is frequently applied in 
+dynamic environments. Deep learning is based on multi-layered neural 
+networks that are used to model complex trends in large data sets, and it is more 
+effective in tasks such as image and speech recognition.  
+ 
+ 
+Within the framework of this project, the concept of unsupervised learning is 
+selected as the main one. In contrast to supervised learning, unsupervised 
+learning works with unlabelled data, which is the data that is not marked with 
+any specific hidden structure, pattern, or relationship (the algorithm must 
+detect this information on its own) (Siafis et al., 2024). This practice is 
+especially beneficial to a reading program in which user preferences are not 
+necessarily labelled or in which the system must find or identify organic 
+collections of books and readers without a priori knowledge. The system can 
+make personalized recommendations by relying on unsupervised learning 
+which enables it to automatically group similar books or users so that it builds 
+22 
+ 
+its own background based on the inherent properties of the data instead of the 
+labels integrated into it. 
+ 
+▪ Unsupervised Learning 
+ 
+Unsupervised learning consists of teaching methods aimed at analysis and 
+interpretation of unlabelled data, such as association, clustering, 
+dimensionality reduction, and recommendation methods. The association rules 
+will be used to find interesting associations among the variables in large 
+databases like finding out which books are often read together. Clustering 
+refers to grouping together a collection of objects such that objects within a 
+given group (or cluster) are more closely related than to objects in other groups; 
+it can be used to contain the number of random variables that one is interested 
+in, simplifying the data without sacrificing the important information. The 
+approach of dimensionality reduction, Principal Component Analysis (PCA), 
+is applied to consider a smaller number of random variables than the original 
+data, reducing the complexity of the data and still having certain important 
+information.  
+ 
+ 
+The recommendation method that will be selected to use in the case of the 
+ReadAlert system is the unsupervised learning method. This is a method that 
+is specifically created to forecast the user preference to an item that the 
+individual has not yet selected depending on the trends of the available data. 
+Through the recommendation methods in the unsupervised learning model, the 
+system will be able to analyse the interaction of the user like the books read, 
+time spent reading and types of books searched and propose new ones that may 
+resonate with the interests of the user. This approach enables a customized user 
+experience as it constantly adapts to the changing reading patterns of the user 
+and, therefore, creates a long-term engagement and habit formation. 
+ 
+ 
+ 
+23 
+ 
+▪ Recommendation Technique 
+ 
+Recommendations techniques are also important elements of the current 
+information filtering systems which are mainly organized into three major 
+categories: Hybrid Recommendation, Collaborative Filtering, and Content-
+Based Filtering. Collaborative Filtering is built on the idea that a user who 
+previously agreed will be able to agree in the future; it suggests items to the 
+user, basing on the taste of similar users (Rosidah & Dellia, 2024). Hybrid 
+Recommendation systems are a set of hybrid frameworks of multiple methods 
+in general, which are often collaborative as well as content-based filtering to 
+address the drawbacks of single methods, such as the cold start problem when 
+new users or things do not have enough data (Siafis et al., 2024). 
+ 
+ 
+ In this project, the Content-Based Filtering is chosen as the most appropriate 
+recommendation technique. The process suggests items to a user, which has 
+been identified as similar to their profile aspects, which consist of past 
+preferences and interactions (Rosidah & Dellia, 2024)) Content-Based 
+Filtering can especially be utilized in a reading app since in this type of 
+application, the system can suggest books that possess certain similarities to 
+the ones the user has enjoyed in the past (gene, author, and topics). This method 
+guarantees that the recommendations are very applicable with regards to the 
+individual taste regardless of the data of other users hence is strong even in 
+cases where there are a few users or it has niche reading interests. 
+ 
+▪ Content-Based Filtering 
+ 
+One of the recommendation methods that uses the features of items and also 
+users to create recommendations is Content Based Filtering. A book profile can 
+be created using information like title, author, summary, category, or genre in 
+a library or reading application. Meanwhile, the system can build up a user 
+profile of all books that the user has read, saved, or liked. The importance of 
+words in documents can be calculated using algorithms like Term Frequency-
+24 
+ 
+Inverse Document Frequency (TF-IDF) and similarity between the user profile 
+and available books is calculated using Cosine Similarity in some content-
+based recommendation system (Rosidah & Dellia, 2024). But in this project, 
+ReadAlert implements a simpler approach, called Content Based Filtering, 
+based on metadata. The system identifies reading preferences by determining 
+the similarity of the reading text to a user's saved reading history, genre, 
+category, author etc of the available book metadata rather than calculating the 
+similarity of text using TF-IDF and Cosine Similarity. From the following book 
+preferences, it fetches appropriate book suggestions from external book 
+sources like Google Books API and Open Library API. This is a good choice 
+for the prototype since there are very few machine learning algorithms and 
+large user datasets needed for this approach. 
+ 
+2.4 Existing Applications 
+ 
+In this section, various applications that are already used, having similar 
+features like in this project are discussed and compared. This comparison is 
+intended to compare their background, functionality, scope, user experience, 
+and strategies to gamification to draw conclusions on their strengths, 
+limitations, and the points where the suggested system can develop better. 
+Applications that are picked to be compared are Bookmory, PagePots, and 
+Habitica, which have some elements of reading related tracking or game-based 
+learning. These applications were selected due to their similarities of the 
+features of reading engagement, progress monitoring, whether the user is 
+motivated or not, and the interactive features. 
+ 
+2.4.1 Bookmory 
+ 
+Bookmory is a reading tracker application, which is supposed to assist the user 
+in documenting and categorizing reading. It enables users to store the 
+information about the books they read, monitor their reading, and come up with 
+reading statistics. Figure 2.2 indicate that the user interface is simple, and it is 
+centered on simplicity to enable a distractive-free experience. 
+25 
+ 
+  
+Figure 2.2 Bookmory Interfaces 
+ 
+The primary audience of the Bookmory consists of teenagers and adults who 
+are enthusiasts of reading and wish to keep track of their habits. It has various 
+handy tools, like reading timers, visual progress measures, reading goals per 
+day, and some specific to individual measures related to reading pace and time 
+spent reading. Being great as data logging, Bookmory is also largely dependent 
+on the inherent discipline of the user. It does not have systematized 
+gamification features including challenges or competitive positions. According 
+to Khaldi et al. (2023), such aspects as badges and leaderboards can be rather 
+common to trigger an active engagement and avoid the turnover of users, which 
+means that Bookmory might not be able to retain those who are not already 
+motivated to read. In addition, it does not make use of Content-Based Filtering 
+in facilitating smart suggestions, as is the case with the proposed system. 
+  
+2.4.2 PagePots 
+  
+PagePots is a mobile reading tracker app that allows individuals to make their 
+goals and track their habits in the form of visuals. Figure 2.3 depict the interface 
+presentation of the bookshelves and reading charts making special focus on 
+aesthetics, and usability. 
+26 
+ 
+  
+Figure 2.3 PagePots Interfaces 
+  
+The application mostly targets young adults and the general readers who desire 
+an entertaining and innovative means of keeping track of their reading 
+endeavours. PagePots incorporates the light gamification of themes with the 
+challenges of reading, rewarding achievements, and pleasant progress 
+animations. It is also geared towards encouraging their users to read repeatedly 
+by giving them monthly challenges and individual progress charts. PagePots 
+combines thematic challenges and visual development in light gamification. 
+This is in line with Parsons et al. (2021) observation that visual progress bars 
+have the capacity to mitigate the ambiguity of time-consuming activities. 
+PagePots, however, does not include learning modules and courses. It is also 
+concerned with the amount of reading but not the quality of understanding and 
+fails to take advantage of the abilities of gamification to engage the cognitive 
+experience as indicated by Wang et al. (2024). 
+ 
+2.4.3 Habitica 
+ 
+Habitica is a productivity program that employs complete gamification as a 
+form of motivation. It turns the everyday chores into game missions wherein 
+users gain Experience Points (XP) and gold. Figure 2.4 display the interface is 
+a Role-Playing Game (RPG) that has avatars and guild.
+27 
+ 
+ 
+ 
+Figure 2.4 Habitica Interfaces 
+     
+Habitica is not limited to any age, which is how it manages to appeal to 
+teenagers as well as adults, and is popular among self-improvement and the 
+creation of certain habits. It has an extremely developed gamification, with 
+challenges, levelling systems, streaks, achievements, and social co-operation 
+in the form of group quests. Habitica is doing quite well in the term of the 
+Progression-Based Gamification, whereby earning XP can fulfil the 
+competence requirement of the user. Nonetheless, it is a habit tracker in the 
+general sense but is not reading specific. It does not have attribute such as 
+literacy material or technical reading, so the user must create reading activities 
+manually without the advantage of automatic tracking and customized book 
+recommendations. 
+ 
+2.4.4 Comparison of Existing Applications 
+  
+Table 2.1 contains a comparative analysis of the chosen applications in terms 
+of their target audience, learning orientation, content structure, gamification 
+element and overall functionality. The given comparison can be used to 
+demonstrate the gap that the given system is supposed to address especially 
+when it comes to integrating reading progress tracking, a recommendation 
+system, and the elements of gamification, designed in a single platform. 
+28 
+ 
+Table 2. 1 Comparison of Existing Applications And ReadAlert 
+ 
+Feature Bookmory PagePots Habitica ReadAlert 
+Target Audience Teens and 
+adults who 
+actively 
+engage in 
+reading 
+Young adults 
+and general 
+readers 
+Teenagers to 
+adults 
+Teenagers to adults 
+Main Focus Reading 
+habit 
+tracking 
+Reading 
+goals & 
+motivation 
+Habit-
+building via 
+gamification 
+Reading engagement 
+via gamification & 
+intelligent 
+recommendations 
+Content 
+Structure 
+Simple logs 
+& notes 
+Themed 
+reading 
+trackers 
+User-created 
+tasks 
+ 
+Structured reading 
+categories & 
+personalized 
+suggestions 
+Learning 
+Method 
+Self-
+monitoring 
+Visual 
+progress & 
+challenges 
+RPG-style 
+progression 
+Data-driven 
+recommendation & 
+gamified 
+engagement 
+Gamification 
+Type 
+None Challenge, 
+Reward 
+based 
+Gamification 
+ 
+Avatar, 
+Reward 
+, Challenge, 
+Progression 
+Gamification 
+Reward, Challenge, 
+Progression 
+Gamification 
+Gamification 
+Elements 
+Streaks only Mini-
+challenges, 
+rewards 
+XP, quests, 
+badges, 
+guilds 
+Points, badges, 
+challenges, streaks, 
+progress bars 
+Recommendation 
+System 
+None None None Content-Based 
+Filtering 
+Strengths Excellent 
+data 
+visualization 
+and reading 
+speed 
+analysis. 
+Fun visuals 
+& challenges 
+Strongest 
+gamification 
+Balanced tracking, 
+learning, and 
+gamification 
+ 
+Altogether, the analysis reveals that Bookmory and PagePots concentrate on 
+the tracking of reading activities and visual motivation, whereas Habitica is 
+more successful at the gamification of forming a habit since none of them 
+allows comprehending the tracking of reading activities, user-focused 
+recommendations, and systematic gamification components under one roof. 
+The proposed system is supposed to combine all these advantages as each 
+provides an organized reading experience supported with smart 
+recommendations and effective strategies of gamification, making it completer 
+and more interesting than available alternatives. 
+ 
+ 
+29 
+ 
+2.5 Justification on Game Elements 
+ 
+The choice of game mechanisms used in the ReadAlert app namely, Points, 
+Challenges, Badges, Progress Bars, Streaks, is theoretically based on Self-
+Determination Theory (SDT) according to which the learner engagement will 
+be at maximum in case psychological needs are satisfied such as competence, 
+autonomy, and relatedness needs. According to Chen et al. (2023) gamification 
+is required to go more than just surface-level entertainment to meet these needs; 
+one example of this is awarding Points (or XP) and Badges which meets the 
+need of competence as the user can get concrete proof of mastery and skill 
+acquisition. Although contexts such as Habitica have been developed and have 
+been proven to be effective in using these elements in general habit building, it 
+lacked the context needed to instil academic reading. Thus, by integrating these 
+types of rewards within reading-specific context, the positive reinforcement 
+that students urgently need to remain motivated when completing complicated 
+reading tasks are obtained, as it is noted by Ahmed et al. (2025) as essential in 
+narrowing knowledge gaps in technical disciplines. Moreover, the Progress 
+Bars and Streaks usage can be explained by the necessity of the constant 
+feedback and the development of the habits. According to Parsons et al. (2021), 
+visual visualizations such as progress bars lower the cognitive load and 
+uncertainty related to long-term tasks so that users can learn in real time about 
+how far they have progressed. It is a merit that is noticed with PagePots, which 
+employs the visual trackers attentively, but the suggested system will take this 
+further by associating visual progress with Streaks. Ahmed et al. (2025) further 
+state that daily activity consistency (streaks) points can be used to ensure the 
+continuity of a learning habit by encouraging the user to visit the platform 
+every day to keep their streak going. It is a combination that is needed in 
+Bookmory, which has impressive statistical tracking, but does not have the 
+behavioural engagement of streak-based gamification to encourage people to 
+visit each day. 
+ 
+ 
+30 
+ 
+To turn the passive reading into active and goal-oriented reading, the 
+Challenges implementation is necessary. Khaldi et al. (2023) define challenges 
+as deeper elements of the game which are the ones that demand cognitive effort 
+and problem-solving, unlike other simple reward mechanisms. PagePots does 
+have themed events, but they tend to be aesthetic (based) instead of cognitive 
+ones, whereas challenges in ReadAlpha are supposed to be adaptive and 
+reading comprehension-specific, similar to the results of Wang et al. (2024) 
+indicating that task-based challenges in learning institutions, in turn, have a 
+significant benefit on critical thinking and engagement. The system can prompt 
+students to read more well-rounded diet of academic materials that they would 
+not read under other conditions by presenting reading requirements in the form 
+of interactive missions (e.g. in form of a mission to read 20 pages of non-
+fiction). 
+ 
+ 
+Lastly, the whole-system approach to all these factors is to ensure that an 
+equilibrium ecosystem that facilitates both intrinsic and extrinsic motivation is 
+formed. Whereas Habitica is more effective at extrinsic motivation with the use 
+of the RPG mechanics, and Bookmory is more effective at intrinsic motivation 
+with the use of data logging, both applications do not cover the needs of the 
+student readers who need both structure and encouragement as the hybrid ones. 
+According to Chen et al. (2023), a properly developed gamified system should 
+balance between the optimal challenges and positive feedback to ensure a flow 
+of state, which will not be bored or anxious. Choosing this set of elements 
+Points to provide feedback, Badges to say milestones, Streaks to be consistent 
+and Challenges to be engaged, the proposed system can overcome the 
+drawbacks of solutions presented on the market, being a complete tool, 
+specifically created to make the university students more enduring and 
+understanding in terms of reading. 
+ 
+ 
+ 
+31 
+ 
+2.6 Conclusion 
+ 
+It is in this chapter that the theoretical and technical basis of the required 
+development of the ReadAlert application has been reviewed in detail. The 
+research of reading materials revealed the strong movement in the direction of 
+digital and mobile platforms and the necessity to focus on the tools that can 
+provide both the possibility to get access to the educational and informational 
+materials as well as the problems of the keeping of attention and understanding 
+in the digital world environment. To reduce the problem of information 
+overload, the review has reviewed several recommendation strategies that can 
+be applied to overcome the problem, which has led to the conclusion that the 
+Content-Based Filtering strategy is the most appropriate strategy. The Content-
+Based Filtering will present the suggestions of books based solely on the 
+favourites of the user regarding the genre and authors. This approach allows 
+users to be given personalized book suggestions, using the techniques of 
+unsupervised machine learning and given the reading history and the interests 
+of the user to increase the discovery process. Furthermore, the analysis of 
+gamification has shown that it is highly necessary to make reading the habit of 
+the goal orientation and not the passive activity anymore. Using the Self-
+Determination Theory, the integration of reward based, progression based and 
+challenge-based types of gamifications was realized to fulfil the psychological 
+need of competence and autonomy among the users. The choice of certain 
+game features Points, Challenges, Badges, Progress Bars, and Streaks was 
+based on their effectiveness related to offering immediate feedback, visualising 
+long-term growth, as well as promoting behavioural consistency. 
+ 
+ 
+Lastly, the comparative analysis of the applications available such as 
+Bookmory, PagePots, and Habitica revealed a gap that existed in the present 
+market. Although these apps seem to be either a good habit-tracking 
+application, visually appealing, or overall gamifying tasks, none provide a 
+comprehensive option that would track academic reading and provide 
+intelligent suggestions and goal-oriented gamification. This gap is the reason 
+32 
+ 
+the suggested ReadAlert system is intended to combine these differences in 
+features into one unified system. In so doing it will offer a full-scale device to 
+not only monitor reading advancement but also actively develop in students a 
+sustainable and worthwhile reading culture. The design decisions and 
+theoretical frameworks that are determined in this chapter are the roadmap in 
+the system methodology and development phases in question in the following 
+chapters. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+33 
+ 
+CHAPTER 3 
+ 
+ 
+METHODOLOGY 
+ 
+ 
+The approach followed in designing the Gamified Mobile Application to Track 
+Reading Progress is discussed in this chapter. It gives a comprehensive description 
+of the way the system was planned, designed and developed during the project. The 
+framework of the methodology employed to carry out the study is addressed to show 
+how the systematic approach was followed in completing the project. The project 
+methodology is discussed in Section 3.1 and is based on Mobile Application 
+Development Life Cycle (MADLC) which has five major stages to the process 
+including identification, design, development, prototyping, and testing. Section 3.2 
+explains the system architecture of the suggested mobile application, whereas Section 
+3.3 presents the hardware and software requirements utilized in the process of the 
+development. 
+ 
+3.1 Project Methodology 
+ 
+The methodology to be applied in this project to achieve project development 
+will be the Mobile Application Development Life Cycle (MADLC). MADLC 
+offers the systematic and orderly approach, which can be applied to the 
+projects that focus on the mobile applications and especially those that focus 
+on the user interaction, interface design and usability testing. The 
+characteristics of mobile applications such as use of multiple screens, active 
+participation of the user, and an iterative process of improvement can make 
+MADLC the right choice of this study. MADLC enables the development 
+phases to be clearly spelled out and implemented in a systematic way. 
+Samrgandi (2021), notes that the correct planning of user interface design and 
+evaluation during the development process has a significant contribution to 
+enhancing the usability and user satisfaction in mobile applications. 
+Furthermore, the continuous assessment throughout development can be used 
+to highlight the possible usability problems early and assist in the further 
+34 
+ 
+enhancement of the system (E. R. Oliveira et al., 2022). Figure 3.1 shows 
+MADLC phases. 
+ 
+   
+Figure 3. 1 Mobile Application Development Life Cycle (MADLC) Phases 
+ 
+The MADLC has seven phases in its entirety; these include identification, 
+design, development, prototyping, testing, deployment and maintenance. And 
+yet, as this project is aimed at the creation and testing of a working prototype, 
+as opposed to a commercial product, the number of implemented phases is 
+only five (5). These phases are deployment and maintenance, and they are not 
+part of this research. This formalized approach is what allows making the 
+process of development systematic and focused on the project goals, as well 
+as facilitates usability, functionality, and user interaction via the iterative 
+design and test (Sarah Salim et al., 2022). 
+ 
+ 
+35 
+ 
+3.1.1 Phase 1: Identification 
+ 
+The first stage in the MADLC is the identification stage whereby, the project 
+ideas and requirements are collected to be analysed. This stage is concerned 
+with determining a problem statement, objectives, scope, and importance of 
+the project to perfectly establish the system that should be developed. The 
+identification phase can be imperative because it provides the basis of the 
+successful process of mobile application development clarifying the direction 
+and aim of the project. Some activities were implemented in this stage. These 
+tasks involve finding out the problems, which are associated with keeping 
+reading motivation and monitoring reading progress, outlining the project 
+objectives, determining the scope of the project, and defining the importance 
+of the suggested system. Moreover, research was done on the current 
+applications in reading related mobile applications to determine their 
+functionality and what they were lacking such as engagement and progress 
+tracking. This review assists in revealing gaps that exist in existing 
+applications and use the same as insights in improving the proposed system. 
+Moreover, during this stage, it will be possible to determine appropriate 
+techniques and methodologies that will be applied to the project development. 
+MADLC was chosen because it is applicable to mobile applications which 
+involve high interactivity of the user, interface design, and usability testing. 
+During the development process, early detection of system requirements and 
+methodologies can help enhance the usability and system effectiveness 
+(Samrgandi, 2021). The summary of activities performed at the identified 
+stage is given in Table 3.1. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+36 
+ 
+Table 3. 1 Identification Phase 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.1.2 Phase 2: Design 
+ 
+The design is the second stage of MADLC. This step is aimed at modifying 
+the identified needs of the previous step into a system design. Designing 
+phase is an important process in the development of a mobile application 
+because it will dictate the interaction of the users with the system and how 
+the information can be displayed in application. This is the stage in which the 
+system architecture and flow will be designed to give a clear picture of how 
+the various component within a system will interact with one another. System 
+architecture diagrams and application flowcharts are diagrams that are 
+developed to represent the workflow and structure of the proposed mobile 
+application. These diagrams can assist in making sure that the system design 
+makes sense, is well structured and based on the project goals. Besides, the 
+user interface (UI) design is created to make it usable so that navigation can 
+be easy. Interfaces design is concerned with the uniformity of layouts, clarity, 
+and simplicity to produce better user experience. Samrgandi (2021) mentions 
+that early user interface design and testing are major factors in enhancing the 
+usability of the application in the mobile system and guarantee user 
+Phase         Activities Technique/Software Deliverable 
+Initiation • Review existing 
+reading and 
+habit-tracking 
+applications. 
+• Study 
+gamification 
+elements 
+suitable for 
+reading 
+engagement. 
+• Compare 
+existing 
+applications 
+such as 
+Bookmory, 
+PagePots, and 
+Habitica. 
+• Select suitable 
+gamification 
+elements for 
+ReadAlert. 
+• Online 
+Database 
+• Existing 
+App 
+ 
+• List of 
+selected 
+gamification 
+elements. 
+ 
+• Justification 
+of 
+gamification 
+elements. 
+ 
+• Comparison 
+of existing 
+applications. 
+ 
+• Initial 
+feature 
+requirements 
+for 
+ReadAlert. 
+37 
+ 
+satisfaction. Thus, special care is taken regarding design screens which are 
+user-friendly and intuitive. The stage gives an overarching design plan of the 
+mobile application, which is used as a basis in the next phase of development. 
+The summary of activities developed during the design stage will be 
+contained in Table 3.2. 
+Table 3. 2 Design Phase 
+Phases Activities Technique/Software Deliverable 
+Design • Design and 
+draw system 
+architecture 
+• Design 
+application 
+flowchart 
+ 
+• Draw.io 
+ 
+• System 
+architecture 
+• Flowchart 
+ 
+• Design user 
+interface layout 
+• Stitch 
+ 
+• Storyboard 
+ 
+▪ Storyboard Design for User Interfaces (UI) 
+ 
+Figure 3.2 will demonstrate the wireframe storyboard in Stich design of the 
+ReadAlert mobile application. This storyboard is a visual road map or blueprint 
+that will emerge the general framework of the interface and the navigation path 
+that the user must follow. The storyboard using the tracking of user interactions 
+between the welcome page and authentication page and the home page and the 
+core functional pages, including book catalog management, reading progress 
+tracking, recommendations, and statistics, makes the interface logic clear, 
+consistent, and easy to use. The design also encourages effective navigation 
+and easy execution of tasks where the objective of the application of following 
+progress in reading, as well as encouraging user motivation through the system 
+of gamification, is acceptable and congruent with the objective of the user 
+interface. 
+ 
+38 
+ 
+  
+Figure 3. 2 Wireframe Storyboard Design for User Interface (UI) 
+ 
+The storyboard that was created in the format of the wireframe was created to 
+demonstrate the general flow and the structure of interaction of the user 
+interface in the ReadAlert application in terms of mobile application. It gives 
+us a pictorial map on how the users move within the system, starting with the 
+Welcome Page, thereafter, the page of Login and Registration, then the page 
+of the Home Page when the user gets success in a authentication. With this 
+storyboard the flow of navigation is easy to follow and user-friendly, such that 
+when one wishes to use the application, they end up knowing the structure of 
+the application even prior to the real development. 
+ 
+ 
+ 
+39 
+ 
+On the Home Page, the user is allowed to use the fundamental functions of the 
+application which includes Book Catalog Page, Reading Progress Page, Profile 
+Page, Recommendation Page, settings page and statistics page. The Book 
+Catalog Page gives a user a chance to organize their own reading library, and 
+the Reading Progress Page gives the user an opportunity to upgrade and track 
+their reading progress. The Profile Page informs the users of their achievements 
+and gamification features, including badges, reading streaks, and levels, to 
+provide motivation. The Recommendation Page will recommend the book 
+depending on the user preferences as well as reading history, whereas the 
+Statistics Page shows the reading progress in the form of simple charts and 
+summaries. In general, wireframe storyboard is a guideline of user interface 
+design as it helps in determining screen layouts, paths, and functional 
+dependencies among modules in the user interface. It assists in making the 
+design as consistent as possible, makes the interface more practical, and aligns 
+the interface structure with the goals set by the ReadAlert application which is 
+aimed at monitoring the reading progress and encouraging the users with the 
+help of gamification. 
+ 
+3.1.3 Phase 3: Development 
+ 
+The third stage of MADLC is the development stage. This stage is the one 
+that involves the conversion of the approved design specifications into a 
+workable mobile application. The active coding was performed in this stage 
+to introduce the main characteristics of the system and make sure that the 
+functioning of the application takes place in accordance with the outlined 
+requirements. The most important events of this stage are the application 
+functionality creation, the database integration, and the gamification logic 
+implementation. The design aspect underlines precision, stability of the 
+system, and congruence of the interface-designed interface and the features 
+applied. It is necessary to implement this phase properly so that the system 
+can be functioning and easy to use. This project was developed based on 
+Flutter as the development environment. Firebase was done to control the data 
+storage, user-related information and synchronization of the application data. 
+40 
+ 
+Samrgandi (2021) notes that the most effective way to maintain usability and 
+guarantee system reliability during the development process is the adequate 
+implementation of the mobile application elements. The overview of 
+activities done at the development stage is shown in Table 3.3. 
+ 
+Table 3. 3 Development Phase 
+Phases Activities Technique/Software Deliverable 
+Development • Develop 
+application 
+functionalities 
+• Implement 
+user interface 
+components 
+ 
+• Flutter 
+• Figma 
+• Functional 
+mobile 
+application 
+prototype 
+• Implemented 
+user 
+interface 
+• Integrate 
+database and 
+system logic 
+ 
+• Firebase 
+ 
+ 
+3.1.4 Phase 4: Prototyping 
+ 
+The fourth step of the MADLC is the prototyping step that entails creating a 
+prototyping of the mobile application. This prototype is a rough functioning 
+prototype that illustrates the main features and system flow of the program 
+prior to its actual implementation. This stage is aimed at the evaluation of the 
+design, functionality system. Flutter was used to build the prototype in this 
+project in accordance with the accepted system design and interface layouts. 
+The prototype consists of such major features as progress tracking in reading, 
+book management, and simple gamification. After its design, the prototype 
+was examined to determine the general functionality and interface design. 
+The system was refined and improved based on the feedback that was given 
+after assessing the prototype. Another key issue in the prototyping stage is 
+iterative refinement since this enables the developers to determine areas of 
+functionality problems and enhance them before moving on to testing stage. 
+It has been found that the iterative prototype evaluation allows the system 
+quality by encompassing the feedback at the early stage of the development 
+process (E. R. Oliveira et al., 2022). Besides that, early testing helps in 
+enhancing minimizing possible crises in the later stages of the development 
+41 
+ 
+(Sarah Salim et al., 2022). This cyclic process is what will ensure the 
+prototype follows the project requirements. Table 3.4 provides the overview 
+of the work to be done in the prototyping stage. 
+ 
+     Table 3. 4 Prototyping Phase 
+  
+3.1.5 Phase 5: Testing 
+ 
+Testing stage is the 5th step in MADLC. At this stage the ReadAlert mobile 
+application is tested to see that all functions implemented work as per the 
+requirements of the project. The primary goal of this stage is to test how the 
+application works on whether it gives the desired output when a user operates 
+it with each functionality. The functional testing in this project is done with 
+the black-box testing methodology. This means that they are testing each 
+function according to its input and output but not the actual structure of source 
+code of the program. The testing process includes all major features such as 
+user registration, login, book search, ISBN or barcode search, adding books 
+to library, updating reading progress, XP reward calculation, level and rank 
+display, streak display, achievement display, reading statistics, reports and 
+management of profile. Test cases are prepared for each feature, with the 
+results expected from the feature compared to what the application generates. 
+In case of any mistake or unexpected results are discovered, the mistake is 
+fixed and the feature is then retested to check for proper functionality. The 
+application will be repeatedly tested to increase the reliability of the 
+application and to ensure that the final prototype is appropriate for 
+Phase Activities Techniques / 
+Software 
+Deliverables 
+Prototyping • Develop a 
+working 
+prototype of the 
+mobile 
+application 
+• Evaluate 
+prototype 
+functionality and 
+interface 
+• Collect feedback 
+and refine 
+prototype 
+accordingly 
+• Flutter • Functional 
+application 
+prototype 
+• Evaluation 
+feedback 
+42 
+ 
+ReadAlert's primary functions to be demonstrated. The testing phase of this 
+project is shown in Table 3.5. 
+Table 3. 5 Testing Phase 
+  
+3.2 Summary of Project Methodology 
+ 
+The systematic realization of each step of the MADLC was in fulfilment of 
+all the aims that were set on the Gamified Mobile Application to Track 
+Reading Progress. The process of development was systematic, repetitious 
+and purpose oriented, which the methodology ensured. The identification 
+phase was aimed at identifying the problem statement, the objective of the 
+project, scope, and importance of the study. The research area and research 
+field were investigated in this step, some of the available reading and tracking 
+applications were studied to determine what they offer as advantages, and 
+what they cannot do to enhance the advantages and offer improvements. This 
+stage has further helped to meet the first goal, which is to find the appropriate 
+requirements and features to build a gamified reading progress tracking 
+application. 
+ 
+ 
+The latter aim was covered at the design and development stages. At the 
+design stage, the required diagrams were created including the methodology 
+diagram, system architecture, and application flowchart. The user interface 
+was also meant to be clear, user friendly and the user interface should be 
+involved. The stage of development included implementation of the projected 
+features by means of coding and reading progress tracking, elements of 
+gamification, and database integration. This step converted the design 
+specification into a working mobile application prototype. The next stage is 
+the prototyping stage that implied producing a work version of the application 
+Phase Activities Techniques / Software Deliverables 
+Testing • Test application 
+functionality and 
+performance 
+ 
+• Developer testing 
+ 
+• Final 
+applicati
+on 
+• Develop
+er testing 
+results 
+ 
+43 
+ 
+to comprise the main functions. Experts tested the prototype to determine its 
+usability, functionality and general design. The evaluation provided 
+feedback, which was then used to make the application refined and improved. 
+The testing stage was finally performed to fulfil the third objective, that is to 
+test the application in terms of functionality. A functional testing was 
+undertaken to ascertain that the system is user friendly and that it is within 
+requirements. The general indication of the project methodology is indicated 
+in Table 3. 6. 
+ 
+Table 3. 6 Summary of Project Methodology 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Objective Phases Activities Deliverables 
+To identify 
+suitable 
+gamification 
+element to 
+enhance 
+users’ 
+reading 
+engagement. 
+Identification • Review 
+existing 
+reading and 
+habit-tracking 
+applications. 
+• Study 
+gamification 
+elements 
+suitable for 
+reading 
+engagement. 
+• Compare 
+existing 
+applications 
+such as 
+Bookmory, 
+PagePots, and 
+Habitica. 
+• Select suitable 
+gamification 
+elements for 
+ReadAlert. 
+• List of selected 
+gamification 
+elements. 
+ 
+• Justification of 
+gamification 
+elements. 
+ 
+• Comparison of 
+existing 
+applications. 
+ 
+• Initial feature 
+requirements for 
+ReadAlert. 
+44 
+ 
+     Table 3.6 (cont.) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+ 
+ 
+ 
+ 
+3.3 System Architecture 
+ 
+This section provides an overall system architecture of Gamified Mobile 
+Application of Tracking Reading Progress. The system architecture is to help 
+clearly demonstrate the interaction of the significant parts of the mobile 
+application with each other and assist in the progress tracking reading, 
+gamification and customized advice. The figure 3.3 below shows the 
+architecture of the system of the proposed mobile application. 
+Objective Phases Activities Deliverables 
+To develop a 
+gamified 
+mobile app 
+that allows 
+users to 
+record and 
+monitor their 
+reading 
+progress. 
+Design • Design and 
+draw system 
+architecture 
+• Design 
+application 
+flowchart 
+• Design user 
+interface 
+layout 
+• System 
+architecture 
+• Flowchart 
+• Storyboard 
+Development • Develop 
+application 
+functionalities 
+• Implement 
+user interface 
+components 
+• Integrate 
+database and 
+system logic 
+• Functional 
+mobile 
+application 
+prototype 
+• Implemented 
+user interface 
+Prototyping • Develop a 
+working 
+prototype of 
+the mobile 
+application 
+• Evaluate 
+prototype 
+functionality 
+and 
+interface 
+• Collect 
+feedback 
+and refine 
+prototype 
+accordingly 
+• Functional 
+application 
+prototype 
+• Evaluation 
+feedback 
+To evaluate 
+the 
+functionality 
+of the 
+mobile 
+application. 
+Testing • Test 
+application 
+functionality 
+and 
+performance 
+ 
+• Final 
+application 
+• Developer 
+testing results 
+ 
+45 
+ 
+ 
+  
+  Figure 3. 3 System Architecture 
+ 
+Initially the system starts when the user is directly involved with the mobile 
+app by using an Android-based smart phone as illustrated in Figure 3.3. The 
+mobile application will serve as the primary communication channel between 
+the user and the system, and it will provide a variety of features that will 
+enable users to perform their reading activities and track their progress, search 
+for books, and engage with the gamification components. The presentation 
+layer is responsible for handling user interaction and presenting the mobile 
+user interface, ensuring smooth navigation and a user-friendly experience. 
+The system core is made up of several functional modules which carry out 
+the core processes of the application. The Reading Management Module 
+controls reading functions like book catalogue management, monitoring 
+reading progress, reading history and visualization of it. This module allows 
+users to manually add books to their profile, search by book title or author, 
+scan the ISBN/Barcode, update your reading progress, see how many pages 
+you have read and see a summary of your reading activity. This module helps 
+to organise, access and understand data from text. The Gamification Module 
+aims to boost the motivation and engagement of the users. It features 
+gamification features like points, levels, badges and titles, streaks, progress 
+bars, and challenges. These elements will give rewards and feedback on the 
+46 
+ 
+user reading activities. Users can earn XP for adding books, reading pages, 
+finishing books, and keeping up a reading streak, for instance. There is also a 
+streak XP system, where the XP awarded varies based on the user's streak. 
+This reward system fosters regular reading and promotes ongoing reading 
+routines. 
+ 
+ 
+Furthermore, the system features a Recommendation System, which offers 
+personalized book recommendations to its users. Applies basic content-based 
+filtering using metadata on a book that is available, including genre, category, 
+author, and the user's reading history. This information is used to fetch and 
+present book recommendations from external books sources. This method can 
+be applied to the prototype because it does not need a large amount of data 
+from users or complicated machine learning algorithms to come up with 
+personalized recommendations. The application also can relate to external 
+book APIs to help searching books and providing book information. Book 
+information like title, author, category, description, cover image, page count, 
+and ISBN information, is primarily taken from Google Books API. If book 
+information is not available through the main API, Open Library API will be 
+used as an additional or fallback source. They include functions like title 
+search, author search, ISBN look-up, book retrieval using bar code and 
+recommendation data look-up. Thus, external book APIs are used as services 
+to deliver book metadata information to Reading Management Module and 
+Recommendation System. 
+ 
+ 
+The app's data layer is Firebase Cloud. Firebase Authentication is utilized to 
+control user logins, enrollment and user account accesses, while Firebase 
+Cloud Firestore holds user profiles, book information, progress in reading, 
+gamification record and achievements, streaks, and stats in reading. The app 
+is directly integrated with Firebase, enabling the system to synchronize user 
+data between the application and offer dependable cloud-based storage. The 
+app is directly integrated with the Firebase, allowing the system to sync user 
+47 
+ 
+data between the application and offering reliable cloud-based storage. 
+Overall, the proposed system architecture would facilitate an efficient and 
+user friendly mobile application by providing the user with features to support 
+their reading journey, such as reading management, gamification, 
+recommendation, external book APIs, barcode/ISBN lookup, and cloud based 
+data storage systems, thus allowing the users to track their reading progress 
+and remain motivated in the long run.. 
+ 
+3.4 Hardware and Software Requirements 
+ 
+This section forms an account on the software and hardware requirements to 
+be employed in the development of the Gamified Mobile Application on 
+Tracking Reading Progress. To facilitate development, testing, and 
+evaluation of the mobile application, it will need the appropriate hardware 
+and software. These specifications that are enumerated in this section 
+facilitate the deployment of the proposed system during the development 
+process. 
+ 
+3.4.1 Hardware Requirements 
+ 
+The hardware requirements would be a laptop and an Android phone. The 
+laptop was to be used in application development, interface design, coding, 
+and documentation whereas Android smartphone was to be used to test and 
+evaluate the developed mobile application. Table 3.7 shows hardware 
+specification and purpose of hardware applied in this project. 
+ 
+Table 3. 7 Hardware Requirements 
+Hardware Description Purpose 
+Android 
+Smartphone 
+• OS: HyperOS based on Android 15 
+• Chipset: MediaTek Dimensity 
+8300-Ultra  
+• CPU: octa-core CPU up to 3.35 
+GHz 
+• To run and 
+test out the 
+functionaly of 
+this system. 
+48 
+ 
+Laptop • Processor: AMD Ryzen 5 7530U 
+with Radeon Graphics          
+• RAM installed: 16 GB  
+• Window Edition: Window 11 
+• To write all 
+reports that 
+need to be 
+used in this 
+project. 
+• To write and 
+run the coding 
+for 
+development 
+of the project. 
+ 
+The laptop is the primary development platform as it allows the execution of 
+the development tools, database administration and testing of the application. 
+This needs sufficient processing capability and memory so that the efficient 
+code, debugging and testing can be carried out at the development stage. At 
+the same time, testing of functionality and performance of the application are 
+done using the Android smartphone in a mobile reality setting. It also enables 
+the developer to test the system as a real user and ensure that the system is 
+compatible with the Android devices. 
+ 
+3.4.2 Software Requirements 
+ 
+The software requirements also involve the tools of development, design and 
+supporting applications needed during various stages of the project. These 
+software tools have been chosen keenly to assist in documentations, system 
+designing, mobile application design and data management. Table 3.8 
+provides the summarization of computer software that has been utilized in 
+this project and its purpose. 
+ 
+Table 3. 8 Software Requirements 
+Phase Software Description 
+  Identification  Microsoft Word To document all report. 
+ Mendeley Reference Manager    To insert citation and manage 
+references. 
+Design 
+ Draw.io 
+To create system 
+architecture diagrams and 
+flowchart for 
+documentation 
+ Figma 
+To design UI of the 
+system 
+49 
+ 
+ Stitch 
+To create Storyboard and 
+brainstorm idea for UI 
+Development  Firebase To store and manage application data   
+and user authentication. 
+ Flutter To develop the mobile application  
+ Visual Studio Code To write, edit, debug, and manage the 
+Flutter application source code. 
+ Google Books API To retrieve book information such as 
+title, author, cover image, page count, 
+category and ISBN.    
+ Open Library API To retrieve book information as a 
+fallback source when data is unavailable 
+from Google Books API. 
+ 
+The preparation of the project report and the effective handling of the 
+academic references was prepared through the use of documentation tools 
+like Microsoft word and Mendeley Reference Manager. Draw.io and Stitch 
+and Figma were used during the design stage to design system architecture, 
+flow charts and Storyboard and user interface designs. The tools were used to 
+aid in proper visualization of system structure, flow of navigation and the user 
+experience order so that upon implementation, no malfunctions occurred. 
+ 
+ 
+For the development phase, Flutter has been applied as the primary cross-
+platform framework and develop the mobile application to be able to 
+implement it efficiently on the Android devices. Visual studio code was the 
+integrated development environment (IDE) used to write, edit and debug the 
+Flutter source code. Firebase was also incorporated to help it with data 
+storage, user authentication and data synchronization on a cloud-based 
+environment. Google Books API and Open Library API use to retrieve all 
+books information. All these software products aided in the process of 
+developing, testing, and assessing the proposed gamified mobile application 
+to monitor reading progress. 
+ 
+3.5 Conclusion 
+ 
+In conclusion, this chapter explained the methodology that was used in the 
+design of the Gamified Mobile Application to Track Reading Progress. This 
+chapter has described the application of the MADLC that has five major 
+50 
+ 
+stages, which include identification, design, development, prototyping, and 
+testing. Every stage was elaborated methodically to explain the way the 
+application was planned, designed, developed and tested during the project. 
+Moreover, this chapter provided the system architecture of the proposed 
+mobile application to give a good sense of how the system elements, such as 
+the reading management module, gamification module, recommendation 
+system, and data storage interact with each other. The description of the 
+architecture assists in the better understanding of the system structure in 
+general and contributes to the process of implementing the offered 
+application. Lastly, this chapter described hardware and software 
+requirements that were used to support the process of development. The 
+discussed specifications will be able to make the application developed, 
+tested, and evaluated. On the whole, this chapter provides a solid background 
+to the further chapters that are devoted to the implementation and testing of 
+developed mobile application.
+ 
+REFERENCES 
+ 
+Ahmed, H. M. M., El-Sabagh, H. A., & Elbourhamy, D. M. (2025). Effect of Gamified, 
+Mobile, Cloud-Based Learning Management System (GMCLMS) on student 
+engagement and achievement. International Journal of Educational Technology 
+in Higher Education, 22(1). 
+ 
+Chen, C., Jamiat, N., & Mao, Y. (2023). The study on the effects of gamified interactive 
+e-books on students’ learning achievements and motivation in a Chinese character 
+learning flipped classroom. Frontiers in Psychology, 14.  
+ 
+Khaldi, A., Bouzidi, R., & Nader, F. (2023). Gamification of e-learning in higher 
+education: a systematic literature review. In Smart Learning Environments (Vol. 
+10, Issue 1). Springer.  
+ 
+Li, L., Zhang, J., Guo, Z., & Wang, Y. (2024). The Mobile Gamification for Early 
+Literacy: An Analysis of Learning Outcomes and Engagement. Journal of 
+Advances in Humanities Research, 3(4), 1–17.  
+ 
+Liu, T., Li, Y., Feng, M., Chen, Y., & Zhang, T. (2023). Understanding College 
+Students’ Engagement in Mobile Reading for Sustainability in Education: A Case 
+Study from China. Sustainability (Switzerland), 15(3).  
+ 
+Meng, C., Zhao, M., Pan, Z., Pan, Q., & Bonk, C. J. (2024). Investigating the impact 
+of gamification components on online learners’ engagement. Smart Learning 
+Environments, 11(1).  
+ 
+Nursi, A., Darni, R., & Novaliendry, D. (2025). A Mobile Vocabulary Learning App 
+for Engineering Contexts: Gamification, Self-Directed Learning, and User 
+Progress Tracking. Journal of Hypermedia & Technology-Enhanced Learning, 
+3(3), 262–282.  
+ 
+Oliveira, E. R., Branco, A. C., Carvalho, D., Sacramento, E. R., Tymoshchuk, O., 
+Pedro, L., Antunes, M. J., Almeida, A. M., & Ramos, F. (2022). An Iterative 
+Process for the Evaluation of a Mobile Application Prototype. SN Computer 
+Science, 3(4).  
+ 
+Oliveira, M., Abelha, A., Sousa, R., & Peixoto, H. (2024). Gamification in mobile 
+applications: techniques, benefits and challenges. Procedia Computer Science, 
+251, 678–683.  
+ 
+Parsons, D., Cerratto-Pargman, T., Vavoula, G., Traxler, J., Vaughan, N., Kukulska-
+Hulme, A., Kitchenham, A., Holley, D., Fitzgerald, E., Yau, J., Griesbaum, J., 
+Jorge, J., Specht, M., Danaher, P., Asunka, S., & Cochrane, T. D. (2021). 
+EDITORS-IN-CHIEF INTERNATIONAL ADVISORY BOARD ASSOCIATE 
+ 
+EDITORS EDITORIAL REVIEW BOARD. http://www.igi-
+global.com/authorseditors/titlesubmission/newproject.aspx 
+ 
+Rosidah, L., & Dellia, P. (2024). Library Book Recommendation System Using 
+Content-Based Filtering. Internet of Things and Artificial Intelligence Journal, 
+4(1), 42–65.  
+ 
+Samrgandi, N. (2021). User Interface Design & Evaluation of Mobile Applications. 
+IJCSNS International Journal of Computer Science and Network Security, 21(1).  
+ 
+Sarah Salim, F., Abu Bakar, Z., Maizura Mohamad Noor, N., & Mohemad, R. (2022). 
+Usability in Mobile Learning Application. In Journal of Information and 
+Knowledge Management (JIKM) (Vol. 1). 
+ 
+Siafis, V., Rangoussi, M., & Psaromiligkos, Y. (2024). Recommender Systems for 
+Teachers: A Systematic Literature Review of Recent (2011–2023) Research. In 
+Education Sciences (Vol. 14, Issue 7). Multidisciplinary Digital Publishing 
+Institute (MDPI).  
+ 
+Anggrainy, J., Sharizan, F. P. N., Sriyanda, S., & Farhan, R. (2024). Gamifying 
+Reading Motivation in EFL Students: Enhancing Engagement and Language 
+Learning Through ICT. In Jurnal Simki Pedagogia (Vol. 7, Issue 1).  
+ 
+Wang, Z., Harun, J., & Yuan, Y. (2024). ENHANCING READING INSTRUCTION 
+THROUGH GAMIFICATION: A SYSTEMATIC REVIEW OF 
+THEORETICAL MODELS, IMPLEMENTATION STRATEGIES, AND 
+MEASURABLE OUTCOMES (2020–2024). Journal of Information Technology 
+Education: Research, 23, 1–27.  
+ 
+ 

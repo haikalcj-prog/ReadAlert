@@ -1,0 +1,4652 @@
+UNIVERSITI TEKNOLOGI MARA 
+ 
+ 
+ 
+ 
+ 
+KAFASMART: INTEGRATING 
+GAMIFICATION IN KAFA 
+EDUCATION 
+ 
+ 
+ 
+ 
+ 
+ 
+NURFARAH NAJWA BINTI MOHD TAKRI 
+ 
+ 
+ 
+ 
+ 
+BACHELOR OF COMPUTER SCIENCE (Hons.) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+JULY 2025 
+ 
+ 
+Universiti Teknologi MARA 
+ 
+ 
+ 
+ 
+KAFASmart: Integrating Gamification 
+in KAFA Education 
+ 
+ 
+ 
+ 
+Nurfarah Najwa Binti Mohd Takri 
+ 
+ 
+ 
+ 
+ 
+ 
+Thesis submitted in fulfilment of the requirements 
+for Bachelor of Computer Science (Hons.) Faculty 
+of Computer Science and Mathematics 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+July 2025 
+SUPERVISOR APPROVAL 
+ 
+ 
+KAFASMART: INTEGRATING GAMIFICATION IN KAFA EDUCATION 
+ 
+By 
+ 
+NURFARAH NAJWA BINTI MOHD TAKRI 
+2022888044 
+ 
+This thesis was prepared under the supervision of the project supervisor, Lily Marlia 
+Binti Abdul Latif. It was submitted to the Faculty of Computer Science and 
+Mathematics and was accepted in partial fulfilment of the requirements for the degree 
+of Bachelor of Computer Science (Hons.). 
+ 
+ 
+ 
+Approved by 
+ 
+ 
+ 
+……………………………… 
+Lily Marlia Binti Abdul Latif 
+Project Supervisor  
+ 
+ 
+JULY 17, 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+STUDENT DECLARATION 
+ 
+ 
+I certify that this thesis and the project to which it refers is the product of my own work 
+and that any idea or quotation from the work of other people, published or otherwise 
+are fully acknowledged in accordance with the standard referring practices of the 
+discipline. 
+ 
+ 
+ 
+ 
+……………………………….. 
+NURFARAH NAJWA BINTI MOHD TAKRI 
+2022888044 
+ 
+ 
+ 
+JULY 17, 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+iii 
+ 
+ACKNOWLEDGEMENT 
+ 
+ 
+Alhamdulillah, all praises and thanks be to Allah SWT, the Most Gracious and the 
+Most Merciful, for His endless blessings and guidance that enabled me to successfully 
+complete this research within the given time frame. 
+ 
+First and foremost, I would like to express my deepest appreciation to my supervisor, 
+Lily Marlia Binti Abdul Latif, for her unwavering support, valuable guidance, and 
+continuous encouragement throughout the entire journey of this project. It has truly 
+been an honour to learn from such a dedicated and knowledgeable individual. 
+ 
+I would also like to extend my sincere gratitude to Dr. Azilawati Binti Azizan for her 
+patience, commitment, and understanding during this past year. Her guidance, not only 
+in academics but also in moral support, has been an invaluable part of my Final Year 
+Project journey. It has been a privilege to be mentored by someone so passionate and 
+supportive. 
+ 
+To my beloved parents and family members, thank you for your unconditional love, 
+endless prayers, and emotional support. Your encouragement has been the foundation 
+of my strength and perseverance throughout this process. 
+ 
+Last but certainly not least, I would like to thank my dearest friend, Ain Syazwani 
+Binti Azman for standing by my side through all the challenges. Your friendship, 
+motivation, and late-night discussions made this journey more bearable and 
+memorable. A heartfelt thank you for being a part of my academic life and for all the 
+moments we shared along the way. 
+ 
+May all of your kindness be rewarded abundantly by Allah SWT. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+iv 
+ 
+ 
+ABSTRACT 
+ 
+ 
+In today's digital age, reliance on traditional rote-learning methods in the KAFA (The 
+Quran and Fardu Ain Class) education system has become less effective, particularly 
+for students who are increasingly familiar with technology. While the KAFA 
+curriculum plays a crucial role in shaping the spiritual and moral foundation of Muslim 
+children in Malaysia, students preparing for the UPKK examination often struggle to 
+remain engaged with conventional learning approaches. To address this challenge, the 
+KAFASmart project was developed to integrate gamification into a mobile learning 
+application tailored specifically for KAFA students. This study aimed to identify 
+effective gamification elements that enhance student engagement, develop a KAFA 
+focused educational app incorporating those elements, and evaluate its usability among 
+students. The project followed a Hybrid Waterfall-Agile development methodology 
+encompassing requirement analysis, system design, implementation, and testing. Key 
+gamification features such as badges, leaderboards, challenges, avatars, timers, points, 
+and progress tracking were implemented to foster sustained interest. The resulting 
+application showed significant improvements in student interaction, motivation, and 
+understanding, particularly in subjects like Sirah and Adab. User feedback confirmed 
+that the gamified environment made learning more enjoyable and encouraged 
+independent study. In conclusion, KAFASmart effectively bridges the gap between 
+traditional religious instruction and the digital learning habits of modern students. 
+Future work may involve collaboration with JAKIM to align the application more 
+closely with national KAFA standards and support wider implementation. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+v 
+ 
+ 
+TABLE OF CONTENTS 
+ 
+ 
+CONTENT            PAGE 
+ 
+SUPERVISOR APPROVAL          i 
+STUDENT DECLARATION         ii 
+ACKNOWLEDGEMENT         iii 
+ABSTRACT           iv 
+TABLE OF CONTENTS          v 
+LIST OF FIGURES                   viii 
+LIST OF TABLES          xi 
+LIST OF ABBREVIATIONS                  xii 
+ 
+CHAPTER ONE: INTRODUCTION 
+ 
+ 1.1 Background of Study         1 
+ 1.2 Problem Statement         2 
+ 1.3 Project Objectives         5 
+ 1.4 Project Scope          5 
+ 1.5 Significance of Research        5 
+ 1.6 Conclusion          6 
+ 
+CHAPTER TWO: LITERATURE REVIEW 
+ 
+2.1 Overview of KAFA Syllabus Subject      7 
+ 2.1.1 Sirah (Islamis History)       9 
+ 2.1.2 Adab (Manners)      10 
+ 2.2 Overview of Gamification      10 
+2.2.1 History and Definition of Gamification   10 
+ 2.2.2 Type of Gamification      11 
+vi 
+ 
+ 2.2.3 Gamification Element      13 
+ 2.3 Comparison of Existing Application     17 
+ 2.4 Justification        22 
+ 2.5 Conclusion        24 
+ 
+CHAPTER THREE: METHODOLOGY 
+ 
+3.1 Project Methodology       25 
+ 3.1.1 Requirement       27 
+ 3.1.2 Design        30 
+ 3.1.3 Development       40 
+ 3.1.4 Testing       41 
+3.1.3 Deployment       43 
+ 3.1.4 Maintenance       43 
+ 3.2 Summary of Project Methodology     43 
+ 3.3 System Architecture       45 
+ 3.4 Hardware and Software Requirement    47 
+ 3.5 Conclusion        49 
+ 
+CHAPTER FOUR: PROJECT DESIGN AND IMPLEMENTATION 
+ 
+ 4.1 Project Design                  50 
+  4.1.1 Student Module      50 
+  4.1.2 Teacher Module      63 
+ 4.2 Project Development       69 
+  4.2.1 Installation of IDE and Plug-ins    69 
+  4.2.2 Importing Libraries      70 
+  4.2.3 Code Snippet       73 
+ 4.3 Testing        84 
+  4.3.1 Functionality Test      84 
+  4.3.2 Before After Test      90 
+  4.3.3 User Acceptance Test                 98 
+vii 
+ 
+ 4.4 Conclusion                            101 
+ 
+CHAPTER FIVE: CONCLUSIONS AND RECOMMENDATIONS 
+ 
+ 5.1 Overall                 103 
+ 5.2 Objective Achievement               104 
+  5.2.1 First Objective               104 
+  5.2.2 Second Objective               104 
+5.2.3 Third Objective               105 
+ 5.3 Limitations                 105 
+ 5.4 Recommendations and Future Work              106 
+ 5.5 Summary                 108 
+ 
+REFERENCES                  110 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+viii 
+ 
+LIST OF FIGURES 
+ 
+ 
+FIGURE                 PAGE 
+2.1 The Conceptual Map of KAFASmart          8 
+2.2 Type of Player        12 
+2.3 STD Applied to Gamification      13 
+2.4 Snippet of the Pandai: Practice for Exam Application   18 
+2.5 Snippet of the Medical Surgical Nursing Quiz    19 
+2.6 Snippet of the EduRev: Exam Preparation App    20 
+3.1 The Phase in the Hybrid Waterfall-Agile Methodology   26 
+3.2 Use Case Diagram of KAFASmart      28 
+3.3 Storyboard Design for User Interface Student    31 
+3.4 Storyboard Design for User Interface Teacher    33 
+3.5 Flowchart Based on Storyboard Design     35 
+3.6 Continuation of the Flowchart Based on the Storyboard Design, Featuring 
+Connectors B, C, and D.       36 
+3.7 Continuation of the Flowchart Based on the Storyboard Design, Featuring 
+Connectors A.         37 
+3.7 Continuation of the Flowchart Based on the Storyboard Design, Featuring 
+Connectors E, F. and G       38 
+3.9 System Architecture of KAFASmart      46 
+4.1 Student Homepage UI Design      52 
+4.2 Badges Page UI Design       53 
+4.3 Mission Page UI Design       54 
+4.4 Profile Page UI Design       55 
+4.5 Progress Bar Page UI Design       56 
+4.6 Leaderboard Page UI Design       58 
+4.7 Note Page UI Design        59 
+4.8 Quiz Set 1 Page UI Design       60 
+4.9 Quiz Set 2 Page UI Design       61 
+4.10 Quiz Set 3 Page UI Design       61 
+4.11 Flashcard Page UI Design       62 
+ix 
+ 
+4.12 Comment Page UI Design       63 
+4.13 Teacher Homepage UI Design      64 
+4.14 Teacher Profile Page UI Design      65 
+4.15 Student Info Page 1 UI Design      66 
+4.16 Student Info Page 2 UI Design      67 
+4.17 Search Student Page UI Design      68 
+4.18 View Leaderboard Page UI Design      69 
+4.19 List of Package Imported       71 
+4.20 Snippet Code Store Note Progress      73 
+4.21 Snippet Code Store Quiz Progress      74 
+4.22 Snippet Code Store Subject Progress      75 
+4.23 Snippet Code Store Overall Progress      75 
+4.24 Snippet Code Mission Evaluation Controller     76 
+4.25 Snippet Code Mission Progress Storage     77 
+4.26 Snippet Code Mission 001       77 
+4.27 Snippet Code Mission 002       78 
+4.28 Snippet Code Store Badges       80 
+4.29 Snippet Code Initialized Lock Badges     81 
+4.30 Snippet Code Fetch Information for Leaderboard    81 
+4.31 Snippet Code Score Calculation      84 
+4.32 Graph Pre-Test Question 1       91 
+4.33 Graph Post-Test Question 1       92 
+4.34 Graph Pre-Test Question 2       92 
+4.35 Graph Post-Test Question 2       93 
+4.36 Graph Pre-Test Question 3       93 
+4.37 Graph Post-Test Question 3       94 
+4.38 Graph Pre-Test Question 4       94 
+4.39 Graph Post-Test Question 4       95 
+4.40 Graph Pre-Test Question 5       95 
+4.41 Graph Post-Test Question 5       66 
+4.42 Graph Pre-Test Question 6       96 
+4.43 Graph Post-Test Question 6       97 
+x 
+ 
+4.44 Graph Summary Usability Test Result     99 
+4.45 Graph Gamification Feature Favourite                         100 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+xi 
+ 
+LIST OF TABLES 
+ 
+ 
+TABLE              PAGE 
+2.1 Description of Gamification Elements     14 
+2.2 Comparison Between the Existing Application and the Proposed Project of 
+the Key Aspects.        21 
+3.1 The Requirement Based on this Study     27 
+3.2 Overview the Requirement Phase      29 
+3.3 Overview the Design Phase       39 
+3.4 Overview the Development Phase      41 
+3.5 Overview the Testing Phase       42 
+3.6 Summary of the Project Methodology     44 
+3.7 List of Hardware Requirement      48 
+3.8 List of Software Requirement       48 
+4.1 Results of the Functionality Testing      85 
+4.2 Information Respondents       90 
+4.3 Statistical Result                   97 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+xii 
+ 
+LIST OF ABBREVIATIONS 
+ 
+ 
+KAFA   Quran and Fardu Ain Class 
+UPKK   Kelas al-Quran dan Fardu Ain Assessment 
+JAKIM  Department of Islamic Development Malaysia 
+KBAT   Higher-Order Thinking Skills 
+STD   Self-Determination Theory 
+PBL   Points, Badges, and Leaderboards 
+UAT   User Acceptance Test 
+ 
+1 
+ 
+CHAPTER 1 
+ 
+ 
+INTRODUCTION 
+ 
+ 
+This chapter provided an overview of the project KAFASmart: Integrating 
+Gamification in KAFA Education. It went through the background of the study, which 
+covered general details about the project domain and research area. Furthermore, it 
+outlined the problem statement of the project in more depth through the ideal, reality, 
+consequence, and proposal of the project. Apart from that, the objectives, project 
+scope, and significance of the project were also discussed in this chapter. 
+ 
+1.1  Background of Study 
+ 
+The Quran and Fardu Ain Class (KAFA) is a program based on the concept of 
+strengthening the foundations of Islamic education for children aged from 
+seven (7) to 12, which had been implemented since 1990 (Mohd Rum et al., 
+2022). This program utilizes a curriculum, textbooks, the Kelas al-Quran dan 
+Fardu Ain Assessment (UPKK) examination, and follows the teaching and 
+learning schedule (PdP) set by the Department of Islamic Development 
+Malaysia (JAKIM) (Musaddin & Zulkifli, 2023). According to Wan Daud et 
+al. (2021), this program aimes to produce successful students with the influence 
+of Quranic and as-Sunnah teachings in their faith and wordship of Allah. There 
+are nine (9) subjects in the KAFA program, such as al-Quran, Akidah (Creed), 
+Ibadah (Worship), Sirah (Islamic History), Adab (Manners), Jawi and Khat 
+(Jawi Script and Arabic Calligraphy), Bahasa Arab (Arabic Language), Amali 
+Solat (Practical Prayer) and Undestanding the Islamic Way of Life (PCHI). 
+ 
+In recent years, there has been significant interest in integrating gamification 
+through mobile applications into educational tools to increase engagement 
+among students. Gamification was the integration of game elements into non-
+2 
+ 
+game contexts (Moldez et al., 2024). This means that conventional study 
+practices were transformed into gamified experiences by incorporating 
+elements such as badges, leaderboards, and interactive challenges. These 
+elements make activities more enjoyable and interactive, encouraging users to 
+participate actively, achieve goals, and maintain their focus. The main goal of 
+gamification was to enhance learning outcomes by providing immediate 
+feedback, encouraging progress tracking, and promoting a sense of 
+achievement (Smiderle et al., 2020). Hence, integrating gamification with 
+learning is increasingly encouraged in the 21st century educational landscape, 
+as it fosters creativity and innovation among students. 
+ 
+1.2  Problem Statement 
+ 
+In recent times, students have spent more time using gadgets, which 
+significantly has changed the way they learned (Putri & Arham, 2024). 
+Smartphones, tablets, and computers have become integral parts of students' 
+daily lives, reshaping how they studied and prepared for their examinations. 
+Conventional learning methods no longer capture their attention or motivate 
+them effectively, as research by Aprianti et al. (2022) shows that students are 
+more engaged when exposed to digital content that matches their interests and 
+habits. This was particularly crucial for students preparing for examinations 
+like the UPKK, where standard study materials do not fully engage them or 
+help them retain information (Elman et al., 2023). Digital learning tools 
+provide an effective alternative to enhance students’ focus, motivation, and 
+comprehension. According to a study by Balalle (2024), students show greater 
+interest and motivation when engaging with dynamic, technology-driven 
+resources that align with their preferences and learning styles. These tools not 
+only made learning more appealing but also create an environment that 
+supports better retention and understanding of the material. Therefore, to help 
+students succeed in the UPKK examination, they need better access to 
+materials that made it easier to understand and master topics in a way that suits 
+3 
+ 
+their natural use of technology. This approach helped improve their 
+performance and better prepares them for the UPKK examination. 
+ 
+In reality, the KAFA program still relies on outdated conventional learning 
+methods, primarily using textbooks and notes in a rote learning format. 
+According to Ikbal (2023), this method prioritizes the centralized delivery of 
+information from teacher to student, where teachers assume an authoritative 
+role as the primary source of knowledge, and students act as passive recipients 
+with limited opportunities for interaction or in-depth exploration. In most 
+standard KAFA classes, this passive learning remains dominant, with an 
+emphasis on memorization and repetition, using blackboards and chalk as the 
+main teaching tools (Maziz et al., 2021). For instance, a KAFA teacher 
+typically enters the classroom, wrote notes on the board, and students copy 
+them into their notebooks, later being asked to memorize the content to answer 
+questions provided by the teacher. This approach makes the teacher’s notes and 
+textbooks the primary sources of learning, limiting students’ chances to gain 
+additional information through more engaging methods. Even though this 
+learning method was effective for previous generations, it has become less 
+suitable for today's students, who are more accustomed to dynamic screens, 
+animated visuals, and instant feedback (Houda Fansa, 2024). Moreover, 
+students with access to smart devices may seek extra information at home 
+through platforms like TikTok, but such sources are often disorganized, 
+unreliable, and limited in scope (Joana & Arco, 2023).  
+ 
+As a result of relying on outdated conventional learning methods, students 
+struggle to maintain their interest and focus in learning. The absence of 
+engaging and dynamic learning materials often makes the process feel static 
+and monotonous rather than productive and enjoyable. This aligns with the 
+findings of Pratiwi et al. (2022), who state that lessons relying heavily on 
+textbooks as the primary reference create a dull environment, leading to 
+boredom among students. Similarly, Othman et al. (2021) note that 
+conventional teaching approaches have resulted in students becoming 
+4 
+ 
+disengaged and less active in KAFA classes. This lack of active engagement 
+often leads to a superficial understanding of the topics taught, negatively 
+affecting their performance in the UPKK examination. Consequently, students 
+not only struggle with examination preparation but also experienced 
+diminished motivation to learn and limited opportunities to develop essential 
+higher-order thinking skills (KBAT), which are increasingly vital in education. 
+Addressing this gap was imperative to fostering a more engaging and effective 
+learning environment that aligns with the needs of contemporary learners. 
+ 
+To bridge the gap between conventional learning methods and the educational 
+needs of modern students, the development of a mobile application 
+incorporating gamification elements was proposed. This approach integrates 
+gamification features into the learning process, making it more engaging and 
+relevant to modern learners (Yusof et al., 2021). According to Othman et al. 
+(2021), digital learning tools that integrates gamification foster healthy 
+competition in learning among students, which continuously increases their 
+engagement and motivation. By encouraging active participation and 
+presenting content in an engaging manner, the application has the potential to 
+address the limitations of conventional learning systems (Hambali & Lubis, 
+2022). It not only improves students’ comprehension of subjects in the KAFA 
+program but also equips them more effectively for their UPKK examinations. 
+Furthermore, the interactive and stimulating learning experience provided by 
+the application promotes the development of KBAT and fosteres a sustained 
+interest in lifelong learning, ensuring students are well-prepared for future 
+educational challenges. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5 
+ 
+1.3  Project Objectives 
+ 
+The objectives of this project are as follows: 
+ 
+• to identify gamification elements that enhance engagement and motivation. 
+• to develop a mobile application that incorporates gamification features to 
+support an engaging KAFA learning experience. 
+• to test the usability of the gamified application among KAFA students 
+using survey. 
+ 
+1.4  Project Scopes 
+ 
+This project was designed specifically for primary school students aged seven 
+(7) to 12, particularly those enrolled in the KAFA program. The application 
+was made available in both Malay and Jawi script to align with the KAFA 
+curriculum requirements. The main goal of this project was to offer a fun and 
+engaging learning experience that supports students in KAFA education. By 
+incorporating various gamification elements, the application aims to increase 
+student motivation and make learning more enjoyable. The mobile app was 
+developed for the Android operating system, allowing students to access the 
+content anytime and anywhere. The content focuses on several KAFA subjects, 
+which serve as the foundation for UPKK examination preparation. This project 
+seeks to provide a comprehensive, mobile-based solution that meets the 
+learning needs of primary school students while ensuring they are well-
+prepared for the UPKK examination. 
+ 
+1.5  Significance of Research 
+ 
+The significance of this project lied in its potential to transform the way 
+students in the KAFA program approached their studies, particularly in 
+preparation for the UPKK examination. By integrating engaging and 
+motivating features, the application encouraged students to actively participate 
+6 
+ 
+in their learning, enhanced their retention and understanding of key concepts. 
+This tool provided a structured and accessible platform where students could 
+easily access study materials and track their progress, making their learning 
+experience more efficient and enjoyable. Moreover, by supporting regular 
+revision through a variety of educational activities, the application helped 
+students manage their time effectively and reinforced their learning in a way 
+that was both fun and relevant to their needs. In addition, the mobile format of 
+the application allowed for flexibility in when and where students could study, 
+further promoting self-directed learning. Ultimately, this project aimed to 
+foster a deeper connection to the KAFA curriculum, improve examination 
+preparedness, and inspire a lasting interest in education, thereby contributing 
+to the development of students' academic skills and lifelong learning habits. 
+ 
+1.6  Conclusion 
+ 
+In conclusion, the KAFASmart project aims to address the limitations of 
+conventional learning methods in the KAFA program by leveraging the 
+potential of gamification in a mobile application. This innovative approach 
+caters to the evolving learning preferences of primary school students, ensuring 
+a more engaging, motivating, and effective learning experience. By focusing 
+on the specific needs of KAFA students, the application provides a structured, 
+accessible, and enjoyable platform that aligns with the curriculum and 
+enhances exam preparation for the UPKK assessment. Through this project, 
+students are empowered to take control of their learning, develop a deeper 
+understanding of key subjects, and cultivate essential skills such as higher-
+order thinking and self-directed learning. Ultimately, KAFASmart has the 
+potential to transform Islamic education for young learners, bridging the gap 
+between traditional teaching methods and the demands of modern education, 
+while fostering a lifelong passion for knowledge. 
+ 
+ 
+7 
+ 
+CHAPTER 2 
+ 
+ 
+LITERATURE REVIEW 
+ 
+ 
+The purpose of this chapter was to discuss the literature review relevant to this project. 
+This chapter begins with a brief introduction of the subtopics that are discussed. Next, 
+it was accompanied by a conceptual map in Figure 2.1, which provides an overview 
+of the main branches in the research field involved. In addition, an overview of the 
+domain was conducted in more depth to obtain more detailed information. Not only 
+that, the research area is also analysed in detail and with specificity to better understand 
+its techniques or elements. In this study, a comparison between techniques or elements 
+is carried out by examining some existing systems or applications. Through this 
+comparison, the appropriate technique or element is selected to develop the project. 
+Finally, justification was given to support the selection of the methods or elements that 
+are used. 
+8 
+ 
+  
+F
+ig
+u
+re
+ 2
+.1
+: 
+T
+h
+e 
+C
+o
+n
+ce
+p
+tu
+al
+ M
+ap
+ o
+f 
+K
+A
+F
+A
+S
+m
+ar
+t 
+9 
+ 
+2.1 Overview of KAFA Syllabus Subject 
+ 
+As discussed in the previous chapter, the domain of this project is related to 
+KAFA education. KAFA is an initiative by JAKIM to address Quranic 
+illiteracy and the lack of religious practice among Muslim children and 
+teenagers (Hamzah et al., 2024). In the early 1990s, KAFA classes were 
+conducted for students from Year One (1) to Year Six (6), using the curriculum, 
+textbooks, examinations, and syllabus set by JAKIM (Musaddin & Zulkifli, 
+2023). KAFA's recognition was assessed through the UPKK examinations, 
+which are carried out for Year Five (5) KAFA students, covering nine (9) 
+subjects (Affan, 2024). The UPKK exam was divided into two categories: 
+written and practical tests. A total of six (6) KAFA subjects are tested in 
+writing, namely Aqidah (Creed), Ibadah (Worship), Sirah (Islamic History), 
+Adab (Manners), Jawi and Khat (Jawi Script and Calligraphy), as well as 
+Bahasa Arab (Arabic Language). 
+ 
+2.1.3 Sirah (Islamic History) 
+ 
+Sirah, a compulsory subject for UPKK students, encompasses the profound 
+journey of Prophet Muhammad SAW, covering his life from birth to his 
+passing and the significant events in between. This subject also delves into the 
+development of Islamic laws, Muamalat, and historic Islamic wars, providing 
+students with insights into the evolution of Islam (JAKIM, 2020). As Bhari et 
+al. (2021) highlight, the study of this subject aims to familiarize students with 
+pivotal events related to the Prophet, his family, companions, and the broader 
+growth of Islam, offering valuable lessons to guide their lives in alignment with 
+Islamic principles. However, mastering this subject presents challenges, as 
+students are required to memorize an extensive array of facts such as dates, 
+participants, locations, and key details of events like the Battle of Badr. 
+According to Mohd Rum et al. (2022), 63.3% of 30 KAFA students struggle 
+with memorization due to the subject’s demanding attention requirements. This 
+difficulty, compounded by the need to focus on other subjects simultaneously, 
+10 
+ 
+often hinders students' ability to retain information and understand the material, 
+making it challenging for them to perform well in the UPKK examinations. 
+ 
+2.1.4 Adab (Manners) 
+ 
+Manners refer to a person's behaviour or habits (Ruzairi & Jasmi, 2022), 
+encompassing goodness, unity, morality, politeness, and humanity. 
+Recognizing this, JAKIM includes Adab as part of the KAFA syllabus to 
+nurture students to obey Allah’s commands and prohibitions (Hamzah et al., 
+2024) and to develop pure and upright personalities (Samurah & Che Soh, 
+2022). These subject covers various aspects, including manners toward Allah, 
+parents, teachers, others, as well as interactions with places, objects, and 
+matters concerning the afterlife. Although this subject is often considered easy 
+due to its relation to everyday life, students frequently overlook its deeper 
+meanings and wisdom. Examination questions typically require critical 
+thinking, an understanding of principles, and the ability to apply them to 
+practical scenarios rather than relying solely on memorization. However, 
+textbook-based lessons without engaging aids reduce students' interest and 
+effort in studying this subject, making it challenging for many students to 
+achieve high grades in the UPKK examination. 
+ 
+2.2 Overview of Gamification 
+ 
+2.2.1 History and Definition of Gamification  
+ 
+Gamification is a relatively recent yet increasingly popular approach that 
+applies knowledge from Human-Computer Interaction (HCI), psychology, and 
+digital game development to stimulate human involvement and motivation 
+(Othman et al., 2021). Although the concept of gamification had existed in 
+various forms since ancient times, it evolved significantly over the years. 
+According to Sharma et al. (2023), the term “gamification” was coined in 2002 
+by Nick Pelling, a British software engineer. Pelling initially applied the 
+11 
+ 
+concept while developing computer games and designing user interfaces. 
+Around the same time, Benthem proposed that any logical task could be 
+gamified, adding further theoretical depth to the concept. However, according 
+to Ratinho & Martins (2023), the first documented use of the term appeared in 
+2008 when Bret Terrill mentioned "gameification" in his blog as a strategy to 
+enhance engagement. Although Terrill’s spelling did not gain widespread 
+acceptance, his reference helped spark growing interest in the concept. By 
+2010, gamification had gained significant attention across various fields, 
+including business, education, healthcare, and crowdsourcing, marking the 
+beginning of its widespread commercial application (Bakhit Al-Salami, 2022). 
+ 
+According to Schöbel et al. (2020), the term gamification sparks ongoing 
+debate, as there was no universally agreed-upon definition. Some researchers 
+define gamification by highlighting its relevance in fields such as finance, 
+marketing, health, education, sustainability, and productivity. Others view it as 
+a powerful tool for solving problems or achieving organizational goals. In the 
+context of education, gamification is commonly defined as the integration of 
+game elements into non-game contexts (Christopoulos & Mystakidis, 2023). 
+This involves using features or mechanics commonly found in games like 
+points, levels, or rewards to make content more interesting and enjoyable, 
+encouraging users to interact and achieve specific goals (Alomair & 
+Hammami, 2020). These elements do not convert the content into a full-fledged 
+game but instead borrowed key aspects of games to enhance the user 
+experience. This approach increases motivation and engagement by creating a 
+more enjoyable learning environment, making it more effective for educational 
+purposes. 
+  
+2.2.2 Type of Gamification  
+ 
+According to Jayalath & Esichaikul (2022), gamification is divided into two 
+main types, namely structural gamification and content gamification. 
+Structural gamification involves adding game elements such as points, levels, 
+12 
+ 
+leaderboards, or progress bars to an existing process or content without 
+changing the core material, while content gamification involved modifying the 
+content itself by incorporating elements such as storylines, challenges, or 
+missions to make the learning more fun and game-like (Fatima et al., 2024). 
+The structural gamification approach focuses more on how users interact with 
+the content or system. For example, in learning applications, structural 
+gamification provides rewards such as points or levels to students after 
+completing a quiz, but the content of the quiz itself remains unchanged. The 
+most appropriate type of gamification used in this project was structural 
+gamification, as it maintains the integrity of the original content while 
+increasing user motivation and engagement.  
+ 
+Furthermore, in the context of gamification, understanding the type of player 
+or user was important to ensure that gamification strategies meet different 
+needs and motivations. In 1996, Bartle introduced four (4) main categories of 
+players in the gaming world, namely Achievers, Socializers, Killers, and 
+Explorers (Vergara et al., 2023). These four (4) categories can be used to design 
+more effective gamification elements. Figure 2.2 illustrates the types of players 
+along with brief descriptions in different quadrants. 
+ 
+Figure 2.2: Type of Player 
+ 
+13 
+ 
+Achievers are the most common user type, with a primary focus on recognizing 
+and enhancing user accomplishments. They are motivated by success and the 
+recognition of their progress. In line with the study by Christopoulos & 
+Mystakidis (2023), Achievers are attracted to systems that provide rewards 
+such as points, badges, or levels to reflect their achievements. In gamification, 
+features such as scoreboards and progress bars are highly relevant for engaging 
+Achievers (Gachkova et al., 2020), as they tend to complete all challenges to 
+reach the highest status. 
+ 
+2.2.3 Gamification Element  
+ 
+Gamification elements, also known as game design elements, are a key 
+component in creating an effective gamification experience (Schöbel et al., 
+2020). The main goal of these elements is to increase motivation, either 
+intrinsically or extrinsically, by ensuring they are relevant and strategically 
+designed to meet the needs of the user (Manzano et al., 2021). Based on Self-
+Determination Theory (SDT), intrinsic motivation can be fostered by fulfilling 
+the needs of autonomy, which is the freedom to act according to one's own 
+interests, competence such as confidence in one's abilities, and social 
+relationships. Figure 2.3 illustrates how SDT applied to gamification elements. 
+When gamification elements were carefully designed, they enhance user 
+experience and make tasks more enjoyable and meaningful. 
+ 
+ 
+Figure 2.3: STD Applied to Gamification 
+(Source: Magnani, 2023) 
+ 
+14 
+ 
+A study by Alam et al. (2023) identifies reward points, leaderboards, badges, 
+and competition as key mechanics in gamification. Similarly, Vrcelj et al. 
+(2023) emphasize the importance of avatars and progress bars as critical 
+elements in this approach. These studies highlight a variety of gamification 
+elements, including leaderboards, points, coins, badges, challenges, tasks 
+levels, feedback, timers, avatars, and progress bars, which can be utilized to 
+enhance the success of an application or system. A general description of these 
+existing gamification elements will be presented in Table 2.1.  
+ 
+Table 2.1: Description of Gamification Elements 
+Gamification Element Description 
+Leaderboard Displayed rankings to encourage competition and showcase 
+top performers. 
+Points Rewarded users for actions, reflecting their progress and 
+achievements. 
+Coins Virtual currency earned to unlock or purchase in-app items 
+and features. 
+Badges Visual tokens awarded for reaching milestones or 
+completing specific tasks. 
+Challenges Time-bound or skill-based tasks designed to engage and 
+reward users. 
+Task A specific activity or objective that users complete to earn 
+rewards or progress. 
+Levels Stages of progress that unlock new opportunities and 
+signify advancement. 
+Feedback Real-time responses to user actions, guiding and motivating 
+improvement. 
+Timers Create urgency by setting deadlines for tasks or challenges. 
+Avatar A customizable digital character representing the user 
+within the platform. 
+Progress Bar Visual tracker showing how close users are to completing 
+goals. 
+ 
+Table 2.1 shows various types of gamification elements. Among these, the 
+most frequently used combinations of elements are the PBL triad (Points, 
+Badges, and Leaderboards), which has demonstrated effectiveness in attracting 
+interest and increasing user engagement (Hallifax et al., 2023). Additional 
+elements such as challenges, progress bars, avatars, and quizzes are also widely 
+recognized for their ability to sustain motivation and enhance the user 
+experience. 
+ 
+ 
+15 
+ 
+a) Badges 
+ 
+In the web dictionary, a badge is defined as a small item made of metal, 
+plastic, or fabric, featuring a design or text, often used to represent identity, 
+membership in an organization, or support for a cause. In the context of 
+gamification, a badge refers to a set of digital icons awarded to users in 
+recognition of specific achievements or the successful completion of tasks 
+or challenges (Bakhit Al-Salami, 2022). In other words, badges align with 
+the concept of points by providing instant feedback to users about their 
+performance (Kamis Alzahrani & Alhalafawy, 2022). Typically, badges 
+carry no narrative meaning, and collecting them was optional rather than 
+mandatory. Users who earn badges felt appreciated for their efforts and 
+become more motivated to collect additional badges as a sign of progress. 
+ 
+b) Leaderboard 
+ 
+The leaderboard is one of the most widely used elements in the 
+gamification concept. It provides rankings or positions for users based on 
+their performance (Hallifax et al., 2023). By displaying nicknames, 
+performance scores, and ranks, users are able to compare themselves with 
+others. According to Bakhit Al-Salami (2022), leaderboards contribute to 
+students’ motivation by instilling a sense of healthy competition to improve 
+their standings. It is clear why the leaderboard is an element that is widely 
+used in game applications because it is able to increase user engagement 
+through elements of healthy competition. Furthermore, it offers users a 
+clear visual of their achievements and motivates them to strive for higher 
+rankings. 
+ 
+c) Challenges 
+ 
+Challenges are crucial elements in gamification, consisting of specific tasks 
+that users are required to complete within a given time frame (Hallifax et 
+16 
+ 
+al., 2023). These challenges can be categorized as daily, weekly, or 
+monthly, depending on the system’s objectives. Each challenge usually 
+offers rewards such as points, badges, or advancement to a new level, as 
+recognition for the user’s effort. These rewards not only provided 
+additional motivation but also increased the users’ sense of 
+accomplishment, thereby deepening their engagement. For example, in an 
+educational application, a daily challenge might involve completing five 
+quizzes in one day, while a monthly challenge could require achieving a 
+target score across multiple lessons. With the implementation of structured 
+challenges, the appeal of the platform increases while also promoting a 
+spirit of healthy competition. 
+ 
+d) Progress Bar 
+ 
+A progress bar functions as a visual progress tracker that provides users 
+with clear goals within the system (Hallifax et al., 2023). It allows users to 
+monitor how much of a task they have completed and how much remains. 
+This visibility encourages users to continue participating in the activities, 
+as they can directly see their progress and feel more motivated to complete 
+the task. In essence, the progress bar serves as a form of real-time feedback 
+for the user (Fajri et al., 2021). 
+ 
+e) Scores 
+ 
+Scores represent a basic numerical reward (Hallifax et al., 2023) and are 
+considered a fundamental gamification element, commonly awarded for 
+completing certain activities (Kamis Alzahrani & Alhalafawy, 2022). As 
+part of a reward system, scores serve to motivate users to improve their 
+performance. The accumulation of scores also functions as a performance 
+indicator that could be reflected on leaderboards. With this mechanism, 
+users are motivated to make more effort, making the overall gamification 
+experience more dynamic and competitive. 
+17 
+ 
+f) Avatar 
+ 
+In a gamified environment, an avatar serves as a digital representation of 
+the user, often depicting their persona or character (Christopoulos & 
+Mystakidis, 2023). Avatars are typically presented in various forms such 
+as diagrams, animations, or 3D graphics to make them more visually 
+appealing. Users are usually given the freedom to select or create their own 
+avatar to distinguish themselves from others, offering a unique identity in 
+the game world. Moreover, avatars play an important role in shaping social 
+interaction in cooperative environments, enabling users to feel more 
+connected and recognized as part of the gaming community (Kamis 
+Alzahrani & Alhalafawy, 2022). Through avatars, users can express unique 
+traits, making them an essential element of a more personal and immersive 
+gamified experience. 
+ 
+g) Timer 
+ 
+A timer refers to a specific time limit set for completing a task (Garcia-
+Iruela & Hijon-Neira, 2020). In gamification, this is commonly represented 
+by a stopwatch or countdown timer either counting up or down to measure 
+the time users take to complete an activity. For example, in a quiz-based 
+task, users might be given 30 seconds to select the correct answer. This 
+time constraint introduces a degree of pressure (Hallifax et al., 2023), 
+compelling users to think and respond more quickly. 
+ 
+2.3 Comparison of Existing Application 
+ 
+This section compares existing mobile applications available in the market 
+with the proposed project. The purpose of this comparison was to evaluate the 
+benefits and unique features of each application to identify how this project can 
+offer improved solutions or better meet users’ needs. The applications selected 
+for this comparison are as follows: 
+18 
+ 
+a) Pandai: Practice for Exam  
+ 
+Pandai: Practice for Exam is a mobile application developed by Pandai 
+Education, based in Kuala Lumpur, Malaysia. It aims to help primary and 
+secondary students prepare for their examinations in an interactive way. 
+The application incorporates various gamification elements such as 
+quizzes, coins, leaderboards, and badges. Figure 2.4 displays a snippet of 
+the application, including the home page, sample quizzes, leaderboard, and 
+badge screen. The main gamification feature of this application is the quiz 
+module, categorized by subject. Upon completing a quiz, users are awarded 
+scores and coins based on their performance. Coins are used to unlock 
+additional quizzes and features within the application. Users also receive 
+badges based on their quiz results. Additionally, the leaderboard allows 
+users to compare their performance with others. With these features, the 
+application makes learning more engaging through fun, game-like 
+experiences. 
+ 
+ 
+             Figure 2.4: Snippet of the Pandai: Practice for Exam Application 
+   (Source: Google Play Store) 
+ 
+b) Medical Surgical Nursing Quiz 
+ 
+Medical Surgical Nursing Quiz is an Android application offered by 
+Nursing Studies for nursing students. It covers various topics in Surgical 
+19 
+ 
+Nursing and serves as a learning aid. The primary gamification element 
+used was the quiz, which users can attempt based on their chosen topic. 
+During the quiz, users are timed and receive scores depending on the 
+accuracy of their responses. Additionally, users earn coins based on their 
+total scores, which could be used to unlock more features. The app also 
+displays statistics and leaderboards for users to monitor their performance 
+and compare with others. These gamification elements like quizzes, timers, 
+scores, coins, and leaderboards successfully engage users and motivate 
+them to study. Figure 2.5 shows evidence of gamification elements used in 
+this application. 
+ 
+ 
+                            Figure 2.5: Snippet of the Medical Surgical Nursing Quiz 
+  (Source: Google Play Store) 
+ 
+c) EduRev Exam Preparation App 
+ 
+EduRev Exam Preparation App is developed to function as a personal tutor, 
+guiding students through revision with targeted materials. It was suitable 
+for both primary and secondary students, offering notes, videos, and 
+exercises for all major subjects in alignment with Malaysia’s Ministry of 
+Education (KPM). Figure 2.6 illustrates the user interface of the 
+application. This app uses quizzes as its main learning activity. To 
+encourage consistency, the application introduced the streak feature, which 
+20 
+ 
+rewards users for consecutive days of learning. A progress bar visually 
+tracks users’ learning milestones, and badges were awarded based on their 
+streak achievements. These elements make the learning process fun and 
+encourage users to maintain regular study habits. 
+ 
+.  
+                           Figure 2.6: Snippet of the EduRev Exam Preparation App 
+     (Source: Google Play Store) 
+ 
+Based on the descriptions above, a comparison is made to evaluate key aspects 
+such as game genre, accessibility, suitability, platform compatibility, and 
+gamification features. Table 2.2 summarizes this comparison between the 
+existing applications and the proposed KAFASmart project. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+21 
+ 
+Table 2.2: Comparison Between the Existing Application and the Proposed Project of the 
+Key Aspects. 
+ 
+Pandai: 
+Practice for 
+Exam 
+ 
+Medical 
+Surgical 
+Nursing Quiz 
+ 
+EduRev Exam 
+Preparation 
+App 
+ 
+KAFASmart: 
+Integrating 
+Gamification in 
+KAFA 
+Education 
+Overview 
+Educational 
+game 
+application to 
+help students 
+prepare for 
+their exams 
+interactively.  
+Educational 
+game 
+application to 
+help nursing 
+student in their 
+study. 
+Educational 
+game 
+application 
+that acts as a 
+personal tutor 
+to ensure users 
+learn the right 
+and clear 
+things to 
+answer their 
+exams later. 
+Educational 
+game 
+application that 
+helps KAFA 
+student learn 
+KAFA subjects. 
+Game genre 
+Quizzes Game Quizzes Game Quizzes Game Quizzes Game  
+Accessibility 
+Online Online Online Online 
+Suitability 
+Primary and 
+Secondary 
+Students 
+Nursing 
+Students 
+Primary and 
+Secondary 
+Students 
+KAFA Students 
+Platform 
+Compatibility 
+Android Android Android Android 
+Features 
+Coin, 
+Leaderboard, 
+Badges, 
+Scores 
+Scores, 
+Coins, 
+Leaderboard, 
+Timer 
+Streak, 
+Progress Bar, 
+Badges 
+Badges, 
+Progress Bar, 
+Leaderboard, 
+Challenges, 
+Timer, 
+Scores, 
+Avatar 
+ 
+  
+Based on the comparison made in Table 2.2, this project was developed to 
+assist KAFA students in learning and preparing for their UPKK examinations. 
+The project specifically implemented quizzes as the main feature to support 
+learning activities. It was designed as a mobile application for the Android 
+platform, with the capability to be used online, similar to the other applications 
+reviewed. The target users of this project were KAFA students preparing to sit 
+for the UPKK exam. What set this project apart from the existing applications 
+was its integration of seven gamification elements, namely: badges, progress 
+bars, leaderboards, challenges, timer, scores, and avatars. These features were 
+22 
+ 
+strategically chosen to enhance motivation, engagement, and overall learning 
+experience, making the application more appealing and effective for its 
+intended users. 
+ 
+2.4 Justification 
+ 
+KAFASmart was a project developed to support KAFA students in learning 
+and preparing for the UPKK examination. The project utilized gamification as 
+its core focus to improve student engagement and learning outcomes. This 
+approach aligned with the theory by Vrcelj et al. (2023), which stated that 
+gamification in education could enhance engagement by transforming tasks 
+into enjoyable experiences that encourage motivation and positive behavioural 
+change. As outlined in Table 2.2, the selected gamification elements in this 
+project included badges, points, leaderboards, progress bars, avatars, 
+challenges, and timers, each chosen for its unique function and benefit. 
+According to Smiderle et al. (2020), different gamification elements had 
+different psychological impacts, contributing to a more effective learning 
+experience. 
+ 
+The project implemented quizzes as its primary activity format to create a fun, 
+low-stress learning environment for KAFA subjects. Unlike traditional KAFA 
+materials, which typically consisted of dense text and written exercises, this 
+quiz-based approach offered an innovative alternative to help students revise 
+and retain knowledge more effectively. 
+ 
+One of the key elements integrated was badges, which acted as visual rewards 
+to recognize user accomplishments. This element was inspired by the 
+psychological finding by Kringelbach et al. (2016), which demonstrated that 
+aesthetically pleasing visuals could stimulate positive emotional responses. In 
+KAFASmart, badges were designed to be visually attractive to motivate 
+students to collect them as a sign of achievement. This design encouraged 
+continuous engagement and performance improvement among users. 
+23 
+ 
+ 
+Challenges were also implemented to offer structured, time-bound tasks that 
+promoted responsibility and engagement. These challenges were grouped into 
+missions to provide users with a more goal-oriented and motivating experience. 
+By framing multiple related challenges as missions, the app encourages 
+students to complete learning tasks in stages, giving them a sense of progress 
+and accomplishment. This mission-based approach also helps to maintain user 
+focus, increase task completion rates, and strengthen the connection between 
+learners and their overall learning objectives. 
+ 
+Apart from that, the progress bar element served as an important visual tool to 
+track task completion. It offered users direct feedback about their learning 
+progress, aligning with the findings of (Fajri et al., 2021). By seeing their 
+progress visually, students experienced a sense of accomplishment through 
+small wins, which helped sustain motivation and momentum throughout their 
+learning journey. 
+ 
+Another crucial gamification feature was the leaderboard, which allowed 
+students to compare their performance with peers. This element introduced 
+healthy competition, an aspect that Kapur (2020) argued can enhance 
+creativity, learning skills, and motivation. By tracking their rankings, students 
+were inspired to improve their scores and engage more deeply with the content. 
+ 
+Scores were used as performance indicators and were awarded based on the 
+difficulty of quiz questions. This system encouraged students to tackle more 
+challenging questions and served as a motivating factor to improve. The 
+accumulated points were then reflected in the leaderboard, reinforcing the 
+competitive spirit in a positive, motivating way. 
+ 
+The timer element was added to limit the time given for answering each quiz. 
+While it introduced mild pressure, it trained students to think quickly and 
+24 
+ 
+maintain focus. The time constraint also helped reduce distractions and kept 
+students engaged throughout the session. 
+ 
+Finally, avatars were implemented to personalize the user experience. Since 
+the target users were young learners, avatars helped create a sense of identity 
+within the app. This element allowed students to select characters they liked, 
+enhancing emotional involvement and enjoyment. For many users, especially 
+children, avatars made the experience feel more relatable and interactive. 
+ 
+2.5 Conclusion 
+ 
+In conclusion, this chapter provided a comprehensive overview of the project 
+domain, which focused on the KAFA subject syllabus. Additionally, the field 
+of gamification was analyzed in depth, covering its history, definitions, types, 
+and important elements. A comparison of existing applications was also 
+conducted to evaluate their features and identify improvements that could be 
+applied to this project.Based on the findings, this project integrated seven (7) 
+main gamification elements which were badges, leaderboards, challenges, 
+progress bars, avatars, scores, and timers. These elements were selected to 
+enhance student motivation, engagement, and learning effectiveness. As a 
+result, the KAFASmart application became more interesting, interactive, and 
+suitable to support KAFA students in preparing for the UPKK examination. 
+ 
+ 
+ 
+ 
+ 
+25 
+ 
+CHAPTER 3 
+ 
+ 
+METHODOLOGY 
+ 
+ 
+This chapter focused on the project methodology used in this study. It began with an 
+overview of the chosen methodology. Then, the selection of the project methodology 
+was described, followed by a detailed analysis related to the methodology to ensure its 
+compatibility with the proposed project. Each phase in the methodology was explained 
+in depth, including relevant steps to achieve the objectives of this study. This chapter 
+also provided a summary of the project's methodology to assess how well it aligned 
+with the objectives set in the previous chapter. To provide a more comprehensive 
+understanding, this chapter also included an overview of the proposed system 
+architecture. Finally, the hardware and software requirements were compiled in detail 
+to support the implementation of this project. 
+ 
+3.1 Project Methodology 
+ 
+According to the Cambridge Dictionary, methodology refers to a set of 
+guidelines specifically formulated and applied in a particular situation (Iwersen 
+et al., 2023). In the context of this project, these guidelines served to facilitate 
+the planning and implementation of the work. For this proposed project, the 
+Hybrid Waterfall Agile methodology was selected as the primary guide to 
+ensure successful implementation. A study by Yahya & Maidin (2022) 
+supported this choice, as the hybrid model was introduced to combine the 
+strengths of different methodologies in order to meet the unique needs of a 
+project. In this case, the Hybrid Waterfall Agile approach merged two (2) main 
+methodologies, namely Waterfall and Agile. The Waterfall model followed a 
+linear structure where each phase was completed one after another in sequence 
+(Santonanda et al., 2022), while the Agile model emphasized repetition and 
+adaptation throughout each phase of development (Senarath, 2021). Therefore, 
+26 
+ 
+the Hybrid Waterfall Agile combination aimed to strike a balance between a 
+structured workflow and flexible interaction across phases. Figure 3.1 
+illustrates the six main phases included in the Hybrid Waterfall Agile 
+methodology used in this study. 
+ 
+ 
+Figure 3.1: The Phases in the Hybrid Waterfall-Agile Methodology 
+ 
+Based on Figure 3.1, the chosen methodology consisted of six (6) main phases 
+which were requirement, design, development, testing, deployment, and 
+maintenance. Each phase was carried out in sequence, but there was interaction 
+between the development and testing phases. This interaction clearly reflected 
+the Agile component of the methodology. It allowed for adjustments to be 
+made during development while still preserving the overall structure and 
+documentation typical of the Waterfall model. This methodology was 
+considered suitable for the project as it required both stability in certain parts 
+and flexibility in others. However, the phases implemented in this project only 
+included the requirement, design, development, and testing phases. 
+27 
+ 
+3.1.1 Requirement 
+ 
+The requirement phase was the most important initial step in software 
+development, as it aimed to understand the necessary specifications of the 
+system to be developed (Ardhiansyah et al., 2022). According to Senarath 
+(2021), this phase was also known as Software Requirement Specification or 
+SRS, which referred to a complete and detailed description of how the system 
+should behave. In this study, the phase began with the process of gathering 
+information and requirements from various sources in order to gain a deeper 
+understanding of the proposed project. The requirements were divided into two 
+categories, which were functional and non-functional requirements. Functional 
+requirements described the core features or functions of the system, while non-
+functional requirements defined aspects such as performance, security, 
+usability, reliability, and scalability (Krüger, 2024). Table 3.1 presents the 
+requirements identified for this project. 
+ 
+ 
+Table 3.1: The Requirements Based on this Study 
+Features Requirements 
+Functional 
+Requirements 
+• Badges: To appreciate user performance as a reward 
+• Leaderboard: To motivate students by showing their ranking 
+based on performance. 
+• Challenges: Act as daily or weekly task for users to complete 
+to get some reward. 
+• Progress Bar: To give students a clear picture of their progress 
+through statistics and reports. 
+• Quizzes: Cover the domain of project by support multiple 
+choices, fill in blank and matching types of questions 
+• Scores: Act as a tool to measure the user's level of 
+achievement in answering quizzes. 
+• Avatar: Allow users to select a predefined list of image 
+characters as their image profile. 
+Non-Functional 
+Requirement 
+• Performance: The application must be responsive and work 
+well on various Android devices. 
+• Security: User data, such as test results or student progress, 
+must be protected and stored securely. 
+• Usability: The application interface must be user-friendly, 
+especially for children, with a simple and intuitive design. 
+ 
+ 
+28 
+ 
+Based on Table 3.1, functional requirements included the main features that 
+needed to be present in the project to achieve the defined objectives, while non-
+functional requirements referred to criteria that determined the overall quality 
+of the project. To provide a clearer understanding of these requirements, a use 
+case diagram was included in Figure 3.2 to illustrates the interaction between 
+the user and the system. 
+ 
+ 
+Figure 3.2: Use Case Diagram of KAFASmart 
+ 
+Based on the Use Case Diagram, there were two (2) main actors involved in 
+this project, which were KAFA students and KAFA teachers. These two (2) 
+actors interacted with 13 use cases that had been defined to meet the objectives 
+of the project. The use cases represented the key system functions that needed 
+to be implemented to fulfil user needs. Therefore, to ensure a smooth transition 
+29 
+ 
+into the next phase, all information and requirements related to the project were 
+successfully gathered and thoroughly documented. Table 3.2 provides an 
+overview of the requirements phase within the chosen methodology. 
+ 
+              Table 3.2: Overview the Requirement Phase 
+Phase Activities Technique/ 
+Software 
+Deliverables 
+Requirement 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+• Identify 
+domain and 
+research area. 
+• Define and 
+understand 
+the problem 
+statement. 
+• Define 
+objectives, 
+scope and 
+significance. 
+ 
+• Project 
+domain 
+• Project 
+research area 
+• Project 
+problem 
+statement 
+• Project 
+objectives 
+• Project scope 
+• Significance 
+of research 
+• Describe 
+about KAFA 
+syllabus 
+subject. 
+• Describe 
+about 
+gamification. 
+• Make 
+comparison 
+with existing 
+application. 
+• Choose the 
+appropriate 
+element of 
+gamification 
+to use in this 
+project. 
+ 
+• KAFA 
+syllabus 
+subject and 
+gamification 
+have been 
+described. 
+• The project 
+has been 
+compared 
+with three 
+(3) existing 
+application. 
+• Avatar, 
+badges, 
+leaderboard, 
+progress bar, 
+quizzes, 
+challenges 
+and points 
+have been 
+chosen. 
+• Microsoft 
+Word 
+• Mendeley 
+• Microsoft 
+Word 
+• Mendeley 
+ 
+30 
+ 
+3.1.2 Design 
+ 
+Based on the methodology used in this study, the design phase was the second 
+phase conducted following the completion of the requirement phase. 
+According to Senarath (2021), this phase involved both planning and problem-
+solving activities aimed at developing software, where developers and 
+designers collaborated to establish a comprehensive solution plan. This 
+included algorithm design, software architecture, conceptual database schema, 
+logic diagrams, design concepts, graphical user interfaces, and data structure 
+definitions. The primary goal of this phase was to provide a clear representation 
+of the design and appearance of the user interface, which served as a guide for 
+developers during the implementation of the system in the following phase 
+(Ardhiansyah et al., 2022). In the context of this project, storyboard designs for 
+user interfaces and flowcharts were prepared to ensure structured planning and 
+offer a visual representation of the application’s flow and user experience. 
+ 
+a) Storyboard Design for User Interfaces (UI) 
+ 
+The storyboard design for user interfaces offered an overview of how the 
+interface functioned. It was divided into two (2) categories of users, namely 
+students and teachers, to ensure better understanding of the system usage 
+flow. This storyboard acted as a visual plan that illustrated how the system 
+operated and how users could navigate it to complete their tasks. Figure 3.3 
+shows the storyboard design prepared for the student user interface. 
+31 
+ 
+ 
+        Figure 3.3: Storyboard Design for User Interface Student    
+ 
+32 
+ 
+Figure 3.3 illustrated the navigation flow of the student user interface 
+design storyboard that was thoroughly planned prior to implementation. 
+The flow began with the splash screen, followed by the registration and 
+login processes, and concluded with the logout page. The primary pages 
+highlighted in this storyboard included the user profile, progress tracking, 
+achievement board, badge collection, mission overview, and quiz modules. 
+These pages were given special emphasis as they were directly related to 
+the research focus of this study. The arrangement of each user interface 
+component was clearly outlined using directional arrows to ensure a 
+seamless and intuitive user experience. In addition, Figure 3.4 presents the 
+detailed storyboard design for the student user interface. 
+ 
+33 
+ 
+ 
+                       Figure 3.4: Storyboard Design for User Interface Teacher 
+ 
+Figure 3.4 illustrated the navigation flow for the user interface design 
+storyboard that was designed specifically for teachers. There were some 
+significant differences between this storyboard and the storyboard designed 
+for students. The function of the system for teachers differed from the 
+function of the system for students, with an emphasis on the elements that 
+supported the role of the teacher in the management and monitoring of 
+34 
+ 
+students. In this storyboard, there were pages that allowed teachers to 
+search for student information, pages that displayed student information, 
+progress and achievements, and also a page that allowed teachers to give 
+comments to students. The arrangement of each UI component was clearly 
+indicated using arrows to show the interaction between pages. 
+ 
+b) Flowchart 
+ 
+A flowchart was a graphical representation of an algorithm, offering a clear 
+and systematic visualization of the process flow within a system. To 
+enhance comprehension of the user interface storyboard design, this study 
+incorporated a flowchart that effectively illustrated the process flow of the 
+developed system. Figure 3.5 shows a flowchart based on the storyboard 
+design. 
+35 
+ 
+ 
+   Figure 3.5: Flowchart Based on Storyboard Design 
+ 
+ 
+Figure 3.6 illustrates the continuation of the flowchart based on the 
+storyboard design, featuring connectors B, C, and D to indicate the flow of 
+processes. 
+ 
+36 
+ 
+ 
+Figure 3.6: Continuation of the Flowchart Based on the Storyboard Design, Featuring 
+Connectors B, C, and D. 
+ 
+Based on Figures 3.5 and 3.6, this flowchart illustrated the process flow for 
+students using this system to learn in the subject of KAFA. The process 
+began with user registration. If the user registered as a student, the system 
+directed them to the student home page after logging in. On the other hand, 
+if the user was a teacher, the system took them to the teacher's home page. 
+On the student homepage, they had access to various features such as 
+reading notes, answering quizzes, viewing achievements, monitoring 
+37 
+ 
+progress, collecting and viewing badges, as well as reading comments from 
+their respective teachers. The teacher's main page worked in a different 
+way, as shown in Figure 3.7. 
+ 
+ 
+Figure 3.7: Continuation of the Flowchart Based on the Storyboard Design, Featuring 
+Connectors A. 
+38 
+ 
+Figure 3.8 illustrates the continuation of the flowchart based on the 
+storyboard design, featuring connectors E, F, and G to indicate the flow of 
+processes. 
+ 
+ 
+Figure 3.8: Continuation of the Flowchart Based on the Storyboard Design, Featuring 
+Connectors E, F and G 
+39 
+ 
+Based on Figure 3.7 and 3.8, this flowchart showed the process flow for 
+teachers to use this system to monitor student learning progress. Upon 
+successful login, teachers were taken to a teacher home page designed 
+specifically for their needs. In this page, teachers could monitor student 
+progress, view achievements such as badges, and provide comments or 
+feedback to students to help them improve their performance. This system 
+aimed to facilitate teachers in managing and supporting the learning 
+process more effectively. 
+ 
+With the presence of storyboards and flowcharts, it facilitated the next phase, 
+which was development, because both showed how the system of this project 
+would be implemented and work. It was like a simulation before the actual 
+system was developed. Therefore, the design phase was very important to be 
+implemented first so that it could provide a comprehensive picture of the 
+system. Table 3.3 shows an overview of the design phase in this study. 
+ 
+Table 3.3: Overview the Design Phase 
+Phase Activities Technique/ 
+Software 
+Deliverables 
+Design 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+• Identify the 
+importance UI 
+pages that needs 
+to include in this 
+system. 
+• Design the 
+storyboard 
+design for UI for 
+both student and 
+teacher parts 
+• Draw the 
+flowchart to 
+better show the 
+interaction 
+between the 
+pages. 
+• Figma 
+• Draw.io 
+• Storyboard 
+design 
+• Flowchart 
+of 
+storyboard 
+40 
+ 
+3.1.3 Development 
+ 
+The development phase was conducted after the completion of the planning 
+and design phases, following an Agile approach to allow dynamic iteration 
+between this phase and the testing phase. It was divided into several sprints in 
+order to focus on the development and testing of specific modules iteratively. 
+This phase involved the creation of algorithmic processes using a programming 
+language that could be interpreted by computers, guided by the previously 
+prepared design (Santonanda et al., 2022).  
+ 
+In the development of this project, the process was divided into three (3) main 
+components: front-end development, back-end development, and full stack 
+development. The front-end focused on creating an interactive and visually 
+appealing user interface for students and teachers, in line with the design 
+concepts developed in the previous phase. Technologies such as Flutter were 
+used to ensure a smooth and responsive user experience. 
+ 
+The back-end covered the logical system and database management, including 
+handling user information and their points using tools such as Firebase. This 
+ensured efficient and secure data management. Full stack development 
+integrated both the front-end and back-end to establish a stable and fully 
+functional system. 
+ 
+In short, the Agile approach allowed flexibility in refining application features 
+based on user feedback (Chandarana et al., 2024). This included enhancements 
+to the gamification modules, leaderboard, and badge awarding systems to 
+improve student motivation and engagement in interactive learning. Table 3.4 
+presents an overview of the development phase. 
+ 
+ 
+ 
+ 
+41 
+ 
+Table 3.4: Overview the Development Phase 
+Phase Activities Technique/ 
+Software 
+Deliverables 
+Development 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+3.1.4 Testing 
+ 
+Testing was an important process to ensure that the developed software met the 
+original requirements and specifications and achieved its intended purpose. 
+The primary goal of this process was to identify any bugs or errors that existed 
+in the system. This phase was closely related to the development phase, where 
+development was divided into several sprints. Each sprint was tested 
+continuously to ensure that the development process remained flexible and 
+effective. In this study, the testing process was divided into two main 
+categories: Functionality Testing and User Acceptance Testing (UAT). Table 
+3.5 presents an overview of the testing phase within the methodology used for 
+this study. 
+ 
+ 
+ 
+ 
+• Writing code for 
+the front end 
+such as an 
+interactive user 
+interface. 
+• Back-end 
+development 
+including 
+application 
+logic, API 
+integration and 
+database 
+management. 
+• Front-end and 
+back-end 
+integration to 
+ensure seamless 
+data 
+communication. 
+• Flutter 
+• Firebase 
+• Responsive 
+user 
+interface 
+• Authenticat
+ion system. 
+• Student 
+data 
+storage. 
+• A mobile 
+app that 
+works 
+seamlessly 
+between 
+front and 
+back. 
+42 
+ 
+a) Functionality Testing 
+ 
+Functionality testing was a verification process used to ensure that each 
+function of the software application operated as specified in the functional 
+requirements (Hamilton, 2024). This process was conducted by providing 
+the appropriate input and comparing the resulting output with the expected 
+result. These tests were performed by the system developers themselves, 
+with each module thoroughly tested. The testing process was implemented 
+using an Agile approach, allowing testing and development to be 
+performed intermittently to maintain the quality of each module. 
+ 
+b) User Acceptance Testing (UAT) 
+ 
+UAT was carried out to verify that the software met the expectations and 
+requirements of the end users. This process was usually conducted in the 
+final phase of development, before product deployment (Schwarz, 2023). 
+In this project, UAT will involve KAFA students and teachers as end users 
+to test the entire system after all functional tests are completed. The 
+feedback obtained from users wasused to improve the system to better meet 
+their needs. 
+ 
+Table 3.5: Overview the Testing Phase 
+Phase Activities Technique/ 
+Software 
+Deliverables 
+Testing 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+• Functionality 
+Testing: Test the 
+functionality of each 
+module based on 
+functional 
+requirements. 
+• Manual 
+testing 
+• Test report 
+for each 
+module. 
+• Bug report 
+• UAT: Involve end 
+users such as KAFA 
+students and teachers 
+to test the system 
+requirements. 
+• Google 
+Form 
+• Report user 
+feedback 
+43 
+ 
+3.1.5 Deployment 
+ 
+Deployment was the phase that typically followed the completion of testing, 
+during which the product was prepared to be delivered to the end users 
+(McKerahan, 2022). In this phase, the product would normally be installed in 
+a live environment and made available for use. The complexity of deployment 
+depended on the scope and scale of the project. Usually, training or user 
+guidance would be provided to help users understand how to operate the system 
+effectively. Final testing in a production environment was also conducted to 
+ensure the software functioned correctly without disrupting any existing 
+systems. However, this phase was not implemented in this project because the 
+system developed was only a prototype. 
+ 
+3.1.6 Maintenance 
+ 
+According to Senarath (2021), the maintenance phase referred to the process 
+of modifying software after it had been deployed, with the aim of improving 
+performance, fixing bugs, or enhancing functionality. Maintenance was a 
+continuous process to ensure that the system remained functional and met 
+evolving user needs. Activities in this phase often included resolving issues 
+reported by users and introducing new features or expanding capabilities based 
+on user feedback and technological advancements (Santonanda et al., 2022). 
+However, this phase was not carried out in this project as the system remained 
+at the prototype stage. 
+ 
+3.2 Summary of Project Methodology 
+ 
+Each phase in the selected methodology played a crucial role in guiding the 
+development of this mobile learning application, and all decisions were made 
+based on the predefined objectives of the project. Since the project was 
+developed as a prototype, the deployment and maintenance phases were not 
+implemented. The primary focus was placed on the design, development, and 
+44 
+ 
+testing phases to evaluate the system’s usability and effectiveness. The 
+relationship between each methodology phase and the project objectives is 
+summarised in Table 3.6 for clearer reference. 
+ 
+Table 3.6: Summary of the Project Methodology 
+Objective Phase Activities Deliverables 
+To identify 
+gamification 
+elements 
+that enhance 
+engagement 
+and 
+motivation. 
+Requirement • Identify domain and 
+research area. 
+• Define and understand the 
+problem statement. 
+• Define objectives, scope 
+and significance. 
+• Describe about KAFA 
+syllabus subject. 
+• Describe about 
+gamification. 
+• Make comparison with 
+existing application. 
+• Choose the appropriate 
+element of gamification to 
+use in this project 
+ 
+• Project domain 
+and research area 
+• Project problem 
+statement 
+• Project objectives, 
+scopes and 
+significance 
+• KAFA syllabus 
+subject and 
+gamification have 
+been described. 
+• The project has 
+been compared 
+with three (3) 
+existing 
+application. 
+• Seven (7) elements 
+of gamification 
+have been chosen 
+(Avatar, badges, 
+leaderboard, 
+progress bar, 
+timer, challenges 
+and points). 
+ 
+To develop a 
+mobile 
+application 
+that 
+incorporates 
+gamification 
+features to 
+support an 
+engaging 
+KAFA 
+learning 
+experience. 
+Design • Identify the importance 
+UI pages that needs to 
+include in this system. 
+• Design the storyboard 
+design for UI for both 
+student and teacher parts 
+• Draw the flowchart to 
+better show the 
+interaction between the 
+pages. 
+ 
+• Storyboard design 
+• Flowchart of 
+storyboard 
+•  
+Development • Writing code for the front 
+end such as an interactive 
+user interface. 
+• Back-end development 
+including application 
+logic, API integration and 
+database management. 
+• Front-end and back-end 
+integration to ensure 
+seamless data 
+communication. 
+• Responsive user 
+interface 
+• Authentication 
+system. 
+• Student data 
+storage. 
+• A mobile app that 
+works seamlessly 
+between front and 
+back. 
+ 
+45 
+ 
+Table 3.6 (continued) 
+Objective Phase Activities Deliverables 
+To test the 
+usability of 
+the gamified 
+application 
+among 
+KAFA 
+students 
+using 
+survey. 
+Testing • Test the functionality of 
+each module based on 
+functional requirements. 
+• Involve end users such as 
+KAFA students and 
+teachers to test the system 
+requirements. 
+ 
+• Test report for 
+each module. 
+• Bug report 
+• Report user 
+feedback 
+ 
+ 
+Based on the summary of the project's methodology, the requirements and 
+design phases played a significant role in achieving the first objective, which 
+was to identify the most suitable gamification elements to be applied in the 
+KAFASmart mobile application. The development phase supported the second 
+objective by focusing on creating an engaging KAFA learning experience 
+through interactive gamification features. Subsequently, the testing phase 
+aligned with the third objective, which aimed to evaluate the effectiveness of 
+the applied gamification techniques on students. The alignment between each 
+phase and the corresponding objectives ensured that every step in the project 
+was systematically structured to achieve the intended goals. 
+ 
+3.3 System Architecture 
+ 
+System architecture is an abstract representation that outlines the high-level 
+structure of a system, including its components, the relationships between 
+those components, and their interactions with the environment. It aims to 
+facilitate communication among stakeholders, guide design decisions, support 
+the development process, and enable comprehensive system analysis 
+(Tekinerdogan & Verdouw, 2020). Figure 3.8 presents the system architecture 
+for the proposed project. 
+ 
+46 
+ 
+ 
+Figure 3.9: System Architecture of KAFASmart 
+ 
+Figure 3.9 illustrates the system architecture of the KAFASmart mobile 
+application, developed for use by students and teachers. The architecture was 
+divided into two primary sections, student and teacher interfaces which were 
+interconnected through the mobile application and supported by a cloud-based 
+database. The Internet served as the medium to connect the user application 
+with the database, which stored all user-related data such as progress, 
+achievements, comments, points, and other relevant information. 
+ 
+The Student Homepage was accessible exclusively to users with student roles 
+and offered five core modules: Subject, Challenges, Achievement, Profile, and 
+View Comments. In the Subject module, students could access notes and 
+quizzes on specific topics, earn points for correct answers, and view a summary 
+of their responses to review the material. The Challenges module offered 
+structured missions that, when completed, rewarded students with badges to 
+boost their motivation. The Achievement module allowed students to monitor 
+their learning progress through a progress bar and compare their results with 
+47 
+ 
+peers via the leaderboard. In the Profile module, students were able to edit their 
+personal details and choose from a set of avatars to personalize their 
+experience. Lastly, the View Comments module enabled students to read 
+feedback from their teachers to help guide and improve their learning journey. 
+ 
+The Teacher Homepage, accessible only to users with teacher roles, contained 
+five main modules: Student Information, Search Student Info, View Student 
+Leaderboard, Profile, and Give Comment. The Student Information module 
+allowed teachers to view comprehensive student data, including profiles, 
+progress tracking, badge collections, earned points, and quiz summaries. The 
+Search Student Info module enabled teachers to locate students based on state 
+and school criteria, while the View Student Leaderboard module allowed 
+teachers to monitor and compare student performance across different year 
+levels within the same school. The Profile module enabled teachers to update 
+their personal information and change their avatar image. Lastly, through the 
+Give Comment module, teachers could provide written feedback to students, 
+offering guidance and encouragement to support their academic performance. 
+ 
+3.4 Hardware & Software Requirement 
+ 
+The selection of appropriate hardware and software played a crucial role in 
+ensuring the success of this project. Hardware refers to the physical 
+components of a computer system that are tangible and essential for executing 
+computational tasks. Software, on the other hand, consists of a set of 
+instructions or programs written in various programming languages to control 
+and optimize hardware operations. The proper integration of hardware and 
+software ensured system compatibility, efficient functionality, and overall 
+project performance. An effective configuration of both components 
+significantly influenced the system’s responsiveness, stability, and ability to 
+meet the defined objectives. The hardware provided the necessary computing 
+power, while the software tools supported the development, testing, and 
+48 
+ 
+deployment of the application. Table 3.7 presents the list of hardware used 
+during the implementation of this project. 
+ 
+Table 3.7: List of Hardware Requirement 
+Hardware Specification Purpose 
+Laptop Honor 
+MagicBook 15 
+• Central Processing Unit: 
+11th Gen Intel®  
+Core™ i5-1135G7 @ 
+2.40GHz   2.42 GHz  
+• Installed RAM: 16.0 GB 
+• Graphics Processing Unit: 
+Intel® Iris® Xᶱ Graphics 
+• Window Edition: 
+Windows 11 Home Single 
+Language 
+• System Type: 64-bit 
+operating system, x64-
+based processor. 
+ 
+• To write all report that need 
+to use in this project. 
+• To write and run the coding 
+for development the 
+project.  
+Smartphone Realme 
+Narzo 20 Pro 
+• RAM: 8 GB 
+• Storage: 128 GB 
+ 
+• To run and test out the 
+usability of this system. 
+ 
+Table 3.8 shows the list the hardware that will be used in the implementation 
+of this project. 
+ 
+Table 3.8: List of Software Requirement 
+Phase Software Specification Purpose 
+Requirement 
+Microsoft 
+Words 
+Microsoft365 version • To document all report. 
+ 
+Mendeley Version 2.128.0 • To insert citation and 
+manage references 
+ 
+Design 
+Draw.io Version 22.1.11 • To draw the system 
+architecture. 
+• To draw the flowchart. 
+• To make a storyboard design 
+UI.   
+ 
+Figma Web-based • To design UI of the system. 
+ 
+Development 
+Flutter Version 3.24.5 • To develop the system. 
+ 
+Firebase Web-based • To store all related data. 
+ 
+Testing Google 
+Form 
+Web-based • To manage and conduct the 
+UAT 
+ 
+ 
+49 
+ 
+3.5 Conclusion 
+ 
+In conclusion, this chapter provided a comprehensive overview of the Hybrid 
+Waterfall-Agile methodology applied in the implementation of this project. 
+Each main phase was described in detail to clarify the processes involved in 
+system development, from the initial requirement stage to the maintenance 
+phase. The inclusion of system architecture, key modules, and the necessary 
+hardware and software requirements further supported a deeper understanding 
+of the project's implementation. Overall, this chapter established a clear and 
+structured foundation to ensure the success of the project and offered valuable 
+guidance for the subsequent development and discussion in the following 
+chapter. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+50 
+ 
+CHAPTER 4 
+ 
+ 
+PROJECT DESIGN AND IMPLEMENTATION 
+ 
+ 
+This chapter elaborated on the design and implementation phase of the KAFASmart 
+mobile application, with a primary focus on achieving the objectives established in 
+previous chapter. The development process was systematically guided by the 
+predefined project requirements to ensure that all functional and non-functional 
+specifications were adequately fulfilled in accordance with the adopted methodology. 
+Furthermore, this chapter provided a comprehensive overview of the application's 
+architecture and user flow, outlined the key stages of development and 
+implementation, and identified the data sources that were utilized in the creation of the 
+educational content. 
+ 
+4.1 Project Design 
+ 
+This section explained the user interface (UI) design of the KAFASmart mobile 
+application. The UI served as the main platform for user interaction with the 
+system. It was designed to support two primary user types: students and 
+teachers. Each module was developed to match the specific functions and needs 
+of these users. The overall design emphasized simplicity, clear navigation, and 
+a consistent layout to ensure a smooth and engaging learning experience. All 
+screen layouts and navigational structures were created based on the system 
+architecture discussed in the previous chapter. 
+ 
+4.1.1 Student Module 
+ 
+The Student Module was specifically designed to support students in their 
+learning journey through the KAFASmart application. This module included 
+several interactive and informative pages that aimed to enhance student 
+engagement and track their academic progress. Each page served a specific 
+51 
+ 
+function, from learning and revising subject materials to completing quizzes 
+and receiving feedback. The features integrated into this module such as 
+rewards, missions, progress tracking, and leaderboards were developed with 
+gamification elements to encourage motivation and active participation. 
+ 
+a) Homepage 
+ 
+The KAFASmart mobile application student homepage UI was 
+developed as the control center of student interaction. It had a gradual 
+background and a personal welcome message containing the name of 
+the student and the avatar of the student. In case of the incomplete 
+profile information like age, state or school, an icon alert and dialog 
+were prompted to the user to complete their profile. There were three 
+primary statistics presented such as score, badges, and missions. They 
+were all depicted using different icons and colors. Firestore was used 
+to fetch the data so that it indicated real time performance. To 
+encourage the students, a countdown panel, which showed the number 
+of days remaining before the UPKK examination was used. 
+ 
+Besides that, the progress section gave an overview of the cumulative 
+learning progress, which was obtained by taking the average 
+completion rate as well as the subjects. By touching, it would give more 
+details to the students. Scrolling subject cards such as Sirah and Adab 
+provided instant access to content and all subject cards could be viewed 
+via a button. There was a bottom navigation interface which gave 
+access to the home page, comment, and leaderboard. All navigation 
+events caused some data to be updated so as to see the most up-to-date 
+information. A background timer was used that saved time to Firestore 
+as well. Figure 4.1 shows UI design of the student home page. 
+ 
+52 
+ 
+ 
+Figure 4.1: Student Homepage UI Design 
+ 
+b) Badges Page 
+ 
+Badges page was used to show the achievements of the student through 
+digital badges. This interface was supposed to be used to motivate and 
+enlighten the users on the KAFASmart mobile application as illustrated 
+in Figure 4.2. Data on badges were retrieved in Firestore and 
+categorized in three sections, Lencana Khas, Subjek Sirah, and Subjek 
+Adab. Basic information on badges was provided by the badges 
+collection, but the progress of each student was recorded in a 
+subcollection under his or her user record. 
+53 
+ 
+ 
+Figure 4.2: Badges Page UI Design 
+ 
+Badges were depicted in a grid view where the difference was 
+visualized according to the unlocked and locked status. unlocked 
+badges were clear whereas locked ones employed faded appearance to 
+indicate that they were as yet locked. A badge was tapped to display a 
+dialog window, which also included a larger image of the badge, its 
+name and description. This content of description varied to whether the 
+badge was unlocked or not. The design was clean and user friendly with 
+the use of consistent colors, soft shadows, and rounded forms in the 
+layout. 
+ 
+c) Mission Page 
+ 
+The mission page on the KAFASmart mobile was identified as the 
+presentation of student learning missions that appeared in a coherent 
+and appealing manner. It was easy, user-friendly, and allowed students 
+to follow the progress, see instructions, and earn rewards. Figure 4.3 
+shows the mission page design. 
+ 
+54 
+ 
+ 
+Figure 4.3: Mission Page UI Design 
+ 
+On the top, a central title was present with the label of “Misi” giving 
+context to the page. Missions were presented in the form of interactive 
+cards in which a user could see the name of the mission, the description 
+of what should be done and its progress, along with a checkmark button. 
+The color-coded objects facilitated the students in determining 
+missions that still needed completion, ones that have been completed, 
+and those that already belong to other learners. 
+ 
+The app feature also added on to the excitement with animation effects 
+such as confetti when all the missions were claimed. Pressed card 
+would show a mission detail including a progress and rewards. The 
+arrangement was based on clean space, rounded designs, and regularly 
+used icons to facilitate an easy flow of the user. 
+ 
+d) Profile Page 
+ 
+The profile page in the KAFASmart mobile application allowed 
+students to view and update their personal information easily. As shown 
+in Figure 4.4, it displayed key details such as name, age, email, state, 
+and KAFA school using a scrollable card-style layout. Each item was 
+55 
+ 
+presented with an icon and label, with data pulled dynamically from 
+Firestore based on the logged-in user ID. At the top, the user’s profile 
+image appeared in a circular frame, along with their name and the label 
+“Pelajar”. A button at the bottom linked to the edit profile screen. 
+ 
+ 
+Figure 4.4: Profile Page UI Design 
+ 
+Tapping the update button opened the edit screen, where students could 
+modify their name, age, state, and school. The email field was locked 
+for security. The age field automatically appended the word “tahun” 
+for consistency. After editing, users tapped the “Simpan Profil” button 
+to save changes. The system validated the input, updated Firestore, and 
+displayed a confirmation message via SnackBar before redirecting back 
+to the profile page. 
+ 
+The page also included a profile image picker that allowed users to 
+select or change their avatar. Tapping the image opened a modal sheet 
+with a horizontally scrollable list of avatar options. Once selected, the 
+avatar preview updated immediately and saved to Firestore. 
+ 
+ 
+ 
+56 
+ 
+e) Progress Bar Page 
+ 
+The progress page, as shown in Figure 4.5, summarised the learning 
+progress of every subject offering animated circular progress bars and 
+vertical bar graphs to depict the progress. The data on the current 
+progress of the subject was pulled using Firebase Firestore and showed 
+in the form of custom-styled visual elements with a gradient design. 
+Every subject, Sirah and Adab was presented in a card, which consisted 
+of an icon, the progress percentage, and a button to take you to a page 
+with a more detailed look to the subject-level progress report. The cards 
+were all tap-able and lead to a progress view of the corresponding 
+subject. In a stylized bar chart at the bottom, performance was 
+visualized across the subjects using the bars colored in gradients to 
+make students understand their performance with a single glance. 
+ 
+ 
+Figure 4.5: Progress Bar Page UI Design 
+ 
+The Sirah was tapped to access the Sirah topic progress screen which 
+divided the progress into specific topics like Keluarga Nabi 
+Muhammad, Dakwah Rasullulah SAW and Perang Badar. I had a 
+separate progress percentage of notes and quizzes on each topic card 
+57 
+ 
+that was read off the notes_progress and quiz_progress collections. 
+Cardworks had soft color gradients, round cards corners, and icon of 
+the topic. Each card contained two linear progress bars to indicate note 
+and quiz completion individually which allowed students to know areas 
+that required corrections. 
+ 
+The Adab topic followed the same pattern and structure in progress 
+page. Some of its topics were Orang Dewasa dan Orang Tua, Ziarah 
+Rakan Sebaya, and Bermesyuarat with personal tracking note and 
+quizzes. The page was similarly developed visually to the Sirah section, 
+with themed icons, animated pointers, and sanitary format. Each and 
+every data was dynamically loaded depending on the ID of the logged-
+in user so that they could track progress on particular areas. 
+ 
+f) Leaderboard Page 
+ 
+The leaderboard page as demonstrated in Figure 4.6 was made to show 
+the ranking of the students according to their total scores which in turn 
+fosters some healthy competition and motivation. The ranking 
+categories available on the screen were state level and national level, 
+which is activated through a toggle tab interface, which may be seen on 
+the top. 
+ 
+58 
+ 
+ 
+Figure 4.6: Leaderboard Page UI Design 
+ 
+When the screen was loaded, the system pulled location, score, and 
+status of the logged-in user out of Firestore database. The tab selector 
+allowed how users switched between looking at the state and national 
+ranking. When the tab labeled “Negeri” is selected only users of the 
+same state were presented and rankings of all the students in the country 
+were shown when the tab labeled “Kebangsaan” was activated. 
+Rankings were placed in the descending order in accordance to the total 
+scores. 
+ 
+The leading three results were marked by a podium format at the 
+uppermost portion of the screen. All the podiums showed the avatar, 
+name, and score of the students and a medal emoji to show how they 
+were ranked. The podium blocks were in varying heights in order to 
+reflect first, second and third place, and a label that builds motivation 
+was also added for effect. A student who was the holder of Ilmuwan 
+KAFASmart title had a special label rendered below his/her name. 
+The entire leaderboard was displayed beneath the podium as scrollable 
+list of card-style tiles. Each tile will show the user avatar, rank, name, 
+59 
+ 
+score and, in case of presence then state and Ilmuwan status. The tile of 
+the present user was easily identified using the particular color block.  
+ 
+g) Note Page 
+ 
+The KAFASmart note page was developed to make the learning 
+process of young students easy and narrowed down. It deployed a clear 
+layout to ensure that users could focus on the contents without being 
+distracted. The UI design of the note page was presented in figure 4.7. 
+ 
+ 
+Figure 4.7: Note Page UI Design 
+ 
+Every note was presented in the form of high-fidelity images through 
+the PhotoView widget so that the users could zoom or pan them to 
+enhance their understanding of them. At the bottom, there were the 
+buttons of navigating through the text with the labels of “Sebelum” and 
+“Seterusnya” and a page indicator that marked the progress of reading. 
+The app also kept the record of what the user had read and it restored 
+to the previous page read, hence keeping the learning process 
+continuous with very little efforts. 
+60 
+ 
+h) Quiz Page 
+ 
+This section described the UI design for the quiz and flashcard 
+components of the KAFASmart mobile application. These features 
+aimed to offer an engaging and age-appropriate learning experience for 
+KAFA students. Each quiz set used a different format to support varied 
+learning styles, while the flashcard module helped reinforce 
+understanding through review. 
+ 
+The Quiz Set 1 (Figure 4.8) was in multiple choice format. Students 
+were asked questions which were written in Jawi and could also be 
+toggled in Rumi. There was an instructional pop before the quiz, which 
+indicated the number of questions and the time limits. Access to 
+Flashcards occurred a lockout before being allowed during the first 
+quiz. Its UI had a friendly format composed with soft coloring, a time 
+counter, and clearly explained answer buttons. The students received a 
+results screen with a breakdown of the score when they finished; a retry 
+option and a return option were available. 
+ 
+ 
+Figure 4.8: Quiz Set 1 Page UI Design 
+ 
+Quiz Set 2 (Figure 4.9) introduced a True/False format. Just like the 
+first set, a brief instruction window appeared prior to the students 
+starting. As the quiz played questions could be seen in the middle of 
+61 
+ 
+the screen and there were big tappable buttons with the words “Betul” 
+and “Salah” on it. On the top there was a timer and question number. 
+After every answer, immediate feedback to aid in learning was 
+provided. 
+ 
+ 
+Figure 4.9: Quiz Set 2 Page UI Design 
+ 
+Quiz Set 3 (Figure 4.10) used a drag-and-drop style. The students were 
+given three minutes to pair the answers to incomplete sentences. 
+Interface was based on colored interactive drag and drop tiles. After 
+finishing the tasks, the students were shown a results screen as in 
+previous sets. 
+ 
+ 
+Figure 4.10: Quiz Set 3 Page UI Design 
+62 
+ 
+ 
+The Flashcard Page (Figure 4.11) became available after at least one 
+quiz attempt. It showed a scrollable list of previously answered 
+questions in card format. Tapping a card opened a modal with the 
+question, the selected and correct answers, and colored feedback 
+borders, green for correct, red for incorrect. Navigation buttons allowed 
+users to move between cards to support reflection and learning. 
+ 
+ 
+Figure 4.11: Flashcard Page UI Design 
+ 
+i) View Comment Page 
+ 
+The view comment page under the student module of the KAFASmart 
+mobile application has been shown in figure 4.12. The blue background 
+adopted by the interface was friendly and accommodating to students 
+which helped in forming a welcoming environment. AppBar was 
+mostly compatibility, its background was clear and the text in it was 
+black thus sticking with the theme but still readable. 
+63 
+ 
+ 
+Figure 4.12: Comment Page UI Design 
+ 
+All the comments were presented in a beautifully made card with 
+rounded edges features, some soft shadows and easy padding. The 
+structure emphasized the salient information like the name of the 
+teacher and the avatar and after that would be his school, the category 
+he/she tagged as well as the content of the comment and the time of the 
+comment. Text styling with GoogleFonts.poppins improved clarity and 
+gave a modern look. It was designed with the help of StreamBuilder on 
+FireBase to show the live output on the interface. In the case of 
+unavailability of comments, a message centred was visible to the user. 
+ 
+4.1.2 Teacher Module 
+ 
+The Teacher Module was developed to help educators manage, monitor, and 
+support student learning within the KAFASmart application. It included 
+several key pages for accessing performance data, supervising academics, and 
+facilitating communication with students. Each page served a specific purpose, 
+such as searching for student information, reviewing progress, providing 
+comments, and viewing leaderboard rankings. With clear layouts and 
+structured navigation, teachers were able to identify top performers, analyze 
+64 
+ 
+quiz results, and give feedback efficiently. Informative dashboards and user-
+friendly controls supported teachers in offering effective academic guidance. 
+ 
+a) Teacher Homepage 
+ 
+The Teacher Homepage UI followed a similar layout to the student 
+homepage to ensure consistency, but it was customized to show school-
+wide data and administrative tools. It included a Student Tab View 
+where the students were grouped according to their academic year, the 
+lists were dynamically fetched through the Firebase Firestore. This 
+enabled teachers to track performance on yearly basis easily. There was 
+a bottom navigation bar that provided an entry to the home, student 
+search, and leaderboard, and a side menu, which contained buttons such 
+as access to the profile settings and the logout. The interface has also 
+been made conversational and informative whereby teachers are 
+enabled to handle and monitor the learning activities of students. 
+ 
+ 
+Figure 4.13: Teacher Homepage UI Design 
+ 
+b) Profile Page 
+ 
+The teacher profile page shown in Figure 3.14 was designed similarly 
+to the student profile page, following the same layout and visual style. 
+65 
+ 
+Instead of student details, it displayed the teacher’s information, 
+including name, avatar, age, email, state, and school. The update 
+process and interactions remained consistent, with slight adjustments 
+made to match the teacher’s role and context. 
+ 
+ 
+Figure 4.14: Teacher Profile Page UI Design 
+ 
+c) Student Info Page 
+ 
+Figure 4.15 displays some of the important interfaces that were related 
+to some information of the students and their academic progress 
+monitoring. In the first screen, which was Student Information, it was 
+the profile of the student showing his/her name, level in this school, 
+email, state, school in KAFA and status. The avatar was conspicuously 
+displayed, and buttons marked “Lihat Kemajuan”, “Lihat 
+Pencapaian”, “Lihat Penghargaan”, and “Beri Komen” were shown. 
+They were divided vertically with the help of different colors and round 
+buttons to be more readable and navigable. The second screen 
+presented the progress interface that presented vertical bar chart of the 
+student upon progress into a topic. Such topics as Sirah and Adab were 
+then shown in terms of percentages of completion and both the students 
+as well as their teachers could track grades easily. The third screen was 
+the badges page, in which the badges were categorised accordingly as 
+unique badges and badges according to the subject. To make the 
+66 
+ 
+students more engaged, the environment was motivating with bright 
+colors, badge icons, and a clear layout. 
+ 
+ 
+Figure 4.15: Student Info Page 1 UI Design 
+ 
+Figure 4.16 focused on interfaces that supported quiz interactions and 
+teacher feedback. The first screen, Topik Sirah, presented a list of topics 
+such as Keluarga Nabi Muhammad SAW and Dakwah Rasulullah SAW, 
+each displayed in card format for structured learning. The second 
+screen showed the Quiz Summary interface, which appeared after a 
+quiz was completed. It summarized the student’s score, number of 
+attempts, and provided a breakdown of correct, incorrect, and 
+unanswered questions. Visual elements like icons and colored 
+indicators made the summary easy to understand. The final screen 
+displayed the comment interface, where teachers could select a 
+category, enter personalized feedback, and review past comments. The 
+layout supported effective communication and was designed to be 
+simple and professional. 
+67 
+ 
+ 
+Figure 4.16: Student Info Page 2 UI Design 
+ 
+d) Search Student Page 
+ 
+The search student page was developed to help teachers find KAFA 
+students across various states and schools. This feature allowed flexible 
+filtering based on two main criteria: state and school name. The layout 
+was simple and user friendly, making it easy for teachers to access 
+student records beyond their own institutions. Figure 4.17 illustrated 
+the student search interface. 
+ 
+68 
+ 
+ 
+Figure 4.17: Search Student Page UI Design 
+ 
+ 
+The top section featured a card containing the search form, which 
+included a searchable dropdown for state selection and a text input for 
+the school’s name. A button labeled "Cari Pelajar" activated the search. 
+Search results were shown in a scrollable list, with each item displaying 
+the student’s name, avatar, school, state, and score. Tapping on a 
+student tile brought the teacher to a detailed view on another screen. If 
+no matching students were found, a message informed the user that no 
+results were available. 
+ 
+e) View Leaderboard Page 
+ 
+The teacher leaderboard page in Figure 4.18 was implemented similarly 
+to the student leaderboard page but was accessed from the teacher's 
+module. It displayed a ranking of students either based on the same state 
+as the logged-in teacher or nationwide. The layout, design structure, 
+and interactive elements such as the toggle tab, top three podiums, and 
+score tiles were reused to maintain consistency, but this version allowed 
+69 
+ 
+teachers to view and monitor student performance based on their 
+teaching context. 
+ 
+ 
+Figure 4.18: View Leaderboard Page UI Design 
+ 
+4.2 Project Development 
+ 
+The stage of development of the KAFASmart mobile application was quite 
+logical and organized, including the configuration of the development 
+environment and the implementation of the code, including libraries, UI design, 
+and mandatory testing. It is the phase when the future features and system design 
+became translated into an operational application based on Flutter and Firebase 
+as the core technologies. Every step has been highly performed to guarantee the 
+application would reach its educational goals, facilitate effective performance, 
+and provide a captivating experience to the students and the teachers. 
+ 
+4.2.1 Installation of IDE and Plug-ins 
+ 
+Preparation of the development environment started with the installation of the 
+Android Studio to which the choice fell as the main Integrated Development 
+70 
+ 
+Environment (IDE) of the KAFASmart mobile application. The official 
+website offered Android Studio that was downloaded and installed with the 
+default option containing the fundamental components of Android SDK, build 
+tools and Android Virtual Device (AVD). System environment variables were 
+also verified after installation to determine that variables such as 
+JAVA_HOME were appropriately registered in system environment to operate 
+flawlessly. 
+ 
+After that, the necessary plug-ins to implement cross platform development on 
+the Flutter and Dart were installed. This was achieved by opening the plug-in 
+setting on the Android studio, clicking the plug-in tab and searching flames in 
+the marketplace tab. When it came to selecting the Flutter plug-in and installing 
+it, it further asked me to install the Dart plug-in which was also installed. 
+android studio was subsequently restarted to implement those changes. 
+ 
+In order to determine that the installation was successful, the command flutter 
+doctor was run in the terminal. This was a detailed system report tool that 
+indicated whether all systems that required to be installed were in the correct 
+state like the Flutter SDK, Android Studio, Dart plug-in, and connectivity of 
+the devices. Any problem that was identified was corrected. Proper installation 
+of these tools has established a stable and efficient environment to develop 
+KAFASmart application. 
+ 
+4.2.2 Importing Libraries 
+ 
+In order to develop a robust and feature-rich mobile application, various 
+external libraries and packages have been integrated into the KAFASmart 
+project. These libraries extend the core functionalities of Flutter and provide 
+ready-made solutions for common tasks such as authentication, data storage, 
+UI enhancement, and multimedia interaction. Each imported library serves a 
+specific purpose in supporting the technical implementation and enhancing the 
+71 
+ 
+overall user experience. Figure 4.19 displays a list of important packages that 
+were imported in this project. 
+ 
+ 
+Figure 4.19: List of Packages Imported 
+ 
+ 
+a) Flutter SDK 
+ 
+The flutter SDK provides the foundational framework necessary for 
+building the application. It includes essential libraries and tools to create 
+natively compiled applications for mobile, web, and desktop from a single 
+codebase. Its declarative UI approach and comprehensive widget library 
+simplify UI development and allow for efficient app rendering across 
+platforms. 
+ 
+b) Firebase Packages 
+ 
+Firebase integration in the application is established through the following 
+packages: 
+ 
+72 
+ 
+• firebase_core: This package is essential for initializing Firebase 
+services in a Flutter application. 
+• firebase_auth: Used for implementing user authentication, allowing 
+sign-in and sign-up functionalities using email/password or other 
+providers. 
+• cloud_firestore: Connects the app to Firebase Cloud Firestore, a 
+NoSQL database used to store structured data like user profiles, 
+quiz results, and progress tracking. 
+ 
+c) Google Sign-In 
+ 
+This package enables OAuth-based Google sign-in authentication. It 
+facilitates seamless and secure login via Google accounts. 
+ 
+d) UI Enhancement and Visual effects 
+ 
+• google_fonts: Allows integration of Google Fonts to enhance UI 
+typography. 
+• confetti: Used to display celebratory effects such as confetti 
+explosions, enhancing user motivation after achievements. 
+• lottie: Plays JSON-based vector animations created in Adobe After 
+Effects via the Bodymovin plugin, improving visual appeal. 
+• page_flip_builder: Enables animated page-flipping effects, 
+particularly useful for creating interactive e-books or notes. 
+• photo_view: Facilitates pinch-to-zoom and pan functionalities on 
+images. 
+• fl_chart: Provides charting capabilities such as bar, pie, and line 
+charts to visualize data, including progress tracking. 
+ 
+ 
+ 
+ 
+73 
+ 
+4.2.3 Code Snippet 
+ 
+a) Progress Bar Module 
+ 
+contributed significantly to the visualization of learning accomplishments 
+by students. It stored, recalled and computed the data of progress among 
+the notes, quizzes, subjects, and the overall performance. Thousands of 
+progress data were maintained in Cloud Firestore with the guarantee of 
+real-time updating and the ability to maintain data across multiple sessions. 
+ 
+The students could read the notes and the method _saveProgress() traced 
+their advancement in the process of reading. This was the way that 
+determined the numbers of pages read, the number of the highest page read, 
+and the percentage read considering the total number of pages. These data 
+were stored in notes_progress subcollection in the document of every 
+student. The piece of code dealing with this is presented in figure 4.20. 
+ 
+ 
+Figure 4.20: Snippet Code Store Note Progress 
+ 
+74 
+ 
+The progress of quiz was monitored based on a set. By way of example 
+after completing set1, a boolean field set1_completed was set to true in the 
+quiz_progress subcollection. The app counted the number sets that were 
+passed and adjusted the percentage of passing sets. This appears on Figure 
+4.21. 
+ 
+ 
+Figure 4.21: Snippet Code Store Quiz Progress 
+ 
+Each topic, such as “Dewasa Tua” or “Mesyuarat” included both note and 
+quiz progress. Methods like loadDewasaTuaProgress() and 
+loadMesyuaratProgress() retrieved these values, calculated the average, 
+and stored it in the subject_progress subcollection using the subject ID. The 
+related code is shown in Figure 4.22. 
+75 
+ 
+ 
+Figure 4.22: Snippet Code Store Subject Progress 
+ 
+The app then calculated the user’s overall progress by averaging the 
+progress of all subjects, such as Sirah and Adab. This final value was stored 
+in the main students document under the allProgress field to provide a 
+single cumulative progress indicator, as shown in Figure 4.23. 
+ 
+ 
+Figure 4.23: Snippet Code Store Overall Progress 
+ 
+ 
+ 
+ 
+ 
+ 
+76 
+ 
+b) Mission Module 
+ 
+The Mission Module in the KAFASmart mobile application is a vital 
+gamification feature designed to enhance student motivation and learning 
+consistency. It achieves this by evaluating user behaviors and achievements 
+against predefined mission criteria, then awarding recognition in the form 
+of mission progress and completion statuses. Each mission is designed to 
+encourage specific learning behaviors, such as completing content, 
+achieving high scores, or engaging regularly with the app. 
+ 
+The evaluation begins with the Mission Evaluation Controller (Figure 
+4.24), which sequentially invokes a series of dedicated functions such as 
+checkMission001() to checkMission010(). Each of these functions assesses 
+a different goal or achievement criteria and returns a Map<String, 
+dynamic> structure containing two essential values such as progress and 
+completed. The controller then passes this output to a helper method called 
+_checkMission(). 
+ 
+ 
+           Figure 4.24: Snippet Code Mission Evaluation Controller 
+ 
+The _checkMission() function is responsible for storing or updating the 
+evaluated mission's progress in Firestore (Figure 4.25). It ensures that 
+existing values such as is_claimed are preserved, preventing previously 
+claimed missions from being reset. This is achieved using 
+77 
+ 
+SetOptions(merge: true) to allow partial updates without overwriting the 
+entire document. 
+ 
+ 
+Figure 4.25: Snippet Code Mission Progress Storage 
+ 
+Each mission contains unique evaluation logic. For example, Mission 001 
+assesses whether the user has achieved at least 33% progress in any Sirah 
+topic (Figure 4.26). If this condition is met, the mission is considered 
+complete and the progress is set to 100%. Otherwise, the function returns a 
+lower progress value accordingly. 
+ 
+ 
+Figure 4.26: Snippet Code Mission 001 
+ 
+Similarly, Mission 002 (Figure 4.27) encourages daily engagement by 
+checking if a student has logged in for three consecutive days. The system 
+78 
+ 
+retrieves the user’s login history and calculates the current streak. When 
+the streak reaches three days, the mission is marked as completed. 
+ 
+ 
+Figure 4.27: Snippet Code Mission 002 
+ 
+Similarly, Mission 002 (Figure 4.27) encourages daily engagement by 
+checking if a student has logged in for three consecutive days. The system 
+retrieves the user’s login history and calculates the current streak. When 
+the streak reaches three days, the mission is marked as completed. 
+ 
+• Mission 003 & 005: Track total score milestones. 
+• Mission 004: Tracks the total time spent in the application. 
+79 
+ 
+• Mission 006 & 007: Assess subject mastery via progress 
+percentage. 
+• Mission 008 & 009: Verify whether the user has obtained perfect 
+quiz scores. 
+• Mission 010: Counts the number of badges unlocked by the user. 
+ 
+c) Badges Module 
+ 
+The Badges Module is a key component in the gamification system of the 
+KAFASmart application. It displays the badges earned by users, serving as 
+a visual representation of their learning progress and rewarding their 
+achievements. By integrating a badge system, the application motivates 
+learners through a sense of accomplishment and progression, encouraging 
+continued engagement with the educational content. 
+ 
+When a user successfully fulfills the criteria to earn a badge, the application 
+first checks whether the badge already exists in the user's 
+badges_collections subcollection. This is done by referencing a specific 
+badge ID like '0011' under the user's document in the student’s collection 
+of Firestore (Figure 4.28). The system performs a read operation using 
+badgeRef.get(). If the document does not exist, indicating the user has not 
+yet received this badge, a new document is created. This document stores 
+the badge details, including the badge ID, image path 
+('assets/avatar/badge11.png'), unlock status (is_locked: true), and a 
+timestamp indicating when the badge was awarded. This ensures that the 
+achievement is both visually reflected in the app and permanently recorded 
+in the backend. A short delay is introduced before displaying a badge 
+reward popup, enhancing the user experience by celebrating their success. 
+This mechanism ensures each badge is awarded only once and is properly 
+tracked across sessions. 
+ 
+80 
+ 
+ 
+Figure 4.28: Snippet Code Store Badges  
+ 
+Additionally, Figure 4.29 shows when the BadgesScreen is initialized, the 
+system queries the badges_collections subcollection for the current user to 
+retrieve all earned badges. Each document in this subcollection 
+corresponds to a specific badge, and the primary field evaluated is 
+is_locked, which determines the badge's display status. A value of true 
+indicates that the badge has been unlocked. The retrieved data is used to 
+build an unlockedStatusMap, which helps dynamically render badges on 
+the UI unlocked badges appear in full color with their achievement 
+descriptions, while locked ones are shown in a faded style with alternate 
+messaging. This approach provides a personalized and engaging badge 
+display, reinforcing the app’s gamified learning experience. 
+ 
+81 
+ 
+ 
+Figure 4.29: Snippet Code Initialized Lock Badges  
+ 
+d) Leaderboard Module 
+ 
+The Leaderboard Module in the KAFASmart application is designed to 
+promote motivation and healthy competition among users by ranking them 
+based on their scores. It offers two modes of viewing: Negeri (State-based) 
+and Kebangsaan (National), allowing users to compare their performance 
+locally and nationally. Figure 4.30 shows the code segment in leaderboard 
+page. 
+ 
+ 
+Figure 4.30: Snippet Code Fetch Information for Leaderboard  
+ 
+82 
+ 
+When the LeaderboardScreen is initialized, it calls the 
+fetchUserAndLeaderboard() method. This method begins by retrieving the 
+current user’s data from the Firestore students’ collection using the user's 
+unique ID. The system stores this user information, particularly the state 
+attribute, which is later used for filtering when the Negeri tab is selected. 
+ 
+Next, the application retrieves all user documents from the same student’s 
+collection. For each student document, it also checks whether the user has 
+earned the special status of Ilmuwan KAFASmart by querying the 
+status_collections subcollection. The result of this check (true or false) is 
+then added into the user’s data map. 
+ 
+Once all users' data and their Ilmuwan status are fetched, the app applies a 
+filtering process. If the Negeri tab is selected, only students from the same 
+state as the current user are included in the list. If the Kebangsaan tab is 
+selected, the full list of students is retained. Regardless of the selected tab, 
+the app then sorts the user list in descending order based on the score field, 
+ensuring that the highest scorers appear at the top of the leaderboard. 
+ 
+The sorted and filtered list is stored in the leaderboardData state and used 
+to display the leaderboard on the screen. The top three students are 
+showcased in a podium-style layout in the center of the page, with medals 
+and colored platforms to signify 1st, 2nd, and 3rd places. Avatars, 
+usernames, states. scores, and a label for "Ilmuwan KAFASmart" are all 
+displayed prominently to enhance recognition. 
+ 
+Below the podium, the remaining users are displayed in a scrollable list 
+using ListView.builder. Each entry shows the student’s rank, avatar, name, 
+score, and state if the Kebangsaan mode is active. Additionally, the current 
+logged-in user’s row is visually highlighted to help them easily identify 
+their own ranking. 
+ 
+83 
+ 
+To keep the data real-time and relevant, this module re-fetches data each 
+time the user switches between the “Negeri” and “Kebangsaan” tabs. 
+Overall, the Leaderboard Module effectively integrates Firestore to 
+dynamically retrieve, filter, and display student rankings, supporting the 
+gamification goals of the KAFASmart app by fostering achievement-
+driven learning. 
+ 
+e) Score Module 
+ 
+The quiz module score calculation logic is engineered the way it rewards 
+the student to the accuracy as well as speed of their answers proving an 
+incentive to interact with the content via gamification. The process used is 
+triggered by the _answerQuestion() method when a student clicks on an 
+answer. In the event that the answer is right the student will be given 5 
+points. Moreover, on the event of the answer being provided within the first 
+10 seconds of the 60 seconds timer, the student will be awarded 2 additional 
+points and the overall point count will increase to 7 points. In case the 
+answer is not correct, however, the student is punished by removing of 1 
+point. The correct, wrong and skipped answers are also monitored in this 
+system as the quiz is going on. The chosen correctness of the given answer, 
+the time of answering, and the rest of the data are stored in a _ userAnswers 
+list and analyzed later to review the results. After it calculates the score on 
+the current question and writes it to the table, the system enters the next 
+question after some pause by default. This type of scoring motivates 
+students to respond correctly as well as encourages them to respond quickly 
+to make the learning much more interactive and rewarding. Figure 4.31 
+shows the score calculation code segment. 
+84 
+ 
+ 
+Figure 4.31: Snippet Code Score Calculation  
+ 
+ 
+4.3 Testing 
+ 
+Testing plays an important role in the development process and it should be 
+assessed to see whether the system is able to fulfill all of its functional and non-
+functional requirements. In case with the KAFASmart applicaton, the full range 
+of the functionality and usability tests were carried out to check the system 
+reliability, responsiveness and the user experience. The main focus of this phase 
+was to detect faults, to verify user interactions and to be sure that all modules 
+operate as follows. 
+ 
+4.3.1 Functionality Test 
+ 
+The functional requirements of the targeted product, KAFASmart mobile 
+application, were met with the use of functional testing, which was conducted 
+by the developer to assure quality products through sustaining a higher degree 
+85 
+ 
+of quality. In this test, a series of test cases were to be run and expose the 
+application to the tests so that the experiences of the application were also 
+tested: the student and the teacher side. Also included was testing and 
+validation of the user interface and integration of the Firestore database and 
+various central functions of the system. Every function was tested both 
+manually, to confirm expected results and to be sure that all modules worked 
+as they should. The process assisted in identifying and rectifying any problems 
+before the deployment thereby ensuring effective and smooth users experience. 
+The components as well as the outcomes were tested as shown in Table 4.1. 
+ 
+Table 4.1: Results of the Functionality Testing  
+No. Test Scenario Expected Result Actual Result Pass Fail 
+On Boarding Page 
+1.  App launches Logo, name, quote 
+and start button 
+displayed 
+Logo, name, 
+quote and start 
+button displayed 
+√  
+2.  Tap start button Navigates to sign in 
+page 
+Navigates to sign 
+in page 
+√  
+Sign In Page 
+3.  Users sign in with a 
+valid email and 
+password then tap 
+login button 
+The user 
+successfully logs in 
+and is directed to the 
+Homepage 
+ 
+The user 
+successfully logs 
+in and is directed 
+to the Homepage 
+ 
+√  
+4. Users sign in with an 
+invalid email or 
+wrong password then 
+tap login button 
+An error message is 
+displayed indicating 
+incorrect credentials 
+An error message 
+is displayed 
+√  
+5. User sign in using a 
+Google account 
+ 
+The user 
+successfully signs in 
+and is directed to the 
+Homepage 
+ 
+The user signed 
+in successfully 
+and was directed 
+to the Homepage 
+ 
+√  
+6. Tab Sign Up link Navigates to Sign Up 
+page 
+Navigates to Sign 
+Up page 
+√  
+7. User taps on “Forgot 
+Password” link 
+The user is navigated 
+to the email reset 
+page 
+The user is 
+directed to the 
+email reset page 
+√  
+8. Tab exit icon The app will close 
+and exit 
+Close the app √  
+Sign Up Page 
+9. User signs up with 
+valid name, age, 
+email, password, state 
+and school’s name 
+then tap register 
+button 
+The user successfully 
+creates an account 
+and is directed to the 
+Sign In page 
+The user signed 
+up and was 
+directed to the 
+Sign In page 
+√  
+10. User signs up with 
+existing email 
+A warning message 
+appears stating the 
+An error message 
+appears stating 
+√  
+86 
+ 
+email is already 
+registered 
+the email is 
+already in use 
+11. User leaves at least 
+one field empty 
+during registration 
+The system prevents 
+form submission and 
+shows required field 
+error 
+Required field 
+warning is shown 
+√  
+12. Tab Sign In link Navigates to Sign In 
+page 
+Navigates to Sign 
+In page 
+√  
+TEACHER SITE 
+Homepage 
+13. Click avatar image Navigates to profile 
+page 
+Navigates to 
+profile page 
+√  
+14. Click badges card Navigates to badges 
+page 
+Navigates to 
+badges page 
+√  
+15. Click Mission card Navigates to mission 
+page 
+Navigates to 
+mission page 
+√  
+16.  Click progress link Navigates to progress 
+bar page 
+Navigates to 
+progress bar page 
+√  
+17. Click menu icon Navigates to menu 
+page 
+Navigates to 
+menu page 
+√  
+18. Click to Sirah card Navigates to Sirah 
+page 
+Navigates to Sirah 
+page 
+√  
+19. Click to Adab card Navigates to Adab 
+page 
+Navigates to 
+Adab page 
+√  
+20. Click to subject icon Navigates to subject 
+page 
+Navigates to 
+subject page 
+√  
+21. Click to comment 
+icon 
+Navigates to 
+comment page 
+Navigates to 
+comment page 
+√  
+22. Click to leaderboard 
+icon 
+Navigates to 
+leadetboard page 
+Navigates to 
+leadetboard page 
+√  
+Profile Page 
+23. Click pencil icon Avatar list popup at 
+the bottom screen and 
+user can change the 
+avatar 
+Avatar list popup 
+at the bottom 
+screen and user 
+can change the 
+avatar 
+√  
+24. Click edit profile 
+button 
+Navigates to edit 
+profile page 
+Navigates to edit 
+profile page 
+√  
+25. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Edit Profile Page 
+26. User can chaged the 
+name, age, state and 
+school’s name then 
+click save button 
+Information saves to 
+firestore then auto 
+navigate to profile 
+page 
+Information saves 
+to firestore then 
+auto navigate to 
+profile page 
+√  
+27. Click arrow icon Navigates to profile 
+page 
+Navigates to 
+profile page 
+√  
+Menu Page 
+28. Click profile button Navigates to profile 
+page 
+Navigates to 
+profile page 
+√  
+29. Click badges button Navigates to badges 
+page 
+Navigates to 
+badges page 
+√  
+30. Click Mission button Navigates to mission 
+page 
+Navigates to 
+mission page 
+√  
+31. Click progress button Navigates to progress 
+bar page 
+Navigates to 
+progress bar page 
+√  
+87 
+ 
+32. Click to subject 
+button 
+Navigates to subject 
+page 
+Navigates to 
+subject page 
+√  
+33. Click to comment 
+icon 
+Navigates to 
+comment page 
+Navigates to 
+comment page 
+√  
+34. Click to leaderboard 
+icon 
+Navigates to 
+leaderboard page 
+Navigates to 
+leaderboard page 
+√  
+35. Click log out button Alert message popup 
+is sure to log out 
+Alert message 
+popup 
+√  
+36. Click x icon Close the menu page Menu page closed √  
+Badges Page 
+37. Click any badges 
+card 
+Badges information 
+popup 
+Badges 
+information 
+popup 
+√  
+38. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Mission Page 
+39. Click any mission 
+card 
+The card expended to 
+displayed progress 
+and information 
+about the mission 
+The card 
+expended to 
+displayed 
+progress and 
+information about 
+the mission 
+√ 
+ 
+40. Click claim button The reward popup 
+then changes to Settle 
+button 
+The reward popup 
+then changes to 
+Settle button 
+√ 
+ 
+41. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Progress Bar Page 
+42. Click Sirah card Navigates to topic 
+Sirah progress 
+Navigates to topic 
+Sirah progress 
+√  
+43. Click Adab card Navigates to topic 
+Adab progress 
+Navigates to topic 
+Adab progress 
+√  
+44. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Topic Sirah Progress Page 
+45. Click arrow icon Navigates to progress 
+bar page 
+Navigates to 
+progress bar page 
+√  
+Topic Adab Progress Page 
+46. Click arrow icon Navigates to progress 
+bar page 
+Navigates to 
+progress bar page 
+√  
+Comment Page 
+47. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Leaderboard Page 
+48. Click state tab Leaderboard based on 
+state displayed 
+Leaderboard 
+based on state 
+displayed 
+√  
+49. Click national tab Leaderboard based on 
+national displayed 
+Leaderboard 
+based on national 
+displayed 
+√  
+50. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Subject Page 
+51 Click Sirah and Adab 
+card 
+Navigated to Sirah 
+Topic page and Adab 
+Navigated to 
+Sirah Topic page 
+√  
+88 
+ 
+topic page 
+respectively 
+and Adab topic 
+page respectively 
+52. Click on others card Popup the subject in 
+not open yet message 
+Mesaage popup √  
+53. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Sirah Page 
+54. Click Tahun 3, Tahun 
+4 and Tahun 5 tab 
+Each tab screen 
+displayed 
+Each tab screen 
+displayed 
+√  
+55. Click Keluarga Nabi 
+card 
+Navigates to 
+Keluarga Nabi Page 
+Navigates to 
+Keluarga Nabi 
+Page 
+√  
+56. Click Dakwah Rasul 
+card 
+Navigates to Dakwah 
+Rasul Page 
+Navigates to 
+Dakwah Rasul 
+Page 
+√  
+57. Click Perang Badar 
+card 
+Navigates to Perang 
+Badr Page 
+Navigates to 
+Perang Badar 
+Page 
+√  
+58. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Adab Page 
+59. Click Tahun 3, Tahun 
+4 and Tahun 5 tab 
+Each tab screen 
+displayed 
+Each tab screen 
+displayed 
+√  
+60. Click Orang Dewasa 
+card 
+Navigates to Orang 
+Dewasa Page 
+Navigates to 
+Orang Dewasa 
+Page 
+√  
+61. Click Ziarah Rakan 
+card 
+Navigates to Ziarah 
+Rakan Page 
+Navigates to 
+Ziarah Rakan 
+Page 
+√  
+62. Click Mesyuarat card Navigates to 
+Mesyuarat Page 
+Navigates to 
+Mesyuarat Page 
+√  
+63. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Notes Module Each Topic 
+64. Click Next button Note change to next 
+page 
+Note change to 
+next page 
+√  
+65. Click Previous button Note change to 
+previous page 
+Note change to 
+previous page 
+√  
+Quiz Module Each Topic 
+66. All buttons in set 1 
+quiz  
+Successful function 
+and works  
+Successful 
+function and 
+works 
+√  
+67. All buttons in set 2 
+quiz  
+Successful function 
+and works  
+Successful 
+function and 
+works 
+√  
+68. All buttons in set 3 
+quiz  
+Successful function 
+and works  
+Successful 
+function and 
+works 
+√ 
+ 
+TEACHER SITE 
+Teacher Homepage 
+69. Click avatar image Navigates to profile 
+page 
+Navigates to 
+profile page 
+√  
+70. Click menu icon Navigates to menu 
+page 
+Navigates to 
+menu page 
+√  
+89 
+ 
+71. Clicks search icon Navigates to search 
+student info page 
+Navigates to 
+search student 
+info page 
+√  
+72. Click leaderboard 
+icon 
+Navigates to students 
+leaderboard page 
+Navigates to 
+students 
+leaderboard page 
+√  
+73. Click any tab student 
+info based on year 
+List of students based 
+on tab displayed 
+List of students 
+based on tab 
+displayed 
+√  
+74. Clicks any student 
+card 
+Navigates to student 
+info page 
+Navigates to 
+student info page 
+√  
+Profile Page 
+75. Click pencil icon Avatar list popup at 
+the bottom screen and 
+user can change the 
+avatar 
+Avatar list popup 
+at the bottom 
+screen and user 
+can change the 
+avatar 
+√  
+76. Click edit profile 
+button 
+Navigates to edit 
+profile page 
+Navigates to edit 
+profile page 
+√  
+77. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Edit Profile Page 
+78. User can chaged the 
+name, age, state and 
+school’s name then 
+click save button 
+Information saves to 
+firestore then auto 
+navigate to profile 
+page 
+Information saves 
+to firestore then 
+auto navigate to 
+profile page 
+√  
+79. Click arrow icon Navigates to profile 
+page 
+Navigates to 
+profile page 
+√  
+Menu Page 
+80. Click profile button Navigates to profile 
+page 
+Navigates to 
+profile page 
+√  
+81. Click search button Navigates to search 
+student info page 
+Navigates to 
+search student 
+info page 
+√  
+82. Click to leaderboard 
+icon 
+Navigates to student 
+leadetboard page 
+Navigates to 
+student 
+leadetboard page 
+√  
+83. Click log out button Alert message popup 
+are sure to log out 
+Alert message 
+popup 
+√  
+84. Click x icon Close the menu page Menu page closed √  
+Search Student Info Page 
+85. Fill the state or 
+school name then tap 
+search button to 
+search student 
+information 
+List of students 
+desplayed 
+List of students 
+desplayed 
+√  
+86. Click any student 
+card  
+Naviagtes to 
+students’ information 
+page 
+Naviagtes to 
+students’ 
+information page 
+√  
+87. Click arrow button Navigates to teacher 
+homepage 
+Navigates to 
+teacher homepage 
+√  
+Students Leaderboard Page 
+88. Click state tab Leaderboard based on 
+state displayed 
+Leaderboard 
+based on state 
+displayed 
+√  
+90 
+ 
+89. Click national tab Leaderboard based on 
+national displayed 
+Leaderboard 
+based on national 
+displayed 
+√  
+90. Click arrow icon Navigates to 
+homepage 
+Navigates to 
+homepage 
+√  
+Student Info Page 
+91. Click button see 
+progress 
+Student progress page 
+displayed 
+Student progress 
+page displayed 
+√  
+92. Clicks button see 
+reward 
+Students badges page 
+displayed 
+Students badges 
+page displayed 
+√  
+93. Click button see 
+achievement 
+Students’ 
+achievement page 
+displayed 
+Students’ 
+achievement page 
+displayed 
+√  
+94. Click button give 
+comment 
+Navigates to give 
+comment page 
+Navigates to give 
+comment page 
+√  
+Give Comment Page 
+95. Choose the tag and 
+input the comment 
+then click submit 
+button 
+The comment will 
+store in database and 
+list of comment will 
+displayed 
+The comment will 
+store in database 
+and list of 
+comment will 
+displayed 
+√  
+96. Clicks arrow button Navigates to teacher 
+homepage 
+Navigates to 
+teacher homepage 
+√  
+ 
+4.3.2 Before After Test 
+ 
+To measure the effectiveness of the KAFASmart application in improving 
+student knowledge, a pre-test and post-test were conducted using the same set 
+of six (6) multiple-choice questions related to Sirah and Adab subject. This 
+approach enabled the identification of any cognitive gains in learners after 
+engaging with the application. A total of 20 respondents participated in both 
+the pre-test and post-test. Table 4.2 presents the information of the 20 
+respondents involved in the study. 
+ 
+                                 Table 4.2: Information Respondents  
+No. Age State Category 
+Experience Used 
+KAFA App 
+1. 11 Years Old Kedah Student No 
+2. 10 Years Old Kedah Student No 
+3. 12 Years Old Kedah Student No 
+4. 10 Years Old Kedah Student No 
+5. 11 Years Old Kedah Student No 
+6. 11 Years Old Kedah Student No 
+7. 10 Years Old Kedah Student No 
+8. 11 Years Old Kedah Student No 
+9. 11 Years Old Kedah Student No 
+10. 10 Years Old Kedah Student No 
+91 
+ 
+11. 11 Years Old Kedah Student No 
+12. 10 Years Old Kedah Student No 
+13. 10 Years Old Kedah Student No 
+14. 11 Years Old Kedah Student No 
+15. 9 Years Old Kedah Student No 
+16. 10 Years Old Kedah Student No 
+17. 11 Years Old Kedah Student No 
+18. 11 Years Old Kedah Student No 
+19. 9 Years Old Kedah Student No 
+20. 10 Years Old Kedah Student No 
+ 
+ The questions were as following: 
+ 
+a) Question 1 
+ 
+Figure 4.32 demonstrates the findings of Question 1 in the pre-test. 
+Only 10% of the respondents answered correctly that Prophet 
+Muhammad is descended from Prophet Ismail. A majority incorrectly 
+selected Nabi Adam (40%) and Nabi Isa (35%), suggesting a lack of 
+understanding about the Prophet's lineage. 
+ 
+ 
+Figure 4.32: Graph Pre-Test Question 1 
+ 
+The post-test results were shown in Figure 4.33 on the same question. 
+A 100% of the respondents answered accurately after the KAFASmart 
+app application. This significant improvement reflects the app’s 
+effectiveness in teaching crucial historical facts through engaging 
+materials. 
+92 
+ 
+ 
+Figure 4.33: Graph Post-Test Question 1 
+ 
+b) Question 2 
+ 
+As presented in Figure 4.34, no single respondent got the correct 
+answer to the question, “Who accepted Islam via Abu Bakar As-
+Siddiq?" during the pre-test. Ali bin Abi Thalib was chosen by 45 
+percent and Umar Al-Khattab by 40 percent, which entails a popular 
+myth on early converts to Islam. 
+ 
+ 
+Figure 4.34: Graph Pre-Test Question 2 
+ 
+As figure 4.35 indicates, after taking the lessons and quizzes in the app, 
+all the 20 respondents were able to identify the correct answer (Zubair 
+Bin Awwam). 
+ 
+93 
+ 
+ 
+Figure 4.35: Graph Post-Test Question 2 
+ 
+c) Question 3 
+ 
+In Figure 4.36, the only 5% of respondents got the correct response of 
+"What assisted Muslim army in the Battle of Badr?". Most of them, 
+70% chose wrongly by guessing a rainstorm, which showed that there 
+was no specific information on the Islamic military history in terms of 
+religiosity. 
+ 
+ 
+Figure 4.36: Graph Pre-Test Question 3 
+ 
+The results in Figure 4.37 showed that all students answered correctly 
+in the post-test. This great improvement suggests that the fun features 
+in KAFASmart helped students understand difficult or less well-known 
+historical events more easily. 
+ 
+94 
+ 
+ 
+Figure 4.37: Graph Post-Test Question 3 
+ 
+d) Question 4 
+ 
+As it indicates in figure 4.38, a majority of the respondents (15%) knew 
+the right answer of the question related to etiquette about the best adab 
+when speaking to elders. The rest of the students either were unsure or 
+made inappropriate responses showing that they do not know much 
+about Islamic manners. 
+ 
+ 
+ Figure 4.38: Graph Pre-Test Question 4  
+ 
+Figure 4.39 portrays the 180-degree reversal, since 100% of the 
+respondents now provide the appropriate answer under the post-app 
+condition. This proves that learning through situational examples 
+helped students understand and apply proper manners. 
+ 
+95 
+ 
+ 
+Figure 4.39: Graph Post-Test Question 4 
+ 
+e) Question 5 
+ 
+As Figure 4.40 reveals, 2 respondents got the correct answer to the 
+question of the benefit of good etiquette in meetings, that is, they 
+answered that good etiquette helps in solving problems. The rest of the 
+majority chose answers that had nothing to do with the subject or the 
+vague answers, which indicates an on the surface interpretation of 
+functionalism of Adab. 
+ 
+ 
+Figure 4.40: Graph Pre-Test Question 5 
+ 
+Figure 4.41 demonstrates a sudden jump in learning with as much as 
+95% answering the correct one. There was only one respondent who 
+got the mistake. 
+ 
+96 
+ 
+ 
+Figure 4.41: Graph Post-Test Question 5 
+ 
+f) Question 6 
+ 
+Figure 4.42 highlights that only 1 respondent correctly answered "Who 
+is condemned in Surah Al-Masad?" as Abu Lahab. The rest selected 
+incorrect names, indicating weak familiarity with the Quranic content. 
+ 
+ 
+Figure 4.42: Graph Pre-Test Question 6 
+ 
+According to Figure 4.43, 95% of respondents correctly answered Abu 
+Lahab in the post-test. Only one (1) respondent got the wrong answer. 
+ 
+97 
+ 
+ 
+Figure 4.43: Graph Post-Test Question 6 
+ 
+To summarize the improvement in knowledge, the total scores of each 
+respondent were analysed using basic statistical measures. The results are 
+shown in Table 4.3. 
+ 
+Table 4.3: Statistical Result 
+Statistic Pre-Test Post-Test 
+Mean (Average) 0.45 5.95 
+Minimum Score 0 5 
+Maximum Score 2 6 
+Standard Deviation 0.60 0.22 
+ 
+Based on Table 4.3, the average score increased significantly from 0.45 to 5.95, 
+indicating a major gain in learning. Additionally, the standard deviation 
+decreased from 0.60 to 0.22, suggesting that the students’ performance became 
+more consistent after using the app. The minimum score also rose from 0 to 5, 
+showing that even the weakest students showed noticeable improvement. 
+ 
+The before and after test results, along with the statistical analysis, clearly 
+demonstrate the significant educational impact of the KAFASmart application. 
+Based on the pre- and post-test results for six multiple-choice questions, 
+student knowledge of KAFA improved substantially. Initially, only 9 out of 
+120 responses were correct, resulting in a low accuracy rate of 7.5%. After 
+using the app, 119 out of 120 responses were correct, raising the success rate 
+98 
+ 
+to 99.2%. This drastic increase reflects the app’s effectiveness in enhancing 
+knowledge retention and correcting misconceptions. 
+ 
+This improvement is further supported by the basic statistical analysis of the 
+total scores. The mean score increased from 0.45 to 5.95, and the minimum 
+score improved from 0 to 5, indicating that even the weakest students benefited 
+significantly from using the application. In addition, the standard deviation 
+decreased from 0.60 to 0.22, suggesting a more consistent performance among 
+all respondents in the post-test. These quantitative results reinforce the claim 
+that KAFASmart facilitated not only learning but also uniform understanding 
+across students with different baseline knowledge levels. 
+ 
+Beyond the numerical results, the findings indicate a shift in student learning 
+behavior and attitude. The design of the application likely helped maintain user 
+focus and motivation. The significant improvement in responses to moral and 
+etiquette-related questions suggests that the app did more than deliver factual 
+knowledge; it also successfully conveyed important Islamic values. The self-
+paced learning environment offered by the app may have further contributed 
+to better knowledge retention and boosted student confidence. 
+ 
+4.3.3 User Acceptance Test 
+ 
+The UAT was conducted with the same 20 respondents who participated in the 
+pre-test and post-test sessions. This group of KAFA students was selected to 
+assess the usability, functionality, and overall satisfaction with the 
+KAFASmart application after using it. The UAT was essential in 
+understanding the user experience, identifying the app’s strengths, and 
+evaluating its effectiveness in supporting KAFA learning. Each survey 
+statement was rated using a 5-point Likert scale (1 = strongly disagree to 5 = 
+strongly agree), and the key findings are discussed below, accompanied by 
+graphical representations. 
+ 
+99 
+ 
+Figure 4.44 presents the summary of users' responses to key usability and 
+satisfaction indicators for the KAFASmart application. The responses were 
+collected using a 5-point Likert scale from 20 KAFA students. The majority of 
+respondents gave high ratings, 4 and 5 across all eight evaluated statements, 
+indicating strong acceptance of the application. 
+ 
+ 
+Figure 4.44: Graph Summary Usability Test Result 
+ 
+The highest level of agreement was observed in the statements “The quiz 
+questions are easy to understand and suitable for my level” and “I can clearly 
+track my learning progress”, whereby 18 of the respondents strongly agreed 
+(rating 5) and the rest 2 rated this statement as 4. These findings indicate that 
+the material covered during the learning process was very much within the 
+potential of the users as well as that the tracking element of the app was well-
+implemented and understood. In a similar way, about 80% of respondents have 
+produced a score of 5 to the question, “The app is fun and helps me learn 
+KAFA” and 20 percent to get a rating of 4, which shows that there is high 
+satisfaction with the overall experience of using the app. 
+ 
+100 
+ 
+Motivational elements such as “I feel motivated to learn when I receive badges 
+or rewards” and “The leaderboard motivates me to keep doing the quizzes” 
+were rated high as well, with roughly 75% and 70 percent of the participants 
+recording the rating of 5 in the two items respectively. This confirms the power 
+of gamified features in maintaining the engagement of learners and inviting 
+them to repetitive usage, which is the first project objective. Hallifax et al. 
+(2023) substantiate these conclusions and stipulated that such features as 
+badges and leaderboards make users more productively engaged in digital 
+worlds. In a similar, Vrcelj et al. (2023) call attention to the fact that with the 
+help of gamification, students will become more committed and focused, 
+especially when specific rewards and progress measurements are made 
+available to the students. 
+ 
+Figure 4.45 also demonstrates preference of users to definite gamification 
+capabilities. Progress bar turned out to be the object of the greatest preference, 
+being chosen by 80% of people. This was followed by the leaderboard (60%), 
+missions (55%), and badges (50%), which are very important elements that are 
+applied in rewarding, indicating milestones and ensuring continuity through 
+the learning processes. The success of the progress bar confirms the idea of  
+Yie et al. (2024) who stressed that the visual tracking elements will be helpful 
+in motivating learners because of the ability to know his/her performance and 
+learning process. 
+ 
+ 
+Figure 4.45: Graph Gamification Feature Favourite 
+101 
+ 
+ 
+Less preferred features included comments (30%), avatars (35%), and score 
+(40%), indicating that while these elements may enhance the learning 
+experience, they were not the primary drivers of engagement for most users. 
+ 
+These findings proved that the KAFASmart application had satisfied usability 
+requirements along with the feature of gamification which is useful in terms of 
+user engagement and inspiration. The solely favorable reviews, in particular, on 
+such aspects of the application as progress tracking, leaderboards, and rewards 
+confirm that it is capable of generating a valuable and fun learning experience. 
+The great level of ratings on most of the indicators concerning usability and 
+learning support proves that the app is positively accepted among its users and 
+can serve as an effective means of KAFA education. The responses are quite 
+consistent testifying to a well thought out design that merges educational utility 
+and user focused interaction. 
+ 
+4.4 Conclusion 
+ 
+This chapter offered a detailed description of the design and implementation of 
+the project and how KAFASmart mobile application was implemented as set by 
+the goals of the project. The design of the user interface was well considered to 
+serve both students and teachers: it is well designed, there is no confusion or 
+excessive complexity in any of the modules. The specific features such as 
+badges, missions, leaderboards, ability to track student progresses, the 
+possibility to interact with the teachers showed how comprehensive the app is in 
+providing the KAFA education. This was developed adopting a Hybrid Waterfall 
+Agile development approach, where improvements are carried out iteratively 
+and real-time integration of data was achieved through Firebase. Programming 
+codes and technical descriptions were used to demonstrate how key features 
+were programmed and integrated with Firestore to award an interactive user 
+interface. The testing stage also confirmed the efficiency of the app in terms of 
+usability and user acceptance testing and the pre-test and post-test analysis 
+revealed significant improvement in the knowledge level of students and the 
+102 
+ 
+UAT proved high levels of user satisfaction. In conclusion, this chapter made it 
+clear that KAFASmart effectively realized its design objectives and bears a 
+considerable potential in becoming an interesting and successfully working 
+source of knowledge by KAFA students in the future. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+103 
+ 
+CHAPTER 5 
+ 
+CONCLUSIONS AND RECOMMENDATIONS 
+ 
+ 
+This chapter presents a summary of the project and discusses how the final product 
+addresses the objectives outlined in previous chapter. It also highlights the limitations 
+encountered during development and testing, and provides recommendations for 
+future improvements. The purpose of this chapter is to reflect on the contributions of 
+this study in enhancing engagement and motivation among KAFA students through 
+the use of gamification in mobile learning. 
+ 
+5.1 Overall 
+ 
+KAFASmart mobile application was designed, developed, and evaluated 
+successfully according to all the intended research objectives. The app allows 
+KAFA students to take part in quizzes and play interactive learning material 
+with the help of gamification strategies that supposedly make the learning 
+routine more fun and efficient. The main topics were directed to the Malaysian 
+KAFA syllabus, especially the aspects of religious and ethical values worthy 
+of students meeting requirements between seven (7) and 12 years old. 
+ 
+The development was based on four major phases of the methodology that are 
+planning, designing, implementation, and testing. During the planning stage, 
+the project scope was defined and the associated aspects of gamification were 
+determined. In the design phase: wireframes, user interface prototypes and data 
+models were developed. The implementation stage concerned the connection 
+of Firebase backend services to the Flutter-based front-end development to 
+guarantee the real-time progression of the software and the child-friendly 
+interface. The testing-stage tested usability and efficiency of the application by 
+surveying and feedback by students. 
+104 
+ 
+5.2 Objective Achievement 
+ 
+The objectives of the study were clearly defined to guide the design and 
+development of the KAFASmart application. Each of the objectives was 
+achieved as follows: 
+ 
+5.2.1 First Objective 
+ 
+The initial objective was to find the gamification features which could be used 
+to improve engagement and motivation. This has been done at the planning and 
+a review of literature. Several gamification components including, points, 
+leaderboards, badges, progress bars, status levels, and missions were found to 
+be effective with regards to enhancing learner motivations. These ideas have 
+been chosen with the help of the results of the academic research and were also 
+confirmed with the help of the informal feedback of the KAFA students and 
+teachers at the beginning of the design process. Then, to promote constant 
+involvement and to motivate positive learning behaviours, the selected 
+elements were incorporated into the application. 
+ 
+5.2.2 Second Objective 
+ 
+The second objective was the development of a mobile app with features of 
+gamification in implementing an attractive KAFA studying process. This was 
+done by the effective creation of KAFASmart with Flutter and Firebase. Some 
+of the main features in the application are quizzes, specific to a subject, real-
+time scoring, tracking progress, badges reward system, and missions. 
+Responsiveness and accessibility were considered during usability in the 
+development process where testing was done to ascertain them. The interface 
+was created and thought of the young learners to fit in the color schemes, 
+typography, and layout according to which it could be functional and aesthetic. 
+ 
+105 
+ 
+5.2.3 Third Objective 
+ 
+The third objective was to evaluate the usability of the gamified application 
+among KAFA students through a user survey. This was done through usability 
+test where 20 students were used within the target age group. The survey 
+provided an evaluation of the aspects like ease of use, content clarity, user 
+engagement and motivation effect. The feedback was overwhelmingly 
+positive, and it showed that the application was intuitive, enjoyable and could 
+help students with their learning. There were also complimentary suggestions 
+on ways to improve the situation and these suggestions have been clearly noted 
+in the subsequent sections of this chapter. 
+ 
+5.3 Limitations 
+ 
+Despite the successful achievement of the project objectives, several limitations 
+were encountered during the development and implementation of the 
+KAFASmart application. It is necessary to identify those shortcomings in order 
+to develop and further execute them. 
+ 
+Firstly, the app was created and also streamlined specifically to targeted Android 
+devices. Consequently, the layout can be potentially disrupted by such changes 
+in the screen resolution, the aspect ratio, occurring between different 
+smartphones and thinner tablets, bringing some variances in the ways of the 
+interface elements appearance. users may also experience overlapping contents 
+or mispositioned buttons on some devices and this may hamper the use of the 
+devices especially among the young users who depend on clear-cut pictures. 
+ 
+Secondly, the user testing was limited to KAFA students from only Malaysian 
+states, Kedah. This geographical limitation narrowed the range of user 
+experiences, as students from other regions may have different learning 
+environments, digital exposure levels, or others variations that could influence 
+their interaction with the application. 
+106 
+ 
+ 
+Third, the number of respondents in the user testing sample was made up of 20 
+people only. The sample size is insufficient to provide credential generalizability 
+of the findings although their responses were very encouraging and could be 
+taken as a sign of positive overall interaction. A larger sample with more variety 
+would yield a more unbiased statistic on which usability and effectiveness can 
+be judged. 
+ 
+Fourthly, the application had most of the features that needed constant internet 
+connection. The quizzes, notes, and ability to monitor the progress require data 
+that is based on cloud and this poses a challenge to the students in the countryside 
+or in regions with low connectivity. Such users cannot use the app regularly, 
+which reduces any impact and its reach. 
+ 
+Lastly, the graphic design of the application and the animations were not 
+particularly fancy because of time and resources limitations. Although operating, 
+the visuals did not include more progressive or interactive items which could 
+make the learning process more engaging and enjoyable to younger audience. 
+ 
+5.4 Recommendations and Future Work 
+ 
+To overcome the limitations and enhance the KAFASmart application’s 
+performance, the following recommendations and future directions are 
+proposed: 
+ 
+a) Make the app compatible with many devices 
+ 
+It is advisable to increase the compatibility of the application by running 
+tests and adjusting the layout of the application to more screen 
+resolutions and types. Making user interface adaptive to meet the screen 
+size like tablet or large smartphone screen will provide a common and 
+easy-going experience to any user. 
+107 
+ 
+b) Increase testing’s area 
+ 
+The students of several Malaysian states and different school 
+environments should be covered in future assessments. This would give 
+more representative feedback that would enable the development team 
+to customize content and features in the KAFA education in better 
+addressing a broader scope of cultural, lingual, and regional 
+requirements. 
+ 
+c) Enlarge sampling size of testing 
+ 
+It will be important to conduct usability studies with a bigger group of 
+respondents, which will provide better understandings on how students 
+are going to use the application. It also can access more data and 
+potentially notice a trend or problem that cannot be spotted in a smaller 
+sample and make smarter design choices. 
+ 
+d) Design an offline learning capability 
+ 
+The implementation of offline features, like permitting the student to 
+download chosen notes and quizzes to use them without the internet 
+connection, will also guarantee that the app will continue to be used in 
+the places with unfavourable connections. The improvement will make 
+the app more accommodative and helpful to students in rural or 
+underserved areas. 
+ 
+e) Enhance visual and interactive design 
+ 
+To make the interaction process even more effective among the 
+elementary users, it is recommended that KAFASmart future versions 
+would cover additional dynamic information tools like: animations of 
+characters, sound effects, interactive storytelling, and animated 
+108 
+ 
+transitions. Such improvements will aid in maintaining attention and 
+positive learning. 
+ 
+f) Collab with JAKIM and official KAFA institutions 
+ 
+Forming an official collaboration with JAKIM or any other Islamic 
+education authorities may make the content fully applicable with the 
+national KAFA standards. This type of cooperation would also 
+contribute to popularizing the application as a tool to be used in KAFA 
+schools on the territory of Malaysia, which would make it even more 
+credible and more widely accepted and used. 
+ 
+5.5 Summary 
+ 
+In conclusion, this project successfully designed, developed, and evaluated the 
+KAFASmart mobile application as a gamified learning tool for KAFA students. 
+The development process followed a combination of traditional and iterative 
+methodologies, where each phase including requirement analysis, system 
+design, implementation, and testing was carefully planned and executed to 
+achieve the project’s objectives. 
+ 
+The application was created to offer an engaging and user-friendly learning 
+environment for both students and teachers. It features educational content 
+aligned with the KAFA curriculum, interactive quizzes, and various 
+gamification elements such as badges, missions, and leaderboards that 
+encourage motivation and participation. Based on the usability and user 
+acceptance tests, the application significantly improved students’ understanding 
+and satisfaction. 
+ 
+Although the project encountered limitations related to platform availability, 
+content coverage, and internet dependency, the final prototype demonstrated 
+strong potential for future development. With continued refinement, 
+109 
+ 
+KAFASmart may serve as an effective digital solution to support Islamic 
+education in primary settings. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+110 
+ 
+REFERENCES 
+Affan. (2024, June 25). Format UPKK 2024: Format Terkini Ujian Penilaian Kelas 
+KAFA. ECentral. https://ecentral.my/format-upkk-2024/ 
+ 
+Alam, Md. I., Malone, L., Nadolny, L., Brown, M., & Cervato, C. (2023). Investigating 
+the impact of a gamified learning analytics dashboard: Student experiences and 
+academic achievement. Journal of Computer Assisted Learning, 39(5), 1436–
+1449. 
+ 
+Alomair, Y., & Hammami, S. (2020). A Review of Methods for Adaptive Gamified 
+Learning Environments. IEEE Xplore. 
+ 
+Aprianti, F., Dayurni, P., Fajari, L. E., Pernanda, D., & Meilisa, R. (2022). The Impact 
+of Gadgets on Student Learning Outcomes: A Case Study in Indonesia Junior 
+High School Students. International Journal of Education, Information 
+Technology, and Others, 5(5), 121–130. 
+ 
+Ardhiansyah, A. Y., Putra, D. L. S., Kristanto, J. S., Budhianto, N. P., & Maulana, F. 
+I. (2022). Waterfall Model for Design and Development Coffee Shop Website at 
+Malang. International Conference on Informatics, Multimedia, Cyber and 
+Information System, 230–234. 
+ 
+Bakhit Al-Salami, S. B. S. (2022). Gamification in Educational Institutions: Concepts 
+and Difficulties. IJCSNS International Journal of Computer Science and Network 
+Security, 22(9).  
+ 
+Balalle, H. (2024). Exploring student engagement in technology-based education in 
+relation to gamification, online/distance learning, and other factors: A systematic 
+literature review. Social Sciences and Humanities Open, 9. 
+ 
+Bhari, A., Mat Rani, M. A., & Mohd Arif, M. I. A. (2021). Sirah Tahap Asas (first). 
+Pertubuhan Kebajikan Islam Malaysia (PERKIM).  
+ 
+Chandarana, N., Gada, T., & Kukkadapu, S. (2024). A Comprehensive Review of 
+Agile Methodologies in Mobile App Development. International Research 
+Journal of Modernization in Engineering Technology and Science, 6(8). 
+ 
+Christopoulos, A., & Mystakidis, S. (2023). Gamification in education. 
+Informatologia, 48(3–4), 198–204. 
+ 
+111 
+ 
+Elman, J., Yusof, A., Sarudin, A., Sufian Ismail, M., & Bahasa dan Komunikasi, F. 
+(2023). Penggunaan Bahan Bantu Mengajar Digital Dalam Pembelajaran Secara 
+Maya Semasa Pandemik. Isu Dalam Pendidikan, 46, 2023. 
+ 
+Fajri, F. A., Haribowo P., R. K., Amalia, N., & Natasari, D. (2021). Gamification in e-
+learning: The mitigation role in technostress. International Journal of Evaluation 
+and Research in Education, 10(2), 606–614. 
+ 
+Fatima, A., Shaheen, A., Ahmed, S., Fazal, B., Ahmad, F., Liew, T. W., & Ahmed, Z. 
+(2024). Exploring the use of gamification in human-centered agile-based 
+requirements engineering. Frontiers in Computer Science, 6. 
+ 
+Gachkova, M., Somova, E., & Gaftandzhieva, S. (2020). Gamification of courses in 
+the e-learning environment. IOP Conference Series: Materials Science and 
+Engineering, 878(1). 
+ 
+Garcia-Iruela, M., & Hijon-Neira, R. (2020). What Perception Do Students Have about 
+the Gamification Elements? IEEE Access, 8, 134386–134392. 
+ 
+Hallifax, S., Altmeyer, M., Kölln, K., Rauschenberger, M., & Nacke, L. E. (2023). 
+From Points to Progression: A Scoping Review of Game Elements in 
+Gamification Research with a Content Analysis of 280 Research Papers. 
+Proceedings of the ACM on Human-Computer Interaction, 7. 
+ 
+Hambali, K., & Lubis, M. A. (2022). KepentinganGamifikasi Dalam Pengajaran dan 
+Pemudahcaraan (PDPC) Pendidikan Islam. ASEAN Comparative Education 
+Research Journal on Islam and Civilization (ACER-J), 5(1), 2600–2769. 
+ 
+Hamilton, T. (2024, March 17). What is Functional Testing? Types & Examples. 
+Guru99. https://www.guru99.com/functional-testing.html 
+ 
+Hamzah, N. Z., Suhardi, M., Jusoh, M., Ade, A., Pusat, H., & Kemanusiaan, S. (2024). 
+The Effectiveness of the KAFA Education Program in the Development of 
+Student’s Manners and Spirituality: Study in Kuantan District). Internasional 
+Journal of Humanities Technology and Civilization, 9, 76–81. 
+ 
+Houda Fansa. (2024, October 2). Educators And Generation Alpha: Adapting To The 
+Future Of Learning. HolistiqueTraining.  
+ 
+Ikbal, T. (2023). Activity-Based Teaching and Learning: Fostering 21 st Century Skills 
+and Student Engagement in a Changing Global Education Landscape. 
+International Journal for Research in Education, 12, 6. 
+112 
+ 
+Iwersen, L. H. L., Zem, L., & Penteado Neto, R. de A. (2023). CHOOSING THE 
+BEST PROJECT MANAGEMENT METHODOLOGY FOR RESEARCH AND 
+DEVELOPMENT PROJECTS: AGILE, WATERFALL, OR HYBRID? 
+REVISTA FOCO, 16(11), e3336. 
+ 
+JAKIM. (2020). Buku Sukatan Pelajaran KAFA JAKIM 2.0. In 
+PortalRasmiJabatanKemajuanIslamMalaysia (2nd ed.). Bahagian Pendidikan, 
+Jabatan Kemajuan Islam Malaysia. https://www.islam.gov.my/ms/e-
+penerbitan/2164-buku-sukatan-pelajaran-kafa-jakim-2-0 
+ 
+Jayalath, J., & Esichaikul, V. (2022). Gamification to Enhance Motivation and 
+Engagement in Blended eLearning for Technical and Vocational Education and 
+Training. Technology, Knowledge and Learning, 27(1), 91–118. 
+ 
+Joana, L., & Arco, P. (2023). Possibilities and limitations of social media in education 
+processes during the pandemic: The teachers perspective. Workshop on Cloud 
+Technologies in Education. 
+ 
+Kamis Alzahrani, F., & Alhalafawy, W. (2022). Benefits And Challenges Of Using 
+Gamification Across Distance Learning Platforms At Higher Education: A 
+Systematic Review Of Research Studies Published During The COVID-19 
+Pandemic. Journal of Positive School Psychology, 6. 
+ 
+Kapur, R. (2020). Importance of Competitions in Enriching in System of Education at 
+all Levels. In ReserchGate. 
+ 
+Kringelbach, M. L., Stein, A., & Stark, E. (2016). How cute things hijack our brains 
+and drive behaviour. Academic Rigour, Journalistic Flair. 
+ 
+Krüger, G. (2024, August 8). Non-functional Requirements: What They Do, Examples, 
+and Best Practices. Perforce. https://www.perforce.com/blog/alm/what-are-non-
+functional-requirements-examples 
+ 
+Magnani, F. (2023). Boosting Team Engagement through Gamification: Mitigating the 
+Effects of Social Loafing. Department of Management Engineering. 
+ 
+Manzano, A., Camacho, P., Guerrero, M. A., Guerrero, L., Aguilar, J. M., Trigueros, 
+R., & Alias, A. (2021). Between level up and game over: A systematic literature 
+review of gamification in education. Sustainability, 13(4), 1–14.  
+ 
+ 
+113 
+ 
+Maziz, M., Moharam, A.-H., Mokhtar, S., & Thia, K. (2021). Pendekatan Kaedah 
+Interaktif Dalam Pengajaran Dan Pembelajaran Pendidikan Islam Abad Ke-21 Di 
+Sekolan Menengah Kebangsaan Kota Kinabalu. International Conference on 
+Teacher Learning and Development, 3–05. 
+ 
+McKerahan, T. (2022). A Comparative Study of Various Software Development Life 
+Cycle (SDLC) Models. International Journal of Research in Engineering, 
+Science and Management, 5(3). 
+ 
+Mohd Rum, S. F., Basri, N., & Dahlan, A. (2022). Sirah Learning Mobile Application 
+for Kafa Primary School Students: A Preliminary Study. Journal of Islamic, 
+Social, Economics and Development, 7(46), 476–489. 
+ 
+Moldez, C., Crisanto, M. A., Gian, M., Cerdeña, R., Maranan, D. S., & Figueroa, R. 
+(2024). Innovation in Education: Developing and Assessing Gamification in the 
+University of the Philippines Open University Massive Open Online Courses. 
+ASEAN Journal of Open and Distance Learning (AJODL), 16(1), 27–42.  
+ 
+Musaddin, N. H., & Zulkifli, H. (2023). Kaedah-kaedah Pengajaran Guru Kelas al-
+Quran dan Fardu Ain (KAFA) dalam Mengajar Tilawah al-Quran. BITARA 
+International Journal of Civilizational Studies and Human Sciences, 6(2). 
+ 
+Othman, M. S., Shafeei, K., Bahuruddin Setambah, M. A., Shuib, T. R., & Abd Rahim, 
+M. M. (2021). Hubungan Pelaksanaan Gamifikasi Terhadap Penglibatan Pelajar 
+dalm Kurikulum Al-Quran dan Fardu Ain(KAFA). The Online Journal of Islamic 
+Education. 
+ 
+Pratiwi, R., Dian Kusuma Ningsih, E., & Arfahmi, K. (2022). PENGARUH MEDIA 
+AUDIO-VISUAL DALAM PEMBELAJARAN BAHASA ARAB TERHADAP 
+SISWA KELAS V DI MIS AL-HIDAYAH CK. SIWAYANG Journal: Publikasi 
+Ilmiah Bidang Pariwisata, Kebudayaan, Dan Antropologi, 1(2), 85–92. 
+ 
+Putri, A. A., & Arham, M. (2024). The Influence of Gadgets on EFL Student’s Desire 
+to Learn: Transcending the Digital Realm. Research and Innovation in Applied 
+Linguistics-Electronic Journal, 2(2), 124. 
+ 
+Ratinho, E., & Martins, C. (2023). The role of gamified learning strategies in student’s 
+motivation in high school and higher education: A systematic review. In Heliyon 
+(Vol. 9, Issue 8). Elsevier Ltd.  
+ 
+Ruzairi, R., & Jasmi, K. A. (2022). Akhlak dan Adab Generasi Muda Kini. 
+ResearchGate. 
+114 
+ 
+Samurah, N. O., & Che Soh, S. N. (2022). Gaya Pengajaran Guru, Pencapaian 
+Kurikulum Al-Syariah Bersepadu Dini dan Hubungannya denagan Akhlak 
+Pelajar. International Conference on Business Studies and Education. 
+ 
+Santonanda, A. L., Nathaniel, R., Putra, W. L., Anggreainy, M. S., Danaparamita, M., 
+& Elok Amalia, A. (2022). Online Craftsman Ordering Application Development 
+using Waterfall Methodology. International Conference on Computer and 
+Informatics Engineering, 150–155. 
+ 
+Schöbel, S. M., Janson, A., & Söllner, M. (2020). Capturing the complexity of 
+gamification elements: a holistic approach for analysing existing and deriving 
+novel gamification designs. European Journal of Information Systems, 29(6), 
+641–668. 
+ 
+Schwarz, L. (2023, July 19). What Is User Acceptance Testing (UAT)? A Complete 
+Guide. Oracle Netsuite. https://netsuite.com/portal/resource/articles/erp/user-
+acceptance-testing.shtml 
+ 
+Senarath, U. S. (2021). Waterfall Methodology, Prototyping and Agile Development. 
+ 
+Sharma, D., & Sharma, J. (2023). Evolution of Gamification, Its Implications, and Its 
+Statical Impact on the Society. Journal of Visual and Performing Arts, 4(2SE). 
+ 
+Smiderle, R., Rigo, S. J., Marques, L. B., Peçanha de Miranda Coelho, J. A., & Jaques, 
+P. A. (2020). The impact of gamification on students’ learning, engagement and 
+behavior based on their personality traits. Smart Learning Environments, 7(1). 
+ 
+Tekinerdogan, B., & Verdouw, C. (2020). Systems architecture design pattern catalog 
+for developing digital twins. Sensors, 20(18), 1–20. 
+ 
+Vergara, D., Antón-Sancho, Á., & Fernández-Arias, P. (2023). Player Profiles in 
+Science Education for Game-Based Digital Training Actions at the University 
+Level. International Journal of Information and Education Technology, 13(11), 
+1663–1671. 
+ 
+Vrcelj, A., Hoić-Božić, N., & Dlab, M. H. (2023). Use of Gamification in Primary and 
+Secondary Education: A Systematic Literature Review. International Journal of 
+Educational Methodology, 9(1), 13–27. 
+ 
+Wan Daud, W. A. A., Ghani, M. T. A., Rahman, A. A., Bin Mohamad Yusof, M. A., 
+& Amiruddin, A. Z. (2021). ARabic-Kafa: Design and development of 
+educational material for Arabic vocabulary with augmented reality technology. 
+Journal of Language and Linguistic Studies, 17(4), 1760–1772. 
+115 
+ 
+Yahya, N., & Maidin, S. S. (2022). The Waterfall Model with Agile Scrum as the 
+Hybrid Agile Model for the Software Engineering Team. International 
+Conference on Cyber and IT Service Management, CITSM 2022. 
+ 
+Yie, D. L., Sanmugam, M., Yahaya, W. A. J. W., & Khlaif, Z. N. (2024). The Impact 
+of Gamification Depth on Higher Educational Students’ Intrinsic Motivation and 
+Performance Levels. Higher Education for the Future, 11(2), 133–150. 
+ 
+Yusof, A., Atan, N. A., Harun, J., Rosli, M. S., & Majid, U. M. A. (2021). Students 
+Engagement and Development of Generic Skills in Gamified Hybrid Service-
+Learning Course. International Journal of Emerging Technologies in Learning, 
+16(24), 220–243. 
+  
+ 

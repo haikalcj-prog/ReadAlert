@@ -26,6 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _isLoading = false;
   bool _isLoadingMore = false;
   bool _hasMoreResults = false;
+  bool _hasSearched = false;
   String _searchMode = 'General';
   int _currentStartIndex = 0;
   String _lastQuery = '';
@@ -287,6 +288,7 @@ class _SearchScreenState extends State<SearchScreen> {
     _lastQuery = '';
     _hasMoreResults = false;
     _isLoadingMore = false;
+    _hasSearched = false;
   }
 
   void _changeSearchMode(String mode) {
@@ -351,6 +353,7 @@ class _SearchScreenState extends State<SearchScreen> {
     setState(() {
       _isLoading = true;
       _isLoadingMore = false;
+      _hasSearched = true;
       _searchResults.clear();
       _currentStartIndex = 0;
       _lastQuery = cleanQuery;
@@ -631,6 +634,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final bool showResults =
         _searchController.text.trim().isNotEmpty && _searchResults.isNotEmpty;
     final bool showNoResults =
+        _hasSearched &&
         _searchController.text.trim().isNotEmpty &&
         _searchResults.isEmpty &&
         !_isLoading;

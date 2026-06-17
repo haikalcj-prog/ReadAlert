@@ -2416,6 +2416,27 @@ class _XpBar extends StatelessWidget {
       children: [
         Row(
           children: [
+            // Info button
+            GestureDetector(
+              onTap: () => _showXpInfoSheet(context),
+              child: Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: theme.primary.withOpacity(0.12),
+                  border: Border.all(
+                    color: theme.primary.withOpacity(0.3),
+                  ),
+                ),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: theme.primary.withOpacity(0.7),
+                  size: 15,
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
             // Level chip
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -2493,6 +2514,268 @@ class _XpBar extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showXpInfoSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (_) => Container(
+        decoration: BoxDecoration(
+          color: Color.lerp(const Color(0xFF1A1F35), theme.bgMid, 0.6),
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(28),
+          ),
+          border: Border(
+            top: BorderSide(
+              color: theme.primary.withOpacity(0.5),
+              width: 1.5,
+            ),
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(24, 16, 24, 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle
+                Container(
+                  width: 44,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.22),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Title
+                Row(
+                  children: [
+                    Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(colors: theme.gradient),
+                        boxShadow: [
+                          BoxShadow(
+                            color: theme.glowColor.withOpacity(0.35),
+                            blurRadius: 16,
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.auto_awesome_rounded,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'How to Earn XP',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Text(
+                            'Level up and unlock new ranks!',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.45),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+
+                // XP Sources
+                _xpInfoTile(
+                  '📖',
+                  'Read Pages',
+                  '+1 XP per page read',
+                  'Every page you read earns you experience points.',
+                  theme,
+                ),
+                _xpInfoTile(
+                  '🔥',
+                  'Daily Streak',
+                  '+15–50 XP',
+                  '1–2 days: 15 XP · 3+ days: 20 XP · 7+ days: 25 XP · 30+ days: 30 XP · 100+ days: 50 XP.',
+                  theme,
+                ),
+                _xpInfoTile(
+                  '🏆',
+                  'Finish a Book',
+                  '+50 XP per book',
+                  'Complete a book to earn a big XP bonus.',
+                  theme,
+                ),
+                _xpInfoTile(
+                  '📚',
+                  'Add a Book',
+                  '+5 XP per book',
+                  'Add new books to your library to earn XP.',
+                  theme,
+                ),
+                _xpInfoTile(
+                  '⭐',
+                  'Complete Quests',
+                  'Varies',
+                  'Daily and weekly quests give bonus XP when claimed.',
+                  theme,
+                ),
+                _xpInfoTile(
+                  '🏅',
+                  'Unlock Achievements',
+                  'Varies',
+                  'Earn XP rewards when you unlock new achievements.',
+                  theme,
+                ),
+
+                const SizedBox(height: 16),
+
+                // Ranks info
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    gradient: LinearGradient(
+                      colors: [
+                        theme.primary.withOpacity(0.12),
+                        theme.secondary.withOpacity(0.06),
+                      ],
+                    ),
+                    border: Border.all(
+                      color: theme.primary.withOpacity(0.2),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.military_tech_rounded,
+                        color: theme.primary,
+                        size: 28,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '10 Ranks to Master',
+                              style: TextStyle(
+                                color: theme.primary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'Scribe → Chronicler → Keeper → Elder → Seer → Oracle → Ancient → Legendary → Mythical → Primordial',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.4),
+                                fontSize: 11,
+                                height: 1.4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget _xpInfoTile(
+    String emoji,
+    String title,
+    String xpAmount,
+    String description,
+    _TierTheme theme,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.04),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withOpacity(0.06)),
+        ),
+        child: Row(
+          children: [
+            Text(emoji, style: const TextStyle(fontSize: 24)),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.4),
+                      fontSize: 11,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: theme.primary.withOpacity(0.15),
+                border: Border.all(
+                  color: theme.primary.withOpacity(0.3),
+                ),
+              ),
+              child: Text(
+                xpAmount,
+                style: TextStyle(
+                  color: theme.primary,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

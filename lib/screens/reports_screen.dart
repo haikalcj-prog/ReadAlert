@@ -325,17 +325,38 @@ class _ReportsScreenState extends State<ReportsScreen>
   // ════════════════════════════════════════════════════════
   //  MONTHLY TAB
   // ════════════════════════════════════════════════════════
+
+  /// Returns how many calendar weeks (5 or 6) the selected month spans.
+  /// A calendar week starts on Monday. If the last day of the month falls
+  /// in a 6th week row, return 6; otherwise 5.
+  int _weeksInMonth(DateTime monthStart) {
+    final firstDayOfMonth = DateTime(monthStart.year, monthStart.month, 1);
+    final lastDayOfMonth = DateTime(monthStart.year, monthStart.month + 1, 0);
+    final firstWeekStart = firstDayOfMonth.subtract(
+      Duration(days: firstDayOfMonth.weekday - 1),
+    );
+    final lastWeekIndex =
+        (lastDayOfMonth.difference(firstWeekStart).inDays ~/ 7) + 1;
+    return lastWeekIndex.clamp(4, 6);
+  }
+
   Widget _buildMonthly() {
     final Map<int, int> raw = Map<int, int>.from(
       _monthlyReportStats['monthlyPages'] ?? widget.stats['monthlyPages'] ?? {},
     );
-    final data = [for (int i = 1; i <= 6; i++) raw[i] ?? 0];
+
+    // Calculate the actual number of calendar weeks for the selected month
+    final now = DateTime.now();
+    final targetMonth = DateTime(now.year, now.month + _monthOffset, 1);
+    final int weekCount = _weeksInMonth(targetMonth);
+
+    final data = [for (int i = 1; i <= weekCount; i++) raw[i] ?? 0];
+    final labels = [for (int i = 1; i <= weekCount; i++) 'W$i'];
     final total = data.fold(0, (a, b) => a + b);
     final avg = data.isEmpty ? 0 : total ~/ data.length;
     final nowW = _monthOffset == 0
         ? _calendarWeekIndexInMonth(DateTime.now()) - 1
         : -1;
-    const labels = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'];
     final bestIdx = _bestIndex(data);
 
     return _tabScroll(
