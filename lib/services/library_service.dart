@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import 'xp_service.dart';
+import 'level_up_service.dart';
 
 class LibraryService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -105,12 +106,19 @@ class LibraryService {
         ? await XpService.updateStreak()
         : false;
 
-    await XpService.awardXp(
+    final xpResult = await XpService.awardXp(
       pagesRead: initialProgress,
       isNewDay: isNewDay,
       justFinished: status == 'Finished',
       addedToLibrary: true,
     );
+
+    if (xpResult['leveledUp'] == true) {
+      LevelUpService.showLevelUp(
+        xpResult['newLevel'] as int,
+        xpResult['newTitle'] as String,
+      );
+    }
   }
 
   static Future<void> addManualBook({
@@ -191,12 +199,19 @@ class LibraryService {
         ? await XpService.updateStreak()
         : false;
 
-    await XpService.awardXp(
+    final xpResult = await XpService.awardXp(
       pagesRead: initialProgress,
       isNewDay: isNewDay,
       justFinished: status == 'Finished',
       addedToLibrary: true,
     );
+
+    if (xpResult['leveledUp'] == true) {
+      LevelUpService.showLevelUp(
+        xpResult['newLevel'] as int,
+        xpResult['newTitle'] as String,
+      );
+    }
   }
 
   static Future<void> removeBook(String bookId) async {
@@ -381,7 +396,14 @@ class LibraryService {
         final userSnap = await transaction.get(userRef);
         final int currentXp = parseInt((userSnap.data() ?? {})['totalXp']);
         final int newTotalXp = (currentXp + xpDifference).clamp(0, 99999999);
+        final oldLevelData = XpService.calculateLevel(currentXp);
         final newLevelData = XpService.calculateLevel(newTotalXp);
+
+        if ((newLevelData['level'] as int) > (oldLevelData['level'] as int)) {
+          leveledUp = true;
+          newLevel = newLevelData['level'] as int;
+          newTitle = newLevelData['title'] as String;
+        }
 
         transaction.update(bookRef, safeUpdates);
         transaction.set(userRef, {

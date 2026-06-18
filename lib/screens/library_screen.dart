@@ -1024,6 +1024,27 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  if (data['status'] == 'Finished') ...[
+                    const Spacer(),
+                    Row(
+                      children: [
+                        Text(
+                          '${data['rating'] ?? 0}',
+                          style: const TextStyle(
+                            color: Colors.amber,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        const Icon(
+                          Icons.star_rounded,
+                          color: Colors.amber,
+                          size: 14,
+                        ),
+                      ],
+                    ),
+                  ],
                   if (showProgress) ...[
                     const Spacer(),
                     // Progress bar
@@ -1665,6 +1686,12 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                                           fontSize: 10,
                                         ),
                                       ),
+                                      const SizedBox(height: 4),
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: _buildStatusBadge(_normalizeBookStatus(bData['status'])),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -1737,6 +1764,8 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
+                                    const SizedBox(height: 6),
+                                    _buildStatusBadge(_normalizeBookStatus(bData['status'])),
                                   ],
                                 ),
                               ),
@@ -2746,14 +2775,78 @@ class BookVerticalListScreen extends StatefulWidget {
 
 class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
   String _searchQuery = '';
+  String _sortBy = 'Title';
 
   @override
   Widget build(BuildContext context) {
-    final filteredBooks = widget.books.where((book) {
-      final data = book.data() as Map<String, dynamic>? ?? {};
-      return (data['title'] ?? '').toString().toLowerCase().contains(_searchQuery) ||
-          (data['authors'] ?? '').toString().toLowerCase().contains(_searchQuery);
-    }).toList();
+    List<String> sortOptions = ['Title'];
+    if (widget.title == 'Finished') {
+      sortOptions.addAll(['Rating High to Low', 'Rating Low to High']);
+    } else if (widget.title == 'Reading') {
+      sortOptions.addAll(['Progress High to Low', 'Progress Low to High']);
+    }
+
+    return StreamBuilder<QuerySnapshot>(
+      stream: LibraryService.getLibraryStream(),
+      builder: (context, snapshot) {
+        List<QueryDocumentSnapshot> freshBooks = widget.books;
+        if (snapshot.hasData) {
+          final allDocsMap = { for (var d in snapshot.data!.docs) d.id: d };
+          freshBooks = widget.books.map((b) => allDocsMap[b.id]).whereType<QueryDocumentSnapshot>().toList();
+        }
+
+        final filteredBooks = freshBooks.where((book) {
+          final data = book.data() as Map<String, dynamic>? ?? {};
+          return (data['title'] ?? '').toString().toLowerCase().contains(_searchQuery) ||
+              (data['authors'] ?? '').toString().toLowerCase().contains(_searchQuery);
+        }).toList();
+
+        if (_sortBy == 'Title') {
+          filteredBooks.sort((a, b) {
+            final dataA = a.data() as Map<String, dynamic>? ?? {};
+            final dataB = b.data() as Map<String, dynamic>? ?? {};
+            return (dataA['title'] ?? '').toString().toLowerCase().compareTo(
+                (dataB['title'] ?? '').toString().toLowerCase());
+          });
+        } else if (_sortBy == 'Rating High to Low') {
+          filteredBooks.sort((a, b) {
+            final ratingA = (a.data() as Map<String, dynamic>?)?['rating'] ?? 0;
+            final ratingB = (b.data() as Map<String, dynamic>?)?['rating'] ?? 0;
+            return ratingB.compareTo(ratingA);
+          });
+        } else if (_sortBy == 'Rating Low to High') {
+          filteredBooks.sort((a, b) {
+            final ratingA = (a.data() as Map<String, dynamic>?)?['rating'] ?? 0;
+            final ratingB = (b.data() as Map<String, dynamic>?)?['rating'] ?? 0;
+            return ratingA.compareTo(ratingB);
+          });
+        } else if (_sortBy == 'Progress High to Low') {
+          filteredBooks.sort((a, b) {
+            final dataA = a.data() as Map<String, dynamic>? ?? {};
+            final dataB = b.data() as Map<String, dynamic>? ?? {};
+            int pageCountA = dataA['pageCount'] is int ? dataA['pageCount'] : 1;
+            if (pageCountA <= 0) pageCountA = 1;
+            int pageCountB = dataB['pageCount'] is int ? dataB['pageCount'] : 1;
+            if (pageCountB <= 0) pageCountB = 1;
+            
+            double progressA = (dataA['currentPage'] is int ? dataA['currentPage'] : 0) / pageCountA;
+            double progressB = (dataB['currentPage'] is int ? dataB['currentPage'] : 0) / pageCountB;
+            return progressB.compareTo(progressA);
+          });
+        } else if (_sortBy == 'Progress Low to High') {
+          filteredBooks.sort((a, b) {
+            final dataA = a.data() as Map<String, dynamic>? ?? {};
+            final dataB = b.data() as Map<String, dynamic>? ?? {};
+            int pageCountA = dataA['pageCount'] is int ? dataA['pageCount'] : 1;
+            if (pageCountA <= 0) pageCountA = 1;
+            int pageCountB = dataB['pageCount'] is int ? dataB['pageCount'] : 1;
+            if (pageCountB <= 0) pageCountB = 1;
+            
+            double progressA = (dataA['currentPage'] is int ? dataA['currentPage'] : 0) / pageCountA;
+            double progressB = (dataB['currentPage'] is int ? dataB['currentPage'] : 0) / pageCountB;
+            return progressA.compareTo(progressB);
+          });
+        }
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -2793,6 +2886,30 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
             ),
           ],
         ),
+        actions: [
+          if (sortOptions.length > 1)
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.sort_rounded, color: Colors.white),
+              color: const Color(0xFF1F2937),
+              onSelected: (String result) {
+                setState(() {
+                  _sortBy = result;
+                });
+              },
+              itemBuilder: (BuildContext context) => sortOptions
+                  .map((option) => PopupMenuItem<String>(
+                        value: option,
+                        child: Text(
+                          option,
+                          style: TextStyle(
+                            color: _sortBy == option ? widget.accentColor : Colors.white,
+                            fontWeight: _sortBy == option ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
+        ],
       ),
       body: Column(
         children: [
@@ -2835,6 +2952,22 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
                     itemBuilder: (context, index) {
                       final data = filteredBooks[index].data() as Map<String, dynamic>? ?? {};
                       final status = _normalizeBookStatus(data['status']);
+                      
+                      String pagesText = '${data['pageCount']?.toString() ?? '?'} pages';
+                      String? extraBadgeText;
+                      IconData? extraBadgeIcon;
+                      
+                      if (status == 'Finished') {
+                        extraBadgeText = '${data['rating'] ?? 0} ★';
+                      } else if (status == 'Reading') {
+                        int pageC = data['pageCount'] is int ? data['pageCount'] : 1;
+                        if (pageC <= 0) pageC = 1;
+                        int currentP = data['currentPage'] is int ? data['currentPage'] : 0;
+                        int pct = (currentP / pageC * 100).clamp(0, 100).toInt();
+                        pagesText = '$currentP / $pageC pages';
+                        extraBadgeText = '$pct%';
+                        extraBadgeIcon = Icons.data_usage_rounded;
+                      }
                       return GestureDetector(
                         onTap: () => Navigator.push(
                           context,
@@ -2914,7 +3047,7 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
                                               Icon(Icons.insert_drive_file_rounded, color: widget.accentColor, size: 11),
                                               const SizedBox(width: 4),
                                               Text(
-                                                '${data['pageCount']?.toString() ?? '?'} pages',
+                                                pagesText,
                                                 style: TextStyle(
                                                   color: widget.accentColor,
                                                   fontWeight: FontWeight.w800,
@@ -2924,6 +3057,32 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
                                             ],
                                           ),
                                         ),
+                                        if (extraBadgeText != null)
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+                                            decoration: BoxDecoration(
+                                              color: widget.accentColor.withOpacity(0.10),
+                                              borderRadius: BorderRadius.circular(999),
+                                              border: Border.all(color: widget.accentColor.withOpacity(0.2)),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                if (extraBadgeIcon != null) ...[
+                                                  Icon(extraBadgeIcon, color: widget.accentColor, size: 11),
+                                                  const SizedBox(width: 4),
+                                                ],
+                                                Text(
+                                                  extraBadgeText,
+                                                  style: TextStyle(
+                                                    color: widget.accentColor,
+                                                    fontWeight: FontWeight.w800,
+                                                    fontSize: 11,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                       ],
                                     ),
                                   ],
@@ -2938,6 +3097,8 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
           ),
         ],
       ),
+    );
+      },
     );
   }
 }

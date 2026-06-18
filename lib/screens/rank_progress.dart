@@ -221,6 +221,35 @@ class _RankProgressScreenState extends State<RankProgressScreen>
     super.dispose();
   }
 
+  Future<void> _equipRankBook(BuildContext context, int tier) async {
+    final messenger = ScaffoldMessenger.of(context);
+
+    try {
+      final equipped = await XpService.equipRankBook(tier);
+      if (!mounted) return;
+
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            equipped
+                ? 'Equipped ${kRankBookNames[tier]}.'
+                : 'This rank book is still locked.',
+          ),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } catch (_) {
+      if (!mounted) return;
+
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text('Could not equip that rank book. Please try again.'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -240,6 +269,11 @@ class _RankProgressScreenState extends State<RankProgressScreen>
           final int currentTier = levelData['tierIndex'] as int;
           final double tierProg = levelData['progress'] as double;
           final int currentLevel = levelData['level'] as int;
+          final int equippedRankBookIndex =
+              XpService.resolveEquippedRankBookIndex(
+                d?['equippedRankBookIndex'],
+                currentTier,
+              );
 
           return Stack(
             children: [
@@ -315,6 +349,7 @@ class _RankProgressScreenState extends State<RankProgressScreen>
                           currentLevel: currentLevel,
                           totalXp: totalXp,
                           tierProgress: i == currentTier ? tierProg : 0,
+                          equippedRankBookIndex: equippedRankBookIndex,
                         ),
                         childCount: 10,
                       ),
@@ -536,10 +571,12 @@ class _RankProgressScreenState extends State<RankProgressScreen>
     required int currentLevel,
     required int totalXp,
     required double tierProgress,
+    required int equippedRankBookIndex,
   }) {
     final bool isUnlocked = tier <= currentTier;
     final bool isCurrent = tier == currentTier;
     final bool isNext = tier == currentTier + 1;
+    final bool isEquipped = isUnlocked && tier == equippedRankBookIndex;
     final t = _tiers[tier];
 
     return GestureDetector(
@@ -730,6 +767,17 @@ class _RankProgressScreenState extends State<RankProgressScreen>
                               ),
                             ],
                           ),
+
+                          if (isUnlocked) ...[
+                            const SizedBox(height: 10),
+                            _EquipRankBookButton(
+                              isEquipped: isEquipped,
+                              theme: t,
+                              onPressed: isEquipped
+                                  ? null
+                                  : () => _equipRankBook(context, tier),
+                            ),
+                          ],
 
                           // Current tier progress bar
                           if (isCurrent) ...[
@@ -947,8 +995,80 @@ class _TierBadgeWidget extends StatelessWidget {
 }
 
 // ════════════════════════════════════════════════════════════
-//  STATUS CHIP
+//  EQUIP BUTTON + STATUS CHIP
 // ════════════════════════════════════════════════════════════
+class _EquipRankBookButton extends StatelessWidget {
+  final bool isEquipped;
+  final _T theme;
+  final VoidCallback? onPressed;
+
+  const _EquipRankBookButton({
+    required this.isEquipped,
+    required this.theme,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isEquipped) {
+      return Container(
+        height: 30,
+        padding: const EdgeInsets.symmetric(horizontal: 11),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: theme.gradient),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: theme.glowColor.withValues(alpha: 0.24),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.check_rounded, color: Colors.white, size: 14),
+            SizedBox(width: 5),
+            Text(
+              'Equipped',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return SizedBox(
+      height: 30,
+      child: OutlinedButton(
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 11),
+          minimumSize: const Size(0, 30),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          side: BorderSide(color: theme.primary.withValues(alpha: 0.45)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          backgroundColor: theme.primary.withValues(alpha: 0.08),
+        ),
+        child: Text(
+          'Equip',
+          style: TextStyle(
+            color: theme.primary,
+            fontSize: 11,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _StatusChip extends StatelessWidget {
   final bool isUnlocked, isCurrent, isNext;
   final _T theme;

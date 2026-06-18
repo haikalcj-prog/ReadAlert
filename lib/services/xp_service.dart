@@ -68,7 +68,7 @@ class XpService {
 
     final int xpIntoTier = totalXp - tierStarts[tierIndex];
     final int step = tierSteps[tierIndex];
-    
+
     int levelsGained = xpIntoTier ~/ step;
     if (tierIndex < tierStarts.length - 1) {
       levelsGained = levelsGained.clamp(0, 9);
@@ -98,6 +98,61 @@ class XpService {
   static String getTitleFromLevel(int level) {
     final int tierIndex = ((level - 1) ~/ 10).clamp(0, 9);
     return tierNames[tierIndex];
+  }
+
+  static int? _tryParseInt(dynamic value) {
+    if (value is num) return value.toInt();
+    if (value is String) return int.tryParse(value);
+    return null;
+  }
+
+  static int _clampTierIndex(int tierIndex) {
+    return tierIndex.clamp(0, tierStarts.length - 1).toInt();
+  }
+
+  /// Display-only rank book choice.
+  ///
+  /// If no book has been explicitly equipped, or the saved book is no longer
+  /// unlocked, the UI falls back to the highest rank unlocked by XP.
+  static int resolveEquippedRankBookIndex(
+    dynamic equippedRankBookIndex,
+    int highestUnlockedTier,
+  ) {
+    final fallbackTier = _clampTierIndex(highestUnlockedTier);
+    final selectedTier = _tryParseInt(equippedRankBookIndex);
+
+    if (selectedTier == null ||
+        selectedTier < 0 ||
+        selectedTier >= tierStarts.length ||
+        selectedTier > fallbackTier) {
+      return fallbackTier;
+    }
+
+    return selectedTier;
+  }
+
+  static Future<bool> equipRankBook(int tierIndex) async {
+    if (tierIndex < 0 || tierIndex >= tierStarts.length) return false;
+
+    final ref = _firestore.collection('users').doc(_uid);
+    bool equipped = false;
+
+    await _firestore.runTransaction((tx) async {
+      final snap = await tx.get(ref);
+      final data = snap.data() ?? {};
+      final totalXp =
+          _tryParseInt(data['totalXp']) ?? _tryParseInt(data['points']) ?? 0;
+      final currentTier = calculateLevel(totalXp)['tierIndex'] as int;
+
+      if (tierIndex > currentTier) return;
+
+      tx.set(ref, {
+        'equippedRankBookIndex': tierIndex,
+      }, SetOptions(merge: true));
+      equipped = true;
+    });
+
+    return equipped;
   }
 
   static double getLevelProgress(int totalXp) =>

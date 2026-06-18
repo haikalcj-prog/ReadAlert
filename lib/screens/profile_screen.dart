@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import '../rank_book_names.dart';
 import '../services/stats_service.dart';
 import '../services/xp_service.dart';
 import '../services/notification_service.dart';
@@ -505,9 +506,6 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget _buildSliverHeader() {
     final claimed = List<String>.from(_stats['claimedAchievements'] ?? []);
     final allAchievements = StatsService.getAllAchievements();
-    final claimedBadges = allAchievements
-        .where((a) => claimed.contains(a['id']))
-        .toList();
 
     return SliverToBoxAdapter(
       child: StreamBuilder<DocumentSnapshot>(
@@ -527,10 +525,17 @@ class _ProfileScreenState extends State<ProfileScreen>
 
           final int level = levelData['level'] as int;
           final int tierIndex = levelData['tierIndex'] as int;
-          final colors = tierGradients[tierIndex];
           final double prog = levelData['progress'] as double;
           final int xpNeeded = levelData['xpNeeded'] as int;
           final String title = levelData['title'] as String;
+          final List<String> selectedBadges = List<String>.from(
+            data?['selectedBadges'] ?? [],
+          );
+          final int rankBookTier = XpService.resolveEquippedRankBookIndex(
+            data?['equippedRankBookIndex'],
+            tierIndex,
+          );
+          final colors = tierGradients[rankBookTier];
 
           return Container(
             decoration: BoxDecoration(
@@ -600,13 +605,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                     ),
                     const SizedBox(height: 10),
                     _rankPill(title, colors),
+                    const SizedBox(height: 12),
+                    _rankBookPreview(rankBookTier, colors),
                     const SizedBox(height: 16),
                     _xpBar(prog, xpNeeded, liveXp, colors),
                     const SizedBox(height: 20),
-                    if (claimedBadges.isNotEmpty) ...[
-                      _badgeCollectionRow(claimedBadges),
-                      const SizedBox(height: 20),
-                    ],
+                    _badgeCollectionRow(
+                      allAchievements,
+                      claimed,
+                      selectedBadges,
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -791,6 +800,42 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
+  Widget _rankBookPreview(int rankBookTier, List<Color> colors) {
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 260),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: colors[0].withValues(alpha: 0.28)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/ranks/rank_$rankBookTier.png',
+            width: 34,
+            height: 34,
+            fit: BoxFit.contain,
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              kRankBookNames[rankBookTier],
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: colors[0],
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _xpBar(
     double progress,
     int xpNeeded,
@@ -905,11 +950,14 @@ class _ProfileScreenState extends State<ProfileScreen>
     }
   }
 
-  Future<void> _showBadgeInfoDialog(Map<String, dynamic> badge) async {
-    final title = badge['title']?.toString() ?? 'Badge';
+  void _showBadgeInfoDialog(
+    Map<String, dynamic> badge, {
+    bool isLocked = false,
+  }) {
+    final title = badge['title']?.toString() ?? 'Unknown Badge';
     final requirement = _badgeRequirementText(badge);
 
-    await showDialog(
+    showDialog(
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: cardColor,
@@ -986,69 +1034,382 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  Widget _badgeCollectionRow(List<Map<String, dynamic>> badges) {
+  Widget _badgeCollectionRow(
+    List<Map<String, dynamic>> allBadges,
+    List<String> claimedIds,
+    List<String> selectedIds,
+  ) {
+    List<Map<String, dynamic>> displayBadges = [];
+
+    if (selectedIds.isNotEmpty) {
+      displayBadges = allBadges
+          .where((a) => selectedIds.contains(a['id']))
+          .toList();
+      if (displayBadges.length > 5) {
+        displayBadges = displayBadges.sublist(0, 5);
+      }
+    } else {
+      final claimedBadges = allBadges
+          .where((a) => claimedIds.contains(a['id']))
+          .toList();
+      displayBadges = claimedBadges.take(5).toList();
+      if (displayBadges.length < 5) {
+        final lockedBadges = allBadges
+            .where((a) => !claimedIds.contains(a['id']))
+            .take(5 - displayBadges.length);
+        displayBadges.addAll(lockedBadges);
+      }
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 4, bottom: 10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(Icons.military_tech_rounded, color: gold, size: 14),
-              const SizedBox(width: 6),
-              Text(
-                'BADGE COLLECTION',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.4),
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.2,
+              Row(
+                children: [
+                  const Icon(
+                    Icons.military_tech_rounded,
+                    color: gold,
+                    size: 14,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'BADGE COLLECTION',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.4),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ],
+              ),
+              TextButton(
+                onPressed: () =>
+                    _showAllBadgesModal(allBadges, claimedIds, selectedIds),
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                child: const Text(
+                  'Show All',
+                  style: TextStyle(
+                    color: gold,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(
-          height: 78,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: badges.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
-            itemBuilder: (_, i) {
-              final badge = badges[i];
-              return GestureDetector(
-                onTap: () => _showBadgeInfoDialog(badge),
-                onLongPress: () => _showBadgeInfoDialog(badge),
-                child: Container(
-                  width: 68,
-                  decoration: BoxDecoration(
-                    color: cardColor,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withOpacity(0.08)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: gold.withOpacity(0.06),
-                        blurRadius: 12,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: displayBadges.map((badge) {
+            final isLocked = !claimedIds.contains(badge['id']);
+            Widget badgeIcon = _achievementAssetWidget(
+              badge,
+              size: 38,
+              fallbackSize: 24,
+            );
+            if (isLocked) {
+              badgeIcon = Opacity(
+                opacity: 0.3,
+                child: ColorFiltered(
+                  colorFilter: const ColorFilter.mode(
+                    Colors.grey,
+                    BlendMode.srcATop,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _achievementAssetWidget(
-                        badge,
-                        size: 42,
-                        fallbackSize: 27,
-                      ),
-                    ],
-                  ),
+                  child: badgeIcon,
                 ),
               );
-            },
-          ),
+            }
+
+            return GestureDetector(
+              onTap: () => _showBadgeInfoDialog(badge, isLocked: isLocked),
+              onLongPress: () =>
+                  _showBadgeInfoDialog(badge, isLocked: isLocked),
+              child: Container(
+                width: 58,
+                height: 68,
+                decoration: BoxDecoration(
+                  color: cardColor,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: isLocked
+                        ? Colors.white.withOpacity(0.02)
+                        : Colors.white.withOpacity(0.08),
+                  ),
+                  boxShadow: isLocked
+                      ? []
+                      : [
+                          BoxShadow(
+                            color: gold.withOpacity(0.06),
+                            blurRadius: 12,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [badgeIcon],
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ],
+    );
+  }
+
+  void _showAllBadgesModal(
+    List<Map<String, dynamic>> allBadges,
+    List<String> claimedIds,
+    List<String> initialSelectedIds,
+  ) {
+    List<String> selectedIds = List.from(initialSelectedIds);
+    bool isSelectionMode = false;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.75,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: bgColor,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(24),
+                ),
+                border: Border.all(color: Colors.white.withOpacity(0.05)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Badge Collection',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(
+                          Icons.close_rounded,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${claimedIds.length} of ${allBadges.length} unlocked',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.5),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          if (isSelectionMode) {
+                            await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(_user?.uid)
+                                .update({'selectedBadges': selectedIds});
+                            setModalState(() => isSelectionMode = false);
+                            if (mounted) setState(() {});
+                          } else {
+                            setModalState(() => isSelectionMode = true);
+                          }
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: isSelectionMode
+                              ? accent.withOpacity(0.2)
+                              : Colors.transparent,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                          isSelectionMode
+                              ? 'Save Selection'
+                              : 'Edit Profile Badges',
+                          style: TextStyle(
+                            color: isSelectionMode ? accent : gold,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (isSelectionMode) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      'Tap badges to select up to 5 to display on your profile.',
+                      style: TextStyle(
+                        color: accent.withOpacity(0.8),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            childAspectRatio: 1.15,
+                          ),
+                      itemCount: allBadges.length,
+                      itemBuilder: (context, index) {
+                        final badge = allBadges[index];
+                        final String badgeId = badge['id'];
+                        final isLocked = !claimedIds.contains(badgeId);
+                        final isSelected = selectedIds.contains(badgeId);
+
+                        Widget badgeIcon = _achievementAssetWidget(
+                          badge,
+                          size: 56,
+                          fallbackSize: 36,
+                        );
+
+                        if (isLocked) {
+                          badgeIcon = Opacity(
+                            opacity: 0.3,
+                            child: ColorFiltered(
+                              colorFilter: const ColorFilter.mode(
+                                Colors.grey,
+                                BlendMode.srcATop,
+                              ),
+                              child: badgeIcon,
+                            ),
+                          );
+                        }
+
+                        return GestureDetector(
+                          onTap: () {
+                            if (isSelectionMode) {
+                              if (isLocked) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "You haven't unlocked this badge yet!",
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
+                              if (isSelected) {
+                                setModalState(
+                                  () => selectedIds.remove(badgeId),
+                                );
+                              } else {
+                                if (selectedIds.length >= 5) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'You can only display up to 5 badges on your profile.',
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  setModalState(() => selectedIds.add(badgeId));
+                                }
+                              }
+                            } else {
+                              _showBadgeInfoDialog(badge, isLocked: isLocked);
+                            }
+                          },
+                          onLongPress: () =>
+                              _showBadgeInfoDialog(badge, isLocked: isLocked),
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: cardColor,
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: isSelectionMode && isSelected
+                                        ? accent
+                                        : (isLocked
+                                              ? Colors.white.withOpacity(0.02)
+                                              : Colors.white.withOpacity(0.08)),
+                                    width: isSelectionMode && isSelected
+                                        ? 2
+                                        : 1,
+                                  ),
+                                  boxShadow: isLocked
+                                      ? []
+                                      : [
+                                          BoxShadow(
+                                            color: gold.withOpacity(0.06),
+                                            blurRadius: 12,
+                                            offset: const Offset(0, 6),
+                                          ),
+                                        ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [badgeIcon],
+                                ),
+                              ),
+                              if (isSelectionMode && isSelected)
+                                Positioned(
+                                  top: 4,
+                                  right: 4,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(2),
+                                    decoration: const BoxDecoration(
+                                      color: accent,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 12,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -1186,7 +1547,11 @@ class _ProfileScreenState extends State<ProfileScreen>
 
         final levelData = XpService.calculateLevel(liveXp);
         final int tierIdx = levelData['tierIndex'] as int;
-        final colors = tierGradients[tierIdx];
+        final int rankBookTier = XpService.resolveEquippedRankBookIndex(
+          data?['equippedRankBookIndex'],
+          tierIdx,
+        );
+        final colors = tierGradients[rankBookTier];
         final int currentLevel = levelData['level'] as int;
 
         return Padding(
@@ -1239,7 +1604,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(
-                  onPressed: () async => await FirebaseAuth.instance.signOut(),
+                  onPressed: () => _showLogoutConfirmation(colors),
                   icon: const Icon(
                     Icons.logout_rounded,
                     color: Colors.redAccent,
@@ -1264,6 +1629,173 @@ class _ProfileScreenState extends State<ProfileScreen>
         );
       },
     );
+  }
+
+  Future<void> _showLogoutConfirmation(List<Color> colors) async {
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.72),
+      builder: (dialogContext) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 26),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(28),
+              gradient: LinearGradient(
+                colors: [
+                  Color.lerp(cardColor, colors[0], 0.16)!,
+                  Color.lerp(bgColor, colors[1], 0.10)!,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(color: colors[0].withOpacity(0.28)),
+              boxShadow: [
+                BoxShadow(
+                  color: colors[0].withOpacity(0.20),
+                  blurRadius: 34,
+                  offset: const Offset(0, 18),
+                ),
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.35),
+                  blurRadius: 22,
+                  offset: const Offset(0, 12),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(28),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: -34,
+                    right: -24,
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colors[0].withOpacity(0.10),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 26, 24, 22),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 64,
+                          height: 64,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(colors: colors),
+                            boxShadow: [
+                              BoxShadow(
+                                color: colors[0].withOpacity(0.38),
+                                blurRadius: 20,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.logout_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        const SizedBox(height: 18),
+                        const Text(
+                          'Log out?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: -0.2,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Your reading progress is saved. You can sign back in anytime.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.62),
+                            fontSize: 14,
+                            height: 1.35,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () =>
+                                    Navigator.pop(dialogContext, false),
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 13,
+                                  ),
+                                  side: BorderSide(
+                                    color: Colors.white.withOpacity(0.16),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Stay',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.82),
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: ElevatedButton.icon(
+                                onPressed: () =>
+                                    Navigator.pop(dialogContext, true),
+                                icon: const Icon(
+                                  Icons.check_rounded,
+                                  size: 17,
+                                  color: Colors.white,
+                                ),
+                                label: const Text('Log Out'),
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 13,
+                                  ),
+                                  backgroundColor: Colors.redAccent,
+                                  foregroundColor: Colors.white,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    if (shouldLogout == true) {
+      await FirebaseAuth.instance.signOut();
+    }
   }
 
   Widget _sectionLabel(String text) => Text(

@@ -8,148 +8,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../rank_book_names.dart';
 import '../services/xp_service.dart';
 import '../services/quest_service.dart';
+import '../services/level_up_service.dart';
+import '../widgets/level_up_dialog.dart';
 import 'book_detail_screen.dart';
 
-// ════════════════════════════════════════════════════════════
-//  TIER THEME — one source of truth for every tier's colours,
-//  background style, badge glow, and accent tint.
-// ════════════════════════════════════════════════════════════
-class _TierTheme {
-  final String name;
-  final Color primary;
-  final Color secondary;
-  final Color bgDark; // darkest bg colour
-  final Color bgMid; // mid bg colour (used in gradient)
-  final Color glowColor; // badge drop-shadow colour
-  final double glowRadius;
-  final double glowSpread;
-
-  const _TierTheme({
-    required this.name,
-    required this.primary,
-    required this.secondary,
-    required this.bgDark,
-    required this.bgMid,
-    required this.glowColor,
-    this.glowRadius = 40,
-    this.glowSpread = 6,
-  });
-
-  List<Color> get gradient => [primary, secondary];
-}
-
-const List<_TierTheme> kTierThemes = [
-  // 0 – Scribe (silver/slate)
-  _TierTheme(
-    name: 'Scribe',
-    primary: Color(0xFFE2E8F0),
-    secondary: Color(0xFF94A3B8),
-    bgDark: Color(0xFF0D1117),
-    bgMid: Color(0xFF161B26),
-    glowColor: Color(0xFF94A3B8),
-    glowRadius: 28,
-    glowSpread: 4,
-  ),
-  // 1 – Chronicler (emerald)
-  _TierTheme(
-    name: 'Chronicler',
-    primary: Color(0xFF86EFAC),
-    secondary: Color(0xFF059669),
-    bgDark: Color(0xFF051A10),
-    bgMid: Color(0xFF0C2A1A),
-    glowColor: Color(0xFF34D399),
-    glowRadius: 36,
-    glowSpread: 6,
-  ),
-  // 2 – Keeper (sky blue)
-  _TierTheme(
-    name: 'Keeper',
-    primary: Color(0xFF7DD3FC),
-    secondary: Color(0xFF0284C7),
-    bgDark: Color(0xFF050F1A),
-    bgMid: Color(0xFF0A1F35),
-    glowColor: Color(0xFF38BDF8),
-    glowRadius: 38,
-    glowSpread: 6,
-  ),
-  // 3 – Elder (violet)
-  _TierTheme(
-    name: 'Elder',
-    primary: Color(0xFFD8B4FE),
-    secondary: Color(0xFF7C3AED),
-    bgDark: Color(0xFF0D0520),
-    bgMid: Color(0xFF160A38),
-    glowColor: Color(0xFFA78BFA),
-    glowRadius: 42,
-    glowSpread: 8,
-  ),
-  // 4 – Seer (crimson)
-  _TierTheme(
-    name: 'Seer',
-    primary: Color(0xFFFCA5A5),
-    secondary: Color(0xFFE11D48),
-    bgDark: Color(0xFF1A0508),
-    bgMid: Color(0xFF2D0A10),
-    glowColor: Color(0xFFF87171),
-    glowRadius: 40,
-    glowSpread: 7,
-  ),
-  // 5 – Oracle (gold/amber) — matches rank_5 golden wings
-  _TierTheme(
-    name: 'Oracle',
-    primary: Color(0xFFFFD700),
-    secondary: Color(0xFFFF8C00),
-    bgDark: Color(0xFF1A1200),
-    bgMid: Color(0xFF2E1F00),
-    glowColor: Color(0xFFFBBF24),
-    glowRadius: 50,
-    glowSpread: 10,
-  ),
-  // 6 – Ancient (teal/cyan) — matches rank_6 teal star
-  _TierTheme(
-    name: 'Ancient',
-    primary: Color(0xFF67E8F9),
-    secondary: Color(0xFF0F766E),
-    bgDark: Color(0xFF02111A),
-    bgMid: Color(0xFF041E2C),
-    glowColor: Color(0xFF22D3EE),
-    glowRadius: 52,
-    glowSpread: 10,
-  ),
-  // 7 – Legendary (rose/ruby) — matches rank_7 dark ruby
-  _TierTheme(
-    name: 'Legendary',
-    primary: Color(0xFFFDA4AF),
-    secondary: Color(0xFF9F1239),
-    bgDark: Color(0xFF1A0510),
-    bgMid: Color(0xFF2D0818),
-    glowColor: Color(0xFFFB7185),
-    glowRadius: 54,
-    glowSpread: 12,
-  ),
-  // 8 – Mythical (hot pink) — matches rank_8 pink wings
-  _TierTheme(
-    name: 'Mythical',
-    primary: Color(0xFFF9A8D4),
-    secondary: Color(0xFFBE185D),
-    bgDark: Color(0xFF1A0218),
-    bgMid: Color(0xFF2D0428),
-    glowColor: Color(0xFFF472B6),
-    glowRadius: 58,
-    glowSpread: 14,
-  ),
-  // 9 – Primordial (void purple) — matches rank_9 cosmic orb
-  _TierTheme(
-    name: 'Primordial',
-    primary: Color(0xFFFFD700),
-    secondary: Color(0xFF7C3AED),
-    bgDark: Color(0xFF04010F),
-    bgMid: Color(0xFF0A0320),
-    glowColor: Color(0xFFA855F7),
-    glowRadius: 70,
-    glowSpread: 18,
-  ),
-];
+// TierTheme and kTierThemes are now imported from
+// '../widgets/level_up_dialog.dart'
 
 // ════════════════════════════════════════════════════════════
 //  HOME SCREEN
@@ -384,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     if (mounted && result['xpGained'] > 0) _showXpToast(result);
     if (mounted && result['leveledUp'] == true) {
-      _showLevelUpDialog(result['newLevel'], result['newTitle']);
+      LevelUpService.showLevelUp(result['newLevel'], result['newTitle']);
     }
   }
 
@@ -403,25 +267,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Future.delayed(const Duration(seconds: 3), () => entry.remove());
   }
 
-  // ════════════════════════════════════════════════════════
-  //  LEVEL-UP DIALOG
-  // ════════════════════════════════════════════════════════
-  void _showLevelUpDialog(int newLevel, String newTitle) {
-    final tier = ((newLevel - 1) ~/ 10).clamp(0, 9);
-    final t = kTierThemes[tier];
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      barrierColor: Colors.black87,
-      builder: (_) => _LevelUpDialog(
-        tier: tier,
-        theme: t,
-        newLevel: newLevel,
-        newTitle: newTitle,
-      ),
-    );
-  }
+  // Level-up popup is now handled globally by LevelUpService.
 
   // ── QUEST POPUP ─────────────────────────────────────────
   void _showQuestDialog() {
@@ -595,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 _showXpToast(result);
                               }
                               if (mounted && result['leveledUp'] == true) {
-                                _showLevelUpDialog(
+                                LevelUpService.showLevelUp(
                                   result['newLevel'],
                                   result['newTitle'],
                                 );
@@ -631,7 +477,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 _showXpToast(result);
                               }
                               if (mounted && result['leveledUp'] == true) {
-                                _showLevelUpDialog(
+                                LevelUpService.showLevelUp(
                                   result['newLevel'],
                                   result['newTitle'],
                                 );
@@ -1210,7 +1056,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             .snapshots(),
                         builder: (ctx, snap) {
                           final d = snap.data?.data() as Map<String, dynamic>?;
-                          final int totalXp = d?['totalXp'] ?? 0;
+                          final int totalXp =
+                              d?['totalXp'] ?? d?['points'] ?? 0;
                           final int streak =
                               XpService.displayCurrentStreakFromData(d);
                           final String name =
@@ -1218,8 +1065,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           final String? photoURL = d?['photoURL'];
                           final levelData = XpService.calculateLevel(totalXp);
                           final tier = levelData['tierIndex'] as int;
-                          _updateTier(tier);
-                          final th = kTierThemes[tier];
+                          final rankBookTier =
+                              XpService.resolveEquippedRankBookIndex(
+                                d?['equippedRankBookIndex'],
+                                tier,
+                              );
+                          _updateTier(rankBookTier);
+                          final th = kTierThemes[rankBookTier];
 
                           return _HeaderCard(
                             name: name,
@@ -1227,6 +1079,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             totalXp: totalXp,
                             streak: streak,
                             levelData: levelData,
+                            rankBookTier: rankBookTier,
                             theme: th,
                             badgeAnim: _badgeCtrl,
                             greeting: _greeting(),
@@ -1605,7 +1458,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildEmptyState(_TierTheme th) {
+  Widget _buildEmptyState(TierTheme th) {
     return Padding(
       padding: const EdgeInsets.all(40),
       child: Column(
@@ -1683,7 +1536,8 @@ class _HeaderCard extends StatelessWidget {
   final int totalXp;
   final int streak;
   final Map<String, dynamic> levelData;
-  final _TierTheme theme;
+  final int rankBookTier;
+  final TierTheme theme;
   final AnimationController badgeAnim;
   final String greeting;
   final VoidCallback onQuestTap;
@@ -1694,6 +1548,7 @@ class _HeaderCard extends StatelessWidget {
     required this.totalXp,
     required this.streak,
     required this.levelData,
+    required this.rankBookTier,
     required this.theme,
     required this.badgeAnim,
     required this.greeting,
@@ -1702,11 +1557,11 @@ class _HeaderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int tier = levelData['tierIndex'] as int;
     final int level = levelData['level'] as int;
     final double prog = levelData['progress'] as double;
     final int xpLeft = levelData['xpNeeded'] as int;
     final String title = levelData['title'] as String;
+    final rankBookTheme = kTierThemes[rankBookTier];
 
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -1740,7 +1595,7 @@ class _HeaderCard extends StatelessWidget {
               child: CustomPaint(
                 painter: _StarfieldPainter(
                   color: theme.primary.withOpacity(0.08),
-                  tier: tier,
+                  tier: rankBookTier,
                 ),
               ),
             ),
@@ -1826,8 +1681,8 @@ class _HeaderCard extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             _AnimatedRankBadge(
-                              tier: tier,
-                              theme: theme,
+                              tier: rankBookTier,
+                              theme: rankBookTheme,
                               animation: badgeAnim,
                             ),
                             // Subtle "tap" hint
@@ -1875,7 +1730,7 @@ class _HeaderCard extends StatelessWidget {
                             colors: theme.gradient,
                           ).createShader(bounds),
                           child: Text(
-                            kRankBookNames[tier],
+                            kRankBookNames[rankBookTier],
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: Colors.white,
@@ -1984,7 +1839,7 @@ class _HeaderCard extends StatelessWidget {
 // ── Tier pill ─────────────────────────────────────────────
 class _TierPill extends StatelessWidget {
   final String title;
-  final _TierTheme theme;
+  final TierTheme theme;
   const _TierPill({required this.title, required this.theme});
 
   @override
@@ -2073,7 +1928,7 @@ class _StreakBadge extends StatelessWidget {
 
 // ── Quest button with red notification dot ───────────────
 class _QuestButton extends StatelessWidget {
-  final _TierTheme theme;
+  final TierTheme theme;
   final VoidCallback onTap;
 
   const _QuestButton({required this.theme, required this.onTap});
@@ -2183,7 +2038,7 @@ class _QuestButton extends StatelessWidget {
 // ── Quest tile for the popup ──────────────────────────────
 class _QuestTile extends StatelessWidget {
   final QuestStatus quest;
-  final _TierTheme theme;
+  final TierTheme theme;
   final Future<void> Function() onClaim;
 
   const _QuestTile({
@@ -2323,7 +2178,7 @@ class _QuestTile extends StatelessWidget {
 // ── Animated rank badge ───────────────────────────────────
 class _AnimatedRankBadge extends StatelessWidget {
   final int tier;
-  final _TierTheme theme;
+  final TierTheme theme;
   final AnimationController animation;
 
   const _AnimatedRankBadge({
@@ -2400,7 +2255,7 @@ class _XpBar extends StatelessWidget {
   final double progress;
   final int xpLeft;
   final int totalXp;
-  final _TierTheme theme;
+  final TierTheme theme;
 
   const _XpBar({
     required this.level,
@@ -2425,9 +2280,7 @@ class _XpBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: theme.primary.withOpacity(0.12),
-                  border: Border.all(
-                    color: theme.primary.withOpacity(0.3),
-                  ),
+                  border: Border.all(color: theme.primary.withOpacity(0.3)),
                 ),
                 child: Icon(
                   Icons.info_outline_rounded,
@@ -2525,14 +2378,9 @@ class _XpBar extends StatelessWidget {
       builder: (_) => Container(
         decoration: BoxDecoration(
           color: Color.lerp(const Color(0xFF1A1F35), theme.bgMid, 0.6),
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(28),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
           border: Border(
-            top: BorderSide(
-              color: theme.primary.withOpacity(0.5),
-              width: 1.5,
-            ),
+            top: BorderSide(color: theme.primary.withOpacity(0.5), width: 1.5),
           ),
         ),
         child: SafeArea(
@@ -2660,9 +2508,7 @@ class _XpBar extends StatelessWidget {
                         theme.secondary.withOpacity(0.06),
                       ],
                     ),
-                    border: Border.all(
-                      color: theme.primary.withOpacity(0.2),
-                    ),
+                    border: Border.all(color: theme.primary.withOpacity(0.2)),
                   ),
                   child: Row(
                     children: [
@@ -2712,7 +2558,7 @@ class _XpBar extends StatelessWidget {
     String title,
     String xpAmount,
     String description,
-    _TierTheme theme,
+    TierTheme theme,
   ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -2753,16 +2599,11 @@ class _XpBar extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: theme.primary.withOpacity(0.15),
-                border: Border.all(
-                  color: theme.primary.withOpacity(0.3),
-                ),
+                border: Border.all(color: theme.primary.withOpacity(0.3)),
               ),
               child: Text(
                 xpAmount,
@@ -2790,7 +2631,7 @@ class _BookCard extends StatelessWidget {
   final int totalPages, currentPage, bestProgress;
   final double pct;
   final bool isBehind;
-  final _TierTheme tierTheme;
+  final TierTheme tierTheme;
   final VoidCallback onUpdate;
   final VoidCallback onTap;
   final Widget Function(String?, double, double) buildImage;
@@ -3101,263 +2942,7 @@ class _BookCard extends StatelessWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════════
-//  LEVEL-UP DIALOG
-// ════════════════════════════════════════════════════════════
-class _LevelUpDialog extends StatefulWidget {
-  final int tier, newLevel;
-  final String newTitle;
-  final _TierTheme theme;
-
-  const _LevelUpDialog({
-    required this.tier,
-    required this.newLevel,
-    required this.newTitle,
-    required this.theme,
-  });
-
-  @override
-  State<_LevelUpDialog> createState() => _LevelUpDialogState();
-}
-
-class _LevelUpDialogState extends State<_LevelUpDialog>
-    with TickerProviderStateMixin {
-  late AnimationController _scaleCtrl, _glowCtrl, _particleCtrl;
-  late Animation<double> _scale, _glow;
-
-  @override
-  void initState() {
-    super.initState();
-    _scaleCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 900),
-    );
-    _glowCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1600),
-    )..repeat(reverse: true);
-    _particleCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2000),
-    )..repeat();
-
-    _scale = CurvedAnimation(parent: _scaleCtrl, curve: Curves.elasticOut);
-    _glow = CurvedAnimation(parent: _glowCtrl, curve: Curves.easeInOut);
-    _scaleCtrl.forward();
-  }
-
-  @override
-  void dispose() {
-    _scaleCtrl.dispose();
-    _glowCtrl.dispose();
-    _particleCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final t = widget.theme;
-    final badgeSize = 120.0 + widget.tier * 8.0;
-
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          gradient: LinearGradient(
-            colors: [
-              Color.lerp(const Color(0xFF1E293B), t.bgMid, 0.6)!,
-              Color.lerp(const Color(0xFF0F172A), t.bgDark, 0.7)!,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          border: Border.all(color: t.primary.withOpacity(0.35), width: 1.5),
-          boxShadow: [
-            BoxShadow(
-              color: t.glowColor.withOpacity(0.25),
-              blurRadius: 40,
-              spreadRadius: 4,
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: Stack(
-            children: [
-              // Particle effect background
-              Positioned.fill(
-                child: AnimatedBuilder(
-                  animation: _particleCtrl,
-                  builder: (_, __) => CustomPaint(
-                    painter: _ParticlePainter(
-                      progress: _particleCtrl.value,
-                      color: t.primary,
-                    ),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 32, 28, 32),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // ── "LEVEL UP!" header ──────────────────────
-                    ShaderMask(
-                      shaderCallback: (b) =>
-                          LinearGradient(colors: t.gradient).createShader(b),
-                      child: const Text(
-                        '✦ LEVEL UP ✦',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 3,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    Text(
-                      'You reached Level ${widget.newLevel}',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.45),
-                        fontSize: 14,
-                      ),
-                    ),
-
-                    const SizedBox(height: 28),
-
-                    // ── Animated badge ───────────────────────────
-                    AnimatedBuilder(
-                      animation: Listenable.merge([_scale, _glow]),
-                      builder: (_, __) => Transform.scale(
-                        scale: _scale.value,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            // Outer pulsing glow
-                            Container(
-                              width: badgeSize + 60,
-                              height: badgeSize + 60,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: t.glowColor.withOpacity(
-                                      0.25 + _glow.value * 0.2,
-                                    ),
-                                    blurRadius: t.glowRadius + _glow.value * 20,
-                                    spreadRadius: t.glowSpread,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: badgeSize + 40,
-                              height: badgeSize + 40,
-                              child: Image.asset(
-                                'assets/images/ranks/rank_${widget.tier}.png',
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // ── New rank title ───────────────────────────
-                    ShaderMask(
-                      shaderCallback: (b) =>
-                          LinearGradient(colors: t.gradient).createShader(b),
-                      child: Text(
-                        widget.newTitle.toUpperCase(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 2.5,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 6),
-
-                    // Decorative line
-                    Container(
-                      height: 1.5,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.transparent,
-                            t.primary,
-                            Colors.transparent,
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 28),
-
-                    // ── Dismiss button ───────────────────────────
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => Navigator.pop(context),
-                        style:
-                            ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ).copyWith(
-                              backgroundColor: WidgetStateProperty.all(
-                                Colors.transparent,
-                              ),
-                            ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: t.gradient),
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: [
-                              BoxShadow(
-                                color: t.glowColor.withOpacity(0.4),
-                                blurRadius: 16,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Claim your glory!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+// LevelUpDialog and ParticlePainter are now in widgets/level_up_dialog.dart
 
 /// Soft two-blob nebula painted behind the main scaffold
 // ════════════════════════════════════════════════════════════
@@ -3437,31 +3022,6 @@ class _StarfieldPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_StarfieldPainter old) => old.tier != tier;
-}
-
-/// Floating particle burst for the level-up dialog
-class _ParticlePainter extends CustomPainter {
-  final double progress;
-  final Color color;
-  const _ParticlePainter({required this.progress, required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rng = math.Random(42);
-    final paint = Paint()..color = color.withOpacity(0.12);
-    for (int i = 0; i < 24; i++) {
-      final angle = rng.nextDouble() * math.pi * 2;
-      final speed = 0.3 + rng.nextDouble() * 0.7;
-      final dist = size.shortestSide * 0.6 * progress * speed;
-      final x = size.width / 2 + math.cos(angle) * dist;
-      final y = size.height / 2 + math.sin(angle) * dist;
-      final r = (1.5 + rng.nextDouble() * 3) * (1 - progress * 0.6);
-      canvas.drawCircle(Offset(x, y), r, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(_ParticlePainter old) => old.progress != progress;
 }
 
 // ════════════════════════════════════════════════════════════

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:share_plus/share_plus.dart';
 import '../services/library_service.dart';
+import '../services/level_up_service.dart';
 import 'full_book_info_screen.dart';
 
 class BookDetailScreen extends StatefulWidget {
@@ -437,6 +438,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             ),
           );
         }
+
+        if (result['leveledUp'] == true) {
+          LevelUpService.showLevelUp(
+            result['newLevel'] as int,
+            result['newTitle'] as String,
+          );
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -495,13 +503,17 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   void _showEditNoteDialog(String currentNote) {
-    final TextEditingController controller = TextEditingController(text: currentNote);
+    final TextEditingController controller = TextEditingController(
+      text: currentNote,
+    );
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: cardColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: const Text('Edit Note', style: TextStyle(color: Colors.white)),
           content: TextField(
             controller: controller,
@@ -521,7 +533,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel', style: TextStyle(color: Colors.white.withOpacity(0.5))),
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: Colors.white.withOpacity(0.5)),
+              ),
             ),
             TextButton(
               onPressed: () async {
@@ -547,7 +562,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   }
                 }
               },
-              child: Text('Save', style: TextStyle(color: accentColor, fontWeight: FontWeight.bold)),
+              child: Text(
+                'Save',
+                style: TextStyle(
+                  color: accentColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         );
@@ -555,19 +576,432 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
+  Future<void> _updateRating(int rating, {bool showMessage = false}) async {
+    try {
+      await LibraryService.updateBookDetailsWithXp(
+        bookId: _bookId,
+        updates: {'rating': rating},
+      );
+      if (showMessage && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(rating > 0 ? 'Rating updated.' : 'Rating cleared.'),
+            backgroundColor: accentColor,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error updating rating: $e')));
+      }
+    }
+  }
+
+  void _showEditRatingSheet(int currentRating) {
+    int selectedRating = currentRating;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (sheetContext) {
+        return StatefulBuilder(
+          builder: (context, setSheetState) {
+            return Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF15151F),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(28),
+                ),
+                border: Border(
+                  top: BorderSide(
+                    color: Colors.amberAccent.withOpacity(0.18),
+                    width: 1,
+                  ),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.amber.withOpacity(0.10),
+                    blurRadius: 32,
+                    offset: const Offset(0, -8),
+                  ),
+                ],
+              ),
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 38,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.16),
+                          borderRadius: BorderRadius.circular(99),
+                        ),
+                      ),
+                      const SizedBox(height: 22),
+                      Container(
+                        width: 58,
+                        height: 58,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.amberAccent.withOpacity(0.95),
+                              Colors.orangeAccent.withOpacity(0.88),
+                            ],
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.amberAccent.withOpacity(0.28),
+                              blurRadius: 22,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.star_rounded,
+                          color: Color(0xFF3A2600),
+                          size: 34,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Edit Rating',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        selectedRating > 0
+                            ? '$selectedRating of 5 stars'
+                            : 'Choose a rating',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.45),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          5,
+                          (index) => _ratingStarButton(
+                            index: index,
+                            currentRating: selectedRating,
+                            size: 34,
+                            padding: 5,
+                            onSelected: (rating) {
+                              setSheetState(() => selectedRating = rating);
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          if (currentRating > 0)
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () async {
+                                  Navigator.pop(sheetContext);
+                                  await _updateRating(0, showMessage: true);
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 13,
+                                  ),
+                                  side: BorderSide(
+                                    color: Colors.white.withOpacity(0.12),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Clear',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.72),
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          if (currentRating > 0) const SizedBox(width: 12),
+                          Expanded(
+                            flex: currentRating > 0 ? 1 : 2,
+                            child: ElevatedButton(
+                              onPressed: selectedRating == 0
+                                  ? null
+                                  : () async {
+                                      Navigator.pop(sheetContext);
+                                      await _updateRating(
+                                        selectedRating,
+                                        showMessage: true,
+                                      );
+                                    },
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 13,
+                                ),
+                                backgroundColor: Colors.amber,
+                                disabledBackgroundColor: Colors.white
+                                    .withOpacity(0.08),
+                                foregroundColor: const Color(0xFF2D1C00),
+                                disabledForegroundColor: Colors.white
+                                    .withOpacity(0.28),
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                              child: const Text('Save Rating'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _ratingStarButton({
+    required int index,
+    required int currentRating,
+    required ValueChanged<int> onSelected,
+    double size = 24,
+    double padding = 3,
+  }) {
+    final filled = index < currentRating;
+
+    return GestureDetector(
+      onTap: () => onSelected(index + 1),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: padding),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          width: size + 14,
+          height: size + 14,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: filled
+                ? LinearGradient(
+                    colors: [
+                      Colors.amberAccent.withOpacity(0.28),
+                      Colors.orangeAccent.withOpacity(0.16),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+            color: filled ? null : Colors.white.withOpacity(0.045),
+            border: Border.all(
+              color: filled
+                  ? Colors.amberAccent.withOpacity(0.42)
+                  : Colors.white.withOpacity(0.08),
+            ),
+            boxShadow: filled
+                ? [
+                    BoxShadow(
+                      color: Colors.amberAccent.withOpacity(0.18),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Icon(
+            filled ? Icons.star_rounded : Icons.star_border_rounded,
+            color: filled ? Colors.amberAccent : Colors.white.withOpacity(0.28),
+            size: size,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _ratingStarDisplay({
+    required int index,
+    required int currentRating,
+    double size = 24,
+    double padding = 3,
+  }) {
+    final filled = index < currentRating;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: padding),
+      child: Container(
+        width: size + 14,
+        height: size + 14,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: filled
+              ? LinearGradient(
+                  colors: [
+                    Colors.amberAccent.withOpacity(0.28),
+                    Colors.orangeAccent.withOpacity(0.16),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+              : null,
+          color: filled ? null : Colors.white.withOpacity(0.045),
+          border: Border.all(
+            color: filled
+                ? Colors.amberAccent.withOpacity(0.42)
+                : Colors.white.withOpacity(0.08),
+          ),
+          boxShadow: filled
+              ? [
+                  BoxShadow(
+                    color: Colors.amberAccent.withOpacity(0.18),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : null,
+        ),
+        child: Icon(
+          filled ? Icons.star_rounded : Icons.star_border_rounded,
+          color: filled ? Colors.amberAccent : Colors.white.withOpacity(0.28),
+          size: size,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRatingCard(int currentRating) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          colors: [
+            Colors.amberAccent.withOpacity(0.10),
+            Colors.white.withOpacity(0.035),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        border: Border.all(color: Colors.amberAccent.withOpacity(0.16)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.amberAccent.withOpacity(0.07),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  5,
+                  (index) => _ratingStarDisplay(
+                    index: index,
+                    currentRating: currentRating,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 7),
+              Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: Text(
+                  currentRating > 0
+                      ? 'Your rating: $currentRating/5'
+                      : 'Tap the pencil to rate',
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.48),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: 8),
+          Material(
+            color: Colors.white.withOpacity(0.06),
+            shape: const CircleBorder(),
+            child: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: () => _showEditRatingSheet(currentRating),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Icon(
+                  Icons.edit_rounded,
+                  color: Colors.amberAccent.withOpacity(0.92),
+                  size: 17,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final title = _volumeInfo['title'] ?? 'Unknown Title';
+    return StreamBuilder<DocumentSnapshot>(
+      stream: LibraryService.getBookStream(_bookId),
+      builder: (context, snapshot) {
+        Map<String, dynamic> firestoreData = {};
+        if (snapshot.hasData && snapshot.data!.exists) {
+          firestoreData = snapshot.data!.data() as Map<String, dynamic>;
+        }
+        return _buildBody(context, firestoreData);
+      },
+    );
+  }
+
+  Widget _buildBody(BuildContext context, Map<String, dynamic> firestoreData) {
+    final title =
+        firestoreData['title'] ?? _volumeInfo['title'] ?? 'Unknown Title';
+
     String authors = 'Unknown Author';
-    if (_volumeInfo['authors'] != null) {
+    if (firestoreData['authors'] != null) {
+      authors = firestoreData['authors'] is List
+          ? (firestoreData['authors'] as List).join(', ')
+          : firestoreData['authors'].toString();
+    } else if (_volumeInfo['authors'] != null) {
       authors = _volumeInfo['authors'] is List
           ? (_volumeInfo['authors'] as List).join(', ')
           : _volumeInfo['authors'].toString();
     }
+
     final description =
-        _volumeInfo['description'] ?? 'No synopsis available for this book.';
-    final pageCount = _volumeInfo['pageCount']?.toString() ?? 'N/A';
+        firestoreData['description'] ??
+        _volumeInfo['description'] ??
+        'No synopsis available for this book.';
+
     final thumbnailUrl =
+        firestoreData['thumbnail'] ??
         _volumeInfo['imageLinks']?['thumbnail']?.replaceFirst(
           'http:',
           'https:',
@@ -617,8 +1051,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          final text = "Check out this book I'm reading: $title by $authors!";
-                          final shareContent = _bookUrl != null ? '$text\n\n$_bookUrl' : text;
+                          final text =
+                              "Check out this book I'm reading: $title by $authors!";
+                          final shareContent = _bookUrl != null
+                              ? '$text\n\n$_bookUrl'
+                              : text;
                           Share.share(shareContent);
                         },
                       ),
@@ -692,6 +1129,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.grey[400], fontSize: 16),
                       ),
+                      if (firestoreData['status'] == 'Finished') ...[
+                        const SizedBox(height: 12),
+                        _buildRatingCard(
+                          (firestoreData['rating'] as num?)?.toInt() ?? 0,
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -714,6 +1157,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         firestoreBookData['format'] ??
                         _volumeInfo['format'] ??
                         'Physical';
+
+                    final currentPageCount =
+                        firestoreBookData['pageCount']?.toString() ??
+                        _volumeInfo['pageCount']?.toString() ??
+                        'N/A';
 
                     return Column(
                       children: [
@@ -789,7 +1237,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          pageCount,
+                                          currentPageCount,
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -1069,10 +1517,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                     border: Border.all(color: Colors.white12),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Text(
                                             'NOTE',
@@ -1084,19 +1534,35 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                             ),
                                           ),
                                           GestureDetector(
-                                            onTap: () => _showEditNoteDialog(firestoreBookData['note'] ?? ''),
-                                            child: const Icon(Icons.edit_rounded, color: Colors.grey, size: 16),
+                                            onTap: () => _showEditNoteDialog(
+                                              firestoreBookData['note'] ?? '',
+                                            ),
+                                            child: const Icon(
+                                              Icons.edit_rounded,
+                                              color: Colors.grey,
+                                              size: 16,
+                                            ),
                                           ),
                                         ],
                                       ),
                                       const SizedBox(height: 12),
                                       Text(
-                                        (firestoreBookData['note'] == null || firestoreBookData['note'].toString().trim().isEmpty) 
+                                        (firestoreBookData['note'] == null ||
+                                                firestoreBookData['note']
+                                                    .toString()
+                                                    .trim()
+                                                    .isEmpty)
                                             ? 'Tap the edit icon to add a personal note.'
                                             : firestoreBookData['note'],
                                         style: TextStyle(
-                                          color: (firestoreBookData['note'] == null || firestoreBookData['note'].toString().trim().isEmpty) 
-                                              ? Colors.white38 
+                                          color:
+                                              (firestoreBookData['note'] ==
+                                                      null ||
+                                                  firestoreBookData['note']
+                                                      .toString()
+                                                      .trim()
+                                                      .isEmpty)
+                                              ? Colors.white38
                                               : Colors.white,
                                           fontSize: 14,
                                           height: 1.4,

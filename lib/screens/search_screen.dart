@@ -754,26 +754,6 @@ class _SearchScreenState extends State<SearchScreen> {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  accentColor.withOpacity(0.26),
-                  accentColor.withOpacity(0.10),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: accentColor.withOpacity(0.25)),
-            ),
-            child: Icon(
-              Icons.auto_stories_rounded,
-              color: accentColor,
-              size: 24,
-            ),
-          ),
         ],
       ),
     );

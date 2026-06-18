@@ -809,11 +809,15 @@ class StatsService {
     return List<String>.from(stats['claimedAchievements'] ?? []);
   }
 
-  static Future<void> claimAchievement(
+  static Future<Map<String, dynamic>> claimAchievement(
     String achievementId,
     int xpReward,
   ) async {
     final ref = _firestore.collection('users').doc(_uid);
+    bool leveledUp = false;
+    int newLevel = 1;
+    String newTitle = '';
+
     await _firestore.runTransaction((tx) async {
       final snap = await tx.get(ref);
       final data = snap.data() ?? {};
@@ -823,7 +827,14 @@ class StatsService {
 
       final int currentXp = data['totalXp'] ?? data['points'] ?? 0;
       final int newXp = currentXp + xpReward;
+      final oldLevelData = XpService.calculateLevel(currentXp);
       final levelData = XpService.calculateLevel(newXp);
+
+      if ((levelData['level'] as int) > (oldLevelData['level'] as int)) {
+        leveledUp = true;
+        newLevel = levelData['level'] as int;
+        newTitle = levelData['title'] as String;
+      }
 
       tx.set(ref, {
         'claimedAchievements': claimed,
@@ -832,6 +843,12 @@ class StatsService {
         'level': levelData['level'],
       }, SetOptions(merge: true));
     });
+
+    return {
+      'leveledUp': leveledUp,
+      'newLevel': newLevel,
+      'newTitle': newTitle,
+    };
   }
 
   static Future<void> equipBadge(String badgeId) async {

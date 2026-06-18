@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/stats_service.dart';
+import '../services/level_up_service.dart';
 
 class AchievementsScreen extends StatefulWidget {
   final Map<String, dynamic> stats;
@@ -108,7 +109,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
     final int rewardXp = (a['xp'] as num?)?.toInt() ?? 0;
     final String title = a['title']?.toString() ?? 'Achievement';
 
-    await StatsService.claimAchievement(a['id'], rewardXp);
+    final result = await StatsService.claimAchievement(a['id'], rewardXp);
 
     if (!mounted) return;
 
@@ -124,6 +125,13 @@ class _AchievementsScreenState extends State<AchievementsScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
+
+    if (result['leveledUp'] == true) {
+      LevelUpService.showLevelUp(
+        result['newLevel'] as int,
+        result['newTitle'] as String,
+      );
+    }
 
     // Refresh both the claimed badges and the latest XP/level stats immediately.
     // This prevents a delay where level-based achievements only appear after

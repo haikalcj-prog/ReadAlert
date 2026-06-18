@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/library_service.dart';
+import '../services/level_up_service.dart';
 
 class FullBookInfoScreen extends StatefulWidget {
   final Map<String, dynamic> bookData;
@@ -296,10 +297,14 @@ class _FullBookInfoScreenState extends State<FullBookInfoScreen> {
       }
 
       // --- CRITICAL FIX: NOW CALLS THE SMART XP TRANSACTION ---
-      await LibraryService.updateBookDetailsWithXp(
+      final result = await LibraryService.updateBookDetailsWithXp(
         bookId: widget.bookData['id'],
         updates: updates,
       );
+
+      // Wait briefly for Firestore's local cache to synchronize the transaction
+      // before we fetch the data again, preventing old data from overwriting edits.
+      await Future.delayed(const Duration(milliseconds: 400));
 
       await _fetchBookData();
 
@@ -307,6 +312,13 @@ class _FullBookInfoScreenState extends State<FullBookInfoScreen> {
         _isEditing = false;
         _newCoverImage = null;
       });
+
+      if (result['leveledUp'] == true) {
+        LevelUpService.showLevelUp(
+          result['newLevel'] as int,
+          result['newTitle'] as String,
+        );
+      }
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
