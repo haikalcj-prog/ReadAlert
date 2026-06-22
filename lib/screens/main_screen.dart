@@ -69,8 +69,9 @@ class _MainScreenState extends State<MainScreen> {
       final hasSeenOnboarding = data?['hasSeenOnboarding'] == true;
 
       if (!hasSeenOnboarding && mounted) {
-        // Small delay so the main screen renders first
-        await Future.delayed(const Duration(milliseconds: 500));
+        // Give the homescreen time to render and transition completely
+        // so the user sees they've landed successfully before the dialog appears.
+        await Future.delayed(const Duration(milliseconds: 1500));
         if (!mounted) return;
 
         showDialog(

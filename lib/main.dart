@@ -54,6 +54,9 @@ class ReadAlertApp extends StatelessWidget {
 
           // Logged in → go to main app
           if (snapshot.hasData && snapshot.data != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              navigatorKey.currentState?.popUntil((route) => route.isFirst);
+            });
             return const MainScreen();
           }
 

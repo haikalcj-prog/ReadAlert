@@ -1,0 +1,276 @@
+<mxfile host="app.diagrams.net" modified="2026-06-19T00:00:00.000Z" agent="Codex" version="24.7.17">
+  <diagram id="readalert-use-case-diagram" name="ReadAlert Use Case Diagram">
+    <mxGraphModel dx="2200" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Use Case Diagram: ReadAlert - A Gamified Mobile App for Tracking Reading Progress" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="180" y="10" width="1900" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="system_boundary" value="ReadAlert Mobile Application" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#111827;strokeWidth=2;fontSize=18;fontStyle=1;verticalAlign=top;align=center;spacingTop=14;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="180" y="50" width="1900" height="1450" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_user" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=16;fontStyle=1;strokeColor=#111827;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="45" y="710" width="70" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="module_auth" value="Authentication" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="220" y="100" width="360" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="module_library" value="Book Search and Library Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="610" y="100" width="520" height="560" as="geometry"/>
+        </mxCell>
+        <mxCell id="module_progress" value="Reading Progress Tracking" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="100" width="430" height="430" as="geometry"/>
+        </mxCell>
+        <mxCell id="module_recommendation" value="Recommendation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1620" y="100" width="420" height="360" as="geometry"/>
+        </mxCell>
+        <mxCell id="module_gamification" value="Gamification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="220" y="700" width="540" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="module_reports" value="Statistics and Reports" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#0D9488;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="800" y="700" width="420" height="360" as="geometry"/>
+        </mxCell>
+        <mxCell id="module_notification" value="Notification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=1;fontSize=15;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="700" width="420" height="280" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_register" value="Register account" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F46E5;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="250" y="155" width="135" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_login" value="Log in" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F46E5;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="420" y="155" width="130" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_logout" value="Log out" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F46E5;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="250" y="255" width="135" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_manage_profile" value="Manage user profile" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4F46E5;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="415" y="255" width="145" height="52" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_search_title" value="Search book by title" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="640" y="150" width="160" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_search_author" value="Search book by author" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="830" y="150" width="165" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_scan_isbn" value="Scan ISBN/barcode" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="640" y="235" width="160" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_retrieve_metadata" value="Retrieve book metadata" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="830" y="235" width="190" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_add_manual" value="Add book manually" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="640" y="320" width="160" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_add_library" value="Add book to library" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="830" y="320" width="170" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_save_book_data" value="Save book data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="955" y="405" width="135" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_view_details" value="View book details" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="640" y="405" width="160" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_edit_book" value="Edit book information" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="640" y="490" width="170" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_delete_book" value="Delete book from library" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="840" y="490" width="190" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_categorize_status" value="Categorize book status as Want to Read, Currently Reading, or Finished" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#059669;fontSize=11;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="790" y="575" width="280" height="62" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_update_page" value="Update current page" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="155" width="165" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_track_percentage" value="Track reading percentage" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="155" width="170" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_mark_finished" value="Mark book as finished" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="260" width="165" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_rating" value="Add or edit book rating after finished" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=11;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="260" width="180" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_reading_history" value="View reading history" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="380" width="185" height="52" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_generate_recs" value="Generate book recommendations" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A21CAF;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1715" y="150" width="200" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_fetch_recs" value="Fetch recommended books from external book APIs" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A21CAF;fontSize=11;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1645" y="270" width="185" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_recommendation_criteria" value="Use genre, author, category, and reading history for recommendation" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A21CAF;fontSize=11;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1835" y="270" width="185" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_earn_xp" value="Earn XP/points" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA580C;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="250" y="765" width="150" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_update_rank" value="Update level/rank" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA580C;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="435" y="765" width="150" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_maintain_streak" value="Maintain reading streak" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA580C;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="610" y="765" width="130" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_complete_quests" value="Complete daily/weekly quests" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA580C;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="250" y="890" width="190" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_unlock_badges" value="Unlock badges and titles" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA580C;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="500" y="890" width="180" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_view_achievements" value="View achievements" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA580C;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1030" width="175" height="52" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_view_stats" value="View reading statistics" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0D9488;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="830" y="765" width="180" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_view_charts" value="View progress charts" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0D9488;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1025" y="765" width="160" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_completed_summary" value="View completed books summary" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0D9488;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="900" y="890" width="210" height="58" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_manage_reminder" value="Manage reminder setting" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1305" y="765" width="190" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_receive_reminder" value="Receive reading reminder notification" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#DC2626;fontSize=12;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="870" width="190" height="64" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="assoc_user_register" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_register">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_login" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_login">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_logout" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_logout">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_profile" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_manage_profile">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_search_title" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_search_title">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_search_author" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_search_author">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_scan" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_scan_isbn">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_add_manual" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_add_manual">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_add_library" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_add_library">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_view_details" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_view_details">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_edit_book" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_edit_book">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_delete_book" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_delete_book">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_update_page" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_update_page">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_history" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_reading_history">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_quests" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_complete_quests">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_achievements" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_view_achievements">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_stats" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_view_stats">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_recs" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_generate_recs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc_user_reminder" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=1;" edge="1" parent="1" source="actor_user" target="uc_manage_reminder">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="inc_search_title_metadata" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_search_title" target="uc_retrieve_metadata">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_search_author_metadata" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_search_author" target="uc_retrieve_metadata">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_scan_metadata" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_scan_isbn" target="uc_retrieve_metadata">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_add_manual_save" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_add_manual" target="uc_save_book_data">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_add_library_save" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_add_library" target="uc_save_book_data">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_add_library_status" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_add_library" target="uc_categorize_status">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_edit_save" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_edit_book" target="uc_save_book_data">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_edit_status" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_edit_book" target="uc_categorize_status">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_update_percentage" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_update_page" target="uc_track_percentage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_generate_fetch" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_generate_recs" target="uc_fetch_recs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="inc_generate_criteria" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_generate_recs" target="uc_recommendation_criteria">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ext_mark_finished_update" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_mark_finished" target="uc_update_page">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_rating_finished" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_rating" target="uc_mark_finished">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_xp_add_library" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_earn_xp" target="uc_add_library">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_xp_update_page" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_earn_xp" target="uc_update_page">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_xp_finished" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_earn_xp" target="uc_mark_finished">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_xp_quest" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_earn_xp" target="uc_complete_quests">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_rank_xp" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_update_rank" target="uc_earn_xp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_streak_update" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_maintain_streak" target="uc_update_page">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_badges_xp" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_unlock_badges" target="uc_earn_xp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_badges_quest" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_unlock_badges" target="uc_complete_quests">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_reminder_setting" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endFill=0;dashed=1;html=1;rounded=0;strokeColor=#7C2D12;fontSize=11;labelBackgroundColor=#FFFFFF;fontColor=#111827;" edge="1" parent="1" source="uc_receive_reminder" target="uc_manage_reminder">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

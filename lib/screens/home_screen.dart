@@ -9,6 +9,7 @@ import '../rank_book_names.dart';
 import '../services/xp_service.dart';
 import '../services/quest_service.dart';
 import '../services/level_up_service.dart';
+import '../services/audio_service.dart';
 import '../widgets/level_up_dialog.dart';
 import 'book_detail_screen.dart';
 
@@ -254,6 +255,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   // ── XP TOAST ─────────────────────────────────────────────
   void _showXpToast(Map<String, dynamic> result) {
+    AudioService.playXpGain();
     final overlay = Overlay.of(context);
     final entry = OverlayEntry(
       builder: (ctx) => Positioned(
@@ -1521,6 +1523,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   String _greeting() {
     final h = DateTime.now().hour;
+    if (h >= 21 || h < 5) return 'Good night,';
     if (h < 12) return 'Good morning,';
     if (h < 17) return 'Good afternoon,';
     return 'Good evening,';

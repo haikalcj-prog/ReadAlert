@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/level_up_dialog.dart';
+import 'audio_service.dart';
 
 /// Global service that can show the level-up popup from any screen.
 ///
@@ -57,6 +58,8 @@ class LevelUpService {
 
       final tier = ((newLevel - 1) ~/ 10).clamp(0, 9);
       final t = kTierThemes[tier];
+
+      AudioService.playLevelUp();
 
       showDialog(
         context: ctx,

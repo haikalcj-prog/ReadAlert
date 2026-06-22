@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import '../services/library_service.dart';
+import '../services/audio_service.dart';
 
 class AddBookScreen extends StatefulWidget {
   const AddBookScreen({super.key});
@@ -240,6 +241,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
       );
 
       if (mounted) {
+        AudioService.playSuccess();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Book added to library!'),

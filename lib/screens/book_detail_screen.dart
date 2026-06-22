@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:share_plus/share_plus.dart';
 import '../services/library_service.dart';
 import '../services/level_up_service.dart';
+import '../services/audio_service.dart';
 import 'full_book_info_screen.dart';
 
 class BookDetailScreen extends StatefulWidget {
@@ -388,6 +389,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       );
 
       if (mounted) {
+        AudioService.playSuccess();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Added to "$status"!'),

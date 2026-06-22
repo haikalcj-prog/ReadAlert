@@ -1,0 +1,849 @@
+<mxfile host="app.diagrams.net" agent="Codex" pages="5">
+  <diagram id="flow-auth" name="4.1.2.1 Registration and Login">
+    <mxGraphModel dx="2175" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="a_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#111827;" value="4.1.2.1 User Registration and Login Flowchart" vertex="1">
+          <mxGeometry height="40" width="1000" x="300" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="a_start" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" value="Start" vertex="1">
+          <mxGeometry height="50" width="150" x="710" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a_launch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;" value="Launch ReadAlert application" vertex="1">
+          <mxGeometry height="55" width="220" x="675" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="a_authstate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;" value="Check authentication state" vertex="1">
+          <mxGeometry height="55" width="220" x="675" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="a_session" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" value="Authenticated user exists?" vertex="1">
+          <mxGeometry height="90" width="190" x="910" y="292.5" as="geometry" />
+        </mxCell>
+        <mxCell id="a_login_screen" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=13;" value="Display login screen" vertex="1">
+          <mxGeometry height="55" width="210" x="300" y="347.5" as="geometry" />
+        </mxCell>
+        <mxCell id="a_action" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" value="Select authentication action" vertex="1">
+          <mxGeometry height="90" width="190" x="705" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="a_email_input" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" value="Enter email and password" vertex="1">
+          <mxGeometry height="60" width="210" x="140" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="a_email_valid" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" value="Input valid?" vertex="1">
+          <mxGeometry height="80" width="140" x="175" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="a_email_auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" value="Authenticate email/password" vertex="1">
+          <mxGeometry height="55" width="210" x="140" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="a_google" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" value="Authenticate with Google" vertex="1">
+          <mxGeometry height="55" width="200" x="610" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="a_register_input" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" value="Enter name, email, password and confirmation" vertex="1">
+          <mxGeometry height="70" width="230" x="1010" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="a_register_valid" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" value="Registration data valid?" vertex="1">
+          <mxGeometry height="85" width="180" x="1035" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="a_result" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" value="Authentication successful?" vertex="1">
+          <mxGeometry height="85" width="180" x="770" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="a_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;" value="Display validation or authentication error" vertex="1">
+          <mxGeometry height="60" width="220" x="455" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="a_userdoc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" value="Create or merge user profile record" vertex="1">
+          <mxGeometry height="60" width="230" x="760" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="a_main" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" value="Authentication stream routes to MainScreen" vertex="1">
+          <mxGeometry height="55" width="250" x="1240" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="a_onboard" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" value="First-time user?" vertex="1">
+          <mxGeometry height="80" width="160" x="1200" y="685" as="geometry" />
+        </mxCell>
+        <mxCell id="a_show_onboard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" value="Show onboarding and mark as seen" vertex="1">
+          <mxGeometry height="60" width="210" x="1390" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="a_dashboard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;" value="Display ReadAlert dashboard" vertex="1">
+          <mxGeometry height="55" width="220" x="1035" y="865" as="geometry" />
+        </mxCell>
+        <mxCell id="a_end" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" value="End" vertex="1">
+          <mxGeometry height="50" width="150" x="1420" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e1" edge="1" parent="1" source="a_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_launch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e2" edge="1" parent="1" source="a_launch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_authstate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e3" edge="1" parent="1" source="a_authstate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_session">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e4" edge="1" parent="1" source="a_session" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_login_screen" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e5" edge="1" parent="1" source="a_session" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_main" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e6" edge="1" parent="1" source="a_login_screen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_action">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e7" edge="1" parent="1" source="a_action" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_email_input" value="Email login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e8" edge="1" parent="1" source="a_action" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_google" value="Google">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e9" edge="1" parent="1" source="a_action" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_register_input" value="Register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e10" edge="1" parent="1" source="a_email_input" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_email_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e11" edge="1" parent="1" source="a_email_valid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_email_auth" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e12" edge="1" parent="1" source="a_email_valid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_error" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e13" edge="1" parent="1" source="a_email_auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_result">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e14" edge="1" parent="1" source="a_google" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_result">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e15" edge="1" parent="1" source="a_register_input" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_register_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e16" edge="1" parent="1" source="a_register_valid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_create" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e17" edge="1" parent="1" source="a_register_valid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_error" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e18" edge="1" parent="1" source="a_create" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_result">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e19" edge="1" parent="1" source="a_result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_error" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e20" edge="1" parent="1" source="a_result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_userdoc" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e21" edge="1" parent="1" source="a_error" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_login_screen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e22" edge="1" parent="1" source="a_userdoc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_main">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e23" edge="1" parent="1" source="a_main" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_onboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e24" edge="1" parent="1" source="a_onboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_show_onboard" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e25" edge="1" parent="1" source="a_onboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" target="a_dashboard" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e26" edge="1" parent="1" source="a_show_onboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_dashboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_e27" edge="1" parent="1" source="a_create" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rCKmVrpT2wU2z22F10uo-1" edge="1" parent="1" source="a_dashboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" target="a_create" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1220" y="858" as="sourcePoint" />
+            <mxPoint x="1460" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a_create" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" value="Create account and update display name" vertex="1">
+          <mxGeometry height="60" width="230" x="1380" y="625" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="flow-library" name="4.1.2.2 Search ISBN and Library">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="b_title" value="4.1.2.2 Book Search, ISBN/Barcode and Library Flowchart" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=22;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b_start" value="Start" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b_open" value="Open Search or Library module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="680" y="155" width="230" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b_method" value="Choose book input method" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="700" y="245" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b_query" value="Enter title, author or general query" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="170" y="390" width="230" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b_query_valid" value="Query not empty?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="205" y="490" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_selected_search" value="Call title, author or general search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="175" y="610" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_isbn" value="Scan barcode or enter 10/13-digit ISBN" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="390" width="230" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b_isbn_valid" value="Valid ISBN obtained?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="710" y="490" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_isbn_search" value="Search by ISBN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="705" y="610" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b_manual_form" value="Open manual book form" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="390" width="210" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b_manual_data" value="Enter book metadata, page count, progress and status" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1175" y="485" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="b_manual_valid" value="Required data valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1215" y="600" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_google" value="Request metadata from Google Books" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="710" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_google_ok" value="Request successful?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="520" y="805" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_fallback" value="Search Open Library and map metadata format" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF4FF;strokeColor=#A21CAF;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="290" y="915" width="240" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b_clean" value="Clean, filter and normalize results" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="915" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_results" value="Book found?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="655" y="1010" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_no_results" value="Display no results or validation message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1090" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_details" value="Display search results and book details" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="820" y="1090" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_add" value="Add book to library?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="1080" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b_status" value="Select Want to Read, Reading or Finished" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1305" y="1030" width="230" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b_save" value="Save book data, status, dates and progress history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1285" y="895" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b_reward" value="Award library/progress XP and update streak if applicable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1275" y="785" width="270" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b_library" value="Refresh and display user library" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="700" width="230" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b_end" value="End" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1335" y="610" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_start" target="b_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_open" target="b_method">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e3" value="Title/author" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_method" target="b_query">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e4" value="ISBN/barcode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_method" target="b_isbn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e5" value="Manual add" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_method" target="b_manual_form">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_query" target="b_query_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e7" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_query_valid" target="b_selected_search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e8" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_query_valid" target="b_no_results">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_selected_search" target="b_google">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_isbn" target="b_isbn_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e11" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_isbn_valid" target="b_isbn_search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e12" value="No/cancel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_isbn_valid" target="b_no_results">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_isbn_search" target="b_google">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_manual_form" target="b_manual_data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_manual_data" target="b_manual_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e16" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_manual_valid" target="b_manual_data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e17" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_manual_valid" target="b_save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_google" target="b_google_ok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e19" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_google_ok" target="b_fallback">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e20" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_google_ok" target="b_clean">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_fallback" target="b_clean">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_clean" target="b_results">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e23" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_results" target="b_no_results">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e24" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_results" target="b_details">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_details" target="b_add">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e26" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_add" target="b_status">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e27" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="b_add" target="b_end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_status" target="b_save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_save" target="b_reward">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_reward" target="b_library">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_e31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="b_library" target="b_end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="flow-progress" name="4.1.2.3 Reading Progress">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c_title" value="4.1.2.3 Reading Progress Tracking Flowchart" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=22;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c_start" value="Start" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c_open" value="Open a library book or Home progress card" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="665" y="155" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c_load" value="Load current page, best progress, total pages and status" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="660" y="245" width="270" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_input" value="Enter or adjust current page" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="685" y="350" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c_valid" value="Page value valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="715" y="445" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c_error" value="Clamp to 0-total pages or display input error" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="455" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c_calc" value="Calculate reading percentage and pages read this session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="665" y="565" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c_increase" value="New page exceeds best progress?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="690" y="670" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c_history" value="Append pages read and date to progress history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="800" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c_finished" value="Current page reaches total pages?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="690" y="800" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c_status_reading" value="Set status to Reading; clear finish date if previously demoted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="950" y="815" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c_status_finished" value="Set status to Finished, current page to total pages and finish date" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="665" y="930" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_save" value="Save current page, best progress, status and history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="665" y="1040" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c_activity" value="Real reading activity or first completion?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="970" y="1025" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c_streak" value="Update current/longest streak and apply daily streak XP once" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="930" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_xp" value="Award page XP and first-finish bonus; update total XP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="815" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c_level" value="Recalculate level and rank" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="700" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c_levelup" value="Level increased?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="585" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c_popup" value="Show XP toast and level-up dialog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="470" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c_rating_decision" value="Book finished and user wants to rate it?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="450" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c_rating" value="Add, edit or clear 1-5 star rating" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="335" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c_refresh" value="Refresh book details, progress percentage and reports" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="225" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c_end" value="End" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="130" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_start" target="c_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_open" target="c_load">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_load" target="c_input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_input" target="c_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e5" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_valid" target="c_error">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_error" target="c_input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e7" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_valid" target="c_calc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_calc" target="c_increase">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_increase" target="c_history">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e10" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_increase" target="c_finished">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_history" target="c_finished">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e12" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_finished" target="c_status_reading">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e13" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_finished" target="c_status_finished">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_status_reading" target="c_save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_status_finished" target="c_save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_save" target="c_activity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e17" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_activity" target="c_streak">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e18" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_activity" target="c_xp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_streak" target="c_xp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_xp" target="c_level">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_level" target="c_levelup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e22" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_levelup" target="c_popup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e23" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_levelup" target="c_rating_decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_popup" target="c_rating_decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e25" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_rating_decision" target="c_rating">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e26" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c_rating_decision" target="c_refresh">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_rating" target="c_refresh">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="c_refresh" target="c_end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="flow-gamification" name="4.1.2.4 Gamification Quest Achievement">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="d_title" value="4.1.2.4 Gamification, Quest and Achievement Flowchart" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=22;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d_start" value="Start" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d_activity" value="User performs a ReadAlert activity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="675" y="160" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="d_type" value="Activity type?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="720" y="250" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d_reading" value="Add book, read pages or finish book" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="160" y="390" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_base_xp" value="Calculate +5 library XP, +1 XP per new page and +50 first-finish XP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="140" y="490" width="270" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="d_new_day" value="Reading activity on a new day?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="175" y="610" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d_streak" value="Continue/reset streak, update longest streak and add daily streak XP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="135" y="745" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d_quest_open" value="Open daily/weekly quest panel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="670" y="390" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_quest_metrics" value="Calculate pages, reading days, books added and books finished" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="660" y="490" width="270" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d_quest_ready" value="Quest completed and unclaimed?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="690" y="610" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d_quest_progress" value="Display quest progress or claimed status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="520" y="750" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_claim_quest" value="User claims quest; save unique claim key and reward XP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="800" y="745" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d_achievement_open" value="Open achievements screen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="390" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_stats" value="Fetch statistics and compare achievement thresholds" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="490" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d_badge_ready" value="Achievement unlocked and unclaimed?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="610" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d_badge_status" value="Display locked or claimed badge/title" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="750" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_claim_badge" value="User claims badge/title; save claim and add reward XP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="745" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d_award" value="Update total XP and points in a transaction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="875" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="d_level" value="Calculate level, tier, title and rank progress" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="675" y="975" width="240" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="d_level_up" value="Level increased?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1070" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d_popup" value="Show XP feedback and level-up dialog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1075" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_recheck" value="Refresh quest, streak, rank and achievement states" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="1050" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="d_end" value="End" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="930" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_start" target="d_activity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_activity" target="d_type">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e3" value="Reading/library" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_type" target="d_reading">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e4" value="Quest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_type" target="d_quest_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e5" value="Achievement" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_type" target="d_achievement_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_reading" target="d_base_xp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_base_xp" target="d_new_day">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e8" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_new_day" target="d_streak">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e9" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_new_day" target="d_award">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_streak" target="d_award">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_quest_open" target="d_quest_metrics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_quest_metrics" target="d_quest_ready">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e13" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_quest_ready" target="d_quest_progress">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_quest_ready" target="d_claim_quest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_claim_quest" target="d_award">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_quest_progress" target="d_recheck">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_achievement_open" target="d_stats">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_stats" target="d_badge_ready">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e19" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_badge_ready" target="d_badge_status">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e20" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_badge_ready" target="d_claim_badge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_claim_badge" target="d_award">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_badge_status" target="d_recheck">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_award" target="d_level">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_level" target="d_level_up">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e25" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_level_up" target="d_popup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e26" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d_level_up" target="d_recheck">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_popup" target="d_recheck">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d_e28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="d_recheck" target="d_end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="flow-recommendation" name="4.1.2.5 Book Recommendation">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e_title" value="4.1.2.5 Book Recommendation Flowchart" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=22;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_start" value="Start" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="80" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_open" value="Open Search and Recommendation screen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="660" y="160" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_loading" value="Set recommendation loading state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="255" width="230" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="e_trending" value="Request trending fiction recommendations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="355" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_random" value="Select a random discovery subject and request books" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="670" y="355" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="e_auth" value="Authenticated user available?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="345" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e_library" value="Read saved library and reading-collection metadata" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="990" y="480" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e_has_books" value="Library contains books?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1025" y="590" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e_extract" value="Count genre/category and author frequencies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="980" y="710" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_preferences" value="Valid preferences found?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1025" y="810" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e_select_pref" value="Select from top three genres and authors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="985" y="930" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_personal_requests" value="Request subject-based and author-based recommendations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="970" y="1030" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="e_api" value="Send request to Google Books with retry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="340" y="500" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_google_ok" value="Google Books request successful?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="365" y="600" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e_openlib" value="Fallback to Open Library search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF4FF;strokeColor=#A21CAF;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="175" y="735" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_normalize" value="Normalize metadata into the app book format" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="455" y="735" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cold" value="Use cold-start recommendations: trending and random discovery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="590" width="270" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e_combine" value="Combine personalized, trending and random results" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="840" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="e_clean" value="Clean invalid entries, remove duplicate IDs and shuffle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="610" y="945" width="300" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="e_any" value="Any recommendations available?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="665" y="1050" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e_error" value="Display recommendation error and allow refresh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1080" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_display" value="Display Trending, Discover and You May Like sections" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="1080" width="280" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="e_select" value="User selects a recommended book" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="1020" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_details" value="Display book details and library option" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="910" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_end" value="End" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1305" y="810" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_start" target="e_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_open" target="e_loading">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_loading" target="e_trending">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_loading" target="e_random">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_loading" target="e_auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_trending" target="e_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_random" target="e_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_api" target="e_google_ok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e9" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_google_ok" target="e_openlib">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e10" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_google_ok" target="e_normalize">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_openlib" target="e_normalize">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_normalize" target="e_combine">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e13" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_auth" target="e_cold">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_auth" target="e_library">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_library" target="e_has_books">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e16" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_has_books" target="e_cold">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e17" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_has_books" target="e_extract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_extract" target="e_preferences">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e19" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_preferences" target="e_cold">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e20" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_preferences" target="e_select_pref">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_select_pref" target="e_personal_requests">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_personal_requests" target="e_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_cold" target="e_combine">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_combine" target="e_clean">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_clean" target="e_any">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e26" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_any" target="e_error">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e27" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="e_any" target="e_display">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_display" target="e_select">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_select" target="e_details">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_details" target="e_end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_e31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#374151;" edge="1" parent="1" source="e_error" target="e_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

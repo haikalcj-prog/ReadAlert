@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/stats_service.dart';
 import '../services/level_up_service.dart';
+import '../services/audio_service.dart';
 
 class AchievementsScreen extends StatefulWidget {
   final Map<String, dynamic> stats;
@@ -106,6 +107,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   }
 
   Future<void> _claim(Map<String, dynamic> a) async {
+    AudioService.playAchievement();
     final int rewardXp = (a['xp'] as num?)?.toInt() ?? 0;
     final String title = a['title']?.toString() ?? 'Achievement';
 
