@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -139,19 +140,26 @@ class _SearchScreenState extends State<SearchScreen> {
 
           for (var doc in snap.docs) {
             final data = doc.data();
+            final status = data['status']?.toString();
+            int weight = 1;
+            if (status == 'Reading') {
+              weight = 3;
+            } else if (status == 'Finished') {
+              weight = 2;
+            }
 
             final cats = data['categories'];
             if (cats is List) {
               for (var c in cats) {
                 String catName = c.toString().trim();
                 if (catName.isNotEmpty && catName != 'Uncategorized') {
-                  genreCounts[catName] = (genreCounts[catName] ?? 0) + 1;
+                  genreCounts[catName] = (genreCounts[catName] ?? 0) + weight;
                 }
               }
             } else if (cats is String &&
                 cats.trim().isNotEmpty &&
                 cats != 'Uncategorized') {
-              genreCounts[cats] = (genreCounts[cats] ?? 0) + 1;
+              genreCounts[cats] = (genreCounts[cats] ?? 0) + weight;
             }
 
             final auths = data['authors'];
@@ -161,25 +169,21 @@ class _SearchScreenState extends State<SearchScreen> {
                 if (authName.isNotEmpty &&
                     authName != 'Unknown Author' &&
                     authName != 'Unknown') {
-                  authorCounts[authName] = (authorCounts[authName] ?? 0) + 1;
+                  authorCounts[authName] = (authorCounts[authName] ?? 0) + weight;
                 }
               }
             } else if (auths is String &&
                 auths.trim().isNotEmpty &&
                 auths != 'Unknown Author' &&
                 auths != 'Unknown') {
-              authorCounts[auths] = (authorCounts[auths] ?? 0) + 1;
+              authorCounts[auths] = (authorCounts[auths] ?? 0) + weight;
             }
           }
 
           List<dynamic> combinedRecommendations = [];
 
-          if (genreCounts.isNotEmpty) {
-            var sortedGenres = genreCounts.entries.toList()
-              ..sort((a, b) => b.value.compareTo(a.value));
-            var topGenres = sortedGenres.take(3).toList()..shuffle();
-            String selectedGenre = topGenres.first.key;
-
+          final selectedGenre = _weightedRandomSelect(genreCounts);
+          if (selectedGenre != null) {
             // Wait before genre call
             await Future.delayed(const Duration(milliseconds: 500));
             final genreRes = await BookApiService.getRecommendations(
@@ -188,12 +192,8 @@ class _SearchScreenState extends State<SearchScreen> {
             combinedRecommendations.addAll(_cleanAndFilterResults(genreRes));
           }
 
-          if (authorCounts.isNotEmpty) {
-            var sortedAuthors = authorCounts.entries.toList()
-              ..sort((a, b) => b.value.compareTo(a.value));
-            var topAuthors = sortedAuthors.take(3).toList()..shuffle();
-            String selectedAuthor = topAuthors.first.key;
-
+          final selectedAuthor = _weightedRandomSelect(authorCounts);
+          if (selectedAuthor != null) {
             // Wait before author call
             await Future.delayed(const Duration(milliseconds: 500));
             final authorRes = await BookApiService.getRecommendations(
@@ -222,6 +222,20 @@ class _SearchScreenState extends State<SearchScreen> {
     } finally {
       if (mounted) setState(() => _isLoadingRecs = false);
     }
+  }
+
+  String? _weightedRandomSelect(Map<String, int> weights) {
+    if (weights.isEmpty) return null;
+    int totalWeight = weights.values.fold(0, (sum, w) => sum + w);
+    int randomValue = Random().nextInt(totalWeight);
+    int currentSum = 0;
+    for (var entry in weights.entries) {
+      currentSum += entry.value;
+      if (randomValue < currentSum) {
+        return entry.key;
+      }
+    }
+    return weights.keys.first;
   }
 
   // ==========================================

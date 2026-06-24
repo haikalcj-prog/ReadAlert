@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../services/stats_service.dart';
 import '../services/level_up_service.dart';
@@ -107,7 +108,8 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   }
 
   Future<void> _claim(Map<String, dynamic> a) async {
-    AudioService.playAchievement();
+    // Sound is played inside the dialog's initState so it is perfectly
+    // synced with the popup animation and particle burst.
     final int rewardXp = (a['xp'] as num?)?.toInt() ?? 0;
     final String title = a['title']?.toString() ?? 'Achievement';
 
@@ -115,18 +117,10 @@ class _AchievementsScreenState extends State<AchievementsScreen>
 
     if (!mounted) return;
 
-    final String message = rewardXp > 0
-        ? '🎉 Claimed "$title"! +$rewardXp XP'
-        : '🎉 Claimed "$title" badge!';
+    // Show beautiful popup dialog
+    await _showBadgeClaimedDialog(a, rewardXp);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: accent,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
+    if (!mounted) return;
 
     if (result['leveledUp'] == true) {
       LevelUpService.showLevelUp(
@@ -139,6 +133,49 @@ class _AchievementsScreenState extends State<AchievementsScreen>
     // This prevents a delay where level-based achievements only appear after
     // leaving and reopening the profile/achievement pages.
     await _load();
+  }
+
+  Future<void> _showBadgeClaimedDialog(
+    Map<String, dynamic> a,
+    int rewardXp,
+  ) async {
+    final String title = a['title']?.toString() ?? 'Achievement';
+    final String description = a['description']?.toString() ?? '';
+    final String category = a['category']?.toString() ?? 'General';
+    final Color catColor = _categoryColor(category);
+
+    await showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Badge Claimed',
+      barrierColor: Colors.black87,
+      transitionDuration: const Duration(milliseconds: 420),
+      transitionBuilder: (context, anim, secondAnim, child) {
+        final curved = CurvedAnimation(
+          parent: anim,
+          curve: Curves.elasticOut,
+        );
+        return ScaleTransition(
+          scale: curved,
+          child: FadeTransition(
+            opacity: CurvedAnimation(parent: anim, curve: Curves.easeOut),
+            child: child,
+          ),
+        );
+      },
+      pageBuilder: (context, anim, secondAnim) {
+        return _BadgeClaimedDialog(
+          achievement: a,
+          rewardXp: rewardXp,
+          categoryColor: catColor,
+          category: category,
+          title: title,
+          description: description,
+          achievementAssetBuilder: (size) =>
+              _achievementAsset(a, size: size, fallbackSize: size * 0.65),
+        );
+      },
+    );
   }
 
   @override
@@ -779,3 +816,429 @@ class _AchievementsScreenState extends State<AchievementsScreen>
 }
 
 enum AchievementListType { ready, claimed, locked }
+
+// ─────────────────────────────────────────────
+// BADGE CLAIMED POPUP DIALOG
+// ─────────────────────────────────────────────
+class _BadgeClaimedDialog extends StatefulWidget {
+  final Map<String, dynamic> achievement;
+  final int rewardXp;
+  final Color categoryColor;
+  final String category;
+  final String title;
+  final String description;
+  final Widget Function(double size) achievementAssetBuilder;
+
+  const _BadgeClaimedDialog({
+    required this.achievement,
+    required this.rewardXp,
+    required this.categoryColor,
+    required this.category,
+    required this.title,
+    required this.description,
+    required this.achievementAssetBuilder,
+  });
+
+  @override
+  State<_BadgeClaimedDialog> createState() => _BadgeClaimedDialogState();
+}
+
+class _BadgeClaimedDialogState extends State<_BadgeClaimedDialog>
+    with TickerProviderStateMixin {
+  late AnimationController _shimmerCtrl;
+  late AnimationController _particleCtrl;
+  late AnimationController _xpBounceCtrl;
+  late Animation<double> _xpBounce;
+
+  static const Color cardColor = Color(0xFF1E293B);
+  static const Color gold = Color(0xFFFFBB33);
+
+  final List<_Particle> _particles = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Play the achievement sound exactly when the dialog opens so it
+    // is in sync with the elastic entry animation and particle burst.
+    AudioService.playAchievement();
+
+    _shimmerCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1800),
+    )..repeat();
+
+    _particleCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1600),
+    )..forward();
+
+    _xpBounceCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
+    _xpBounce = CurvedAnimation(parent: _xpBounceCtrl, curve: Curves.elasticOut);
+
+    // Delay the XP badge pop-in
+    Future.delayed(const Duration(milliseconds: 350), () {
+      if (mounted) _xpBounceCtrl.forward();
+    });
+
+    // Generate particles
+    final rng = Random();
+    for (int i = 0; i < 22; i++) {
+      _particles.add(_Particle(
+        dx: (rng.nextDouble() - 0.5) * 2,
+        dy: -(rng.nextDouble() * 0.8 + 0.3),
+        size: rng.nextDouble() * 7 + 4,
+        color: [
+          widget.categoryColor,
+          gold,
+          Colors.white,
+          const Color(0xFFD134B6),
+          const Color(0xFF06B6D4),
+        ][rng.nextInt(5)],
+        delay: rng.nextDouble() * 0.35,
+      ));
+    }
+  }
+
+  @override
+  void dispose() {
+    _shimmerCtrl.dispose();
+    _particleCtrl.dispose();
+    _xpBounceCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Particle layer
+            SizedBox(
+              width: 340,
+              height: 480,
+              child: AnimatedBuilder(
+                animation: _particleCtrl,
+                builder: (_, __) {
+                  return CustomPaint(
+                    painter: _ParticlePainter(
+                      particles: _particles,
+                      progress: _particleCtrl.value,
+                    ),
+                  );
+                },
+              ),
+            ),
+            // Main card
+            Container(
+              width: 320,
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 28),
+              decoration: BoxDecoration(
+                color: cardColor,
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(
+                  color: widget.categoryColor.withOpacity(0.45),
+                  width: 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: widget.categoryColor.withOpacity(0.28),
+                    blurRadius: 48,
+                    spreadRadius: 2,
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.55),
+                    blurRadius: 32,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Category pill
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: widget.categoryColor.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(999),
+                      border: Border.all(
+                        color: widget.categoryColor.withOpacity(0.35),
+                      ),
+                    ),
+                    child: Text(
+                      widget.category.toUpperCase(),
+                      style: TextStyle(
+                        color: widget.categoryColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Badge icon with shimmer glow
+                  AnimatedBuilder(
+                    animation: _shimmerCtrl,
+                    builder: (_, child) {
+                      return Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: RadialGradient(
+                            colors: [
+                              widget.categoryColor.withOpacity(
+                                0.25 + (_shimmerCtrl.value * 0.15),
+                              ),
+                              Colors.transparent,
+                            ],
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: widget.categoryColor.withOpacity(
+                                0.3 + (_shimmerCtrl.value * 0.25),
+                              ),
+                              blurRadius: 30 + (_shimmerCtrl.value * 20),
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Center(child: child),
+                      );
+                    },
+                    child: Container(
+                      width: 92,
+                      height: 92,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: [
+                            widget.categoryColor.withOpacity(0.35),
+                            widget.categoryColor.withOpacity(0.10),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        border: Border.all(
+                          color: widget.categoryColor.withOpacity(0.55),
+                          width: 2.5,
+                        ),
+                      ),
+                      child: Center(
+                        child: widget.achievementAssetBuilder(56),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  // Headline
+                  const Text(
+                    'Badge Claimed!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: -0.3,
+                      height: 1.1,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.description,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.45),
+                      fontSize: 13,
+                      height: 1.4,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 22),
+                  // XP reward badge
+                  if (widget.rewardXp > 0)
+                    ScaleTransition(
+                      scale: _xpBounce,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 22,
+                          vertical: 13,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [
+                              gold.withOpacity(0.20),
+                              widget.categoryColor.withOpacity(0.15),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          border: Border.all(
+                            color: gold.withOpacity(0.55),
+                            width: 1.5,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: gold.withOpacity(0.18),
+                              blurRadius: 20,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text('⚡', style: TextStyle(fontSize: 18)),
+                            const SizedBox(width: 8),
+                            Text(
+                              '+${widget.rewardXp} XP',
+                              style: const TextStyle(
+                                color: gold,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            const Text('⚡', style: TextStyle(fontSize: 18)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  if (widget.rewardXp <= 0)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 22,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: widget.categoryColor.withOpacity(0.10),
+                        border: Border.all(
+                          color: widget.categoryColor.withOpacity(0.30),
+                        ),
+                      ),
+                      child: Text(
+                        '🏅 Badge Collected',
+                        style: TextStyle(
+                          color: widget.categoryColor,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 24),
+                  // Dismiss button
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(999),
+                        gradient: LinearGradient(
+                          colors: [
+                            widget.categoryColor,
+                            widget.categoryColor.withOpacity(0.65),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: widget.categoryColor.withOpacity(0.35),
+                            blurRadius: 16,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: const Text(
+                        'Awesome! 🎉',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
+// PARTICLE DATA MODEL
+// ─────────────────────────────────────────────
+class _Particle {
+  final double dx;
+  final double dy;
+  final double size;
+  final Color color;
+  final double delay;
+
+  const _Particle({
+    required this.dx,
+    required this.dy,
+    required this.size,
+    required this.color,
+    required this.delay,
+  });
+}
+
+// ─────────────────────────────────────────────
+// PARTICLE PAINTER
+// ─────────────────────────────────────────────
+class _ParticlePainter extends CustomPainter {
+  final List<_Particle> particles;
+  final double progress;
+
+  const _ParticlePainter({required this.particles, required this.progress});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height * 0.42);
+
+    for (final p in particles) {
+      final t = ((progress - p.delay) / (1.0 - p.delay)).clamp(0.0, 1.0);
+      if (t <= 0) continue;
+
+      final opacity = (1.0 - t).clamp(0.0, 1.0);
+      final x = center.dx + p.dx * size.width * 0.42 * t;
+      final y = center.dy + p.dy * size.height * 0.55 * t + 80 * t * t;
+      final paint = Paint()
+        ..color = p.color.withOpacity(opacity * 0.85)
+        ..style = PaintingStyle.fill;
+
+      canvas.drawCircle(Offset(x, y), p.size * (1 - t * 0.5), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_ParticlePainter old) => old.progress != progress;
+}
+
