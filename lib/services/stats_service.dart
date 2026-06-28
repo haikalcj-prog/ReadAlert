@@ -844,11 +844,7 @@ class StatsService {
       }, SetOptions(merge: true));
     });
 
-    return {
-      'leveledUp': leveledUp,
-      'newLevel': newLevel,
-      'newTitle': newTitle,
-    };
+    return {'leveledUp': leveledUp, 'newLevel': newLevel, 'newTitle': newTitle};
   }
 
   static Future<void> equipBadge(String badgeId) async {

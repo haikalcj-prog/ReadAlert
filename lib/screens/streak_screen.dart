@@ -19,7 +19,7 @@ class StreakScreen extends StatefulWidget {
 class _StreakScreenState extends State<StreakScreen>
     with SingleTickerProviderStateMixin {
   Set<String> _readingDays = {};
-  bool _isLoading = true;
+  bool _isLoadingReadingDays = true;
   DateTime _displayMonth = DateTime.now();
 
   // Display-only current streak. This prevents StreakScreen from showing an
@@ -61,21 +61,36 @@ class _StreakScreenState extends State<StreakScreen>
   }
 
   Future<void> _load() async {
-    final days = await StatsService.getReadingDays();
+    final readingDaysFuture = StatsService.getReadingDays();
 
     // fetchAllStats() returns the corrected display streak, not the stale
     // Firestore currentStreak value.
-    Map<String, dynamic> stats = {};
+    final statsFuture = StatsService.fetchAllStats().catchError(
+      (_) => <String, dynamic>{},
+    );
+
     try {
-      stats = await StatsService.fetchAllStats();
-    } catch (_) {}
+      final days = await readingDaysFuture;
+
+      if (mounted) {
+        setState(() {
+          _readingDays = days;
+          _isLoadingReadingDays = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isLoadingReadingDays = false);
+      }
+    }
+
+    final stats = await statsFuture;
+    if (stats.isEmpty) return;
 
     if (mounted) {
       setState(() {
-        _readingDays = days;
         _displayCurrentStreak = stats['currentStreak'] ?? widget.currentStreak;
         _displayLongestStreak = stats['longestStreak'] ?? widget.longestStreak;
-        _isLoading = false;
       });
     }
   }
@@ -102,7 +117,7 @@ class _StreakScreenState extends State<StreakScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      body: _isLoading
+      body: _isLoadingReadingDays
           ? const Center(
               child: CircularProgressIndicator(color: accent, strokeWidth: 2),
             )

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
+import 'screens/welcome_screen.dart';
 import 'screens/main_screen.dart';
 import 'services/notification_service.dart';
 import 'services/level_up_service.dart';
@@ -60,8 +60,8 @@ class ReadAlertApp extends StatelessWidget {
             return const MainScreen();
           }
 
-          // Logged out or never logged in → go to login
-          return const LoginScreen();
+          // Logged out or never logged in → go to welcome
+          return const WelcomeScreen();
         },
       ),
     );

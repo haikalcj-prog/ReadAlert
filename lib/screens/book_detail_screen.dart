@@ -7,6 +7,7 @@ import 'package:share_plus/share_plus.dart';
 import '../services/library_service.dart';
 import '../services/level_up_service.dart';
 import '../services/audio_service.dart';
+import '../widgets/xp_toast.dart';
 import 'full_book_info_screen.dart';
 
 class BookDetailScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   final Color bgColor = const Color(0xFF111118);
   final Color cardColor = const Color(0xFF1A1A26);
   final Color accentColor = const Color(0xFFE91E63);
+  final Color xpToastColor = const Color(0xFF6366F1);
 
   Map<String, dynamic> get _volumeInfo {
     if (widget.bookData.containsKey('volumeInfo')) {
@@ -408,6 +410,39 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     }
   }
 
+  void _showXpToast(Map<String, dynamic> result, {double topOffset = 16}) {
+    AudioService.playXpGain();
+    final overlay = Overlay.of(context);
+    final entry = OverlayEntry(
+      builder: (ctx) => Positioned(
+        top: MediaQuery.of(context).padding.top + topOffset,
+        left: 20,
+        right: 20,
+        child: XpToastWidget(result: result, accentColor: xpToastColor),
+      ),
+    );
+    overlay.insert(entry);
+    Future.delayed(const Duration(seconds: 3), () {
+      if (entry.mounted) entry.remove();
+    });
+  }
+
+  void _showStatusToast(String status) {
+    final overlay = Overlay.of(context);
+    final entry = OverlayEntry(
+      builder: (ctx) => Positioned(
+        top: MediaQuery.of(context).padding.top + 16,
+        left: 20,
+        right: 20,
+        child: _StatusChangeToast(status: status),
+      ),
+    );
+    overlay.insert(entry);
+    Future.delayed(const Duration(milliseconds: 2600), () {
+      if (entry.mounted) entry.remove();
+    });
+  }
+
   Future<void> _updateStatus(String status) async {
     setState(() => _isAdding = true);
     try {
@@ -417,28 +452,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       );
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Status changed to "$status"!'),
-            backgroundColor: accentColor,
-          ),
-        );
-
-        final int xpGained = result['xpGained'] ?? 0;
+        final int xpGained = result['xpGained'] is int
+            ? result['xpGained'] as int
+            : int.tryParse(result['xpGained']?.toString() ?? '') ?? 0;
+        _showStatusToast(status);
         if (xpGained != 0) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                xpGained > 0
-                    ? '+$xpGained XP Earned!'
-                    : '$xpGained XP Reverted!',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              backgroundColor: xpGained > 0
-                  ? Colors.greenAccent.shade700
-                  : Colors.orangeAccent.shade700,
-            ),
-          );
+          _showXpToast(result, topOffset: 92);
         }
 
         if (result['leveledUp'] == true) {
@@ -1633,6 +1652,201 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 // ════════════════════════════════════════════════════════════
 // Animated Add to Library Button
 // ════════════════════════════════════════════════════════════
+class _StatusChangeToast extends StatefulWidget {
+  final String status;
+
+  const _StatusChangeToast({required this.status});
+
+  @override
+  State<_StatusChangeToast> createState() => _StatusChangeToastState();
+}
+
+class _StatusChangeToastState extends State<_StatusChangeToast>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  late final Animation<double> _fade;
+  late final Animation<Offset> _slide;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+    );
+    _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic);
+    _slide = Tween<Offset>(
+      begin: const Offset(0, -0.35),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic));
+    _ctrl.forward();
+    Future.delayed(const Duration(milliseconds: 2100), () {
+      if (mounted) _ctrl.reverse();
+    });
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final config = _StatusToastConfig.forStatus(widget.status);
+
+    return SlideTransition(
+      position: _slide,
+      child: FadeTransition(
+        opacity: _fade,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(1.2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: LinearGradient(
+                colors: [
+                  config.primary.withValues(alpha: 0.9),
+                  config.secondary.withValues(alpha: 0.45),
+                  Colors.white.withValues(alpha: 0.12),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: config.primary.withValues(alpha: 0.28),
+                  blurRadius: 26,
+                  offset: const Offset(0, 10),
+                ),
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.36),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                color: const Color(0xFF121826).withValues(alpha: 0.96),
+                borderRadius: BorderRadius.circular(17),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [config.primary, config.secondary],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(13),
+                      boxShadow: [
+                        BoxShadow(
+                          color: config.primary.withValues(alpha: 0.36),
+                          blurRadius: 14,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Icon(config.icon, color: Colors.white, size: 22),
+                  ),
+                  const SizedBox(width: 13),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Status updated',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.58),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          widget.status,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: config.primary.withValues(alpha: 0.14),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.check_rounded,
+                      color: config.primary,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _StatusToastConfig {
+  final Color primary;
+  final Color secondary;
+  final IconData icon;
+
+  const _StatusToastConfig({
+    required this.primary,
+    required this.secondary,
+    required this.icon,
+  });
+
+  static _StatusToastConfig forStatus(String status) {
+    switch (status) {
+      case 'Want to read':
+        return const _StatusToastConfig(
+          primary: Color(0xFF8B5CF6),
+          secondary: Color(0xFF6366F1),
+          icon: Icons.bookmark_rounded,
+        );
+      case 'Reading':
+        return const _StatusToastConfig(
+          primary: Color(0xFF14B8A6),
+          secondary: Color(0xFF38BDF8),
+          icon: Icons.auto_stories_rounded,
+        );
+      case 'Finished':
+        return const _StatusToastConfig(
+          primary: Color(0xFF6366F1),
+          secondary: Color(0xFFE879F9),
+          icon: Icons.check_circle_rounded,
+        );
+      default:
+        return const _StatusToastConfig(
+          primary: Color(0xFF6366F1),
+          secondary: Color(0xFF8B5CF6),
+          icon: Icons.swap_horiz_rounded,
+        );
+    }
+  }
+}
+
 class _AddToLibraryButton extends StatefulWidget {
   final bool isInLibrary;
   final bool isLoading;

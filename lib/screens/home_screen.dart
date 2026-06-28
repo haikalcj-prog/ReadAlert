@@ -11,6 +11,7 @@ import '../services/quest_service.dart';
 import '../services/level_up_service.dart';
 import '../services/audio_service.dart';
 import '../widgets/level_up_dialog.dart';
+import '../widgets/xp_toast.dart';
 import 'book_detail_screen.dart';
 
 // TierTheme and kTierThemes are now imported from
@@ -262,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         top: MediaQuery.of(context).padding.top + 16,
         left: 20,
         right: 20,
-        child: _XpToastWidget(result: result, accentColor: _indigo),
+        child: XpToastWidget(result: result, accentColor: _indigo),
       ),
     );
     overlay.insert(entry);
@@ -274,7 +275,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // ── QUEST POPUP ─────────────────────────────────────────
   void _showQuestDialog() {
     final th = kTierThemes[_currentTier];
-    Future<List<QuestStatus>> questFuture = QuestService.fetchQuestStatuses();
+    List<QuestStatus>? cachedQuests;
+    Future<List<QuestStatus>> questFuture = QuestService.fetchQuestStatuses()
+        .then((quests) {
+          cachedQuests = quests;
+          return quests;
+        });
 
     showModalBottomSheet(
       context: context,
@@ -284,8 +290,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         builder: (ctx, setLocal) {
           Future<void> refresh() async {
             setLocal(() {
-              questFuture = QuestService.fetchQuestStatuses();
+              questFuture = QuestService.fetchQuestStatuses().then((quests) {
+                cachedQuests = quests;
+                return quests;
+              });
             });
+            await questFuture;
           }
 
           return Container(
@@ -305,8 +315,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               top: false,
               child: FutureBuilder<List<QuestStatus>>(
                 future: questFuture,
+                initialData: cachedQuests,
                 builder: (context, snap) {
-                  if (snap.connectionState == ConnectionState.waiting) {
+                  if (snap.connectionState == ConnectionState.waiting &&
+                      cachedQuests == null) {
                     return SizedBox(
                       height: 260,
                       child: Center(
@@ -328,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     );
                   }
 
-                  final quests = snap.data ?? [];
+                  final quests = snap.data ?? cachedQuests ?? [];
                   final daily = quests
                       .where((q) => q.type == QuestType.daily)
                       .toList();
@@ -3025,119 +3037,4 @@ class _StarfieldPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_StarfieldPainter old) => old.tier != tier;
-}
-
-// ════════════════════════════════════════════════════════════
-//  XP TOAST
-// ════════════════════════════════════════════════════════════
-class _XpToastWidget extends StatefulWidget {
-  final Map<String, dynamic> result;
-  final Color accentColor;
-  const _XpToastWidget({required this.result, required this.accentColor});
-
-  @override
-  State<_XpToastWidget> createState() => _XpToastWidgetState();
-}
-
-class _XpToastWidgetState extends State<_XpToastWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-  late Animation<double> _fade;
-  late Animation<Offset> _slide;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-    _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeOut);
-    _slide = Tween<Offset>(
-      begin: const Offset(0, -0.5),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOut));
-    _ctrl.forward();
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) _ctrl.reverse();
-    });
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final reasons = widget.result['reasons'] as List<String>? ?? [];
-    return SlideTransition(
-      position: _slide,
-      child: FadeTransition(
-        opacity: _fade,
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1E293B),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: widget.accentColor.withOpacity(0.4)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.4),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: widget.accentColor.withOpacity(0.15),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.auto_awesome_rounded,
-                    color: widget.accentColor,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '+${widget.result['xpGained']} XP earned!',
-                        style: TextStyle(
-                          color: widget.accentColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                      if (reasons.isNotEmpty)
-                        Text(
-                          reasons.join(' · '),
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.4),
-                            fontSize: 11,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

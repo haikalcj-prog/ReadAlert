@@ -17,7 +17,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
     with SingleTickerProviderStateMixin {
   List<String> _claimed = [];
   late Map<String, dynamic> _stats;
-  bool _isLoading = true;
+  bool _isLoading = false;
   late TabController _tabCtrl;
 
   static const Color bgColor = Color(0xFF0F172A);
@@ -33,6 +33,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   void initState() {
     super.initState();
     _stats = Map<String, dynamic>.from(widget.stats);
+    _claimed = List<String>.from(_stats['claimedAchievements'] ?? []);
     _tabCtrl = TabController(length: 3, vsync: this);
     _load(showLoading: false);
   }
