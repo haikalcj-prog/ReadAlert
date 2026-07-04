@@ -80,6 +80,8 @@ class LibraryService {
       'publishedDate': publishedDate,
       'categories': categories,
       'industryIdentifiers': industryIdentifiers,
+      'isManual': false,
+      'verifiedPageCount': totalPages,
       'bookUrl': bookUrl,
       'currentPage': initialProgress,
       'bestProgress': initialProgress,
@@ -169,6 +171,8 @@ class LibraryService {
       'industryIdentifiers': identifiers,
       'description': description,
       'pageCount': pageCount,
+      'isManual': true,
+      'manualPageXpCap': XpService.manualBookPageXpCap,
       'location': location,
       'bookUrl': bookUrl,
       'status': status,
@@ -200,7 +204,7 @@ class LibraryService {
         : false;
 
     final xpResult = await XpService.awardXp(
-      pagesRead: initialProgress,
+      pagesRead: XpService.capManualPageXp(initialProgress),
       isNewDay: isNewDay,
       justFinished: status == 'Finished',
       addedToLibrary: true,
@@ -214,24 +218,52 @@ class LibraryService {
     }
   }
 
-  static Future<void> removeBook(String bookId) async {
+  static Future<Map<String, dynamic>> removeBook(String bookId) async {
     final userRef = _firestore.collection('users').doc(_uid);
     final bookRef = userRef.collection('library').doc(bookId);
+    int xpToDeduct = 0;
+    final List<String> reasons = [];
 
     try {
       await _firestore.runTransaction((transaction) async {
         final bookSnap = await transaction.get(bookRef);
-        if (!bookSnap.exists) return;
+        if (!bookSnap.exists) {
+          xpToDeduct = 0;
+          return;
+        }
 
         final bookData = bookSnap.data() as Map<String, dynamic>;
         final int bestProgress =
             bookData['bestProgress'] ?? bookData['currentPage'] ?? 0;
         final String status = bookData['status'] ?? 'Want to read';
         final List<dynamic> onShelvesIds = bookData['onShelves'] ?? [];
+        final bool isManualBook = XpService.isManualBookData(
+          bookData,
+          bookId: bookId,
+        );
+        final Map<String, dynamic> xpBookData = Map<String, dynamic>.from(
+          bookData,
+        );
+        if (!isManualBook && !xpBookData.containsKey('verifiedPageCount')) {
+          xpBookData['verifiedPageCount'] = bookData['pageCount'];
+        }
+        final int pageXpProgress = XpService.pageXpProgressForBook(
+          progress: bestProgress,
+          bookData: xpBookData,
+          bookId: bookId,
+        );
 
         // 1. DEDUCT XP
-        int xpToDeduct = 5 + bestProgress;
-        if (status == 'Finished') xpToDeduct += 50;
+        xpToDeduct = 5 + pageXpProgress;
+        reasons.clear();
+        reasons.add('-5 XP (added book)');
+        if (pageXpProgress > 0) {
+          reasons.add('-$pageXpProgress XP (pages)');
+        }
+        if (status == 'Finished') {
+          xpToDeduct += 50;
+          reasons.add('-50 XP (finished)');
+        }
 
         final userSnap = await transaction.get(userRef);
         final int currentXp = (userSnap.data() ?? {})['totalXp'] ?? 0;
@@ -254,6 +286,8 @@ class LibraryService {
           });
         }
       });
+
+      return {'xpGained': -xpToDeduct, 'reasons': reasons, 'leveledUp': false};
     } catch (e) {
       debugPrint('Error removing book and updating shelves: $e');
       throw Exception('Failed to fully remove book from library and shelves.');
@@ -301,13 +335,39 @@ class LibraryService {
           parseInt(oldData['currentPage']),
         );
         final String oldStatus = oldData['status'] ?? 'Want to read';
+        final bool isManualBook = XpService.isManualBookData(
+          oldData,
+          bookId: bookId,
+        );
+        final int trustedPageCount = isManualBook
+            ? 0
+            : parseInt(
+                oldData['verifiedPageCount'],
+                parseInt(oldData['pageCount']),
+              );
+        final Map<String, dynamic> xpBookData = Map<String, dynamic>.from(
+          oldData,
+        );
+        if (!isManualBook && trustedPageCount > 0) {
+          xpBookData['verifiedPageCount'] = trustedPageCount;
+        }
 
-        int oldXpYield = oldBestProgress;
+        int oldXpYield = XpService.pageXpProgressForBook(
+          progress: oldBestProgress,
+          bookData: xpBookData,
+          bookId: bookId,
+        );
         if (oldStatus == 'Finished') oldXpYield += 50;
 
         final Map<String, dynamic> safeUpdates = Map<String, dynamic>.from(
           updates,
         );
+        safeUpdates.remove('verifiedPageCount');
+        if (!isManualBook &&
+            !oldData.containsKey('verifiedPageCount') &&
+            trustedPageCount > 0) {
+          safeUpdates['verifiedPageCount'] = trustedPageCount;
+        }
 
         int requestedProgress = safeUpdates.containsKey('currentPage')
             ? parseInt(safeUpdates['currentPage'])
@@ -382,7 +442,11 @@ class LibraryService {
           ]);
         }
 
-        int newXpYield = newBestProgress;
+        int newXpYield = XpService.pageXpProgressForBook(
+          progress: newBestProgress,
+          bookData: xpBookData,
+          bookId: bookId,
+        );
         if (newStatus == 'Finished') newXpYield += 50;
 
         xpDifference = newXpYield - oldXpYield;

@@ -1755,15 +1755,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                             ),
                             const SizedBox(width: 12),
                             Expanded(
-                              child: ElevatedButton.icon(
+                              child: ElevatedButton(
                                 onPressed: () =>
                                     Navigator.pop(dialogContext, true),
-                                icon: const Icon(
-                                  Icons.check_rounded,
-                                  size: 17,
-                                  color: Colors.white,
-                                ),
-                                label: const Text('Log Out'),
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 13,
@@ -1778,6 +1772,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
+                                child: const Text('Log Out'),
                               ),
                             ),
                           ],

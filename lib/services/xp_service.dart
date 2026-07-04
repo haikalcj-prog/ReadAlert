@@ -4,6 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 class XpService {
   static final _firestore = FirebaseFirestore.instance;
   static final _auth = FirebaseAuth.instance;
+  static const int manualBookPageXpCap = 1000;
+  static final RegExp _uuidPattern = RegExp(
+    r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+  );
 
   static String get _uid {
     final user = _auth.currentUser;
@@ -104,6 +108,38 @@ class XpService {
     if (value is num) return value.toInt();
     if (value is String) return int.tryParse(value);
     return null;
+  }
+
+  static bool isManualBookData(
+    Map<String, dynamic> bookData, {
+    String? bookId,
+  }) {
+    if (bookData.containsKey('isManual')) return bookData['isManual'] == true;
+    if (bookData['manualEntry'] == true) return true;
+
+    // Older manual books were saved with generated UUID document IDs before
+    // the explicit isManual flag existed.
+    return bookId != null && _uuidPattern.hasMatch(bookId);
+  }
+
+  static int capManualPageXp(int pages) {
+    if (pages <= 0) return 0;
+    return pages.clamp(0, manualBookPageXpCap).toInt();
+  }
+
+  static int pageXpProgressForBook({
+    required int progress,
+    required Map<String, dynamic> bookData,
+    String? bookId,
+  }) {
+    if (progress <= 0) return 0;
+    if (isManualBookData(bookData, bookId: bookId)) {
+      return capManualPageXp(progress);
+    }
+
+    final verifiedPageCount = _tryParseInt(bookData['verifiedPageCount']);
+    if (verifiedPageCount == null || verifiedPageCount <= 0) return 0;
+    return progress.clamp(0, verifiedPageCount).toInt();
   }
 
   static int _clampTierIndex(int tierIndex) {

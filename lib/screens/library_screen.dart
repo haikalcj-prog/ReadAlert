@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../services/library_service.dart';
+import '../services/xp_service.dart';
+import '../widgets/level_up_dialog.dart';
 import 'book_detail_screen.dart';
 import 'add_book_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,7 +48,11 @@ Widget _buildCoverImage(String? url, double width, double height) {
           end: Alignment.bottomRight,
         ),
       ),
-      child: const Icon(Icons.menu_book_rounded, color: Color(0xFF334155), size: 32),
+      child: const Icon(
+        Icons.menu_book_rounded,
+        color: Color(0xFF334155),
+        size: 32,
+      ),
     );
   }
   if (url.startsWith('http')) {
@@ -96,6 +102,10 @@ Color _bookStatusColor(String status) {
   if (status == 'Reading') return readColor;
   if (status == 'Finished') return finColor;
   return wantColor;
+}
+
+Color _vividRankColor(TierTheme theme) {
+  return Color.lerp(theme.primary, theme.secondary, 0.28) ?? theme.primary;
 }
 
 IconData _bookStatusIcon(String status) {
@@ -153,7 +163,10 @@ class LibraryScreen extends StatefulWidget {
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
-  void _openLibrarySearch(List<QueryDocumentSnapshot> allBooks) {
+  void _openLibrarySearch(
+    List<QueryDocumentSnapshot> allBooks,
+    Color rankAccent,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -162,6 +175,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         allBooks: allBooks,
         bgColor: bgColor,
         cardColor: cardColor,
+        accentColor: rankAccent,
       ),
     );
   }
@@ -178,7 +192,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (context, setModalState) {
           return Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(ctx).viewInsets.bottom,
+            ),
             child: Container(
               padding: const EdgeInsets.fromLTRB(24, 20, 24, 36),
               decoration: const BoxDecoration(
@@ -240,14 +256,20 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       ),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.06),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide(color: shelfColor.withOpacity(0.7), width: 1.5),
+                        borderSide: BorderSide(
+                          color: shelfColor.withOpacity(0.7),
+                          width: 1.5,
+                        ),
                       ),
                     ),
                   ),
@@ -270,14 +292,19 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               final name = nameCtrl.text.trim();
                               if (name.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Shelf name cannot be empty')),
+                                  const SnackBar(
+                                    content: Text('Shelf name cannot be empty'),
+                                  ),
                                 );
                                 return;
                               }
                               setModalState(() => isSaving = true);
                               try {
                                 if (isEdit) {
-                                  await LibraryService.renameShelf(editShelfId, name);
+                                  await LibraryService.renameShelf(
+                                    editShelfId,
+                                    name,
+                                  );
                                 } else {
                                   await LibraryService.createShelf(name);
                                 }
@@ -286,7 +313,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               } catch (e) {
                                 if (!ctx.mounted) return;
                                 ScaffoldMessenger.of(ctx).showSnackBar(
-                                  SnackBar(content: Text('Error: $e'), backgroundColor: Colors.redAccent),
+                                  SnackBar(
+                                    content: Text('Error: $e'),
+                                    backgroundColor: Colors.redAccent,
+                                  ),
                                 );
                                 setModalState(() => isSaving = false);
                               }
@@ -355,7 +385,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     color: shelfColor.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Icon(Icons.collections_bookmark_rounded, color: shelfColor, size: 20),
+                  child: Icon(
+                    Icons.collections_bookmark_rounded,
+                    color: shelfColor,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -391,7 +425,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
               subtitle: 'Update the shelf title',
               onTap: () {
                 Navigator.pop(ctx);
-                _showCreateShelfModal(editShelfId: shelfId, currentName: shelfName);
+                _showCreateShelfModal(
+                  editShelfId: shelfId,
+                  currentName: shelfName,
+                );
               },
             ),
             const SizedBox(height: 6),
@@ -403,7 +440,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
               titleColor: Colors.redAccent,
               onTap: () {
                 Navigator.pop(ctx);
-                _showDeleteShelfDialog(shelfId: shelfId, shelfName: shelfName, bookCount: bookCount);
+                _showDeleteShelfDialog(
+                  shelfId: shelfId,
+                  shelfName: shelfName,
+                  bookCount: bookCount,
+                );
               },
             ),
           ],
@@ -465,7 +506,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded, color: Colors.white.withOpacity(0.2), size: 14),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Colors.white.withOpacity(0.2),
+              size: 14,
+            ),
           ],
         ),
       ),
@@ -493,7 +538,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text('Cancel', style: TextStyle(color: Colors.white.withOpacity(0.5))),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white.withOpacity(0.5)),
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -501,10 +549,19 @@ class _LibraryScreenState extends State<LibraryScreen> {
               if (!mounted || !ctx.mounted) return;
               Navigator.pop(ctx);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Deleted "$shelfName".'), backgroundColor: Colors.redAccent),
+                SnackBar(
+                  content: Text('Deleted "$shelfName".'),
+                  backgroundColor: Colors.redAccent,
+                ),
               );
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: const Text(
+              'Delete',
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -513,166 +570,295 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: bgColor,
-      body: StreamBuilder<QuerySnapshot>(
-        stream: LibraryService.getLibraryStream(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(color: accentColor, strokeWidth: 2.5),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Loading your library…',
-                    style: TextStyle(color: Colors.white.withOpacity(0.45), fontSize: 14),
-                  ),
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+
+    return StreamBuilder<DocumentSnapshot>(
+      stream: uid == null
+          ? null
+          : FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+      builder: (context, userSnap) {
+        final userData = userSnap.data?.data() as Map<String, dynamic>?;
+        final rawXp = userData?['totalXp'] ?? userData?['points'] ?? 0;
+        final totalXp = rawXp is num ? rawXp.toInt() : 0;
+        final levelData = XpService.calculateLevel(totalXp);
+        final currentTier = levelData['tierIndex'] as int;
+        final rankBookTier = XpService.resolveEquippedRankBookIndex(
+          userData?['equippedRankBookIndex'],
+          currentTier,
+        );
+        final theme = kTierThemes[rankBookTier];
+        final rankAccent = _vividRankColor(theme);
+
+        return Scaffold(
+          backgroundColor: theme.bgDark,
+          body: AnimatedContainer(
+            duration: const Duration(milliseconds: 450),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.lerp(theme.bgDark, rankAccent, 0.18)!,
+                  Color.lerp(theme.bgMid, rankAccent, 0.14)!,
+                  bgColor,
                 ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-            );
-          }
-
-          final List<QueryDocumentSnapshot> docs =
-              snapshot.hasData ? snapshot.data!.docs : [];
-
-          final wantToRead = docs
-              .where((d) => (d.data() as Map<String, dynamic>)['status'] == 'Want to read')
-              .toList();
-          final reading = docs
-              .where((d) => (d.data() as Map<String, dynamic>)['status'] == 'Reading')
-              .toList();
-          final finished = docs
-              .where((d) => (d.data() as Map<String, dynamic>)['status'] == 'Finished')
-              .toList();
-
-          Map<String, List<QueryDocumentSnapshot>> authorsMap = {};
-          Map<String, List<QueryDocumentSnapshot>> genresMap = {};
-
-          for (var doc in docs) {
-            final data = doc.data() as Map<String, dynamic>;
-            String aStr = data['authors']?.toString() ?? 'Unknown';
-            for (var a in aStr.split(',').map((s) => s.trim())) {
-              if (a.isNotEmpty) authorsMap.putIfAbsent(a, () => []).add(doc);
-            }
-            String gStr = data['categories']?.toString() ?? 'Uncategorized';
-            genresMap.putIfAbsent(gStr, () => []).add(doc);
-          }
-
-          final Map<String, int> shelfCounts = {};
-          for (final doc in docs) {
-            final data = doc.data() as Map<String, dynamic>;
-            final onShelves = List<String>.from(data['onShelves'] ?? []);
-            for (final shelfId in onShelves.toSet()) {
-              shelfCounts[shelfId] = (shelfCounts[shelfId] ?? 0) + 1;
-            }
-          }
-
-          return CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              // ── HEADER ──
-              SliverToBoxAdapter(child: _buildHeader(docs, context)),
-
-              // ── STATS BAR ──
-              if (docs.isNotEmpty)
-                SliverToBoxAdapter(child: _buildStatsBar(wantToRead.length, reading.length, finished.length)),
-
-              // ── WANT TO READ ──
-              SliverToBoxAdapter(
-                child: _buildSectionHeader(context, 'Want to Read', wantColor, wantToRead, Icons.bookmark_rounded),
-              ),
-              SliverToBoxAdapter(
-                child: wantToRead.isEmpty
-                    ? _buildEmptyPlaceholder('Want to Read', wantColor, Icons.bookmark_add_outlined)
-                    : _buildHorizontalList(context, wantToRead, wantColor, showProgress: false),
-              ),
-
-              // ── READING ──
-              SliverToBoxAdapter(
-                child: _buildSectionHeader(context, 'Reading', readColor, reading, Icons.auto_stories_rounded),
-              ),
-              SliverToBoxAdapter(
-                child: reading.isEmpty
-                    ? _buildEmptyPlaceholder('Reading', readColor, Icons.import_contacts_outlined)
-                    : _buildHorizontalList(context, reading, readColor, showProgress: true),
-              ),
-
-              // ── FINISHED ──
-              SliverToBoxAdapter(
-                child: _buildSectionHeader(context, 'Finished', finColor, finished, Icons.check_circle_rounded),
-              ),
-              SliverToBoxAdapter(
-                child: finished.isEmpty
-                    ? _buildEmptyPlaceholder('Finished', finColor, Icons.done_all_rounded)
-                    : _buildHorizontalList(context, finished, finColor, showProgress: false),
-              ),
-
-              // ── BROWSE BY ──
-              SliverToBoxAdapter(
-                child: _buildBrowseBySection(context, genresMap, authorsMap),
-              ),
-
-              // ── MY SHELVES HEADER ──
-              SliverToBoxAdapter(child: _buildShelvesHeader()),
-
-              // ── MY SHELVES LIST ──
-              SliverToBoxAdapter(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: LibraryService.getShelvesStream(),
-                  builder: (context, shelfSnap) {
-                    if (shelfSnap.connectionState == ConnectionState.waiting) {
-                      return Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Center(
-                          child: CircularProgressIndicator(color: shelfColor, strokeWidth: 2),
+            ),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: LibraryService.getLibraryStream(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                          color: rankAccent,
+                          strokeWidth: 2.5,
                         ),
-                      );
-                    }
-
-                    if (!shelfSnap.hasData || shelfSnap.data!.docs.isEmpty) {
-                      return _buildEmptyShelvesPlaceholder();
-                    }
-
-                    final shelves = shelfSnap.data!.docs.toList();
-                    shelves.sort(
-                      (a, b) => (a['name'] ?? '').toString().toLowerCase().compareTo(
-                            (b['name'] ?? '').toString().toLowerCase(),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Loading your library…',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.45),
+                            fontSize: 14,
                           ),
-                    );
+                        ),
+                      ],
+                    ),
+                  );
+                }
 
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: shelves.length,
-                      itemBuilder: (ctx, i) {
-                        final sData = shelves[i].data() as Map<String, dynamic>;
-                        final sId = shelves[i].id;
-                        final sName = sData['name'] ?? 'Unnamed';
-                        final shelfBookCount = shelfCounts[sId] ?? 0;
-                        return _buildShelfCard(
-                          context,
-                          sId: sId,
-                          sName: sName,
-                          shelfBookCount: shelfBookCount,
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
+                final List<QueryDocumentSnapshot> docs = snapshot.hasData
+                    ? snapshot.data!.docs
+                    : [];
 
-              const SliverToBoxAdapter(child: SizedBox(height: 40)),
-            ],
-          );
-        },
-      ),
+                final wantToRead = docs
+                    .where(
+                      (d) =>
+                          (d.data() as Map<String, dynamic>)['status'] ==
+                          'Want to read',
+                    )
+                    .toList();
+                final reading = docs
+                    .where(
+                      (d) =>
+                          (d.data() as Map<String, dynamic>)['status'] ==
+                          'Reading',
+                    )
+                    .toList();
+                final finished = docs
+                    .where(
+                      (d) =>
+                          (d.data() as Map<String, dynamic>)['status'] ==
+                          'Finished',
+                    )
+                    .toList();
+
+                Map<String, List<QueryDocumentSnapshot>> authorsMap = {};
+                Map<String, List<QueryDocumentSnapshot>> genresMap = {};
+
+                for (var doc in docs) {
+                  final data = doc.data() as Map<String, dynamic>;
+                  String aStr = data['authors']?.toString() ?? 'Unknown';
+                  for (var a in aStr.split(',').map((s) => s.trim())) {
+                    if (a.isNotEmpty)
+                      authorsMap.putIfAbsent(a, () => []).add(doc);
+                  }
+                  String gStr =
+                      data['categories']?.toString() ?? 'Uncategorized';
+                  genresMap.putIfAbsent(gStr, () => []).add(doc);
+                }
+
+                final Map<String, int> shelfCounts = {};
+                for (final doc in docs) {
+                  final data = doc.data() as Map<String, dynamic>;
+                  final onShelves = List<String>.from(data['onShelves'] ?? []);
+                  for (final shelfId in onShelves.toSet()) {
+                    shelfCounts[shelfId] = (shelfCounts[shelfId] ?? 0) + 1;
+                  }
+                }
+
+                return CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    // ── HEADER ──
+                    SliverToBoxAdapter(
+                      child: _buildHeader(docs, context, theme, rankAccent),
+                    ),
+
+                    // ── STATS BAR ──
+                    if (docs.isNotEmpty)
+                      SliverToBoxAdapter(
+                        child: _buildStatsBar(
+                          wantToRead.length,
+                          reading.length,
+                          finished.length,
+                        ),
+                      ),
+
+                    // ── WANT TO READ ──
+                    SliverToBoxAdapter(
+                      child: _buildSectionHeader(
+                        context,
+                        'Want to Read',
+                        wantColor,
+                        wantToRead,
+                        Icons.bookmark_rounded,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: wantToRead.isEmpty
+                          ? _buildEmptyPlaceholder(
+                              'Want to Read',
+                              wantColor,
+                              Icons.bookmark_add_outlined,
+                            )
+                          : _buildHorizontalList(
+                              context,
+                              wantToRead,
+                              wantColor,
+                              showProgress: false,
+                            ),
+                    ),
+
+                    // ── READING ──
+                    SliverToBoxAdapter(
+                      child: _buildSectionHeader(
+                        context,
+                        'Reading',
+                        readColor,
+                        reading,
+                        Icons.auto_stories_rounded,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: reading.isEmpty
+                          ? _buildEmptyPlaceholder(
+                              'Reading',
+                              readColor,
+                              Icons.import_contacts_outlined,
+                            )
+                          : _buildHorizontalList(
+                              context,
+                              reading,
+                              readColor,
+                              showProgress: true,
+                            ),
+                    ),
+
+                    // ── FINISHED ──
+                    SliverToBoxAdapter(
+                      child: _buildSectionHeader(
+                        context,
+                        'Finished',
+                        finColor,
+                        finished,
+                        Icons.check_circle_rounded,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: finished.isEmpty
+                          ? _buildEmptyPlaceholder(
+                              'Finished',
+                              finColor,
+                              Icons.done_all_rounded,
+                            )
+                          : _buildHorizontalList(
+                              context,
+                              finished,
+                              finColor,
+                              showProgress: false,
+                            ),
+                    ),
+
+                    // ── BROWSE BY ──
+                    SliverToBoxAdapter(
+                      child: _buildBrowseBySection(
+                        context,
+                        genresMap,
+                        authorsMap,
+                        rankAccent,
+                      ),
+                    ),
+
+                    // ── MY SHELVES HEADER ──
+                    SliverToBoxAdapter(child: _buildShelvesHeader(rankAccent)),
+
+                    // ── MY SHELVES LIST ──
+                    SliverToBoxAdapter(
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: LibraryService.getShelvesStream(),
+                        builder: (context, shelfSnap) {
+                          if (shelfSnap.connectionState ==
+                              ConnectionState.waiting) {
+                            return Padding(
+                              padding: const EdgeInsets.all(24),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: rankAccent,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                            );
+                          }
+
+                          if (!shelfSnap.hasData ||
+                              shelfSnap.data!.docs.isEmpty) {
+                            return _buildEmptyShelvesPlaceholder(rankAccent);
+                          }
+
+                          final shelves = shelfSnap.data!.docs.toList();
+                          shelves.sort(
+                            (a, b) => (a['name'] ?? '')
+                                .toString()
+                                .toLowerCase()
+                                .compareTo(
+                                  (b['name'] ?? '').toString().toLowerCase(),
+                                ),
+                          );
+
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: shelves.length,
+                            itemBuilder: (ctx, i) {
+                              final sData =
+                                  shelves[i].data() as Map<String, dynamic>;
+                              final sId = shelves[i].id;
+                              final sName = sData['name'] ?? 'Unnamed';
+                              final shelfBookCount = shelfCounts[sId] ?? 0;
+                              return _buildShelfCard(
+                                context,
+                                sId: sId,
+                                sName: sName,
+                                shelfBookCount: shelfBookCount,
+                                accent: rankAccent,
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SliverToBoxAdapter(child: SizedBox(height: 40)),
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildHeader(List<QueryDocumentSnapshot> docs, BuildContext context) {
+  Widget _buildHeader(
+    List<QueryDocumentSnapshot> docs,
+    BuildContext context,
+    TierTheme theme,
+    Color rankAccent,
+  ) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 56, 20, 20),
       child: Row(
@@ -716,10 +902,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
             children: [
               _headerButton(
                 icon: Icons.search_rounded,
+                theme: theme,
+                rankAccent: rankAccent,
                 onTap: () {
                   // Trigger library search inline
                   LibraryService.getLibraryStream().first.then((snap) {
-                    _openLibrarySearch(snap.docs);
+                    _openLibrarySearch(snap.docs, rankAccent);
                   });
                 },
               ),
@@ -727,6 +915,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
               _headerButton(
                 icon: Icons.add_rounded,
                 isAccent: true,
+                theme: theme,
+                rankAccent: rankAccent,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const AddBookScreen()),
@@ -742,6 +932,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
   Widget _headerButton({
     required IconData icon,
     required VoidCallback onTap,
+    required TierTheme theme,
+    required Color rankAccent,
     bool isAccent = false,
   }) {
     return GestureDetector(
@@ -752,19 +944,25 @@ class _LibraryScreenState extends State<LibraryScreen> {
         height: 44,
         decoration: BoxDecoration(
           gradient: isAccent
-              ? const LinearGradient(
-                  colors: [Color(0xFF8B5CF6), Color(0xFF7C3AED)],
+              ? LinearGradient(
+                  colors: [rankAccent, theme.secondary],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
-          color: isAccent ? null : Colors.white.withOpacity(0.07),
+          color: isAccent ? null : rankAccent.withOpacity(0.14),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: isAccent ? Colors.transparent : Colors.white.withOpacity(0.08),
+            color: isAccent ? Colors.transparent : rankAccent.withOpacity(0.26),
           ),
           boxShadow: isAccent
-              ? [BoxShadow(color: accentColor.withOpacity(0.35), blurRadius: 14, offset: const Offset(0, 6))]
+              ? [
+                  BoxShadow(
+                    color: rankAccent.withOpacity(0.5),
+                    blurRadius: 20,
+                    offset: const Offset(0, 6),
+                  ),
+                ]
               : null,
         ),
         child: Icon(icon, color: Colors.white, size: 20),
@@ -825,7 +1023,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   Widget _statDivider() {
-    return Container(width: 1, height: 32, color: Colors.white.withOpacity(0.08));
+    return Container(
+      width: 1,
+      height: 32,
+      color: Colors.white.withOpacity(0.08),
+    );
   }
 
   Widget _buildSectionHeader(
@@ -898,7 +1100,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     ),
                   ),
                   const SizedBox(width: 2),
-                  Icon(Icons.arrow_forward_ios_rounded, color: accent, size: 11),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: accent,
+                    size: 11,
+                  ),
                 ],
               ),
             ),
@@ -961,13 +1167,16 @@ class _LibraryScreenState extends State<LibraryScreen> {
           final data = books[index].data() as Map<String, dynamic>? ?? {};
           int pageCount = data['pageCount'] is int ? data['pageCount'] : 1;
           if (pageCount <= 0) pageCount = 1;
-          double progress = (data['currentPage'] is int ? data['currentPage'] : 0) / pageCount;
+          double progress =
+              (data['currentPage'] is int ? data['currentPage'] : 0) /
+              pageCount;
 
           return GestureDetector(
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => BookDetailScreen(bookData: _formatBookData(books[index])),
+                builder: (_) =>
+                    BookDetailScreen(bookData: _formatBookData(books[index])),
               ),
             ),
             child: Container(
@@ -996,7 +1205,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(14),
-                      child: _buildCoverImage(data['thumbnail']?.toString(), 130, 192),
+                      child: _buildCoverImage(
+                        data['thumbnail']?.toString(),
+                        130,
+                        192,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -1087,6 +1300,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     BuildContext context,
     Map<String, List<QueryDocumentSnapshot>> genresMap,
     Map<String, List<QueryDocumentSnapshot>> authorsMap,
+    Color rankAccent,
   ) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 32, 20, 0),
@@ -1101,7 +1315,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   color: Colors.white.withOpacity(0.07),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(Icons.explore_rounded, color: Colors.white.withOpacity(0.7), size: 16),
+                child: Icon(
+                  Icons.explore_rounded,
+                  color: Colors.white.withOpacity(0.7),
+                  size: 16,
+                ),
               ),
               const SizedBox(width: 10),
               Text(
@@ -1124,11 +1342,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   label: 'Genres',
                   icon: Icons.grid_view_rounded,
                   count: genresMap.length,
-                  color: const Color(0xFFEF4444),
+                  color: rankAccent,
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CategoryListScreen(title: 'My Genres', categoryMap: genresMap),
+                      builder: (_) => CategoryListScreen(
+                        title: 'My Genres',
+                        categoryMap: genresMap,
+                      ),
                     ),
                   ),
                 ),
@@ -1140,11 +1361,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   label: 'Authors',
                   icon: Icons.people_alt_rounded,
                   count: authorsMap.length,
-                  color: const Color(0xFF3B82F6),
+                  color: rankAccent,
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CategoryListScreen(title: 'My Authors', categoryMap: authorsMap),
+                      builder: (_) => CategoryListScreen(
+                        title: 'My Authors',
+                        categoryMap: authorsMap,
+                      ),
                     ),
                   ),
                 ),
@@ -1170,19 +1394,26 @@ class _LibraryScreenState extends State<LibraryScreen> {
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [color.withOpacity(0.14), color.withOpacity(0.06)],
+            colors: [color.withOpacity(0.28), color.withOpacity(0.12)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.22)),
+          border: Border.all(color: color.withOpacity(0.42)),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.16),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
+          ],
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.15),
+                color: color.withOpacity(0.24),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: color, size: 18),
@@ -1211,14 +1442,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded, color: color.withOpacity(0.5), size: 13),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: color.withOpacity(0.5),
+              size: 13,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildShelvesHeader() {
+  Widget _buildShelvesHeader(Color rankAccent) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 30, 20, 14),
       child: Row(
@@ -1227,10 +1462,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: shelfColor.withOpacity(0.12),
+              color: rankAccent.withOpacity(0.22),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(Icons.collections_bookmark_rounded, color: shelfColor, size: 16),
+            child: Icon(
+              Icons.collections_bookmark_rounded,
+              color: rankAccent,
+              size: 16,
+            ),
           ),
           const SizedBox(width: 10),
           const Text(
@@ -1248,19 +1487,19 @@ class _LibraryScreenState extends State<LibraryScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: shelfColor.withOpacity(0.12),
+                color: rankAccent.withOpacity(0.20),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: shelfColor.withOpacity(0.3)),
+                border: Border.all(color: rankAccent.withOpacity(0.48)),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.add_rounded, color: shelfColor, size: 16),
+                  Icon(Icons.add_rounded, color: rankAccent, size: 16),
                   const SizedBox(width: 5),
                   Text(
                     'New Shelf',
                     style: TextStyle(
-                      color: shelfColor,
+                      color: rankAccent,
                       fontSize: 12,
                       fontWeight: FontWeight.w800,
                     ),
@@ -1274,26 +1513,26 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
   }
 
-  Widget _buildEmptyShelvesPlaceholder() {
+  Widget _buildEmptyShelvesPlaceholder(Color rankAccent) {
     return GestureDetector(
       onTap: () => _showCreateShelfModal(),
       child: Container(
         margin: const EdgeInsets.fromLTRB(20, 0, 20, 8),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: shelfColor.withOpacity(0.04),
+          color: rankAccent.withOpacity(0.09),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: shelfColor.withOpacity(0.15), width: 1.5),
+          border: Border.all(color: rankAccent.withOpacity(0.34), width: 1.5),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: shelfColor.withOpacity(0.12),
+                color: rankAccent.withOpacity(0.22),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Icon(Icons.add_rounded, color: shelfColor, size: 24),
+              child: Icon(Icons.add_rounded, color: rankAccent, size: 24),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -1331,6 +1570,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     required String sId,
     required String sName,
     required int shelfBookCount,
+    required Color accent,
   }) {
     return GestureDetector(
       onTap: () => Navigator.push(
@@ -1365,11 +1605,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
               width: 46,
               height: 46,
               decoration: BoxDecoration(
-                color: shelfColor.withOpacity(0.10),
+                color: accent.withOpacity(0.20),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: shelfColor.withOpacity(0.18)),
+                border: Border.all(color: accent.withOpacity(0.36)),
               ),
-              child: Icon(Icons.collections_bookmark_rounded, color: shelfColor, size: 20),
+              child: Icon(
+                Icons.collections_bookmark_rounded,
+                color: accent,
+                size: 20,
+              ),
             ),
             const SizedBox(width: 14),
             // Info
@@ -1407,13 +1651,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: shelfColor.withOpacity(0.10),
+                color: accent.withOpacity(0.20),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 '$shelfBookCount',
                 style: TextStyle(
-                  color: shelfColor,
+                  color: accent,
                   fontWeight: FontWeight.w900,
                   fontSize: 14,
                 ),
@@ -1429,7 +1673,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(6),
-                child: Icon(Icons.more_horiz_rounded, color: Colors.white.withOpacity(0.4), size: 20),
+                child: Icon(
+                  Icons.more_horiz_rounded,
+                  color: Colors.white.withOpacity(0.4),
+                  size: 20,
+                ),
               ),
             ),
           ],
@@ -1501,7 +1749,11 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
               color: Colors.white.withOpacity(0.07),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(Icons.arrow_back_rounded, color: Colors.white, size: 20),
+            child: const Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 20,
+            ),
           ),
         ),
         title: Column(
@@ -1542,7 +1794,11 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                 color: Colors.white.withOpacity(0.07),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(Icons.more_horiz_rounded, color: Colors.white, size: 20),
+              child: const Icon(
+                Icons.more_horiz_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
         ],
@@ -1554,14 +1810,26 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
             child: TextField(
               style: const TextStyle(color: Colors.white, fontSize: 14),
-              onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
+              onChanged: (val) =>
+                  setState(() => _searchQuery = val.toLowerCase()),
               decoration: InputDecoration(
                 hintText: 'Search title or author…',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.3), fontSize: 14),
-                prefixIcon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.3), size: 20),
+                hintStyle: TextStyle(
+                  color: Colors.white.withOpacity(0.3),
+                  fontSize: 14,
+                ),
+                prefixIcon: Icon(
+                  Icons.search_rounded,
+                  color: Colors.white.withOpacity(0.3),
+                  size: 20,
+                ),
                 suffixIcon: _searchQuery.isNotEmpty
                     ? IconButton(
-                        icon: Icon(Icons.cancel_rounded, color: Colors.white.withOpacity(0.3), size: 18),
+                        icon: Icon(
+                          Icons.cancel_rounded,
+                          color: Colors.white.withOpacity(0.3),
+                          size: 18,
+                        ),
                         onPressed: () {
                           setState(() => _searchQuery = '');
                           FocusScope.of(context).unfocus();
@@ -1577,7 +1845,10 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(color: accentColor.withOpacity(0.6), width: 1.2),
+                  borderSide: BorderSide(
+                    color: accentColor.withOpacity(0.6),
+                    width: 1.2,
+                  ),
                 ),
               ),
             ),
@@ -1587,28 +1858,51 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
               stream: LibraryService.getBooksInShelfStream(widget.shelfId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(color: accentColor, strokeWidth: 2));
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: accentColor,
+                      strokeWidth: 2,
+                    ),
+                  );
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return _buildShelfEmpty();
                 }
 
-                List<QueryDocumentSnapshot> docs = snapshot.data!.docs.where((doc) {
+                List<QueryDocumentSnapshot> docs = snapshot.data!.docs.where((
+                  doc,
+                ) {
                   final data = doc.data() as Map<String, dynamic>;
                   final title = (data['title'] ?? '').toString().toLowerCase();
-                  final author = (data['authors'] ?? '').toString().toLowerCase();
-                  return title.contains(_searchQuery) || author.contains(_searchQuery);
+                  final author = (data['authors'] ?? '')
+                      .toString()
+                      .toLowerCase();
+                  return title.contains(_searchQuery) ||
+                      author.contains(_searchQuery);
                 }).toList();
 
                 if (_sortBy == 'Title') {
-                  docs.sort((a, b) => ((a.data() as Map)['title'] ?? '')
-                      .toString().toLowerCase()
-                      .compareTo(((b.data() as Map)['title'] ?? '').toString().toLowerCase()));
+                  docs.sort(
+                    (a, b) => ((a.data() as Map)['title'] ?? '')
+                        .toString()
+                        .toLowerCase()
+                        .compareTo(
+                          ((b.data() as Map)['title'] ?? '')
+                              .toString()
+                              .toLowerCase(),
+                        ),
+                  );
                 } else if (_sortBy == 'Added (Newest)') {
                   docs.sort((a, b) {
-                    final aAdded = _getShelfAddedAt(a.data() as Map<String, dynamic>);
-                    final bAdded = _getShelfAddedAt(b.data() as Map<String, dynamic>);
-                    return bAdded.millisecondsSinceEpoch.compareTo(aAdded.millisecondsSinceEpoch);
+                    final aAdded = _getShelfAddedAt(
+                      a.data() as Map<String, dynamic>,
+                    );
+                    final bAdded = _getShelfAddedAt(
+                      b.data() as Map<String, dynamic>,
+                    );
+                    return bAdded.millisecondsSinceEpoch.compareTo(
+                      aAdded.millisecondsSinceEpoch,
+                    );
                   });
                 }
 
@@ -1616,24 +1910,29 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                   return GridView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
                     physics: const BouncingScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 0.55,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 16,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 0.55,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 16,
+                        ),
                     itemCount: docs.length,
                     itemBuilder: (context, index) {
                       final bData = docs[index].data() as Map<String, dynamic>;
                       final bookId = docs[index].id;
                       return GestureDetector(
                         onTap: () async {
-                          final fullDoc = await LibraryService.getBookStream(bookId).first;
+                          final fullDoc = await LibraryService.getBookStream(
+                            bookId,
+                          ).first;
                           if (!context.mounted || !fullDoc.exists) return;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => BookDetailScreen(bookData: _formatBookData(fullDoc)),
+                              builder: (_) => BookDetailScreen(
+                                bookData: _formatBookData(fullDoc),
+                              ),
                             ),
                           );
                         },
@@ -1654,7 +1953,11 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: _buildCoverImage(bData['thumbnail'], double.infinity, double.infinity),
+                                  child: _buildCoverImage(
+                                    bData['thumbnail'],
+                                    double.infinity,
+                                    double.infinity,
+                                  ),
                                 ),
                               ),
                             ),
@@ -1664,7 +1967,8 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         bData['title'] ?? 'Unknown',
@@ -1690,14 +1994,21 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                                       FittedBox(
                                         fit: BoxFit.scaleDown,
                                         alignment: Alignment.centerLeft,
-                                        child: _buildStatusBadge(_normalizeBookStatus(bData['status'])),
+                                        child: _buildStatusBadge(
+                                          _normalizeBookStatus(bData['status']),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () => _showRemoveDialog(context, bookId),
-                                  child: Icon(Icons.more_horiz_rounded, color: Colors.white.withOpacity(0.35), size: 16),
+                                  onTap: () =>
+                                      _showRemoveDialog(context, bookId),
+                                  child: Icon(
+                                    Icons.more_horiz_rounded,
+                                    color: Colors.white.withOpacity(0.35),
+                                    size: 16,
+                                  ),
                                 ),
                               ],
                             ),
@@ -1717,12 +2028,16 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                       final bookId = docs[index].id;
                       return GestureDetector(
                         onTap: () async {
-                          final fullDoc = await LibraryService.getBookStream(bookId).first;
+                          final fullDoc = await LibraryService.getBookStream(
+                            bookId,
+                          ).first;
                           if (!context.mounted || !fullDoc.exists) return;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => BookDetailScreen(bookData: _formatBookData(fullDoc)),
+                              builder: (_) => BookDetailScreen(
+                                bookData: _formatBookData(fullDoc),
+                              ),
                             ),
                           );
                         },
@@ -1731,13 +2046,19 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.04),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.white.withOpacity(0.06)),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.06),
+                            ),
                           ),
                           child: Row(
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: _buildCoverImage(bData['thumbnail'], 48, 72),
+                                child: _buildCoverImage(
+                                  bData['thumbnail'],
+                                  48,
+                                  72,
+                                ),
                               ),
                               const SizedBox(width: 14),
                               Expanded(
@@ -1765,7 +2086,9 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     const SizedBox(height: 6),
-                                    _buildStatusBadge(_normalizeBookStatus(bData['status'])),
+                                    _buildStatusBadge(
+                                      _normalizeBookStatus(bData['status']),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1773,7 +2096,11 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
                                 onTap: () => _showRemoveDialog(context, bookId),
                                 child: Padding(
                                   padding: const EdgeInsets.all(6),
-                                  child: Icon(Icons.more_horiz_rounded, color: Colors.white.withOpacity(0.35), size: 20),
+                                  child: Icon(
+                                    Icons.more_horiz_rounded,
+                                    color: Colors.white.withOpacity(0.35),
+                                    size: 20,
+                                  ),
                                 ),
                               ),
                             ],
@@ -1802,17 +2129,28 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
               color: shelfColor.withOpacity(0.08),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.collections_bookmark_outlined, color: shelfColor.withOpacity(0.5), size: 48),
+            child: Icon(
+              Icons.collections_bookmark_outlined,
+              color: shelfColor.withOpacity(0.5),
+              size: 48,
+            ),
           ),
           const SizedBox(height: 20),
           const Text(
             'This shelf is empty',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 17),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+            ),
           ),
           const SizedBox(height: 6),
           Text(
             'Tap ••• to add books from your library',
-            style: TextStyle(color: Colors.white.withOpacity(0.38), fontSize: 13),
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.38),
+              fontSize: 13,
+            ),
           ),
         ],
       ),
@@ -1825,7 +2163,10 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
       builder: (_) => AlertDialog(
         backgroundColor: const Color(0xFF111827),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Remove from shelf?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+        title: const Text(
+          'Remove from shelf?',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+        ),
         content: Text(
           'This book will be removed from the shelf but stays in your library.',
           style: TextStyle(color: Colors.white.withOpacity(0.6), height: 1.5),
@@ -1833,14 +2174,23 @@ class _ShelfDetailScreenState extends State<ShelfDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel', style: TextStyle(color: Colors.white.withOpacity(0.5))),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white.withOpacity(0.5)),
+            ),
           ),
           TextButton(
             onPressed: () {
               LibraryService.unlinkBookFromShelf(bookId, widget.shelfId);
               Navigator.pop(context);
             },
-            child: const Text('Remove', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: const Text(
+              'Remove',
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -1888,7 +2238,9 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
     return SafeArea(
       top: false,
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.82),
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.82,
+        ),
         child: Container(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
           decoration: const BoxDecoration(
@@ -1931,7 +2283,8 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     Future.microtask(() {
-                      if (screenContext.mounted) _showAddBooksToShelfModal(screenContext);
+                      if (screenContext.mounted)
+                        _showAddBooksToShelfModal(screenContext);
                     });
                   },
                 ),
@@ -1943,7 +2296,8 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     Future.microtask(() {
-                      if (screenContext.mounted) _showRenameDialog(screenContext);
+                      if (screenContext.mounted)
+                        _showRenameDialog(screenContext);
                     });
                   },
                 ),
@@ -1956,7 +2310,8 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     Future.microtask(() {
-                      if (screenContext.mounted) _showDeleteDialog(screenContext);
+                      if (screenContext.mounted)
+                        _showDeleteDialog(screenContext);
                     });
                   },
                 ),
@@ -2095,16 +2450,24 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
         duration: const Duration(milliseconds: 180),
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: selected ? accentColor.withOpacity(0.15) : Colors.white.withOpacity(0.05),
+          color: selected
+              ? accentColor.withOpacity(0.15)
+              : Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: selected ? accentColor.withOpacity(0.5) : Colors.white.withOpacity(0.07),
+            color: selected
+                ? accentColor.withOpacity(0.5)
+                : Colors.white.withOpacity(0.07),
             width: selected ? 1.5 : 1,
           ),
         ),
         child: Column(
           children: [
-            Icon(icon, color: selected ? accentColor : Colors.white.withOpacity(0.4), size: 20),
+            Icon(
+              icon,
+              color: selected ? accentColor : Colors.white.withOpacity(0.4),
+              size: 20,
+            ),
             const SizedBox(height: 6),
             Text(
               label,
@@ -2131,16 +2494,24 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
         decoration: BoxDecoration(
-          color: selected ? accentColor.withOpacity(0.1) : Colors.white.withOpacity(0.04),
+          color: selected
+              ? accentColor.withOpacity(0.1)
+              : Colors.white.withOpacity(0.04),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: selected ? accentColor.withOpacity(0.45) : Colors.white.withOpacity(0.06),
+            color: selected
+                ? accentColor.withOpacity(0.45)
+                : Colors.white.withOpacity(0.06),
             width: selected ? 1.3 : 1,
           ),
         ),
         child: Row(
           children: [
-            Icon(icon, color: selected ? accentColor : Colors.white.withOpacity(0.4), size: 18),
+            Icon(
+              icon,
+              color: selected ? accentColor : Colors.white.withOpacity(0.4),
+              size: 18,
+            ),
             const SizedBox(width: 12),
             Text(
               label,
@@ -2158,7 +2529,11 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
                   color: accentColor,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.check_rounded, color: Colors.white, size: 12),
+                child: const Icon(
+                  Icons.check_rounded,
+                  color: Colors.white,
+                  size: 12,
+                ),
               ),
           ],
         ),
@@ -2173,7 +2548,10 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
       builder: (_) => AlertDialog(
         backgroundColor: const Color(0xFF111827),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        title: const Text('Rename Shelf', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+        title: const Text(
+          'Rename Shelf',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+        ),
         content: TextField(
           controller: ctrl,
           autofocus: true,
@@ -2190,18 +2568,27 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel', style: TextStyle(color: Colors.white.withOpacity(0.5))),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white.withOpacity(0.5)),
+            ),
           ),
           TextButton(
             onPressed: () async {
               final newName = ctrl.text.trim();
               if (newName.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Shelf name cannot be empty.'), backgroundColor: Colors.redAccent),
+                  const SnackBar(
+                    content: Text('Shelf name cannot be empty.'),
+                    backgroundColor: Colors.redAccent,
+                  ),
                 );
                 return;
               }
-              if (newName == currentName) { Navigator.pop(context); return; }
+              if (newName == currentName) {
+                Navigator.pop(context);
+                return;
+              }
               try {
                 await LibraryService.renameShelf(shelfId, newName);
                 onShelfRenamed(newName);
@@ -2214,12 +2601,18 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
               } catch (e) {
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Error: $e'), backgroundColor: Colors.redAccent),
+                    SnackBar(
+                      content: Text('Error: $e'),
+                      backgroundColor: Colors.redAccent,
+                    ),
                   );
                 }
               }
             },
-            child: const Text('Save', style: TextStyle(color: accentColor, fontWeight: FontWeight.bold)),
+            child: const Text(
+              'Save',
+              style: TextStyle(color: accentColor, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -2232,7 +2625,10 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
       builder: (_) => AlertDialog(
         backgroundColor: const Color(0xFF111827),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        title: const Text('Delete Shelf?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+        title: const Text(
+          'Delete Shelf?',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+        ),
         content: Text(
           'This will delete the shelf. Your books will remain in your main library.',
           style: TextStyle(color: Colors.white.withOpacity(0.6), height: 1.5),
@@ -2240,7 +2636,10 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel', style: TextStyle(color: Colors.white.withOpacity(0.5))),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white.withOpacity(0.5)),
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -2249,7 +2648,13 @@ class ShelfOptionsBottomSheet extends StatelessWidget {
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+            child: const Text(
+              'Delete',
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -2317,7 +2722,11 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                       color: Colors.white.withOpacity(0.07),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(Icons.close_rounded, color: Colors.white, size: 18),
+                    child: const Icon(
+                      Icons.close_rounded,
+                      color: Colors.white,
+                      size: 18,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 14),
@@ -2341,11 +2750,19 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
             child: TextField(
               autofocus: false,
               style: const TextStyle(color: Colors.white, fontSize: 14),
-              onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
+              onChanged: (val) =>
+                  setState(() => _searchQuery = val.toLowerCase()),
               decoration: InputDecoration(
                 hintText: 'Search your library…',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.3), fontSize: 14),
-                prefixIcon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.3), size: 20),
+                hintStyle: TextStyle(
+                  color: Colors.white.withOpacity(0.3),
+                  fontSize: 14,
+                ),
+                prefixIcon: Icon(
+                  Icons.search_rounded,
+                  color: Colors.white.withOpacity(0.3),
+                  size: 20,
+                ),
                 filled: true,
                 fillColor: Colors.white.withOpacity(0.06),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -2355,7 +2772,10 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(color: accentColor.withOpacity(0.6), width: 1.2),
+                  borderSide: BorderSide(
+                    color: accentColor.withOpacity(0.6),
+                    width: 1.2,
+                  ),
                 ),
               ),
             ),
@@ -2365,11 +2785,19 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
               stream: LibraryService.getLibraryStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(color: accentColor, strokeWidth: 2));
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: accentColor,
+                      strokeWidth: 2,
+                    ),
+                  );
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: Text('Your library is empty.', style: TextStyle(color: Colors.white.withOpacity(0.45))),
+                    child: Text(
+                      'Your library is empty.',
+                      style: TextStyle(color: Colors.white.withOpacity(0.45)),
+                    ),
                   );
                 }
 
@@ -2382,8 +2810,11 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                 final filteredBooks = allBooks.where((book) {
                   final data = book.data() as Map<String, dynamic>;
                   final title = (data['title'] ?? '').toString().toLowerCase();
-                  final author = (data['authors'] ?? '').toString().toLowerCase();
-                  return title.contains(_searchQuery) || author.contains(_searchQuery);
+                  final author = (data['authors'] ?? '')
+                      .toString()
+                      .toLowerCase();
+                  return title.contains(_searchQuery) ||
+                      author.contains(_searchQuery);
                 }).toList();
 
                 if (filteredBooks.isEmpty) {
@@ -2402,25 +2833,32 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                   itemCount: filteredBooks.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 8),
                   itemBuilder: (ctx, i) {
-                    final data = filteredBooks[i].data() as Map<String, dynamic>;
+                    final data =
+                        filteredBooks[i].data() as Map<String, dynamic>;
                     final bookId = filteredBooks[i].id;
                     final isSelected = _selectedBookIds.contains(bookId);
 
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          if (isSelected) _selectedBookIds.remove(bookId);
-                          else _selectedBookIds.add(bookId);
+                          if (isSelected)
+                            _selectedBookIds.remove(bookId);
+                          else
+                            _selectedBookIds.add(bookId);
                         });
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 150),
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: isSelected ? accentColor.withOpacity(0.1) : Colors.white.withOpacity(0.04),
+                          color: isSelected
+                              ? accentColor.withOpacity(0.1)
+                              : Colors.white.withOpacity(0.04),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: isSelected ? accentColor.withOpacity(0.6) : Colors.white.withOpacity(0.07),
+                            color: isSelected
+                                ? accentColor.withOpacity(0.6)
+                                : Colors.white.withOpacity(0.07),
                             width: isSelected ? 1.5 : 1,
                           ),
                         ),
@@ -2428,7 +2866,11 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(9),
-                              child: _buildCoverImage(data['thumbnail']?.toString(), 48, 72),
+                              child: _buildCoverImage(
+                                data['thumbnail']?.toString(),
+                                48,
+                                72,
+                              ),
                             ),
                             const SizedBox(width: 14),
                             Expanded(
@@ -2448,7 +2890,10 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                                   const SizedBox(height: 4),
                                   Text(
                                     data['authors']?.toString() ?? '',
-                                    style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 12),
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.4),
+                                      fontSize: 12,
+                                    ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -2462,14 +2907,22 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                               height: 24,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: isSelected ? accentColor : Colors.transparent,
+                                color: isSelected
+                                    ? accentColor
+                                    : Colors.transparent,
                                 border: Border.all(
-                                  color: isSelected ? accentColor : Colors.white.withOpacity(0.25),
+                                  color: isSelected
+                                      ? accentColor
+                                      : Colors.white.withOpacity(0.25),
                                   width: 1.5,
                                 ),
                               ),
                               child: isSelected
-                                  ? const Icon(Icons.check_rounded, color: Colors.white, size: 14)
+                                  ? const Icon(
+                                      Icons.check_rounded,
+                                      color: Colors.white,
+                                      size: 14,
+                                    )
                                   : null,
                             ),
                           ],
@@ -2492,22 +2945,37 @@ class _AddBooksToShelfModalState extends State<_AddBooksToShelfModal> {
                     backgroundColor: accentColor,
                     foregroundColor: Colors.white,
                     elevation: 0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   onPressed: _isSaving
                       ? null
                       : () async {
                           setState(() => _isSaving = true);
-                          await LibraryService.linkBooksToShelf(widget.shelfId, _selectedBookIds.toList());
+                          await LibraryService.linkBooksToShelf(
+                            widget.shelfId,
+                            _selectedBookIds.toList(),
+                          );
                           if (!context.mounted) return;
                           Navigator.pop(context);
                         },
                   child: _isSaving
-                      ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
                       : Text(
                           'Add ${_selectedBookIds.length} book${_selectedBookIds.length > 1 ? 's' : ''} to shelf',
-                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                          ),
                         ),
                 ),
               ),
@@ -2525,10 +2993,12 @@ class _LibrarySearchModal extends StatefulWidget {
   final List<QueryDocumentSnapshot> allBooks;
   final Color bgColor;
   final Color cardColor;
+  final Color accentColor;
   const _LibrarySearchModal({
     required this.allBooks,
     required this.bgColor,
     required this.cardColor,
+    required this.accentColor,
   });
 
   @override
@@ -2550,20 +3020,31 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
   Widget build(BuildContext context) {
     List<QueryDocumentSnapshot> filtered = widget.allBooks.where((book) {
       final data = book.data() as Map<String, dynamic>? ?? {};
-      return (data['title'] ?? '').toString().toLowerCase().contains(_searchQuery) ||
-          (data['authors'] ?? '').toString().toLowerCase().contains(_searchQuery);
+      return (data['title'] ?? '').toString().toLowerCase().contains(
+            _searchQuery,
+          ) ||
+          (data['authors'] ?? '').toString().toLowerCase().contains(
+            _searchQuery,
+          );
     }).toList();
 
     if (_sortBy == 'Title') {
-      filtered.sort((a, b) => ((a.data() as Map)['title'] ?? '')
-          .toString().toLowerCase()
-          .compareTo(((b.data() as Map)['title'] ?? '').toString().toLowerCase()));
+      filtered.sort(
+        (a, b) => ((a.data() as Map)['title'] ?? '')
+            .toString()
+            .toLowerCase()
+            .compareTo(
+              ((b.data() as Map)['title'] ?? '').toString().toLowerCase(),
+            ),
+      );
     } else if (_sortBy == 'Added (Newest)') {
       filtered.sort((a, b) {
         final bAdded = (b.data() as Map)['addedAt'];
         final aAdded = (a.data() as Map)['addedAt'];
         if (bAdded is Timestamp && aAdded is Timestamp) {
-          return bAdded.millisecondsSinceEpoch.compareTo(aAdded.millisecondsSinceEpoch);
+          return bAdded.millisecondsSinceEpoch.compareTo(
+            aAdded.millisecondsSinceEpoch,
+          );
         }
         return 0;
       });
@@ -2600,7 +3081,11 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                       color: Colors.white.withOpacity(0.07),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(Icons.close_rounded, color: Colors.white, size: 18),
+                    child: const Icon(
+                      Icons.close_rounded,
+                      color: Colors.white,
+                      size: 18,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -2608,11 +3093,19 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                   child: TextField(
                     autofocus: true,
                     style: const TextStyle(color: Colors.white, fontSize: 15),
-                    onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
+                    onChanged: (val) =>
+                        setState(() => _searchQuery = val.toLowerCase()),
                     decoration: InputDecoration(
                       hintText: 'Search your library…',
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.28), fontSize: 15),
-                      prefixIcon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.3), size: 20),
+                      hintStyle: TextStyle(
+                        color: Colors.white.withOpacity(0.28),
+                        fontSize: 15,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search_rounded,
+                        color: Colors.white.withOpacity(0.3),
+                        size: 20,
+                      ),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.06),
                       contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -2622,7 +3115,10 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide(color: accentColor.withOpacity(0.6), width: 1.2),
+                        borderSide: BorderSide(
+                          color: widget.accentColor.withOpacity(0.6),
+                          width: 1.2,
+                        ),
                       ),
                     ),
                   ),
@@ -2646,13 +3142,25 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                 DropdownButton<String>(
                   value: _sortBy,
                   dropdownColor: const Color(0xFF1E293B),
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13),
-                  icon: Icon(Icons.sort_rounded, color: Colors.white.withOpacity(0.5), size: 18),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                  ),
+                  icon: Icon(
+                    Icons.sort_rounded,
+                    color: Colors.white.withOpacity(0.5),
+                    size: 18,
+                  ),
                   underline: const SizedBox(),
-                  items: ['Added (Newest)', 'Title'].map((String value) => DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  )).toList(),
+                  items: ['Added (Newest)', 'Title']
+                      .map(
+                        (String value) => DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        ),
+                      )
+                      .toList(),
                   onChanged: (newValue) => setState(() => _sortBy = newValue!),
                 ),
               ],
@@ -2664,7 +3172,10 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                 ? Center(
                     child: Text(
                       'No books match your search',
-                      style: TextStyle(color: Colors.white.withOpacity(0.38), fontSize: 14),
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.38),
+                        fontSize: 14,
+                      ),
                     ),
                   )
                 : ListView.separated(
@@ -2673,14 +3184,17 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                     itemCount: filtered.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 8),
                     itemBuilder: (context, index) {
-                      final data = filtered[index].data() as Map<String, dynamic>? ?? {};
+                      final data =
+                          filtered[index].data() as Map<String, dynamic>? ?? {};
                       final status = data['status']?.toString() ?? '';
                       final sColor = _getStatusColor(status);
                       return GestureDetector(
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => BookDetailScreen(bookData: _formatBookData(filtered[index])),
+                            builder: (_) => BookDetailScreen(
+                              bookData: _formatBookData(filtered[index]),
+                            ),
                           ),
                         ),
                         child: Container(
@@ -2688,13 +3202,19 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.04),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.white.withOpacity(0.06)),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.06),
+                            ),
                           ),
                           child: Row(
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(9),
-                                child: _buildCoverImage(data['thumbnail']?.toString(), 44, 66),
+                                child: _buildCoverImage(
+                                  data['thumbnail']?.toString(),
+                                  44,
+                                  66,
+                                ),
                               ),
                               const SizedBox(width: 14),
                               Expanded(
@@ -2726,11 +3246,16 @@ class _LibrarySearchModalState extends State<_LibrarySearchModal> {
                               ),
                               const SizedBox(width: 8),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 9,
+                                  vertical: 5,
+                                ),
                                 decoration: BoxDecoration(
                                   color: sColor.withOpacity(0.12),
                                   borderRadius: BorderRadius.circular(999),
-                                  border: Border.all(color: sColor.withOpacity(0.25)),
+                                  border: Border.all(
+                                    color: sColor.withOpacity(0.25),
+                                  ),
                                 ),
                                 child: Text(
                                   status.isEmpty ? '–' : status,
@@ -2791,14 +3316,21 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
       builder: (context, snapshot) {
         List<QueryDocumentSnapshot> freshBooks = widget.books;
         if (snapshot.hasData) {
-          final allDocsMap = { for (var d in snapshot.data!.docs) d.id: d };
-          freshBooks = widget.books.map((b) => allDocsMap[b.id]).whereType<QueryDocumentSnapshot>().toList();
+          final allDocsMap = {for (var d in snapshot.data!.docs) d.id: d};
+          freshBooks = widget.books
+              .map((b) => allDocsMap[b.id])
+              .whereType<QueryDocumentSnapshot>()
+              .toList();
         }
 
         final filteredBooks = freshBooks.where((book) {
           final data = book.data() as Map<String, dynamic>? ?? {};
-          return (data['title'] ?? '').toString().toLowerCase().contains(_searchQuery) ||
-              (data['authors'] ?? '').toString().toLowerCase().contains(_searchQuery);
+          return (data['title'] ?? '').toString().toLowerCase().contains(
+                _searchQuery,
+              ) ||
+              (data['authors'] ?? '').toString().toLowerCase().contains(
+                _searchQuery,
+              );
         }).toList();
 
         if (_sortBy == 'Title') {
@@ -2806,7 +3338,8 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
             final dataA = a.data() as Map<String, dynamic>? ?? {};
             final dataB = b.data() as Map<String, dynamic>? ?? {};
             return (dataA['title'] ?? '').toString().toLowerCase().compareTo(
-                (dataB['title'] ?? '').toString().toLowerCase());
+              (dataB['title'] ?? '').toString().toLowerCase(),
+            );
           });
         } else if (_sortBy == 'Rating High to Low') {
           filteredBooks.sort((a, b) {
@@ -2828,9 +3361,13 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
             if (pageCountA <= 0) pageCountA = 1;
             int pageCountB = dataB['pageCount'] is int ? dataB['pageCount'] : 1;
             if (pageCountB <= 0) pageCountB = 1;
-            
-            double progressA = (dataA['currentPage'] is int ? dataA['currentPage'] : 0) / pageCountA;
-            double progressB = (dataB['currentPage'] is int ? dataB['currentPage'] : 0) / pageCountB;
+
+            double progressA =
+                (dataA['currentPage'] is int ? dataA['currentPage'] : 0) /
+                pageCountA;
+            double progressB =
+                (dataB['currentPage'] is int ? dataB['currentPage'] : 0) /
+                pageCountB;
             return progressB.compareTo(progressA);
           });
         } else if (_sortBy == 'Progress Low to High') {
@@ -2841,263 +3378,351 @@ class _BookVerticalListScreenState extends State<BookVerticalListScreen> {
             if (pageCountA <= 0) pageCountA = 1;
             int pageCountB = dataB['pageCount'] is int ? dataB['pageCount'] : 1;
             if (pageCountB <= 0) pageCountB = 1;
-            
-            double progressA = (dataA['currentPage'] is int ? dataA['currentPage'] : 0) / pageCountA;
-            double progressB = (dataB['currentPage'] is int ? dataB['currentPage'] : 0) / pageCountB;
+
+            double progressA =
+                (dataA['currentPage'] is int ? dataA['currentPage'] : 0) /
+                pageCountA;
+            double progressB =
+                (dataB['currentPage'] is int ? dataB['currentPage'] : 0) /
+                pageCountB;
             return progressA.compareTo(progressB);
           });
         }
 
-    return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        backgroundColor: bgColor,
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.07),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(Icons.arrow_back_rounded, color: Colors.white, size: 20),
-          ),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-                fontSize: 20,
-                letterSpacing: -0.4,
+        return Scaffold(
+          backgroundColor: bgColor,
+          appBar: AppBar(
+            backgroundColor: bgColor,
+            elevation: 0,
+            leading: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.07),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.arrow_back_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
             ),
-            Text(
-              '${widget.books.length} books',
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.42),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    letterSpacing: -0.4,
+                  ),
+                ),
+                Text(
+                  '${widget.books.length} books',
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.42),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        actions: [
-          if (sortOptions.length > 1)
-            PopupMenuButton<String>(
-              icon: const Icon(Icons.sort_rounded, color: Colors.white),
-              color: const Color(0xFF1F2937),
-              onSelected: (String result) {
-                setState(() {
-                  _sortBy = result;
-                });
-              },
-              itemBuilder: (BuildContext context) => sortOptions
-                  .map((option) => PopupMenuItem<String>(
-                        value: option,
-                        child: Text(
-                          option,
-                          style: TextStyle(
-                            color: _sortBy == option ? widget.accentColor : Colors.white,
-                            fontWeight: _sortBy == option ? FontWeight.bold : FontWeight.normal,
+            actions: [
+              if (sortOptions.length > 1)
+                PopupMenuButton<String>(
+                  icon: const Icon(Icons.sort_rounded, color: Colors.white),
+                  color: const Color(0xFF1F2937),
+                  onSelected: (String result) {
+                    setState(() {
+                      _sortBy = result;
+                    });
+                  },
+                  itemBuilder: (BuildContext context) => sortOptions
+                      .map(
+                        (option) => PopupMenuItem<String>(
+                          value: option,
+                          child: Text(
+                            option,
+                            style: TextStyle(
+                              color: _sortBy == option
+                                  ? widget.accentColor
+                                  : Colors.white,
+                              fontWeight: _sortBy == option
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
                           ),
                         ),
-                      ))
-                  .toList(),
-            ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-            child: TextField(
-              style: const TextStyle(color: Colors.white, fontSize: 14),
-              onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
-              decoration: InputDecoration(
-                hintText: 'Search title or author…',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.28), fontSize: 14),
-                prefixIcon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.3), size: 20),
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.06),
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide.none,
+                      )
+                      .toList(),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(color: widget.accentColor.withOpacity(0.7), width: 1.2),
-                ),
-              ),
-            ),
+            ],
           ),
-          Expanded(
-            child: filteredBooks.isEmpty
-                ? Center(
-                    child: Text(
-                      'No books match your search',
-                      style: TextStyle(color: Colors.white.withOpacity(0.38), fontSize: 14),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                child: TextField(
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                  onChanged: (val) =>
+                      setState(() => _searchQuery = val.toLowerCase()),
+                  decoration: InputDecoration(
+                    hintText: 'Search title or author…',
+                    hintStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.28),
+                      fontSize: 14,
                     ),
-                  )
-                : ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: filteredBooks.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 10),
-                    itemBuilder: (context, index) {
-                      final data = filteredBooks[index].data() as Map<String, dynamic>? ?? {};
-                      final status = _normalizeBookStatus(data['status']);
-                      
-                      String pagesText = '${data['pageCount']?.toString() ?? '?'} pages';
-                      String? extraBadgeText;
-                      IconData? extraBadgeIcon;
-                      
-                      if (status == 'Finished') {
-                        extraBadgeText = '${data['rating'] ?? 0} ★';
-                      } else if (status == 'Reading') {
-                        int pageC = data['pageCount'] is int ? data['pageCount'] : 1;
-                        if (pageC <= 0) pageC = 1;
-                        int currentP = data['currentPage'] is int ? data['currentPage'] : 0;
-                        int pct = (currentP / pageC * 100).clamp(0, 100).toInt();
-                        pagesText = '$currentP / $pageC pages';
-                        extraBadgeText = '$pct%';
-                        extraBadgeIcon = Icons.data_usage_rounded;
-                      }
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BookDetailScreen(bookData: _formatBookData(filteredBooks[index])),
+                    prefixIcon: Icon(
+                      Icons.search_rounded,
+                      color: Colors.white.withOpacity(0.3),
+                      size: 20,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.06),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(
+                        color: widget.accentColor.withOpacity(0.7),
+                        width: 1.2,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: filteredBooks.isEmpty
+                    ? Center(
+                        child: Text(
+                          'No books match your search',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.38),
+                            fontSize: 14,
                           ),
                         ),
-                        child: Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.04),
-                            borderRadius: BorderRadius.circular(18),
-                            border: Border.all(color: Colors.white.withOpacity(0.06)),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.35),
-                                      blurRadius: 12,
-                                      offset: const Offset(0, 6),
-                                    ),
-                                  ],
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: _buildCoverImage(data['thumbnail']?.toString(), 70, 105),
+                      )
+                    : ListView.separated(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: filteredBooks.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          final data =
+                              filteredBooks[index].data()
+                                  as Map<String, dynamic>? ??
+                              {};
+                          final status = _normalizeBookStatus(data['status']);
+
+                          String pagesText =
+                              '${data['pageCount']?.toString() ?? '?'} pages';
+                          String? extraBadgeText;
+                          IconData? extraBadgeIcon;
+
+                          if (status == 'Finished') {
+                            extraBadgeText = '${data['rating'] ?? 0} ★';
+                          } else if (status == 'Reading') {
+                            int pageC = data['pageCount'] is int
+                                ? data['pageCount']
+                                : 1;
+                            if (pageC <= 0) pageC = 1;
+                            int currentP = data['currentPage'] is int
+                                ? data['currentPage']
+                                : 0;
+                            int pct = (currentP / pageC * 100)
+                                .clamp(0, 100)
+                                .toInt();
+                            pagesText = '$currentP / $pageC pages';
+                            extraBadgeText = '$pct%';
+                            extraBadgeIcon = Icons.data_usage_rounded;
+                          }
+                          return GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BookDetailScreen(
+                                  bookData: _formatBookData(
+                                    filteredBooks[index],
+                                  ),
                                 ),
                               ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data['title']?.toString() ?? 'Unknown',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 16,
-                                        letterSpacing: -0.2,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      data['authors']?.toString() ?? 'Unknown',
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.48),
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Wrap(
-                                      spacing: 8,
-                                      runSpacing: 6,
-                                      children: [
-                                        _buildStatusBadge(status),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-                                          decoration: BoxDecoration(
-                                            color: widget.accentColor.withOpacity(0.10),
-                                            borderRadius: BorderRadius.circular(999),
-                                            border: Border.all(color: widget.accentColor.withOpacity(0.2)),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(Icons.insert_drive_file_rounded, color: widget.accentColor, size: 11),
-                                              const SizedBox(width: 4),
-                                              Text(
-                                                pagesText,
-                                                style: TextStyle(
-                                                  color: widget.accentColor,
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.04),
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.06),
+                                ),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.35),
+                                          blurRadius: 12,
+                                          offset: const Offset(0, 6),
                                         ),
-                                        if (extraBadgeText != null)
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-                                            decoration: BoxDecoration(
-                                              color: widget.accentColor.withOpacity(0.10),
-                                              borderRadius: BorderRadius.circular(999),
-                                              border: Border.all(color: widget.accentColor.withOpacity(0.2)),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                if (extraBadgeIcon != null) ...[
-                                                  Icon(extraBadgeIcon, color: widget.accentColor, size: 11),
-                                                  const SizedBox(width: 4),
-                                                ],
-                                                Text(
-                                                  extraBadgeText,
-                                                  style: TextStyle(
-                                                    color: widget.accentColor,
-                                                    fontWeight: FontWeight.w800,
-                                                    fontSize: 11,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: _buildCoverImage(
+                                        data['thumbnail']?.toString(),
+                                        70,
+                                        105,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 14),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          data['title']?.toString() ??
+                                              'Unknown',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 16,
+                                            letterSpacing: -0.2,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          data['authors']?.toString() ??
+                                              'Unknown',
+                                          style: TextStyle(
+                                            color: Colors.white.withOpacity(
+                                              0.48,
+                                            ),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Wrap(
+                                          spacing: 8,
+                                          runSpacing: 6,
+                                          children: [
+                                            _buildStatusBadge(status),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 9,
+                                                    vertical: 5,
+                                                  ),
+                                              decoration: BoxDecoration(
+                                                color: widget.accentColor
+                                                    .withOpacity(0.10),
+                                                borderRadius:
+                                                    BorderRadius.circular(999),
+                                                border: Border.all(
+                                                  color: widget.accentColor
+                                                      .withOpacity(0.2),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    Icons
+                                                        .insert_drive_file_rounded,
+                                                    color: widget.accentColor,
+                                                    size: 11,
+                                                  ),
+                                                  const SizedBox(width: 4),
+                                                  Text(
+                                                    pagesText,
+                                                    style: TextStyle(
+                                                      color: widget.accentColor,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      fontSize: 11,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            if (extraBadgeText != null)
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 9,
+                                                      vertical: 5,
+                                                    ),
+                                                decoration: BoxDecoration(
+                                                  color: widget.accentColor
+                                                      .withOpacity(0.10),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        999,
+                                                      ),
+                                                  border: Border.all(
+                                                    color: widget.accentColor
+                                                        .withOpacity(0.2),
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    if (extraBadgeIcon !=
+                                                        null) ...[
+                                                      Icon(
+                                                        extraBadgeIcon,
+                                                        color:
+                                                            widget.accentColor,
+                                                        size: 11,
+                                                      ),
+                                                      const SizedBox(width: 4),
+                                                    ],
+                                                    Text(
+                                                      extraBadgeText,
+                                                      style: TextStyle(
+                                                        color:
+                                                            widget.accentColor,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        fontSize: 11,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        );
       },
     );
   }
@@ -3139,7 +3764,11 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               color: Colors.white.withOpacity(0.07),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(Icons.arrow_back_rounded, color: Colors.white, size: 20),
+            child: const Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 20,
+            ),
           ),
         ),
         title: Text(
@@ -3155,10 +3784,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
       body: StreamBuilder<QuerySnapshot>(
         stream: widget.title == 'My Genres' && user != null
             ? FirebaseFirestore.instance
-                .collection('users')
-                .doc(user.uid)
-                .collection('custom_genres')
-                .snapshots()
+                  .collection('users')
+                  .doc(user.uid)
+                  .collection('custom_genres')
+                  .snapshots()
             : null,
         builder: (context, snapshot) {
           Set<String> allKeys = Set.from(widget.categoryMap.keys);
@@ -3168,22 +3797,36 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
             }
           }
 
-          final keys = allKeys.where((k) => k.toLowerCase().contains(_searchQuery)).toList()..sort();
+          final keys =
+              allKeys
+                  .where((k) => k.toLowerCase().contains(_searchQuery))
+                  .toList()
+                ..sort();
 
           return CustomScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                   child: TextField(
                     style: const TextStyle(color: Colors.white, fontSize: 14),
-                    onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
+                    onChanged: (val) =>
+                        setState(() => _searchQuery = val.toLowerCase()),
                     decoration: InputDecoration(
                       hintText: 'Search…',
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.28), fontSize: 14),
-                      prefixIcon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.3), size: 20),
+                      hintStyle: TextStyle(
+                        color: Colors.white.withOpacity(0.28),
+                        fontSize: 14,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search_rounded,
+                        color: Colors.white.withOpacity(0.3),
+                        size: 20,
+                      ),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.06),
                       contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -3193,7 +3836,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide(color: accentColor.withOpacity(0.6), width: 1.2),
+                        borderSide: BorderSide(
+                          color: accentColor.withOpacity(0.6),
+                          width: 1.2,
+                        ),
                       ),
                     ),
                   ),
@@ -3217,10 +3863,18 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                     separatorBuilder: (_, __) => const SizedBox(height: 10),
                     itemBuilder: (context, index) {
                       String key = keys[index];
-                      List<QueryDocumentSnapshot> books = widget.categoryMap[key] ?? [];
+                      List<QueryDocumentSnapshot> books =
+                          widget.categoryMap[key] ?? [];
                       final statusCounts = _statusCountsForBooks(books);
-                      final visibleStatusCounts = statusCounts.entries.where((e) => e.value > 0).toList();
-                      return _buildCategoryTile(context, key: key, books: books, visibleStatusCounts: visibleStatusCounts);
+                      final visibleStatusCounts = statusCounts.entries
+                          .where((e) => e.value > 0)
+                          .toList();
+                      return _buildCategoryTile(
+                        context,
+                        key: key,
+                        books: books,
+                        visibleStatusCounts: visibleStatusCounts,
+                      );
                     },
                   ),
                 ),
@@ -3281,7 +3935,12 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                       spacing: 7,
                       runSpacing: 7,
                       children: visibleStatusCounts
-                          .map((entry) => _buildStatusBadge(entry.key, count: entry.value))
+                          .map(
+                            (entry) => _buildStatusBadge(
+                              entry.key,
+                              count: entry.value,
+                            ),
+                          )
                           .toList(),
                     ),
                   ],
@@ -3293,7 +3952,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 11,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: readColor.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(10),
@@ -3308,7 +3970,11 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Icon(Icons.arrow_forward_ios_rounded, color: Colors.white.withOpacity(0.2), size: 13),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.white.withOpacity(0.2),
+                  size: 13,
+                ),
               ],
             ),
           ],

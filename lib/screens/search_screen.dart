@@ -7,6 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/book_api_service.dart';
 import '../services/library_service.dart';
+import '../services/xp_service.dart';
+import '../widgets/level_up_dialog.dart';
 import 'book_detail_screen.dart';
 import 'add_book_screen.dart';
 
@@ -43,9 +45,16 @@ class _SearchScreenState extends State<SearchScreen> {
   List<dynamic> _randomBooks = [];
   List<dynamic> _youMayLikeBooks = [];
 
-  final Color bgColor = const Color(0xFF0F172A);
-  final Color cardColor = const Color(0xFF1E293B);
-  final Color accentColor = const Color(0xFF8B5CF6);
+  TierTheme _activeTheme = kTierThemes[3];
+
+  Color get bgColor => _activeTheme.bgDark;
+  Color get cardColor =>
+      Color.lerp(const Color(0xFF1E293B), _activeTheme.bgMid, 0.42)!;
+  Color get accentColor => _vividRankColor(_activeTheme);
+
+  Color _vividRankColor(TierTheme theme) {
+    return Color.lerp(theme.primary, theme.secondary, 0.28) ?? theme.primary;
+  }
 
   @override
   void initState() {
@@ -169,7 +178,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 if (authName.isNotEmpty &&
                     authName != 'Unknown Author' &&
                     authName != 'Unknown') {
-                  authorCounts[authName] = (authorCounts[authName] ?? 0) + weight;
+                  authorCounts[authName] =
+                      (authorCounts[authName] ?? 0) + weight;
                 }
               }
             } else if (auths is String &&
@@ -653,44 +663,68 @@ class _SearchScreenState extends State<SearchScreen> {
         _searchResults.isEmpty &&
         !_isLoading;
 
-    return Scaffold(
-      backgroundColor: bgColor,
-      body: Stack(
-        children: [
-          Positioned.fill(child: _buildBackgroundGlow()),
-          SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(),
-                _buildSearchPanel(),
-                Expanded(
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 260),
-                    child: _isLoading && _searchResults.isEmpty
-                        ? _buildFullLoading()
-                        : showResults
-                        ? _buildSearchResults()
-                        : showNoResults
-                        ? _buildNoResults()
-                        : _buildDiscoverView(),
-                  ),
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+
+    return StreamBuilder<DocumentSnapshot>(
+      stream: uid == null
+          ? null
+          : FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+      builder: (context, snap) {
+        final data = snap.data?.data() as Map<String, dynamic>?;
+        final rawXp = data?['totalXp'] ?? data?['points'] ?? 0;
+        final totalXp = rawXp is num ? rawXp.toInt() : 0;
+        final levelData = XpService.calculateLevel(totalXp);
+        final currentTier = levelData['tierIndex'] as int;
+        final rankBookTier = XpService.resolveEquippedRankBookIndex(
+          data?['equippedRankBookIndex'],
+          currentTier,
+        );
+        _activeTheme = kTierThemes[rankBookTier];
+
+        return Scaffold(
+          backgroundColor: bgColor,
+          body: Stack(
+            children: [
+              Positioned.fill(child: _buildBackgroundGlow()),
+              SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(),
+                    _buildSearchPanel(),
+                    Expanded(
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 260),
+                        child: _isLoading && _searchResults.isEmpty
+                            ? _buildFullLoading()
+                            : showResults
+                            ? _buildSearchResults()
+                            : showNoResults
+                            ? _buildNoResults()
+                            : _buildDiscoverView(),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   Widget _buildBackgroundGlow() {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF111827), Color(0xFF0F172A), Color(0xFF090E1A)],
+          colors: [
+            Color.lerp(_activeTheme.bgDark, accentColor, 0.18)!,
+            Color.lerp(_activeTheme.bgMid, accentColor, 0.14)!,
+            const Color(0xFF090E1A),
+          ],
         ),
       ),
       child: Stack(
@@ -722,10 +756,10 @@ class _SearchScreenState extends State<SearchScreen> {
               height: 190,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFFD134B6).withOpacity(0.10),
+                color: _activeTheme.secondary.withOpacity(0.14),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFFD134B6).withOpacity(0.12),
+                    color: _activeTheme.secondary.withOpacity(0.16),
                     blurRadius: 90,
                     spreadRadius: 55,
                   ),
@@ -919,14 +953,23 @@ class _SearchScreenState extends State<SearchScreen> {
         height: 52,
         decoration: BoxDecoration(
           color: isAccent
-              ? accentColor.withOpacity(0.14)
+              ? accentColor.withOpacity(0.22)
               : Colors.white.withOpacity(0.045),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isAccent
-                ? accentColor.withOpacity(0.35)
+                ? accentColor.withOpacity(0.52)
                 : Colors.white.withOpacity(0.07),
           ),
+          boxShadow: isAccent
+              ? [
+                  BoxShadow(
+                    color: accentColor.withOpacity(0.28),
+                    blurRadius: 18,
+                    offset: const Offset(0, 7),
+                  ),
+                ]
+              : null,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -964,7 +1007,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ? LinearGradient(
                   colors: [
                     accentColor.withOpacity(0.92),
-                    const Color(0xFFD134B6).withOpacity(0.75),
+                    _activeTheme.secondary.withOpacity(0.82),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -1177,17 +1220,17 @@ class _SearchScreenState extends State<SearchScreen> {
             borderRadius: BorderRadius.circular(24),
             gradient: LinearGradient(
               colors: [
-                accentColor.withOpacity(0.22),
-                const Color(0xFFD134B6).withOpacity(0.12),
+                accentColor.withOpacity(0.30),
+                _activeTheme.secondary.withOpacity(0.18),
                 cardColor.withOpacity(0.88),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            border: Border.all(color: accentColor.withOpacity(0.22)),
+            border: Border.all(color: accentColor.withOpacity(0.38)),
             boxShadow: [
               BoxShadow(
-                color: accentColor.withOpacity(0.10),
+                color: accentColor.withOpacity(0.18),
                 blurRadius: 22,
                 offset: const Offset(0, 10),
               ),

@@ -211,8 +211,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final bookSnap = await bookRef.get();
     final oldData = bookSnap.data() ?? {};
     final String oldStatus = oldData['status']?.toString() ?? 'Reading';
+    final bool isManualBook = XpService.isManualBookData(
+      oldData,
+      bookId: bookId,
+    );
+    final Map<String, dynamic> xpBookData = Map<String, dynamic>.from(oldData);
+    if (!isManualBook && !xpBookData.containsKey('verifiedPageCount')) {
+      xpBookData['verifiedPageCount'] = totalPages;
+    }
 
     final int pagesRead = (newPage - bestProgress).clamp(0, totalPages);
+    final int newBestProgress = newPage > bestProgress ? newPage : bestProgress;
+    final int oldPageXpProgress = XpService.pageXpProgressForBook(
+      progress: bestProgress,
+      bookData: xpBookData,
+      bookId: bookId,
+    );
+    final int newPageXpProgress = XpService.pageXpProgressForBook(
+      progress: newBestProgress,
+      bookData: xpBookData,
+      bookId: bookId,
+    );
+    final int pageXpGained = (newPageXpProgress - oldPageXpProgress)
+        .clamp(0, totalPages)
+        .toInt();
     final bool finished = newPage >= totalPages;
     final bool justFinished = oldStatus != 'Finished' && finished;
     final String todayDate = XpService.dateKey(DateTime.now());
@@ -223,9 +245,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     final Map<String, dynamic> updateData = {
       'currentPage': newPage,
-      'bestProgress': newPage > bestProgress ? newPage : bestProgress,
+      'bestProgress': newBestProgress,
       'status': finished ? 'Finished' : 'Reading',
     };
+    if (!isManualBook && !oldData.containsKey('verifiedPageCount')) {
+      updateData['verifiedPageCount'] = totalPages;
+    }
 
     if (justFinished) {
       updateData['finishedReading'] = todayDate;
@@ -243,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         : false;
 
     final result = await XpService.awardXp(
-      pagesRead: pagesRead,
+      pagesRead: pageXpGained,
       isNewDay: isNewDay,
       justFinished: justFinished,
     );
@@ -519,9 +544,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     int currentPage,
     int totalPages,
     int bestProgress,
+    Map<String, dynamic> bookData,
   ) {
     final th = kTierThemes[_currentTier];
     final ctrl = TextEditingController(text: '$currentPage');
+    final bool isManualBook = XpService.isManualBookData(
+      bookData,
+      bookId: bookId,
+    );
+    final Map<String, dynamic> xpBookData = Map<String, dynamic>.from(bookData);
+    if (!isManualBook && !xpBookData.containsKey('verifiedPageCount')) {
+      xpBookData['verifiedPageCount'] = totalPages;
+    }
 
     showModalBottomSheet(
       context: context,
@@ -532,7 +566,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           int curVal() =>
               (int.tryParse(ctrl.text) ?? currentPage).clamp(0, totalPages);
           double pct() => totalPages > 0 ? curVal() / totalPages : 0.0;
-          int newPages() => (curVal() - bestProgress).clamp(0, totalPages);
+          int newPages() {
+            final int newBest = curVal() > bestProgress
+                ? curVal()
+                : bestProgress;
+            final int oldPageXpProgress = XpService.pageXpProgressForBook(
+              progress: bestProgress,
+              bookData: xpBookData,
+              bookId: bookId,
+            );
+            final int newPageXpProgress = XpService.pageXpProgressForBook(
+              progress: newBest,
+              bookData: xpBookData,
+              bookId: bookId,
+            );
+            return (newPageXpProgress - oldPageXpProgress)
+                .clamp(0, totalPages)
+                .toInt();
+          }
+
           int xpPrev() => newPages() + (curVal() >= totalPages ? 50 : 0);
           bool finish() => curVal() >= totalPages;
 
@@ -1445,6 +1497,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 cur,
                                 total,
                                 best,
+                                data,
                               ),
                               onTap: () => Navigator.push(
                                 context,
@@ -2491,7 +2544,7 @@ class _XpBar extends StatelessWidget {
                   '📚',
                   'Add a Book',
                   '+5 XP per book',
-                  'Add new books to your library to earn XP.',
+                  'Add new books to your library to earn XP. XP gain from manually added books is capped.',
                   theme,
                 ),
                 _xpInfoTile(

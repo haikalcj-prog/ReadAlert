@@ -412,10 +412,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   void _showXpToast(Map<String, dynamic> result, {double topOffset = 16}) {
     AudioService.playXpGain();
-    final overlay = Overlay.of(context);
+    final overlay = Overlay.of(context, rootOverlay: true);
     final entry = OverlayEntry(
       builder: (ctx) => Positioned(
-        top: MediaQuery.of(context).padding.top + topOffset,
+        top: MediaQuery.of(ctx).padding.top + topOffset,
         left: 20,
         right: 20,
         child: XpToastWidget(result: result, accentColor: xpToastColor),
@@ -428,13 +428,29 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   void _showStatusToast(String status) {
-    final overlay = Overlay.of(context);
+    final overlay = Overlay.of(context, rootOverlay: true);
     final entry = OverlayEntry(
       builder: (ctx) => Positioned(
-        top: MediaQuery.of(context).padding.top + 16,
+        top: MediaQuery.of(ctx).padding.top + 16,
         left: 20,
         right: 20,
         child: _StatusChangeToast(status: status),
+      ),
+    );
+    overlay.insert(entry);
+    Future.delayed(const Duration(milliseconds: 2600), () {
+      if (entry.mounted) entry.remove();
+    });
+  }
+
+  void _showRemoveToast() {
+    final overlay = Overlay.of(context, rootOverlay: true);
+    final entry = OverlayEntry(
+      builder: (ctx) => Positioned(
+        top: MediaQuery.of(ctx).padding.top + 16,
+        left: 20,
+        right: 20,
+        child: const _LibraryRemoveToast(),
       ),
     );
     overlay.insert(entry);
@@ -478,17 +494,128 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     }
   }
 
+  Future<bool> _confirmRemoveFromLibrary() async {
+    final title = (_volumeInfo['title'] ?? 'this book').toString();
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF171722),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+            side: BorderSide(color: Colors.white.withOpacity(0.08)),
+          ),
+          titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+          contentPadding: const EdgeInsets.fromLTRB(24, 18, 24, 8),
+          actionsPadding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+          title: Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.redAccent.withOpacity(0.24),
+                      Colors.deepOrangeAccent.withOpacity(0.14),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: Colors.redAccent.withOpacity(0.28)),
+                ),
+                child: const Icon(
+                  Icons.delete_forever_rounded,
+                  color: Colors.redAccent,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 14),
+              const Expanded(
+                child: Text(
+                  'Remove book?',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            'Remove "$title" from your library?',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.68),
+              height: 1.4,
+              fontSize: 14,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white.withOpacity(0.58),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, true),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.redAccent.withOpacity(0.14),
+                foregroundColor: Colors.redAccent,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  side: BorderSide(color: Colors.redAccent.withOpacity(0.22)),
+                ),
+              ),
+              child: const Text(
+                'Remove',
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    return confirmed ?? false;
+  }
+
   Future<void> _removeFromLibrary() async {
+    if (_isRemoving) return;
+
+    final shouldRemove = await _confirmRemoveFromLibrary();
+    if (!shouldRemove || !mounted) return;
+
     setState(() => _isRemoving = true);
     try {
-      await LibraryService.removeBook(_bookId);
+      final result = await LibraryService.removeBook(_bookId);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Removed from library.'),
-            backgroundColor: Colors.redAccent,
-          ),
-        );
+        final int xpGained = result['xpGained'] is int
+            ? result['xpGained'] as int
+            : int.tryParse(result['xpGained']?.toString() ?? '') ?? 0;
+        _showRemoveToast();
+        if (xpGained != 0) {
+          _showXpToast(result, topOffset: 92);
+        }
         Navigator.pop(context);
       }
     } catch (e) {
@@ -632,21 +759,30 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           builder: (context, setSheetState) {
             return Container(
               decoration: BoxDecoration(
-                color: const Color(0xFF15151F),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF111118), Color(0xFF1B1824)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(28),
                 ),
                 border: Border(
                   top: BorderSide(
-                    color: Colors.amberAccent.withOpacity(0.18),
-                    width: 1,
+                    color: Colors.amberAccent.withOpacity(0.24),
+                    width: 1.4,
                   ),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.amber.withOpacity(0.10),
+                    color: Colors.black.withOpacity(0.45),
                     blurRadius: 32,
-                    offset: const Offset(0, -8),
+                    offset: const Offset(0, -12),
+                  ),
+                  BoxShadow(
+                    color: Colors.amberAccent.withOpacity(0.09),
+                    blurRadius: 36,
+                    offset: const Offset(0, -10),
                   ),
                 ],
               ),
@@ -673,15 +809,26 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
                             colors: [
-                              Colors.amberAccent.withOpacity(0.95),
-                              Colors.orangeAccent.withOpacity(0.88),
+                              const Color(0xFFFFF0A8),
+                              Colors.amberAccent.withOpacity(0.96),
+                              const Color(0xFFFF9F43),
                             ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.38),
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.amberAccent.withOpacity(0.28),
-                              blurRadius: 22,
-                              offset: const Offset(0, 8),
+                              color: Colors.amberAccent.withOpacity(0.34),
+                              blurRadius: 26,
+                              offset: const Offset(0, 10),
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.22),
+                              blurRadius: 12,
+                              offset: const Offset(0, 6),
                             ),
                           ],
                         ),
@@ -713,18 +860,31 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          5,
-                          (index) => _ratingStarButton(
-                            index: index,
-                            currentRating: selectedRating,
-                            size: 34,
-                            padding: 5,
-                            onSelected: (rating) {
-                              setSheetState(() => selectedRating = rating);
-                            },
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 12,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.20),
+                          borderRadius: BorderRadius.circular(22),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.08),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            5,
+                            (index) => _ratingStarButton(
+                              index: index,
+                              currentRating: selectedRating,
+                              size: 34,
+                              padding: 4,
+                              onSelected: (rating) {
+                                setSheetState(() => selectedRating = rating);
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -742,8 +902,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 13,
                                   ),
+                                  backgroundColor: Colors.white.withOpacity(
+                                    0.035,
+                                  ),
                                   side: BorderSide(
-                                    color: Colors.white.withOpacity(0.12),
+                                    color: Colors.white.withOpacity(0.14),
                                   ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(14),
@@ -775,13 +938,16 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 13,
                                 ),
-                                backgroundColor: Colors.amber,
+                                backgroundColor: Colors.amberAccent,
                                 disabledBackgroundColor: Colors.white
                                     .withOpacity(0.08),
                                 foregroundColor: const Color(0xFF2D1C00),
                                 disabledForegroundColor: Colors.white
                                     .withOpacity(0.28),
                                 elevation: 0,
+                                shadowColor: Colors.amberAccent.withOpacity(
+                                  0.24,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),
@@ -828,25 +994,30 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             gradient: filled
                 ? LinearGradient(
                     colors: [
-                      Colors.amberAccent.withOpacity(0.28),
-                      Colors.orangeAccent.withOpacity(0.16),
+                      Colors.amberAccent.withOpacity(0.34),
+                      const Color(0xFFFFA726).withOpacity(0.20),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   )
                 : null,
-            color: filled ? null : Colors.white.withOpacity(0.045),
+            color: filled ? null : Colors.black.withOpacity(0.22),
             border: Border.all(
               color: filled
-                  ? Colors.amberAccent.withOpacity(0.42)
-                  : Colors.white.withOpacity(0.08),
+                  ? Colors.amberAccent.withOpacity(0.56)
+                  : Colors.white.withOpacity(0.10),
             ),
             boxShadow: filled
                 ? [
                     BoxShadow(
-                      color: Colors.amberAccent.withOpacity(0.18),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
+                      color: Colors.amberAccent.withOpacity(0.24),
+                      blurRadius: 16,
+                      offset: const Offset(0, 6),
+                    ),
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.18),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
                     ),
                   ]
                 : null,
@@ -879,25 +1050,25 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           gradient: filled
               ? LinearGradient(
                   colors: [
-                    Colors.amberAccent.withOpacity(0.28),
-                    Colors.orangeAccent.withOpacity(0.16),
+                    Colors.amberAccent.withOpacity(0.32),
+                    const Color(0xFFFFA726).withOpacity(0.18),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
-          color: filled ? null : Colors.white.withOpacity(0.045),
+          color: filled ? null : Colors.black.withOpacity(0.20),
           border: Border.all(
             color: filled
-                ? Colors.amberAccent.withOpacity(0.42)
-                : Colors.white.withOpacity(0.08),
+                ? Colors.amberAccent.withOpacity(0.50)
+                : Colors.white.withOpacity(0.10),
           ),
           boxShadow: filled
               ? [
                   BoxShadow(
-                    color: Colors.amberAccent.withOpacity(0.18),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    color: Colors.amberAccent.withOpacity(0.20),
+                    blurRadius: 14,
+                    offset: const Offset(0, 5),
                   ),
                 ]
               : null,
@@ -913,22 +1084,24 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   Widget _buildRatingCard(int currentRating) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.fromLTRB(14, 12, 12, 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          colors: [
-            Colors.amberAccent.withOpacity(0.10),
-            Colors.white.withOpacity(0.035),
-          ],
+        borderRadius: BorderRadius.circular(22),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF17151F), Color(0xFF211B20)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        border: Border.all(color: Colors.amberAccent.withOpacity(0.16)),
+        border: Border.all(color: Colors.amberAccent.withOpacity(0.18)),
         boxShadow: [
           BoxShadow(
-            color: Colors.amberAccent.withOpacity(0.07),
+            color: Colors.black.withOpacity(0.22),
             blurRadius: 18,
+            offset: const Offset(0, 10),
+          ),
+          BoxShadow(
+            color: Colors.amberAccent.withOpacity(0.08),
+            blurRadius: 22,
             offset: const Offset(0, 8),
           ),
         ],
@@ -939,6 +1112,29 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 4, bottom: 8),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.workspace_premium_rounded,
+                      color: Colors.amberAccent.withOpacity(0.92),
+                      size: 14,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      'MY RATING',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.46),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: List.generate(
@@ -967,7 +1163,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           ),
           const SizedBox(width: 8),
           Material(
-            color: Colors.white.withOpacity(0.06),
+            color: Colors.amberAccent.withOpacity(0.10),
             shape: const CircleBorder(),
             child: InkWell(
               customBorder: const CircleBorder(),
@@ -976,7 +1172,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                 padding: const EdgeInsets.all(8),
                 child: Icon(
                   Icons.edit_rounded,
-                  color: Colors.amberAccent.withOpacity(0.92),
+                  color: Colors.amberAccent.withOpacity(0.95),
                   size: 17,
                 ),
               ),
@@ -1844,6 +2040,163 @@ class _StatusToastConfig {
           icon: Icons.swap_horiz_rounded,
         );
     }
+  }
+}
+
+class _LibraryRemoveToast extends StatefulWidget {
+  const _LibraryRemoveToast();
+
+  @override
+  State<_LibraryRemoveToast> createState() => _LibraryRemoveToastState();
+}
+
+class _LibraryRemoveToastState extends State<_LibraryRemoveToast>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  late final Animation<double> _fade;
+  late final Animation<Offset> _slide;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+    );
+    _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic);
+    _slide = Tween<Offset>(
+      begin: const Offset(0, -0.35),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic));
+    _ctrl.forward();
+    Future.delayed(const Duration(milliseconds: 2100), () {
+      if (mounted) _ctrl.reverse();
+    });
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFFFF5C7A);
+    const secondary = Color(0xFFFF9F43);
+
+    return SlideTransition(
+      position: _slide,
+      child: FadeTransition(
+        opacity: _fade,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(1.2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: LinearGradient(
+                colors: [
+                  primary.withValues(alpha: 0.9),
+                  secondary.withValues(alpha: 0.42),
+                  Colors.white.withValues(alpha: 0.12),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: primary.withValues(alpha: 0.26),
+                  blurRadius: 26,
+                  offset: const Offset(0, 10),
+                ),
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.36),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                color: const Color(0xFF121826).withValues(alpha: 0.96),
+                borderRadius: BorderRadius.circular(17),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [primary, secondary],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(13),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primary.withValues(alpha: 0.34),
+                          blurRadius: 14,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.delete_forever_rounded,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                  ),
+                  const SizedBox(width: 13),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Library updated',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.58),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        const Text(
+                          'Removed from library',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: primary.withValues(alpha: 0.14),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.check_rounded,
+                      color: primary,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
