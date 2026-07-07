@@ -233,6 +233,182 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   // ── AVATAR OPTIONS DIALOG ───────────────────────────────
+  Future<void> _showProfileMenu(List<Color> colors) async {
+    await showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.62),
+      builder: (dialogContext) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+          child: Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: LinearGradient(
+                colors: [
+                  Color.lerp(cardColor, colors[0], 0.14)!,
+                  Color.lerp(bgColor, colors[1], 0.08)!,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(color: colors[0].withOpacity(0.24)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.34),
+                  blurRadius: 26,
+                  offset: const Offset(0, 14),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(13),
+                        gradient: LinearGradient(colors: colors),
+                      ),
+                      child: const Icon(
+                        Icons.menu_rounded,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Text(
+                        'Profile Menu',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.pop(dialogContext),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: Colors.white.withOpacity(0.55),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Material(
+                  color: Colors.white.withOpacity(0.055),
+                  borderRadius: BorderRadius.circular(16),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () {
+                      Navigator.pop(dialogContext);
+                      _showChangePasswordDialog(colors);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 14,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: colors[0].withOpacity(0.16),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(
+                              Icons.lock_reset_rounded,
+                              color: colors[0],
+                              size: 20,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Text(
+                              'Change Password',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: Colors.white.withOpacity(0.35),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _showChangePasswordDialog(List<Color> colors) async {
+    final user = _user;
+    final email = user?.email;
+    final hasPasswordProvider =
+        user?.providerData.any((info) => info.providerId == 'password') ??
+        false;
+
+    if (user == null || email == null || email.isEmpty) return;
+
+    if (!hasPasswordProvider) {
+      await showDialog(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          backgroundColor: cardColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(22),
+          ),
+          title: const Text(
+            'Change Password',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          content: const Text(
+            'Password changes are only available for email login accounts.',
+            style: TextStyle(color: Colors.white70, height: 1.35),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text('OK', style: TextStyle(color: colors[0])),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    await showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.72),
+      builder: (_) => _ChangePasswordDialog(
+        user: user,
+        email: email,
+        colors: colors,
+        scaffoldMessenger: scaffoldMessenger,
+      ),
+    );
+  }
+
   Future<void> _showAvatarOptionsDialog() async {
     await showDialog(
       context: context,
@@ -563,7 +739,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             letterSpacing: -0.5,
                           ),
                         ),
-                        _xpPill(liveXp, colors[0]),
+                        _profileMenuButton(colors),
                       ],
                     ),
                     const SizedBox(height: 28),
@@ -750,27 +926,29 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   // ── SMALL UI HELPERS ──────────────────────────────────────
-  Widget _xpPill(int xp, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.35)),
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.auto_awesome_rounded, color: color, size: 13),
-          const SizedBox(width: 5),
-          Text(
-            '$xp XP',
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
+  Widget _profileMenuButton(List<Color> colors) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: () => _showProfileMenu(colors),
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: colors[0].withOpacity(0.14),
+            border: Border.all(color: colors[0].withOpacity(0.34)),
+            boxShadow: [
+              BoxShadow(
+                color: colors[0].withOpacity(0.12),
+                blurRadius: 16,
+                offset: const Offset(0, 6),
+              ),
+            ],
           ),
-        ],
+          child: Icon(Icons.menu_rounded, color: colors[0], size: 24),
+        ),
       ),
     );
   }
@@ -2979,6 +3157,304 @@ class _ProfileScreenState extends State<ProfileScreen>
       default:
         return accent;
     }
+  }
+}
+
+class _ChangePasswordDialog extends StatefulWidget {
+  final User user;
+  final String email;
+  final List<Color> colors;
+  final ScaffoldMessengerState scaffoldMessenger;
+
+  const _ChangePasswordDialog({
+    required this.user,
+    required this.email,
+    required this.colors,
+    required this.scaffoldMessenger,
+  });
+
+  @override
+  State<_ChangePasswordDialog> createState() => _ChangePasswordDialogState();
+}
+
+class _ChangePasswordDialogState extends State<_ChangePasswordDialog> {
+  final _currentCtrl = TextEditingController();
+  final _newCtrl = TextEditingController();
+  final _confirmCtrl = TextEditingController();
+
+  bool _saving = false;
+  bool _showCurrentPassword = false;
+  bool _showNewPassword = false;
+  bool _showConfirmPassword = false;
+  String? _errorText;
+
+  @override
+  void dispose() {
+    _currentCtrl.dispose();
+    _newCtrl.dispose();
+    _confirmCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _savePassword() async {
+    final current = _currentCtrl.text;
+    final next = _newCtrl.text;
+    final confirm = _confirmCtrl.text;
+
+    if (current.isEmpty || next.isEmpty || confirm.isEmpty) {
+      setState(() => _errorText = 'Please fill all fields.');
+      return;
+    }
+    if (next.length < 6) {
+      setState(() => _errorText = 'New password must be at least 6 chars.');
+      return;
+    }
+    if (next != confirm) {
+      setState(() => _errorText = 'New passwords do not match.');
+      return;
+    }
+
+    setState(() {
+      _saving = true;
+      _errorText = null;
+    });
+
+    try {
+      final credential = EmailAuthProvider.credential(
+        email: widget.email,
+        password: current,
+      );
+      await widget.user.reauthenticateWithCredential(credential);
+      await widget.user.updatePassword(next);
+
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pop();
+      widget.scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('Password changed successfully.'),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.green,
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      final message = switch (e.code) {
+        'wrong-password' => 'Current password is incorrect.',
+        'invalid-credential' => 'Current password is incorrect.',
+        'weak-password' => 'New password is too weak.',
+        'requires-recent-login' =>
+          'Please log in again before changing password.',
+        _ => e.message ?? 'Could not change password.',
+      };
+      if (mounted) {
+        setState(() {
+          _saving = false;
+          _errorText = message;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _saving = false;
+          _errorText = 'Could not change password.';
+        });
+      }
+    }
+  }
+
+  Widget _passwordField({
+    required TextEditingController controller,
+    required String label,
+    required bool isVisible,
+    required VoidCallback onToggleVisibility,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: !isVisible,
+      style: const TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.white.withOpacity(0.46)),
+        filled: true,
+        fillColor: Colors.black.withOpacity(0.18),
+        prefixIcon: Icon(
+          Icons.lock_outline_rounded,
+          color: Colors.white.withOpacity(0.36),
+          size: 19,
+        ),
+        suffixIcon: IconButton(
+          onPressed: onToggleVisibility,
+          icon: Icon(
+            isVisible ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+            color: Colors.white.withOpacity(0.42),
+            size: 20,
+          ),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.10)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.10)),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(14)),
+          borderSide: BorderSide(color: _ProfileScreenState.accent, width: 1.4),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = widget.colors;
+
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(26),
+          gradient: LinearGradient(
+            colors: [
+              Color.lerp(_ProfileScreenState.cardColor, colors[0], 0.14)!,
+              Color.lerp(_ProfileScreenState.bgColor, colors[1], 0.08)!,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          border: Border.all(color: colors[0].withOpacity(0.24)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    gradient: LinearGradient(colors: colors),
+                  ),
+                  child: const Icon(
+                    Icons.lock_reset_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Text(
+                    'Change Password',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            _passwordField(
+              controller: _currentCtrl,
+              label: 'Current password',
+              isVisible: _showCurrentPassword,
+              onToggleVisibility: () {
+                setState(() => _showCurrentPassword = !_showCurrentPassword);
+              },
+            ),
+            const SizedBox(height: 12),
+            _passwordField(
+              controller: _newCtrl,
+              label: 'New password',
+              isVisible: _showNewPassword,
+              onToggleVisibility: () {
+                setState(() => _showNewPassword = !_showNewPassword);
+              },
+            ),
+            const SizedBox(height: 12),
+            _passwordField(
+              controller: _confirmCtrl,
+              label: 'Confirm new password',
+              isVisible: _showConfirmPassword,
+              onToggleVisibility: () {
+                setState(() => _showConfirmPassword = !_showConfirmPassword);
+              },
+            ),
+            if (_errorText != null) ...[
+              const SizedBox(height: 12),
+              Text(
+                _errorText!,
+                style: const TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: _saving
+                        ? null
+                        : () =>
+                              Navigator.of(context, rootNavigator: true).pop(),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 13),
+                      side: BorderSide(color: Colors.white.withOpacity(0.16)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.78),
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _saving ? null : _savePassword,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 13),
+                      backgroundColor: colors[0],
+                      foregroundColor: Colors.white,
+                      disabledBackgroundColor: Colors.white.withOpacity(0.08),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                    child: _saving
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Text(
+                            'Save',
+                            style: TextStyle(fontWeight: FontWeight.w900),
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

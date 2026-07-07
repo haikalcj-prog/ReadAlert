@@ -364,7 +364,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     setState(() => _isAdding = true);
 
     try {
-      await LibraryService.addBook(
+      final result = await LibraryService.addBook(
         bookId: _bookId,
         title: _volumeInfo['title'] ?? 'Unknown',
         authors: _volumeInfo['authors'] is List
@@ -391,7 +391,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       );
 
       if (mounted) {
+        final int xpGained = result['xpGained'] is int
+            ? result['xpGained'] as int
+            : int.tryParse(result['xpGained']?.toString() ?? '') ?? 0;
         AudioService.playSuccess();
+        if (xpGained > 0) {
+          _showXpToast(result);
+        }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Added to "$status"!'),

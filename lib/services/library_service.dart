@@ -38,7 +38,7 @@ class LibraryService {
         .snapshots();
   }
 
-  static Future<void> addBook({
+  static Future<Map<String, dynamic>> addBook({
     required String bookId,
     required String title,
     required String authors,
@@ -121,9 +121,11 @@ class LibraryService {
         xpResult['newTitle'] as String,
       );
     }
+
+    return xpResult;
   }
 
-  static Future<void> addManualBook({
+  static Future<Map<String, dynamic>> addManualBook({
     required String title,
     required String authors,
     required int pageCount,
@@ -216,6 +218,8 @@ class LibraryService {
         xpResult['newTitle'] as String,
       );
     }
+
+    return xpResult;
   }
 
   static Future<Map<String, dynamic>> removeBook(String bookId) async {

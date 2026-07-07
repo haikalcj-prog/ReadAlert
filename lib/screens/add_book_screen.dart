@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import '../services/library_service.dart';
 import '../services/audio_service.dart';
+import '../widgets/xp_toast.dart';
 
 class AddBookScreen extends StatefulWidget {
   const AddBookScreen({super.key});
@@ -190,6 +191,24 @@ class _AddBookScreenState extends State<AddBookScreen> {
     );
   }
 
+  void _showXpToast(Map<String, dynamic> result) {
+    AudioService.playXpGain();
+    final accentColor = _getActiveColor();
+    final overlay = Overlay.of(context, rootOverlay: true);
+    final entry = OverlayEntry(
+      builder: (ctx) => Positioned(
+        top: MediaQuery.of(ctx).padding.top + 16,
+        left: 20,
+        right: 20,
+        child: XpToastWidget(result: result, accentColor: accentColor),
+      ),
+    );
+    overlay.insert(entry);
+    Future.delayed(const Duration(seconds: 3), () {
+      if (entry.mounted) entry.remove();
+    });
+  }
+
   Future<void> _saveBook() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isLoading = true);
@@ -202,7 +221,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
           : (_selectedStatus == 'Finished' ? pages : 0);
       if (progress > pages) progress = pages;
 
-      await LibraryService.addManualBook(
+      final result = await LibraryService.addManualBook(
         title: _titleController.text.trim(),
         authors: _authorController.text.trim(),
         pageCount: pages,
@@ -241,7 +260,13 @@ class _AddBookScreenState extends State<AddBookScreen> {
       );
 
       if (mounted) {
+        final int xpGained = result['xpGained'] is int
+            ? result['xpGained'] as int
+            : int.tryParse(result['xpGained']?.toString() ?? '') ?? 0;
         AudioService.playSuccess();
+        if (xpGained > 0) {
+          _showXpToast(result);
+        }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Book added to library!'),
