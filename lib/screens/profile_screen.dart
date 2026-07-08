@@ -13,6 +13,13 @@ import 'reports_screen.dart';
 import 'achievements_screen.dart';
 import 'streak_screen.dart';
 
+class NotificationPermissionNotGrantedException implements Exception {
+  const NotificationPermissionNotGrantedException();
+
+  @override
+  String toString() => 'Notification permission was not granted.';
+}
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -156,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         );
 
         if (!scheduled) {
-          throw Exception('Notification permission was not granted.');
+          throw const NotificationPermissionNotGrantedException();
         }
       } else {
         await NotificationService.cancelDailyStreakReminder();
@@ -186,8 +193,8 @@ class _ProfileScreenState extends State<ProfileScreen>
         setState(() => _dailyReminderEnabled = previousValue);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Unable to update reminder. Please try again.'),
+          SnackBar(
+            content: Text(_reminderUpdateErrorMessage(e)),
             backgroundColor: Colors.redAccent,
             behavior: SnackBarBehavior.floating,
           ),
@@ -198,6 +205,18 @@ class _ProfileScreenState extends State<ProfileScreen>
         setState(() => _isReminderSaving = false);
       }
     }
+  }
+
+  String _reminderUpdateErrorMessage(Object error) {
+    if (error is NotificationPermissionNotGrantedException) {
+      return 'Notification permission is off. Enable it in Android settings, then try again.';
+    }
+
+    final message = error
+        .toString()
+        .replaceFirst('Exception: ', '')
+        .replaceFirst('PlatformException(', '');
+    return 'Unable to update reminder: $message';
   }
 
   Future<void> _showTestReminder() async {
@@ -345,6 +364,56 @@ class _ProfileScreenState extends State<ProfileScreen>
                           Icon(
                             Icons.chevron_right_rounded,
                             color: Colors.white.withOpacity(0.35),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Material(
+                  color: Colors.redAccent.withOpacity(0.10),
+                  borderRadius: BorderRadius.circular(16),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () {
+                      Navigator.pop(dialogContext);
+                      _showLogoutConfirmation(colors);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 14,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent.withOpacity(0.16),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.logout_rounded,
+                              color: Colors.redAccent,
+                              size: 20,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Text(
+                              'Log Out',
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: Colors.redAccent.withOpacity(0.55),
                           ),
                         ],
                       ),
@@ -1778,29 +1847,6 @@ class _ProfileScreenState extends State<ProfileScreen>
               _sectionLabel('🏅 ACHIEVEMENTS'),
               const SizedBox(height: 12),
               _buildAchievementsPreview(liveLongestStreak, currentLevel),
-              const SizedBox(height: 28),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () => _showLogoutConfirmation(colors),
-                  icon: const Icon(
-                    Icons.logout_rounded,
-                    color: Colors.redAccent,
-                    size: 18,
-                  ),
-                  label: const Text(
-                    'Log Out',
-                    style: TextStyle(color: Colors.redAccent),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    side: BorderSide(color: Colors.redAccent.withOpacity(0.4)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 40),
             ],
           ),

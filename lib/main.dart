@@ -1,22 +1,103 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'firebase_options.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/main_screen.dart';
 import 'services/notification_service.dart';
 import 'services/level_up_service.dart';
-// import 'firebase_options.dart'; // uncomment if using FlutterFire CLI
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform, // uncomment if using FlutterFire CLI
-  );
-  await NotificationService.initialize();
+
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (error, stackTrace) {
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stackTrace,
+        library: 'readalert startup',
+        context: ErrorDescription('initializing Firebase'),
+      ),
+    );
+    runApp(StartupErrorApp(error: error.toString()));
+    return;
+  }
+
+  unawaited(_initializeNotifications());
   LevelUpService.init(navigatorKey);
   runApp(const ReadAlertApp());
+}
+
+Future<void> _initializeNotifications() async {
+  try {
+    await NotificationService.initialize();
+  } catch (error, stackTrace) {
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stackTrace,
+        library: 'readalert startup',
+        context: ErrorDescription('initializing notifications'),
+      ),
+    );
+  }
+}
+
+class StartupErrorApp extends StatelessWidget {
+  final String error;
+
+  const StartupErrorApp({super.key, required this.error});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home: Scaffold(
+        backgroundColor: const Color(0xFF0F172A),
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.error_outline_rounded,
+                    color: Color(0xFFF87171),
+                    size: 42,
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'ReadAlert could not start',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    error,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.70),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class ReadAlertApp extends StatelessWidget {

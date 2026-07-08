@@ -11,56 +11,77 @@ class NotificationService {
 
   static final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
+  static Future<void>? _initializing;
+  static bool _initialized = false;
 
   static const int dailyStreakReminderId = 3108;
   static const String _channelId = 'readalert_streak_reminder';
   static const String _channelName = 'Reading Streak Reminder';
   static const String _channelDescription =
       'Daily reminder to keep your ReadAlert streak active.';
+  static const String _androidNotificationIcon = 'notification_icon';
 
-  static Future<void> initialize() async {
-    tzdata.initializeTimeZones();
-    final TimezoneInfo localTimezone = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(localTimezone.identifier));
+  static Future<void> initialize() {
+    if (_initialized) return Future.value();
+    final Future<void>? currentInitialization = _initializing;
+    if (currentInitialization != null) return currentInitialization;
+    _initializing = _doInitialize();
+    return _initializing!;
+  }
 
-    const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+  static Future<void> _doInitialize() async {
+    try {
+      tzdata.initializeTimeZones();
+      final TimezoneInfo localTimezone =
+          await FlutterTimezone.getLocalTimezone();
+      tz.setLocalLocation(tz.getLocation(localTimezone.identifier));
 
-    const DarwinInitializationSettings darwinSettings =
-        DarwinInitializationSettings(
-          requestAlertPermission: false,
-          requestBadgePermission: false,
-          requestSoundPermission: false,
-        );
+      const AndroidInitializationSettings androidSettings =
+          AndroidInitializationSettings(_androidNotificationIcon);
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-          android: androidSettings,
-          iOS: darwinSettings,
-          macOS: darwinSettings,
-        );
+      const DarwinInitializationSettings darwinSettings =
+          DarwinInitializationSettings(
+            requestAlertPermission: false,
+            requestBadgePermission: false,
+            requestSoundPermission: false,
+          );
 
-    await _plugin.initialize(
-      settings: initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) {},
-    );
+      const InitializationSettings initializationSettings =
+          InitializationSettings(
+            android: androidSettings,
+            iOS: darwinSettings,
+            macOS: darwinSettings,
+          );
 
-    final AndroidFlutterLocalNotificationsPlugin? androidPlugin = _plugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >();
+      await _plugin.initialize(
+        settings: initializationSettings,
+        onDidReceiveNotificationResponse: (NotificationResponse response) {},
+      );
 
-    await androidPlugin?.createNotificationChannel(
-      const AndroidNotificationChannel(
-        _channelId,
-        _channelName,
-        description: _channelDescription,
-        importance: Importance.high,
-      ),
-    );
+      final AndroidFlutterLocalNotificationsPlugin? androidPlugin = _plugin
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >();
+
+      await androidPlugin?.createNotificationChannel(
+        const AndroidNotificationChannel(
+          _channelId,
+          _channelName,
+          description: _channelDescription,
+          importance: Importance.high,
+        ),
+      );
+
+      _initialized = true;
+    } catch (_) {
+      _initializing = null;
+      rethrow;
+    }
   }
 
   static Future<bool> requestPermission() async {
+    await initialize();
+
     if (Platform.isAndroid) {
       final AndroidFlutterLocalNotificationsPlugin? androidPlugin = _plugin
           .resolvePlatformSpecificImplementation<
@@ -95,6 +116,8 @@ class NotificationService {
     int hour = 20,
     int minute = 0,
   }) async {
+    await initialize();
+
     final bool allowed = await requestPermission();
     if (!allowed) return false;
 
@@ -112,7 +135,7 @@ class NotificationService {
           channelDescription: _channelDescription,
           importance: Importance.high,
           priority: Priority.high,
-          icon: '@mipmap/ic_launcher',
+          icon: _androidNotificationIcon,
         ),
         iOS: DarwinNotificationDetails(
           presentAlert: true,
@@ -129,10 +152,14 @@ class NotificationService {
   }
 
   static Future<void> cancelDailyStreakReminder() async {
+    await initialize();
+
     await _plugin.cancel(id: dailyStreakReminderId);
   }
 
   static Future<bool> showTestReminder() async {
+    await initialize();
+
     final bool allowed = await requestPermission();
     if (!allowed) return false;
 
@@ -147,7 +174,7 @@ class NotificationService {
           channelDescription: _channelDescription,
           importance: Importance.high,
           priority: Priority.high,
-          icon: '@mipmap/ic_launcher',
+          icon: _androidNotificationIcon,
         ),
         iOS: DarwinNotificationDetails(
           presentAlert: true,
