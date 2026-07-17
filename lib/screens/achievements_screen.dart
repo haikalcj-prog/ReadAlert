@@ -111,15 +111,37 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   Future<void> _claim(Map<String, dynamic> a) async {
     // Sound is played inside the dialog's initState so it is perfectly
     // synced with the popup animation and particle burst.
-    final int rewardXp = (a['xp'] as num?)?.toInt() ?? 0;
-    final String title = a['title']?.toString() ?? 'Achievement';
+    final String achievementId = a['id']?.toString() ?? '';
+    if (achievementId.isEmpty || _claimed.contains(achievementId)) return;
 
-    final result = await StatsService.claimAchievement(a['id'], rewardXp);
+    final int rewardXp = (a['xp'] as num?)?.toInt() ?? 0;
+    setState(() {
+      _claimed = [..._claimed, achievementId];
+    });
+
+    final claimFuture = StatsService.claimAchievement(achievementId, rewardXp);
 
     if (!mounted) return;
 
-    // Show beautiful popup dialog
-    await _showBadgeClaimedDialog(a, rewardXp);
+    // Show the badge popup immediately; the backend save continues in parallel.
+    final dialogFuture = _showBadgeClaimedDialog(a, rewardXp);
+
+    late final Map<String, dynamic> result;
+    try {
+      result = await claimFuture;
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _claimed = _claimed.where((id) => id != achievementId).toList();
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not claim achievement: $e')),
+        );
+      }
+      return;
+    }
+
+    await dialogFuture;
 
     if (!mounted) return;
 
@@ -152,10 +174,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
       barrierColor: Colors.black87,
       transitionDuration: const Duration(milliseconds: 420),
       transitionBuilder: (context, anim, secondAnim, child) {
-        final curved = CurvedAnimation(
-          parent: anim,
-          curve: Curves.elasticOut,
-        );
+        final curved = CurvedAnimation(parent: anim, curve: Curves.elasticOut);
         return ScaleTransition(
           scale: curved,
           child: FadeTransition(
@@ -878,7 +897,10 @@ class _BadgeClaimedDialogState extends State<_BadgeClaimedDialog>
       vsync: this,
       duration: const Duration(milliseconds: 700),
     );
-    _xpBounce = CurvedAnimation(parent: _xpBounceCtrl, curve: Curves.elasticOut);
+    _xpBounce = CurvedAnimation(
+      parent: _xpBounceCtrl,
+      curve: Curves.elasticOut,
+    );
 
     // Delay the XP badge pop-in
     Future.delayed(const Duration(milliseconds: 350), () {
@@ -888,19 +910,21 @@ class _BadgeClaimedDialogState extends State<_BadgeClaimedDialog>
     // Generate particles
     final rng = Random();
     for (int i = 0; i < 22; i++) {
-      _particles.add(_Particle(
-        dx: (rng.nextDouble() - 0.5) * 2,
-        dy: -(rng.nextDouble() * 0.8 + 0.3),
-        size: rng.nextDouble() * 7 + 4,
-        color: [
-          widget.categoryColor,
-          gold,
-          Colors.white,
-          const Color(0xFFD134B6),
-          const Color(0xFF06B6D4),
-        ][rng.nextInt(5)],
-        delay: rng.nextDouble() * 0.35,
-      ));
+      _particles.add(
+        _Particle(
+          dx: (rng.nextDouble() - 0.5) * 2,
+          dy: -(rng.nextDouble() * 0.8 + 0.3),
+          size: rng.nextDouble() * 7 + 4,
+          color: [
+            widget.categoryColor,
+            gold,
+            Colors.white,
+            const Color(0xFFD134B6),
+            const Color(0xFF06B6D4),
+          ][rng.nextInt(5)],
+          delay: rng.nextDouble() * 0.35,
+        ),
+      );
     }
   }
 
@@ -1034,9 +1058,7 @@ class _BadgeClaimedDialogState extends State<_BadgeClaimedDialog>
                           width: 2.5,
                         ),
                       ),
-                      child: Center(
-                        child: widget.achievementAssetBuilder(56),
-                      ),
+                      child: Center(child: widget.achievementAssetBuilder(56)),
                     ),
                   ),
                   const SizedBox(height: 18),
@@ -1242,4 +1264,3 @@ class _ParticlePainter extends CustomPainter {
   @override
   bool shouldRepaint(_ParticlePainter old) => old.progress != progress;
 }
-

@@ -50,11 +50,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String _searchQuery = '';
   String _sortOption =
       'Recent'; // 'Recent', 'TitleAZ', 'AuthorAZ', 'ProgressHL', 'PagesHL'
+  final Map<String, Map<String, dynamic>> _optimisticBookUpdates = {};
+  Stream<QuerySnapshot>? _readingBooksStream;
 
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      _readingBooksStream = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('library')
+          .where('status', isEqualTo: 'Reading')
+          .snapshots();
+    }
     _bgCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
@@ -197,6 +208,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     int newPage,
     int totalPages,
     int bestProgress,
+    Map<String, dynamic> oldData,
   ) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
@@ -208,8 +220,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         .collection('library')
         .doc(bookId);
 
-    final bookSnap = await bookRef.get();
-    final oldData = bookSnap.data() ?? {};
     final String oldStatus = oldData['status']?.toString() ?? 'Reading';
     final bool isManualBook = XpService.isManualBookData(
       oldData,
@@ -239,10 +249,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final bool justFinished = oldStatus != 'Finished' && finished;
     final String todayDate = XpService.dateKey(DateTime.now());
 
-    if (pagesRead > 0) {
-      await XpService.logProgressHistory(bookId, pagesRead);
-    }
-
     final Map<String, dynamic> updateData = {
       'currentPage': newPage,
       'bestProgress': newBestProgress,
@@ -258,7 +264,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       updateData['finishedReading'] = FieldValue.delete();
     }
 
-    await bookRef.update(updateData);
+    final optimisticUpdate = <String, dynamic>{
+      'currentPage': newPage,
+      'bestProgress': newBestProgress,
+      'status': finished ? 'Finished' : 'Reading',
+    };
+    if (mounted) {
+      setState(() {
+        _optimisticBookUpdates[bookId] = optimisticUpdate;
+      });
+    }
+
+    try {
+      if (pagesRead > 0) {
+        await XpService.logProgressHistory(bookId, pagesRead);
+      }
+      await bookRef.update(updateData);
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _optimisticBookUpdates.remove(bookId);
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not update progress: $e')),
+        );
+      }
+      return;
+    }
+    Future.delayed(const Duration(seconds: 2), () {
+      if (!mounted ||
+          !identical(_optimisticBookUpdates[bookId], optimisticUpdate)) {
+        return;
+      }
+      setState(() {
+        _optimisticBookUpdates.remove(bookId);
+      });
+    });
 
     // Streak only counts if the user really read new pages
     // or finished the book for the first time.
@@ -321,6 +362,58 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               });
             });
             await questFuture;
+          }
+
+          Future<void> claim(QuestStatus quest) async {
+            final previousQuests = cachedQuests;
+            setLocal(() {
+              cachedQuests = (cachedQuests ?? <QuestStatus>[])
+                  .map(
+                    (q) => q.claimKey == quest.claimKey
+                        ? q.copyWith(claimed: true)
+                        : q,
+                  )
+                  .toList();
+              questFuture = Future.value(cachedQuests ?? <QuestStatus>[]);
+            });
+
+            late final Map<String, dynamic> result;
+            try {
+              result = await QuestService.claimQuest(quest);
+            } catch (e) {
+              if (ctx.mounted) {
+                setLocal(() {
+                  cachedQuests = previousQuests;
+                  questFuture = Future.value(cachedQuests ?? <QuestStatus>[]);
+                });
+                ScaffoldMessenger.of(ctx).showSnackBar(
+                  SnackBar(content: Text('Could not claim quest: $e')),
+                );
+              }
+              return;
+            }
+
+            if (ctx.mounted) {
+              ScaffoldMessenger.of(ctx).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    result['xpGained'] > 0
+                        ? 'Claimed +${result['xpGained']} XP!'
+                        : 'Quest already claimed.',
+                  ),
+                ),
+              );
+            }
+            if (mounted && result['xpGained'] > 0) {
+              _showXpToast(result);
+            }
+            if (mounted && result['leveledUp'] == true) {
+              LevelUpService.showLevelUp(
+                result['newLevel'],
+                result['newTitle'],
+              );
+            }
+            await refresh();
           }
 
           return Container(
@@ -461,32 +554,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           (quest) => _QuestTile(
                             quest: quest,
                             theme: th,
-                            onClaim: () async {
-                              final result = await QuestService.claimQuest(
-                                quest,
-                              );
-                              if (ctx.mounted) {
-                                ScaffoldMessenger.of(ctx).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      result['xpGained'] > 0
-                                          ? 'Claimed +${result['xpGained']} XP!'
-                                          : 'Quest already claimed.',
-                                    ),
-                                  ),
-                                );
-                              }
-                              if (mounted && result['xpGained'] > 0) {
-                                _showXpToast(result);
-                              }
-                              if (mounted && result['leveledUp'] == true) {
-                                LevelUpService.showLevelUp(
-                                  result['newLevel'],
-                                  result['newTitle'],
-                                );
-                              }
-                              await refresh();
-                            },
+                            onClaim: () => claim(quest),
                           ),
                         ),
                         sectionTitle(
@@ -497,32 +565,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           (quest) => _QuestTile(
                             quest: quest,
                             theme: th,
-                            onClaim: () async {
-                              final result = await QuestService.claimQuest(
-                                quest,
-                              );
-                              if (ctx.mounted) {
-                                ScaffoldMessenger.of(ctx).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      result['xpGained'] > 0
-                                          ? 'Claimed +${result['xpGained']} XP!'
-                                          : 'Quest already claimed.',
-                                    ),
-                                  ),
-                                );
-                              }
-                              if (mounted && result['xpGained'] > 0) {
-                                _showXpToast(result);
-                              }
-                              if (mounted && result['leveledUp'] == true) {
-                                LevelUpService.showLevelUp(
-                                  result['newLevel'],
-                                  result['newTitle'],
-                                );
-                              }
-                              await refresh();
-                            },
+                            onClaim: () => claim(quest),
                           ),
                         ),
                       ],
@@ -969,6 +1012,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               newPage,
                               totalPages,
                               bestProgress,
+                              bookData,
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -1391,14 +1435,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
                     // ── BOOK LIST ─────────────────────────────
                     StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(uid)
-                          .collection('library')
-                          .where('status', isEqualTo: 'Reading')
-                          .snapshots(),
+                      stream: _readingBooksStream,
                       builder: (ctx, snap) {
-                        if (snap.connectionState == ConnectionState.waiting) {
+                        if (!snap.hasData) {
                           return SliverToBoxAdapter(
                             child: Center(
                               child: Padding(
@@ -1419,6 +1458,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         var books = snap.data!.docs;
                         // Apply search filter
                         books = _filterBooks(books);
+                        books = books.where((doc) {
+                          final optimistic = _optimisticBookUpdates[doc.id];
+                          return optimistic?['status'] != 'Finished';
+                        }).toList();
                         // Apply sort
                         _sortBooks(books);
                         // Show no results message if search returns empty
@@ -1469,7 +1512,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         return SliverList(
                           delegate: SliverChildBuilderDelegate((ctx, i) {
                             final doc = books[i];
-                            final data = doc.data() as Map<String, dynamic>;
+                            final data = {
+                              ...Map<String, dynamic>.from(doc.data() as Map),
+                              ...?_optimisticBookUpdates[doc.id],
+                            };
                             final String title = data['title'] ?? 'Unknown';
                             final String authors = data['authors'] is List
                                 ? (data['authors'] as List).join(', ')
@@ -2443,7 +2489,7 @@ class _XpBar extends StatelessWidget {
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
-      builder: (_) => Container(
+      builder: (sheetContext) => Container(
         decoration: BoxDecoration(
           color: Color.lerp(const Color(0xFF1A1F35), theme.bgMid, 0.6),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
@@ -2472,6 +2518,21 @@ class _XpBar extends StatelessWidget {
                 // Title
                 Row(
                   children: [
+                    Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.08),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        tooltip: 'Back',
+                        icon: const Icon(Icons.arrow_back_rounded),
+                        color: Colors.white,
+                        onPressed: () => Navigator.pop(sheetContext),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
                     Container(
                       width: 42,
                       height: 42,

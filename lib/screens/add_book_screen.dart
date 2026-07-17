@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import '../services/library_service.dart';
 import '../services/audio_service.dart';
+import '../widgets/library_action_toast.dart';
 import '../widgets/xp_toast.dart';
 
 class AddBookScreen extends StatefulWidget {
@@ -191,13 +192,13 @@ class _AddBookScreenState extends State<AddBookScreen> {
     );
   }
 
-  void _showXpToast(Map<String, dynamic> result) {
+  void _showXpToast(Map<String, dynamic> result, {double topOffset = 16}) {
     AudioService.playXpGain();
     final accentColor = _getActiveColor();
     final overlay = Overlay.of(context, rootOverlay: true);
     final entry = OverlayEntry(
       builder: (ctx) => Positioned(
-        top: MediaQuery.of(ctx).padding.top + 16,
+        top: MediaQuery.of(ctx).padding.top + topOffset,
         left: 20,
         right: 20,
         child: XpToastWidget(result: result, accentColor: accentColor),
@@ -205,6 +206,22 @@ class _AddBookScreenState extends State<AddBookScreen> {
     );
     overlay.insert(entry);
     Future.delayed(const Duration(seconds: 3), () {
+      if (entry.mounted) entry.remove();
+    });
+  }
+
+  void _showBookAddedToast(String title, String status) {
+    final overlay = Overlay.of(context, rootOverlay: true);
+    final entry = OverlayEntry(
+      builder: (ctx) => Positioned(
+        top: MediaQuery.of(ctx).padding.top + 16,
+        left: 20,
+        right: 20,
+        child: LibraryActionToast(title: title, status: status),
+      ),
+    );
+    overlay.insert(entry);
+    Future.delayed(const Duration(milliseconds: 2600), () {
       if (entry.mounted) entry.remove();
     });
   }
@@ -264,15 +281,10 @@ class _AddBookScreenState extends State<AddBookScreen> {
             ? result['xpGained'] as int
             : int.tryParse(result['xpGained']?.toString() ?? '') ?? 0;
         AudioService.playSuccess();
+        _showBookAddedToast(_titleController.text.trim(), _selectedStatus);
         if (xpGained > 0) {
-          _showXpToast(result);
+          _showXpToast(result, topOffset: 92);
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Book added to library!'),
-            backgroundColor: _getActiveColor(),
-          ),
-        );
         Navigator.pop(context);
       }
     } catch (e) {

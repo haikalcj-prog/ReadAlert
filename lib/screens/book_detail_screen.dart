@@ -7,6 +7,7 @@ import 'package:share_plus/share_plus.dart';
 import '../services/library_service.dart';
 import '../services/level_up_service.dart';
 import '../services/audio_service.dart';
+import '../widgets/library_action_toast.dart';
 import '../widgets/xp_toast.dart';
 import 'full_book_info_screen.dart';
 
@@ -395,15 +396,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             ? result['xpGained'] as int
             : int.tryParse(result['xpGained']?.toString() ?? '') ?? 0;
         AudioService.playSuccess();
-        if (xpGained > 0) {
-          _showXpToast(result);
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Added to "$status"!'),
-            backgroundColor: accentColor,
-          ),
+        _showBookAddedToast(
+          (_volumeInfo['title'] ?? 'Unknown').toString(),
+          status,
         );
+        if (xpGained > 0) {
+          _showXpToast(result, topOffset: 92);
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -441,6 +440,22 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         left: 20,
         right: 20,
         child: _StatusChangeToast(status: status),
+      ),
+    );
+    overlay.insert(entry);
+    Future.delayed(const Duration(milliseconds: 2600), () {
+      if (entry.mounted) entry.remove();
+    });
+  }
+
+  void _showBookAddedToast(String title, String status) {
+    final overlay = Overlay.of(context, rootOverlay: true);
+    final entry = OverlayEntry(
+      builder: (ctx) => Positioned(
+        top: MediaQuery.of(ctx).padding.top + 16,
+        left: 20,
+        right: 20,
+        child: LibraryActionToast(title: title, status: status),
       ),
     );
     overlay.insert(entry);

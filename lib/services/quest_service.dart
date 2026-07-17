@@ -26,6 +26,19 @@ class QuestStatus {
   });
 
   bool get canClaim => completed && !claimed;
+
+  QuestStatus copyWith({bool? completed, bool? claimed}) {
+    return QuestStatus(
+      id: id,
+      type: type,
+      title: title,
+      description: description,
+      rewardXp: rewardXp,
+      completed: completed ?? this.completed,
+      claimed: claimed ?? this.claimed,
+      claimKey: claimKey,
+    );
+  }
 }
 
 class QuestService {
